@@ -2,6 +2,8 @@ import { defineConfig } from "tinacms";
 import { LocalAuthProvider } from "tinacms";
 import { CustomAuthProvider } from "@/lib/custom_auth_provider";
 
+const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
+
 // Your hosting provider likely exposes this as an environment variable
 const branch =
   process.env.GITHUB_BRANCH ||
@@ -26,10 +28,10 @@ export default defineConfig({
     publicFolder: "public",
   },
   media: {
-    tina: {
-      mediaRoot: "",
-      publicFolder: "public",
-    },
+    loadCustomStore:async () => {
+        const pack = await import("next-tinacms-s3");
+        return pack.TinaCloudS3MediaStore;
+    }
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
