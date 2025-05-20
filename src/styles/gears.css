@@ -12,6 +12,7 @@
     bottom: 70px;
     right: 100px;
     mix-blend-mode: soft-light;
+    color: #696969;
 }
 
 .gear3{
@@ -20,6 +21,7 @@
     bottom: 180px;
     left: 100px;
     mix-blend-mode: soft-light;
+    
 }
 
 .gear4{
@@ -28,6 +30,7 @@
     right: 250px;
     bottom: 250px;
     mix-blend-mode: soft-light;
+   color: #696969;
 }
 
 .gear5{
@@ -36,4 +39,5 @@
     bottom: 530px;
     left: 120px;
     mix-blend-mode: soft-light;
+    /* color: #2E2E2E; */
 }

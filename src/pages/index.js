@@ -25,16 +25,16 @@ export default function Home() {
               <GearIcon className="h-80 w-80 text-black" />
             </motion.div>
             <motion.div style={{ rotate }} className="mr-10 gear2">
-              <GearIcon className="h-50 w-50 text-white" />
+              <GearIcon className="h-50 w-50 " />
             </motion.div>
             <motion.div style={{ rotate }} className="mr-10 gear3">
-              <GearIcon className="h-65 w-65 text-white" />
+              <GearIcon className="h-65 w-65 text-black" />
             </motion.div>
             <motion.div style={{ rotate }} className="mr-10 gear4">
-              <GearIcon className="h-80 w-80 text-white" />
+              <GearIcon className="h-80 w-80 " />
             </motion.div>
             <motion.div style={{ rotate }} className="mr-10 gear5">
-              <GearIcon className="h-105 w-105 text-white" />
+              <GearIcon className="h-105 w-105 text-black" />
             </motion.div>
        
           
