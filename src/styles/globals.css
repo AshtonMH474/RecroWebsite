@@ -16,13 +16,20 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -20;
   min-height: 100vh;
   width: 100%;
   margin: 0;
   padding: 0;
   background: black;
   background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
+}
+
+.nav{
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
   
 
@@ -33,4 +40,8 @@ body {
   width: 100px;
   position: relative;
   top: 2000px
+}
+
+.bg-primary{
+  background-color: #B55914;
 }

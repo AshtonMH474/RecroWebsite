@@ -6,32 +6,44 @@ import { useScroll, useTransform, motion } from "framer-motion";
 export default function Home() {
   const ref = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
+ const { scrollY } = useScroll();
+
+   const rotate = useTransform(scrollY, [0, 1000], [0, 360], {
+    clamp: false, // disables clamping so it keeps going beyond 360
   });
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-
   return (
-    <div>
-      {/* Full viewport section with a fixed background image */}
+    // <div>
+    <>
       <div
         ref={ref}
-        className=" background Home h-screen bg-fixed bg-center bg-cover flex items-center justify-end"
+        className=" background Home h-screen bg-fixed bg-center bg-cover flex flex-col items-end"
        
       >
-        <motion.div style={{ rotate }} className="mr-10">
-          <GearIcon className="h-40 w-40 text-white" />
-        </motion.div>
-
+        
+            <motion.div style={{ rotate }} className="mr-10 gear1">
+              <GearIcon className="h-80 w-80 text-black" />
+            </motion.div>
+            <motion.div style={{ rotate }} className="mr-10 gear2">
+              <GearIcon className="h-50 w-50 text-white" />
+            </motion.div>
+            <motion.div style={{ rotate }} className="mr-10 gear3">
+              <GearIcon className="h-65 w-65 text-white" />
+            </motion.div>
+            <motion.div style={{ rotate }} className="mr-10 gear4">
+              <GearIcon className="h-80 w-80 text-white" />
+            </motion.div>
+            <motion.div style={{ rotate }} className="mr-10 gear5">
+              <GearIcon className="h-105 w-105 text-white" />
+            </motion.div>
+       
           
       </div>
       <div className="test"></div>
 
-      {/* More content below so you can scroll */}
   
-    </div>
+    {/* // </div> */}
+    </>
   );
 }
 
