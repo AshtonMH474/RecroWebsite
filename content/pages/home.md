@@ -11,6 +11,7 @@ blocks:
       - link: /signup
         label: Sign Up
         style: button
+        width: 30
       - link: /about
         label: about
         style: border
