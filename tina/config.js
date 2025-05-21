@@ -37,29 +37,57 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "post",
-        label: "Posts",
-        path: "content/posts",
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true,
-          },
-        ],
-        ui: {
-          // This is an DEMO router. You can remove this to fit your site
-          router: ({ document }) => `/demo/blog/${document._sys.filename}`,
+        name:'page',
+        label:'Page',
+        path:'content/pages',
+        format:'md',
+        ui:{
+          router:props => {
+            if(props.document._sys.relativePath == 'home.md') return '/'
+          }
         },
-      },
+        fields:[{
+          name:'title',
+          type:'string'
+        },
+        {
+          name:'blocks',
+          label:'Blocks',
+          type:'object',
+          list:true,
+          templates:[{
+            name:'landing',
+            label:'Landing',
+            fields:[{
+              name:'heading',
+              type:'rich-text'
+            },
+            {
+              name:'buttons',
+              label:'Buttons',
+              type:'object',
+              list:true,
+              fields:[{
+                type:'string',
+                name:'link'
+              },
+              {
+                type:'string',
+                name:'label'
+              },
+              {
+                type:'string',
+                name:'style',
+                options:["border",'button']
+              }
+          ]
+            }
+          ]
+          }]
+        }
+      ]
+      }
+      
     ],
   },
 });

@@ -1,0 +1,19 @@
+---
+title: Home
+blocks:
+  - heading: >
+      # Reinventing How We Move Forward
+
+
+      ### Get in touch with Recro. We're here to answer your questions and
+      discuss how we can help grow your career.
+    buttons:
+      - link: /signup
+        label: Sign Up
+        style: button
+      - link: /about
+        label: about
+        style: border
+    _template: landing
+---
+
