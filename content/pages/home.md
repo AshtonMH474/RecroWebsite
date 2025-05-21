@@ -15,6 +15,7 @@ blocks:
       - link: /about
         label: about
         style: border
+        width: 30
     _template: landing
 ---
 
