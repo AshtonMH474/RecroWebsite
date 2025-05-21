@@ -1,6 +1,8 @@
 import { defineConfig } from "tinacms";
 import { LocalAuthProvider } from "tinacms";
 import { CustomAuthProvider } from "@/lib/custom_auth_provider";
+import pages from "./collections/pages/page";
+import nav from "./collections/nav/nav";
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
@@ -36,58 +38,8 @@ export default defineConfig({
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
     collections: [
-      {
-        name:'page',
-        label:'Page',
-        path:'content/pages',
-        format:'md',
-        ui:{
-          router:props => {
-            if(props.document._sys.relativePath == 'home.md') return '/'
-          }
-        },
-        fields:[{
-          name:'title',
-          type:'string'
-        },
-        {
-          name:'blocks',
-          label:'Blocks',
-          type:'object',
-          list:true,
-          templates:[{
-            name:'landing',
-            label:'Landing',
-            fields:[{
-              name:'heading',
-              type:'rich-text'
-            },
-            {
-              name:'buttons',
-              label:'Buttons',
-              type:'object',
-              list:true,
-              fields:[{
-                type:'string',
-                name:'link'
-              },
-              {
-                type:'string',
-                name:'label'
-              },
-              {
-                type:'string',
-                name:'style',
-                options:["border",'button']
-              }
-          ]
-            }
-          ]
-          }]
-        }
-      ]
-      }
-      
+      pages,
+      nav
     ],
   },
 });
