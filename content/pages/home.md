@@ -23,7 +23,11 @@ blocks:
         icon: FaPhoneAlt
         description: |
           Transforming your organization's data into mission driving information
-      - {}
+      - title: Cloud Native
+        icon: FaCoins
+        description: >
+          Moving you to the cutting edge of technology to drive innovation and
+          growth.
       - description: ''
     _template: expertise
   - heading: >
