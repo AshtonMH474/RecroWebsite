@@ -19,7 +19,10 @@ blocks:
         icon: FaChartLine
         description: |
           Transforming your organization's data into mission driving information
-      - {}
+      - title: Consulting
+        icon: FaPhoneAlt
+        description: |
+          Transforming your organization's data into mission driving information
       - {}
       - description: ''
     _template: expertise
