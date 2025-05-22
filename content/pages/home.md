@@ -10,7 +10,11 @@ blocks:
         description: >
           Enabling capability through the most cutting-edge Tailored solutions
           for every need.
-      - {}
+      - title: Cyber Security
+        icon: FaLock
+        description: >
+          Keeping most sensitive data behind closed doors Integrated and
+          Intelligent
       - {}
       - {}
       - {}
