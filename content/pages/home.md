@@ -1,6 +1,21 @@
 ---
 title: Home
 blocks:
+  - expertise_heading: Our Expertise
+    underline_color: B55914
+    underline_width: 80
+    expertise:
+      - title: Cloud
+        icon: FaCloud
+        description: >
+          Enabling capability through the most cutting-edge Tailored solutions
+          for every need.
+      - {}
+      - {}
+      - {}
+      - {}
+      - description: ''
+    _template: expertise
   - heading: >
       # Reinventing How We Move Forward
 
