@@ -1,6 +1,22 @@
 ---
 title: Home
 blocks:
+  - heading: >
+      # Reinventing How We Move Forward
+
+
+      ### Get in touch with Recro. We're here to answer your questions and
+      discuss how we can help grow your career.
+    buttons:
+      - link: /signup
+        label: Sign Up
+        style: button
+        width: 30
+      - link: /about
+        label: about
+        style: border
+        width: 30
+    _template: landing
   - expertise_heading: Our Expertise
     underline_color: B55914
     underline_width: 80
@@ -34,21 +50,5 @@ blocks:
           Bringing transformative digital solutions while meeting you where you
           are
     _template: expertise
-  - heading: >
-      # Reinventing How We Move Forward
-
-
-      ### Get in touch with Recro. We're here to answer your questions and
-      discuss how we can help grow your career.
-    buttons:
-      - link: /signup
-        label: Sign Up
-        style: button
-        width: 30
-      - link: /about
-        label: about
-        style: border
-        width: 30
-    _template: landing
 ---
 
