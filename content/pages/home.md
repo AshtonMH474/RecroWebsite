@@ -15,7 +15,10 @@ blocks:
         description: >
           Keeping most sensitive data behind closed doors Integrated and
           Intelligent
-      - {}
+      - title: Analytics
+        icon: FaChartLine
+        description: |
+          Transforming your organization's data into mission driving information
       - {}
       - {}
       - description: ''
