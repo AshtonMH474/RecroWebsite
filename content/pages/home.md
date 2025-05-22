@@ -28,7 +28,11 @@ blocks:
         description: >
           Moving you to the cutting edge of technology to drive innovation and
           growth.
-      - description: ''
+      - title: Digital Solutions
+        icon: FaTv
+        description: >
+          Bringing transformative digital solutions while meeting you where you
+          are
     _template: expertise
   - heading: >
       # Reinventing How We Move Forward
