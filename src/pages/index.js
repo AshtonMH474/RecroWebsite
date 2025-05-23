@@ -1,11 +1,11 @@
 
 import { useRef } from "react";
-import GearIcon from "./components/GearIcon";
+import GearIcon from "../components/GearIcon";
 import { useScroll, useTransform, motion } from "framer-motion";
-import Landing from "./components/Home/Landing";
+import Landing from "../components/Home/Landing";
 import {useTina} from 'tinacms/dist/react'
-import Nav from "./components/Nav";
-import Expertise from "./components/Home/Expertise";
+import Nav from "../components/Nav";
+import Expertise from "../components/Home/Expertise";
 
 
 
@@ -30,10 +30,11 @@ export default function Home({res,navData}) {
     clamp: false, // disables clamping so it keeps going beyond 360
   });
   const {data} = useTina(res)
+  const {data:navContent} = useTina(navData)
   return (
   
     <>
-      <Nav res={navData}/>
+      <Nav res={navContent.nav}/>
       <div
         ref={ref}
         className="background Home h-screen bg-fixed bg-center bg-cover flex flex-col items-end"
