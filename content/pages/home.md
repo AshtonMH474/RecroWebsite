@@ -18,10 +18,9 @@ blocks:
         width: 30
     _template: landing
   - expertise_heading: Our Expertise
-    underline_color: B55914
     underline_width: 80
     expertise:
-      - title: Cloud
+      - title: Cloud!
         icon: FaCloud
         description: >
           Enabling capability through the most cutting-edge Tailored solutions
