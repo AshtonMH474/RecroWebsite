@@ -1,24 +1,42 @@
-'use client'
+
 import { useRef } from "react";
 import GearIcon from "./components/GearIcon";
 import { useScroll, useTransform, motion } from "framer-motion";
+import Landing from "./components/Home/Landing";
+import {useTina} from 'tinacms/dist/react'
+import Nav from "./components/Nav";
+import Expertise from "./components/Home/Expertise";
 
-export default function Home() {
+
+
+export async function getStaticProps(){
+    const {client} = await import("../../tina/__generated__/databaseClient");
+    const res = await client.queries.page({relativePath:'home.md'})
+    const navRes = await client.queries.nav({relativePath:'nav.md'})
+    return {
+      props:{
+        res:res,
+        navData:navRes
+      }
+    }
+  
+}
+
+
+export default function Home({res,navData}) {
   const ref = useRef(null);
-
- const { scrollY } = useScroll();
-
-   const rotate = useTransform(scrollY, [0, 1000], [0, 360], {
+  const { scrollY } = useScroll();
+  const rotate = useTransform(scrollY, [0, 1000], [0, 360], {
     clamp: false, // disables clamping so it keeps going beyond 360
   });
-
+  const {data} = useTina(res)
   return (
-    // <div>
+  
     <>
+      <Nav res={navData}/>
       <div
         ref={ref}
-        className=" background Home h-screen bg-fixed bg-center bg-cover flex flex-col items-end"
-       
+        className="background Home h-screen bg-fixed bg-center bg-cover flex flex-col items-end"
       >
         
             <motion.div style={{ rotate }} className="mr-10 gear1">
@@ -39,10 +57,23 @@ export default function Home() {
        
           
       </div>
-      <div className="test"></div>
+      {data.page.blocks?.map((block,i) => {
+        switch(block?.__typename){
+          case "PageBlocksLanding":{
+            return <Landing key={i} {...block}/>
+          }
+          case "PageBlocksExpertise":{
+            return <Expertise key={i} {...block}/>
+          }
+        }
+      })}
+      
+      
+
+      
 
   
-    {/* // </div> */}
+   
     </>
   );
 }

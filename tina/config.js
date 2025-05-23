@@ -1,6 +1,9 @@
 import { defineConfig } from "tinacms";
 import { LocalAuthProvider } from "tinacms";
 import { CustomAuthProvider } from "@/lib/custom_auth_provider";
+import pages from "./collections/pages/page";
+import nav from "./collections/nav/nav";
+import { IconPickerField } from "./components/IconPicker";
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
@@ -36,30 +39,8 @@ export default defineConfig({
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
     collections: [
-      {
-        name: "post",
-        label: "Posts",
-        path: "content/posts",
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true,
-          },
-        ],
-        ui: {
-          // This is an DEMO router. You can remove this to fit your site
-          router: ({ document }) => `/demo/blog/${document._sys.filename}`,
-        },
-      },
+      pages,
+      nav
     ],
   },
 });
