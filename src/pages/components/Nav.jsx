@@ -1,6 +1,6 @@
 const { default: Link } = require("next/link");
 import { tinaField, useTina } from 'tinacms/dist/react';
-import logo from '../../../public/RecroDarkModeLogo.png'
+
 
 
 

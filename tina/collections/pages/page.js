@@ -1,3 +1,4 @@
+import { expertise } from "./home/expertise";
 import { landingBlock } from "./home/landing";
 
 const pages = {
@@ -20,7 +21,7 @@ const pages = {
       label: "Blocks",
       type: "object",
       list: true,
-      templates: [landingBlock],
+      templates: [landingBlock,expertise],
     },
   ],
 };

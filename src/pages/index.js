@@ -5,6 +5,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import Landing from "./components/Home/Landing";
 import {useTina} from 'tinacms/dist/react'
 import Nav from "./components/Nav";
+import Expertise from "./components/Home/Expertise";
 
 
 
@@ -61,11 +62,15 @@ export default function Home({res,navData}) {
           case "PageBlocksLanding":{
             return <Landing key={i} {...block}/>
           }
+          case "PageBlocksExpertise":{
+            return <Expertise key={i} {...block}/>
+          }
         }
       })}
       
+      
 
-      <div className="test"></div>
+      
 
   
    

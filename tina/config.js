@@ -3,6 +3,7 @@ import { LocalAuthProvider } from "tinacms";
 import { CustomAuthProvider } from "@/lib/custom_auth_provider";
 import pages from "./collections/pages/page";
 import nav from "./collections/nav/nav";
+import { IconPickerField } from "./components/IconPicker";
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
