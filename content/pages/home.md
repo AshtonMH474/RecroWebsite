@@ -20,8 +20,6 @@ blocks:
   - expertise_heading: Our Expertise
     underline_width: 80
     expertise:
-      - {}
-      - {}
       - title: Cloud
         icon: FaCloud
         description: >
