@@ -26,7 +26,7 @@ export async function getStaticProps(){
 export default function Home({res,navData}) {
   const ref = useRef(null);
   const { scrollY } = useScroll();
-  const rotate = useTransform(scrollY, [0, 1000], [0, 360], {
+  const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
     clamp: false, // disables clamping so it keeps going beyond 360
   });
   const {data} = useTina(res)
