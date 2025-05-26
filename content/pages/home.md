@@ -59,8 +59,11 @@ blocks:
     learnTeamImages:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
+        left: 100
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
+        right: 100
+        bottom: 50
     _template: learnTeam
 ---
 
