@@ -19,24 +19,28 @@ return(
             </div>
             <div className="move">
                 {props?.learnTeamImages.map((image, i) => {
-            // Apply staggered styles
-            const positionClass =
-              i % 2 === 0
-                ? "relative left-[100px]"
-                : "relative right-[100px] bottom-[50px] z-10";
+                    console.log(image)
 
             return (
               <img
                 key={i}
                 src={image.src}
                 alt={image.alt || `team image ${i + 1}`}
-                className={`w-[420px] h-[220px] object-cover rounded-[12px] ${positionClass}`}
+                className={`object-cover rounded-[12px]`}
                 data-tina-field={tinaField(image, "src")}
+                style={{
+                    width: image?.width ?? 'auto',
+                    height: image?.height ?? 'auto',
+                    top: image?.top ?? undefined,
+                    left: image?.left ?? undefined,
+                    right: image?.right ?? undefined,
+                    bottom: image?.bottom ?? undefined,
+                    zIndex: image?.zIndex ?? undefined,
+                    position: 'relative',
+                }}
               />
             );
           })}
-                {/* <img className="move1 w-[420px] h-[220px] object-cover rounded-[12px]" src={'https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png'} alt="team"/>
-                <img className=" move2 w-[420px] h-[220px] object-cover rounded-[12px]" src={'https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png'} alt="team"/> */}
             </div>
         </div>
     </div>

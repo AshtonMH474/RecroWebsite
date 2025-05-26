@@ -17,6 +17,22 @@ export const learnAboutTeamBlock = {
                 type:'image'
             },
             {
+  name: 'width',
+  label: 'Image-Width',
+  type: 'number',
+  ui: {
+    defaultValue: 420,
+  },
+},
+{
+  name: 'height',
+  label: 'Image-Height',
+  type: 'number',
+  ui: {
+    defaultValue: 220,
+  },
+},
+            {
                 name:'top',
                 label:'Top',
                 type:'number'
