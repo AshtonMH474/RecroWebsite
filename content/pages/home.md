@@ -49,5 +49,18 @@ blocks:
           Bringing transformative digital solutions while meeting you where you
           are
     _template: expertise
+  - headingLearnTeam: >
+      # Learn about the Team
+
+
+      At Recro, we bring together expertise, innovation, and dedication to
+      deliver exceptional results. Our unique approach combines security-focused
+      practices with cutting-edge solutions.
+    learnTeamImages:
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
+    _template: learnTeam
 ---
 
