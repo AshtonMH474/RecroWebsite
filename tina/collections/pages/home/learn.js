@@ -11,27 +11,27 @@ export const learnAboutTeamBlock = {
             label:'LearnTeamImages',
             type:'object',
             list:true,
+            ui:{
+                defaultItem:{
+                    width:420,
+                    height:220
+                }
+            },
             fields:[{
                 name:'src',
                 label:'Images',
                 type:'image'
             },
             {
-  name: 'width',
-  label: 'Image-Width',
-  type: 'number',
-  ui: {
-    defaultValue: 420,
-  },
-},
-{
-  name: 'height',
-  label: 'Image-Height',
-  type: 'number',
-  ui: {
-    defaultValue: 220,
-  },
-},
+            name: 'width',
+            label: 'Image-Width',
+            type: 'number',
+            },
+            {
+            name: 'height',
+            label: 'Image-Height',
+            type: 'number',
+            },
             {
                 name:'top',
                 label:'Top',
