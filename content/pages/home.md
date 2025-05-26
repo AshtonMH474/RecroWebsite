@@ -64,6 +64,7 @@ blocks:
           https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
         right: 100
         bottom: 50
+        zIndex: 10
     _template: learnTeam
 ---
 
