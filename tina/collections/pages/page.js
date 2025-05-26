@@ -1,5 +1,6 @@
 import { expertise } from "./home/expertise";
 import { landingBlock } from "./home/landing";
+import { learnAboutTeamBlock } from "./home/learn";
 
 const pages = {
   name: "page",
@@ -21,7 +22,7 @@ const pages = {
       label: "Blocks",
       type: "object",
       list: true,
-      templates: [landingBlock,expertise],
+      templates: [landingBlock,expertise,learnAboutTeamBlock],
     },
   ],
 };
