@@ -50,7 +50,7 @@ blocks:
           are
     _template: expertise
   - headingLearnTeam: >
-      # Learn about the Team
+      # Learn about the **Team**
 
 
       At Recro, we bring together expertise, innovation, and dedication to
