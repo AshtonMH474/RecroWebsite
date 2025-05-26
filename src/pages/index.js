@@ -6,6 +6,7 @@ import Landing from "../components/Home/Landing";
 import {useTina} from 'tinacms/dist/react'
 import Nav from "../components/Nav";
 import Expertise from "../components/Home/Expertise";
+import Learn from "@/components/Home/Learn";
 
 
 
@@ -31,6 +32,7 @@ export default function Home({res,navData}) {
   });
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
+
   return (
   
     <>
@@ -66,8 +68,13 @@ export default function Home({res,navData}) {
           case "PageBlocksExpertise":{
             return <Expertise key={i} {...block}/>
           }
+        case "PageBlocksLearnTeam":{
+          return <Learn key={i} {...block}/>
+        }
         }
       })}
+      
+
       
       
 

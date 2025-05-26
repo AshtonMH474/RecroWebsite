@@ -52,53 +52,53 @@ return (
       height: `${Math.ceil(expertiseItems.length / 2) * 120}vh`,
     }}
   >
-    {/* 
-      Sticky container that remains fixed on screen during scroll of this section 
-      This is where heading and cards will animate based on scroll progress 
-    */}
-    <motion.div
-      style={{
-        position: "sticky",
-        top: 0,
-        height: "100vh",
-      }}
-      className="flex flex-col justify-center items-center"
-    >
-      {/* Animated heading container */}
-      {/* It fades in and scales up as the user starts scrolling the section */}
-      <motion.div 
-        className="pb-12 pt-12 flex flex-col items-center"
-        style={{ opacity: headingOpacity, scale: headingScale }}
-      >
-        {/* The section heading text, editable with TinaCMS */}
-        <h2
-          data-tina-field={tinaField(props, "expertise_heading")}
-          className="font-bold text-[36px]"
+        {/* 
+        Sticky container that remains fixed on screen during scroll of this section 
+        This is where heading and cards will animate based on scroll progress 
+        */}
+        <motion.div
+        style={{
+            position: "sticky",
+            top: 0,
+            height: "100vh",
+        }}
+        className="flex flex-col justify-center items-center"
         >
-          {props.expertise_heading}
-        </h2>
+        {/* Animated heading container */}
+        {/* It fades in and scales up as the user starts scrolling the section */}
+            <motion.div 
+                className="pb-12 pt-12 flex flex-col items-center"
+                style={{ opacity: headingOpacity, scale: headingScale }}
+            >
+                {/* The section heading text, editable with TinaCMS */}
+                <h2
+                data-tina-field={tinaField(props, "expertise_heading")}
+                className="font-bold text-[36px]"
+                >
+                {props.expertise_heading}
+                </h2>
 
-        {/* Underline bar under heading, width controlled by prop */}
-        <div
-          className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary`}
-        ></div>
-      </motion.div>
+                {/* Underline bar under heading, width controlled by prop */}
+                <div
+                className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary`}
+                ></div>
+            </motion.div>
 
-      {/* Container for expertise cards */}
-      {/* Uses flex-wrap to arrange cards in rows with horizontal and vertical gaps */}
-      <div className="flex flex-wrap justify-start gap-x-6 gap-y-12 max-w-[1000px] mx-auto">
-        {/* Map over expertise items, passing the corresponding transform (scale & opacity) */}
-        {expertiseItems.map((ex, i) => {
-          return (
-            <ExpertiseCard 
-              key={i} 
-              ex={ex} 
-              transform={transforms[i] || {}} // fallback to empty object if out of range
-            />
-          );
-        })}
-      </div>
-    </motion.div>
+        {/* Container for expertise cards */}
+        {/* Uses flex-wrap to arrange cards in rows with horizontal and vertical gaps */}
+            <div className="flex flex-wrap justify-start gap-x-6 gap-y-12 max-w-[1000px] mx-auto">
+                {/* Map over expertise items, passing the corresponding transform (scale & opacity) */}
+                {expertiseItems.map((ex, i) => {
+                return (
+                    <ExpertiseCard 
+                    key={i} 
+                    ex={ex} 
+                    transform={transforms[i] || {}} // fallback to empty object if out of range
+                    />
+                );
+                })}
+            </div>
+        </motion.div>
   </section>
 );
 

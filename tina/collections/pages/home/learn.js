@@ -15,6 +15,31 @@ export const learnAboutTeamBlock = {
                 name:'src',
                 label:'Images',
                 type:'image'
+            },
+            {
+                name:'top',
+                label:'Top',
+                type:'number'
+            },
+            {
+                name:'right',
+                label:'Right',
+                type:'number'
+            },
+            {
+                name:'bottom',
+                label:'Bottom',
+                type:'number'
+            },
+            {
+                name:'left',
+                label:'Left',
+                type:'number'
+            },
+            {
+                name:'zIndex',
+                label:'Z-Index',
+                type:'number'
             }]
         }
     ]
