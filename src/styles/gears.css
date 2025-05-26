@@ -40,3 +40,19 @@
     left: 120px;
     mix-blend-mode: soft-light;
 }
+
+
+.move1{
+    position: relative;
+    left: 100px;
+}
+.move2{
+    position: relative;
+    right: 100px;
+    bottom: 50px;
+    z-index: 2;
+}
+.move{
+    position: relative;
+    top: 50px;
+}
