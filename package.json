@@ -23,6 +23,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-intersection-observer": "^9.16.0",
+    "simple-git": "^3.27.0",
     "tinacms": "^2.7.7",
     "tinacms-authjs": "^10.0.7",
     "tinacms-gitprovider-github": "^2.0.17"
