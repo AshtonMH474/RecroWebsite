@@ -6,19 +6,19 @@ function Learn(props) {
     // scrollYProgress tracks scroll from 0(top page) - 1(bottom page)
   const { scrollYProgress } = useViewportScroll();
 
-  // Slide entire section up from 100% to 0% between 40% and 100%
-  const translateY = useTransform(scrollYProgress, [0.4, 1], ["100%", "0%"]);
-  
-  // Fade in content between 90% and 100% for better timing
-  const contentOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
+// was [0.4, 1], consider [0.4, 0.95] so it's done before footer enters
+const translateY = useTransform(scrollYProgress, [0.4, 0.95], ["100%", "0%"]);
+const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
 
   return (
+    <>
     <motion.div
       className="bg-black h-screen w-full"
       style={{
         y: translateY,
         position: "relative",
         zIndex: 30,
+        paddingBottom:'80px'
       }}
     >
       <motion.div
@@ -66,6 +66,8 @@ function Learn(props) {
         </div>
       </motion.div>
     </motion.div>
+    <div className="bg-black h-[100px] w-full" />
+    </>
   );
 }
 
