@@ -7,6 +7,7 @@ import {useTina} from 'tinacms/dist/react'
 import Nav from "../components/Nav";
 import Expertise from "../components/Home/Expertise";
 import Learn from "@/components/Home/Learn";
+import Footer from "@/components/Footer";
 
 
 
@@ -73,6 +74,9 @@ export default function Home({res,navData}) {
         }
         }
       })}
+
+
+      <Footer/>
       
 
       
