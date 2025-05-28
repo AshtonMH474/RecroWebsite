@@ -1,6 +1,7 @@
 
 import path from "path";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
+import simpleGit from "simple-git";
 
 const git = simpleGit();
 
