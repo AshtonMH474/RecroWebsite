@@ -46,15 +46,12 @@
 //   }
 // }
 import { Octokit } from "@octokit/rest";
-import { MongoClient } from "mongodb";
+
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 });
 
-const MONGODB_URI = process.env.MONGODB_URI;
-const MONGO_DB_NAME = "tina";
-const MONGO_COLLECTION = `content-${process.env.GITHUB_BRANCH}`;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -95,29 +92,14 @@ export default async function handler(req, res) {
       },
     });
 
-    // 2. Mirror to MongoDB
-    const client = new MongoClient(MONGODB_URI);
-    await client.connect();
-    const db = client.db(MONGO_DB_NAME);
-    const collection = db.collection(MONGO_COLLECTION);
-
-    await collection.insertOne({
-      _id: slug,
-        key: slug,
-      _template: "contactForm",
-      ...frontmatter,
-     message:message,
-    });
-    console.log("completed")
-    await client.close();
+ 
 
 
     if (process.env.VERCEL_DEPLOY_HOOK_URL) {
-        console.log("vercellllllll")
       await fetch(process.env.VERCEL_DEPLOY_HOOK_URL, { method: "POST" });
     }
 
-    console.log("Completed Git commit, Mongo insert, and triggered redeploy.");
+    console.log("Completed Git commit and triggered redeploy.");
 
     res.status(200).json({ success: true });
   } catch (err) {
