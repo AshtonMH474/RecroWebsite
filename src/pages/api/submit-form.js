@@ -1,9 +1,9 @@
 
-import path from "path";
-import { writeFileSync, mkdirSync, existsSync } from "fs";
-import simpleGit from "simple-git";
+import { Octokit } from "@octokit/rest";
 
-const git = simpleGit();
+const octokit = new Octokit({
+  auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+});
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -11,34 +11,28 @@ export default async function handler(req, res) {
   const { firstName, lastName, email, organization, subject, message } = req.body;
   const date = new Date().toISOString();
   const slug = `${date.split("T")[0]}-${firstName.toLowerCase()}`;
-  const dirPath = path.join(process.cwd(), "content/forms");
-  const filePath = path.join(dirPath, `${slug}.md`);
+  const content = `---\nfirstName: "${firstName}"\nlastName: "${lastName}"\nemail: "${email}"\norganization: "${organization}"\nsubject: "${subject}"\ndate: "${date}"\n---\n\n${message}\n`;
 
-  const content = `---
-firstName: "${firstName}"
-lastName: "${lastName}"
-email: "${email}"
-organization: "${organization}"
-subject: "${subject}"
-date: "${date}"
----
-
-${message}
-`;
+  const repoOwner = process.env.GITHUB_OWNER;
+  const repoName = process.env.GITHUB_REPO;
+  const filePath = `content/forms/${slug}.md`;
 
   try {
-    // Ensure directory exists
-    if (!existsSync(dirPath)) mkdirSync(dirPath, { recursive: true });
-
-    // Write Markdown file
-    writeFileSync(filePath, content);
-
-    // Git commit & push
-    await git.add(filePath);
-    await git.commit(`chore: add contact form from ${email}`, filePath, {
-      '--author': `"${process.env.GITHUB_OWNER} <${process.env.GITHUB_AUTHOR_EMAIL}>"`,
+    await octokit.repos.createOrUpdateFileContents({
+      owner: repoOwner,
+      repo: repoName,
+      path: filePath,
+      message: `chore: add contact form from ${email}`,
+      content: Buffer.from(content).toString("base64"),
+      committer: {
+        name: repoOwner,
+        email: process.env.GITHUB_AUTHOR_EMAIL,
+      },
+      author: {
+        name: repoOwner,
+        email: process.env.GITHUB_AUTHOR_EMAIL,
+      },
     });
-    await git.push("origin", process.env.GITHUB_BRANCH || "main");
 
     res.status(200).json({ success: true });
   } catch (err) {
