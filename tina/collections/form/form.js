@@ -1,6 +1,6 @@
 const form = {
-    name:'forms',
-    label:"Forms",
+    name:'contactForm',
+    label:"Contact Forms",
     path:'content/forms',
     format:'md',
     fields:[
