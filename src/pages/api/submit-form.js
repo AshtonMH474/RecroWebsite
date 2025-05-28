@@ -106,12 +106,18 @@ export default async function handler(req, res) {
         key: slug,
       _template: "contactForm",
       ...frontmatter,
-      body: message,
+     message:message,
     });
     console.log("completed")
     await client.close();
 
-    // Redeploy trigger removed intentionally
+
+    if (process.env.VERCEL_DEPLOY_HOOK_URL) {
+        console.log("vercellllllll")
+      await fetch(process.env.VERCEL_DEPLOY_HOOK_URL, { method: "POST" });
+    }
+
+    console.log("Completed Git commit, Mongo insert, and triggered redeploy.");
 
     res.status(200).json({ success: true });
   } catch (err) {
