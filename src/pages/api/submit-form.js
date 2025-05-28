@@ -46,13 +46,15 @@
 //   }
 // }
 import { Octokit } from "@octokit/rest";
-// import fetch from "node-fetch";  // if you don’t have it, add `node-fetch` package
+import { MongoClient } from "mongodb";
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 });
 
-const VERCEL_DEPLOY_HOOK = process.env.VERCEL_DEPLOY_HOOK; // store the deploy hook URL here
+const MONGODB_URI = process.env.MONGODB_URI;
+const MONGO_DB_NAME = "tina";
+const MONGO_COLLECTION = `content-${process.env.GITHUB_BRANCH}`;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -60,45 +62,62 @@ export default async function handler(req, res) {
   const { firstName, lastName, email, organization, subject, message } = req.body;
   const date = new Date().toISOString();
   const slug = `${date.split("T")[0]}-${firstName.toLowerCase()}`;
-  const content = `---\nfirstName: "${firstName}"\nlastName: "${lastName}"\nemail: "${email}"\norganization: "${organization}"\nsubject: "${subject}"\ndate: "${date}"\n---\n\n${message}\n`;
-
-  const repoOwner = process.env.GITHUB_OWNER;
-  const repoName = process.env.GITHUB_REPO;
   const filePath = `content/forms/${slug}.md`;
 
+  const frontmatter = {
+    firstName,
+    lastName,
+    email,
+    organization,
+    subject,
+    date,
+  };
+
+  const content = `---\n${Object.entries(frontmatter)
+    .map(([key, val]) => `${key}: "${val}"`)
+    .join("\n")}\n---\n\n${message}\n`;
+
   try {
+    // 1. Commit to GitHub
     await octokit.repos.createOrUpdateFileContents({
-      owner: repoOwner,
-      repo: repoName,
+      owner: process.env.GITHUB_OWNER,
+      repo: process.env.GITHUB_REPO,
       path: filePath,
       message: `chore: add contact form from ${email}`,
       content: Buffer.from(content).toString("base64"),
       committer: {
-        name: repoOwner,
+        name: process.env.GITHUB_OWNER,
         email: process.env.GITHUB_AUTHOR_EMAIL,
       },
       author: {
-        name: repoOwner,
+        name: process.env.GITHUB_OWNER,
         email: process.env.GITHUB_AUTHOR_EMAIL,
       },
     });
 
-    // Trigger Vercel redeploy
-    if(process.env.ENV == 'production'){
-    await fetch(VERCEL_DEPLOY_HOOK, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({}), // deploy hooks usually accept empty payload
-    });
+    // 2. Mirror to MongoDB
+    const client = new MongoClient(MONGODB_URI);
+    await client.connect();
+    const db = client.db(MONGO_DB_NAME);
+    const collection = db.collection(MONGO_COLLECTION);
 
-}
+    await collection.insertOne({
+      _id: slug,
+        key: slug,
+      _template: "contactForm",
+      ...frontmatter,
+      body: message,
+    });
+    console.log("completed")
+    await client.close();
+
+    // Redeploy trigger removed intentionally
 
     res.status(200).json({ success: true });
   } catch (err) {
-    console.error(err);
+    console.error("Error submitting form:", err);
     res.status(500).json({ error: "Failed to submit form." });
   }
 }
+
 
