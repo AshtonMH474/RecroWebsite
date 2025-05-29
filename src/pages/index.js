@@ -15,17 +15,19 @@ export async function getStaticProps(){
     const {client} = await import("../../tina/__generated__/databaseClient");
     const res = await client.queries.page({relativePath:'home.md'})
     const navRes = await client.queries.nav({relativePath:'nav.md'})
+    const footerRes = await client.queries.footer({relativePath:"footer.md"})
     return {
       props:{
         res:res,
-        navData:navRes
+        navData:navRes,
+        footerData:footerRes
       }
     }
   
 }
 
 
-export default function Home({res,navData}) {
+export default function Home({res,navData,footerData}) {
   const ref = useRef(null);
   const { scrollY } = useScroll();
   const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
@@ -33,6 +35,7 @@ export default function Home({res,navData}) {
   });
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
+  const {data:footerContent} = useTina(footerData)
 
   return (
   
@@ -76,7 +79,7 @@ export default function Home({res,navData}) {
       })}
 
 
-      <Footer/>
+      <Footer res={footerContent.footer}/>
       
 
       
