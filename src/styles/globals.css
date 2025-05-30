@@ -30,6 +30,8 @@ body {
     height: 135vh; /* increase height */
     background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 80%);
     width: 112vw;
+    background-position: center center; /* keep centered */
+    background-size: cover;
   }
 }
 @media (max-width: 800px) {
