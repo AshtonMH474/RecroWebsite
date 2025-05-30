@@ -24,6 +24,12 @@ body {
   background: black;
   background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
 }
+@media (max-width: 1325px) {
+  .background.Home {
+    height: 135vh; /* increase height */
+    background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 80%);
+  }
+}
 
 .nav{
   z-index: 100;

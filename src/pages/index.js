@@ -44,8 +44,7 @@ export default function Home({res,navData,footerData}) {
       <Nav res={navContent.nav}/>
       <div
         ref={ref}
-        className="background Home bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
-
+        className="background Home h-screen bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
       >
         
             <motion.div style={{ rotate }} className="mr-10 gear1">
@@ -96,3 +95,4 @@ export default function Home({res,navData,footerData}) {
 }
 
 
+// className="background Home bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
