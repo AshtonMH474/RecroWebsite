@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import GearIcon from "../components/GearIcon";
 import { useScroll, useTransform, motion } from "framer-motion";
 import Landing from "../components/Home/Landing";
@@ -36,18 +36,7 @@ export default function Home({res,navData,footerData}) {
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
   const {data:footerContent} = useTina(footerData)
-
-  useEffect(() => {
-      const setVh = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-
-    setVh(); // Set on load
-    window.addEventListener('resize', setVh); // Update on resize
-
-    return () => window.removeEventListener('resize', setVh);
-  },[])
+  
 
   return (
   
@@ -55,8 +44,8 @@ export default function Home({res,navData,footerData}) {
       <Nav res={navContent.nav}/>
       <div
         ref={ref}
-        className="background Home  bg-fixed bg-center bg-cover flex flex-col items-end"
-        style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+        className="background Home bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
+
       >
         
             <motion.div style={{ rotate }} className="mr-10 gear1">
@@ -105,4 +94,5 @@ export default function Home({res,navData,footerData}) {
     </>
   );
 }
+
 
