@@ -18,8 +18,8 @@ body {
   left: 0;
   z-index: -20;
   min-height: 100vh;
-  /* width: 100%; */
-  width: 100vw;
+  width: 100%;
+  /* width: 100vw; */
   margin: 0;
   padding: 0;
   background: black;
@@ -29,7 +29,7 @@ body {
   .background.Home {
     height: 135vh; /* increase height */
     background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 80%);
-    width: 112vw;
+    
     background-position: center center; /* keep centered */
     background-size: cover;
   }
@@ -38,7 +38,7 @@ body {
   .background.Home {
     height: 135vh; /* increase height */
     background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 80%);
-    width: 135vw;
+    
   }
 }
 
