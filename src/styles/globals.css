@@ -4,20 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* html, body {
+html, body {
    margin: 0;
   padding: 0;
-  /* background-color: #000000; */
   
-/* }
+  
+}
 
 
 
 body {
   /* background: var(--background); */
-  /* color: white;
+  color: white;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: black;
+  background-color: #000000;
 }
 
 .background.Home{
@@ -30,60 +30,15 @@ body {
   margin: 0;
   padding: 0;
   /* background: black; */
-  /* background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
+  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
 }
 @media (max-width: 1325px) {
   .background.Home {
     height: 120vh; /* increase height */
-    /* background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 80%);
+    background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 80%);
     
   }
-} */ */ */ */ */
- html,
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: clip; /* avoids side scroll on rotate while allowing animations */
 }
-
-/* General body styles */
-body {
-  background-color: #000000; /* fallback color */
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* ✅ Fixed full-screen background gradient */
-.fixed-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  width: 100vw;
-  height: 100dvh;
-  background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 80%);
-  background-size: cover;
-  background-repeat: no-repeat;
-  pointer-events: none;
-}
-
-/* Responsive adjustment for gradient on smaller screens */
-@media (max-width: 1325px) {
-  .fixed-background {
-    background: radial-gradient(circle at 120% 185%, #b55a14 15%, #000000 80%);
-  }
-}
-
-/* ✅ Gear container (no background here) */
-.background.Home {
-  position: fixed ;
-  z-index: -1;
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
 
 
 
