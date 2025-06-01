@@ -7,7 +7,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
 }
 
 
@@ -27,8 +27,8 @@ width: 100vw;
   
   margin: 0;
   padding: 0;
-  background: black;
-  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
+  /* background: black;
+  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%); */
 }
 @media (max-width: 1325px) {
   .background.Home {
