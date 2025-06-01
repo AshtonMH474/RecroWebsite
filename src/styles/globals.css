@@ -5,9 +5,12 @@
 @tailwind utilities;
 
 html, body {
-  margin: 0;
+   margin: 0;
   padding: 0;
-  background-color: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
+  background-color: #000000; /* fallback for uncovered areas */
+  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 
