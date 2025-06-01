@@ -22,7 +22,7 @@ body::before {
 }
 
 body {
-  background: var(--background);
+  /* background: var(--background); */
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
@@ -41,13 +41,13 @@ width: 100vw;
   
   margin: 0;
   padding: 0;
-  /* background: black;
-  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%); */
+  background: black;
+  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
 }
 @media (max-width: 1325px) {
   .background.Home {
     height: 120vh; /* increase height */
-    background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 80%);
+    
     
   }
 }
