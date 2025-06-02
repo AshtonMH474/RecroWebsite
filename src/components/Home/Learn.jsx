@@ -26,7 +26,7 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
         style={{ opacity: contentOpacity }}
       >
         <div
-          className=" md:w-[700px] mb-32"
+          className="relative top-[20px] sm:static md:w-[700px] mb-32  "
           data-tina-field={tinaField(props, "headingLearnTeam")}
         >
           <TinaMarkdown
@@ -50,7 +50,7 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
               key={i}
               src={image.src}
               alt={image.alt || `team image ${i + 1}`}
-              className="object-cover rounded-[12px] md:relative sm:max-w-[340px]"
+              className={`object-cover rounded-[12px] md:relative max-w-[340px] max-w-[340px] sm:max-w-none`}
               data-tina-field={tinaField(image, "src")}
               style={{
                 width: image?.width ?? 420,
