@@ -64,12 +64,12 @@ export default function Nav({ res }) {
             </div>
 
             {/* Hamburger Button */}
-            <div className="md:hidden ml-auto pr-4 flex items-center h-full">
+            <div className="md:hidden ml-auto pr-16 flex items-center h-full">
 
                 <button
                 ref={buttonRef}
                 onClick={toggleMenu}
-                className="text-white  px-3 py-2 rounded"
+                className="text-white text-[26px]  px-3 py-2 rounded"
                 >
                 ☰
                 </button>
@@ -81,7 +81,7 @@ export default function Nav({ res }) {
         ref={menuRef}
         className={`${
           menuOpen ? 'flex' : 'hidden'
-        } flex-col md:flex md:flex-row gap-4 md:gap-x-8 items-start md:items-center md:pr-16 mt-2 md:mt-0`}
+        } flex-col pl-8 md:pl-0 pb-4 md:pb-0 md:flex md:flex-row gap-4 md:gap-x-8 items-start md:items-center md:pr-16 mt-2 md:mt-0`}
       >
         {res.links?.map((link, i) =>
           link.style === 'link' && link.link ? (
