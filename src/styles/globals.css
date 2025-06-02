@@ -4,20 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-   margin: 0;
-  padding: 0;
-  
-  
-}
-
-
 
 body {
-  /* background: var(--background); */
+  background: var(--background);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #000000;
 }
 
 .background.Home{
@@ -29,7 +20,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  /* background: black; */
+  background: black;
   background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
 }
 @media (max-width: 1325px) {
@@ -40,7 +31,24 @@ body {
   }
 }
 
+/* body {
+  background: var(--background);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+.background.Home{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -20;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: black;
+  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 80%);
+} */
 
 .nav{
   z-index: 100;

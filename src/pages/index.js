@@ -128,8 +128,6 @@ export default function Home({ res, navData, footerData }) {
 
   return (
     <>
-      {/* ✅ Fixed Background Gradient Layer */}
-      <div className="fixed-background" />
 
       {/* Navigation */}
       <Nav res={navContent.nav} />
