@@ -13,7 +13,7 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
   return (
     <>
     <motion.div
-      className="bg-black h-screen w-full"
+      className="bg-black learn h-screen w-full"
       style={{
         y: translateY,
         position: "relative",
@@ -22,34 +22,35 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
       }}
     >
       <motion.div
-        className="flex items-center justify-center h-screen w-full"
+        className="flex flex-col md:flex-row items-center justify-center h-screen w-full"
         style={{ opacity: contentOpacity }}
       >
         <div
-          className="w-[700px] mb-32"
+          className=" md:w-[700px] mb-32"
           data-tina-field={tinaField(props, "headingLearnTeam")}
         >
           <TinaMarkdown
             content={props.headingLearnTeam}
             components={{
-              h1: (props) => <h1 className="text-[60px] font-bold" {...props} />,
+              h1: (props) => <h1 className="pl-4 md:pl-0 text-[36px] md:text-[60px] font-bold" {...props} />,
               bold: (props) => <span className="primary-color" {...props} />,
-              p: (props) => <p className="secondary-text mb-6" {...props} />,
+              p: (props) => <p className="pl-4 md:pl-0 secondary-text mb-6" {...props} />,
             }}
           />
-
-          <button className="px-4 capitalize py-2 w-30 border primary-border rounded hover:text-white/80 transition-colors duration-300">
-            About Us
-          </button>
+            <div className="pl-4 md:pl-0 ">
+                <button className="px-4 capitalize py-2 w-30 border primary-border rounded hover:text-white/80 transition-colors duration-300">
+                    About Us
+                </button>
+            </div>
         </div>
 
-        <div className="move relative top-[50px]">
+        <div className="move flex flex-col gap-y-4 md:relative top-[50px]">
           {props?.learnTeamImages?.map((image, i) => (
             <img
               key={i}
               src={image.src}
               alt={image.alt || `team image ${i + 1}`}
-              className="object-cover rounded-[12px]"
+              className="object-cover rounded-[12px] md:relative sm:max-w-[340px]"
               data-tina-field={tinaField(image, "src")}
               style={{
                 width: image?.width ?? 420,
@@ -58,8 +59,7 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
                 left: image?.left ?? "auto",
                 right: image?.right ?? "auto",
                 bottom: image?.bottom ?? "auto",
-                zIndex: image?.zIndex ?? "auto",
-                position: "relative",
+                zIndex: image?.zIndex ?? "auto"
               }}
             />
           ))}

@@ -71,3 +71,11 @@ body {
   border-color: rgba(181, 89, 20, 0.5);
   cursor: pointer; 
 }
+
+
+@media (max-width: 1325px) {
+  .learn {
+    height: 120vh; /* increase height */
+    
+  }
+}
