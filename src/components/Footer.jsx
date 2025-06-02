@@ -5,7 +5,6 @@ import ContactUsForm from "./ContactUsForm";
 import { tinaField } from "tinacms/dist/react";
 
 function Footer({res}) {
-    console.log(res)
   const [showForm, setShowForm] = useState(false);
 
   const toggleForm = () => setShowForm((prev) => !prev);
