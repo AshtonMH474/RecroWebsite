@@ -64,12 +64,12 @@ export default function Nav({ res }) {
             </div>
 
             {/* Hamburger Button */}
-            <div className="md:hidden ml-auto pr-16 flex items-center h-full">
+            <div className="md:hidden ml-auto pr-4 flex items-center h-full">
 
                 <button
                 ref={buttonRef}
                 onClick={toggleMenu}
-                className="text-white text-[26px]  px-3 py-2 rounded"
+                className="text-white text-[30px]  px-3 py-2 rounded"
                 >
                 ☰
                 </button>
