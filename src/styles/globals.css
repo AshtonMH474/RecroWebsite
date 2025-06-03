@@ -77,15 +77,4 @@ body {
 }
 
 
-@media (max-width: 1325px) {
-  .learn {
-    height: 120vh; /* increase height */
-    
-  }
-}
 
-.aboutImages{
-overflow-clip-margin: content-box;
-overflow: clip;
-
-}
