@@ -83,3 +83,9 @@ body {
     
   }
 }
+
+.aboutImages{
+overflow-clip-margin: content-box;
+overflow: clip;
+
+}

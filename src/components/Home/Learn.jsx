@@ -12,10 +12,11 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
 
   return (
     <>
-    <motion.div
-      className="bg-black learn h-screen w-full"
+    {/* <motion.div */}
+   <div
+      className="bg-black learn min-h-[130vh] w-full mt-32"
       style={{
-        y: translateY,
+        // y: translateY,
         position: "relative",
         zIndex: 30,
         paddingBottom:'80px'
@@ -23,10 +24,10 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
     >
       <motion.div
         className="flex flex-col md:flex-row items-center justify-center h-screen w-full"
-        style={{ opacity: contentOpacity }}
+        // style={{ opacity: contentOpacity }}
       >
         <div
-          className="relative top-[20px] sm:static md:w-[700px] mb-32  "
+          className="relative top-[20px] mt-16 sm:static md:w-[700px] mb-32  "
           data-tina-field={tinaField(props, "headingLearnTeam")}
         >
           <TinaMarkdown
@@ -50,11 +51,11 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
               key={i}
               src={image.src}
               alt={image.alt || `team image ${i + 1}`}
-              className={`object-cover rounded-[12px] md:relative max-w-[340px] max-w-[340px] sm:max-w-none`}
+              className={`aboutImages object-cover rounded-[12px] relative  h-[120px] sm:max-w-none `}
               data-tina-field={tinaField(image, "src")}
               style={{
-                width: image?.width ?? 420,
-                height: image?.height ?? 220,
+                // width: image?.width ?? 420,
+                // height: image?.height ?? 220,
                 top: image?.top ?? "auto",
                 left: image?.left ?? "auto",
                 right: image?.right ?? "auto",
@@ -65,7 +66,8 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
           ))}
         </div>
       </motion.div>
-    </motion.div>
+    {/* </motion.div> */}
+    </div>
     <div className="bg-black h-[100px] w-full" />
     </>
   );
