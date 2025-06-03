@@ -58,7 +58,7 @@ function Footer({res}) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }} className="flex justify-center">
-                <h3 data-tina-field={tinaField(res,'copyright')} className="relative bottom-8">
+                <h3 data-tina-field={tinaField(res,'copyright')} className="relative bottom-8 text-center">
                     {res.copyright}
                 </h3>
             </motion.div>

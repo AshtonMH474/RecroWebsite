@@ -77,12 +77,12 @@ function ExpertiseCard({ ex }) {
           content={ex.description}
           components={{
             p: ({ children }) => (
-              <p className="ml-3 mr-3 text-[#C2C2BC] text-[16px]">{children}</p>
+              <p className=" text-[#C2C2BC] text-[16px]">{children}</p>
             ),
           }}
         />
       </div>
-      <div className="ml-3 mt-3 primary-color flex items-center gap-x-1 text-[14px]">
+      <div className="mt-3 primary-color flex items-center gap-x-1 text-[14px]">
         Learn More <FaArrowRight className="primary-color text-[14px]" />
       </div>
     </motion.div>
