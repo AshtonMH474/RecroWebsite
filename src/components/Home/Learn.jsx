@@ -23,11 +23,11 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
       }}
     >
       <motion.div
-        className="flex flex-col md:flex-row items-center justify-center h-screen w-full"
+        className="flex flex-col md:gap-16 md:flex-row items-center justify-center h-screen w-full"
         // style={{ opacity: contentOpacity }}
       >
         <div
-          className="relative top-[20px] mt-16 sm:static md:w-[700px] mb-32  "
+          className="pl-4 relative top-[20px] mt-16 sm:static md:w-[700px] mb-32 "
           data-tina-field={tinaField(props, "headingLearnTeam")}
         >
           <TinaMarkdown
@@ -51,7 +51,7 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
               key={i}
               src={image.src}
               alt={image.alt || `team image ${i + 1}`}
-              className={`aboutImages object-cover rounded-[12px] relative  h-[120px] sm:max-w-none `}
+              className={` object-cover rounded-[12px] lg:relative h-[200px] sm:max-w-none `}
               data-tina-field={tinaField(image, "src")}
               style={{
                 // width: image?.width ?? 420,
