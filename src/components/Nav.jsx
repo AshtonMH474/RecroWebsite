@@ -35,7 +35,7 @@ export default function Nav({ res }) {
     <div className="bg-black w-full flex flex-col md:flex-row justify-between md:items-center nav p-0">
         <div className='flex justify-between items-center'>
             <div data-tina-field={tinaField(res, 'logo')}>
-                <img className="h-30 cursor-pointer pl-4 md:pl-16" src={res.logo} alt="logo" />
+                <img className="h-20 md:h-30 cursor-pointer pl-4 md:pl-16" src={res.logo} alt="logo" />
             </div>
 
             {/* Hamburger Button */}
