@@ -186,35 +186,163 @@
 
 
 
-import { tinaField } from "tinacms/dist/react";
+
+
+
+
+
+
+
+
+
+
+import { useRef, useState, useEffect } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
 import ExpertiseCard from "./Expertise/ExpertiseCard";
+import { tinaField } from "tinacms/dist/react";
 
 function Expertise(props) {
   const expertiseItems = props.expertise || [];
+  const sectionRef = useRef(null);
+  const [rows, setRows] = useState(1);
+
+  // Calculate how many rows of cards will appear based on screen width
+  useEffect(() => {
+    const updateRows = () => {
+      const screenWidth = window.innerWidth;
+      let cardsPerRow;
+
+      if (screenWidth < 640) {
+        cardsPerRow = 1; // mobile
+      } else if (screenWidth < 1024) {
+        cardsPerRow = 2; // tablet
+      } else {
+        cardsPerRow = 3; // desktop
+      }
+
+      setRows(Math.ceil(expertiseItems.length / cardsPerRow));
+    };
+
+    updateRows();
+    window.addEventListener("resize", updateRows);
+    return () => window.removeEventListener("resize", updateRows);
+  }, [expertiseItems.length]);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  const headingOpacity = useTransform(scrollYProgress, [0, 0.02], [0, 1]);
+  const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], {
+    clamp: true,
+  });
+  const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], {
+    clamp: true,
+  });
+
+  const isSticky = scrollYProgress.get() <= 0.3;
+
+
+  const rowHeightVh = 65; // each row gets 65% of viewport height
+const headingHeightVh = 80; // the heading and intro area
+const totalHeightVh = rows * rowHeightVh + headingHeightVh;
 
   return (
-    <section className="relative mt-32">
-      <div className="flex flex-col justify-center items-center">
-        <div className="pb-12 pt-12 flex flex-col items-center">
-          <h2
-            data-tina-field={tinaField(props, "expertise_heading")}
-            className="font-bold text-[36px]"
-          >
-            {props.expertise_heading}
-          </h2>
-          <div
-            className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary`}
-          ></div>
-        </div>
+    <section
+  ref={sectionRef}
+  className="relative"
+  style={{ height: `${totalHeightVh}vh` }}
+>
+      {/* Sticky Container */}
+      <div
+        className={`${
+          isSticky
+            ? "sticky top-20 z-30 py-12 max-w-[1000px] mx-auto rounded-md"
+            : "relative py-12 max-w-[1000px] mx-auto rounded-md"
+        }`}
+      >
+        <motion.h2
+          data-tina-field={tinaField(props, "expertise_heading")}
+          className="font-bold text-[36px] text-white text-center"
+          style={{ opacity: headingOpacity }}
+        >
+          {props.expertise_heading}
+        </motion.h2>
 
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-12 max-w-[1000px] mx-auto items-center">
+        <motion.div
+          style={{ opacity: headingOpacity }}
+          className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary mx-auto mt-2`}
+        />
+
+        <motion.div
+          className="pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
+          style={{ opacity: cardsOpacity, scale: cardsScale }}
+        >
           {expertiseItems.map((ex, i) => (
             <ExpertiseCard key={i} ex={ex} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 export default Expertise;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { tinaField } from "tinacms/dist/react";
+// import ExpertiseCard from "./Expertise/ExpertiseCard";
+
+// function Expertise(props) {
+//   const expertiseItems = props.expertise || [];
+
+//   return (
+//     <section className="relative mt-32">
+//       <div className="flex flex-col justify-center items-center">
+//         <div className="pb-12 pt-12 flex flex-col items-center">
+//           <h2
+//             data-tina-field={tinaField(props, "expertise_heading")}
+//             className="font-bold text-[36px]"
+//           >
+//             {props.expertise_heading}
+//           </h2>
+//           <div
+//             className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary`}
+//           ></div>
+//         </div>
+
+//         <div className="flex flex-wrap justify-center gap-x-6 gap-y-12 max-w-[1000px] mx-auto items-center">
+//           {expertiseItems.map((ex, i) => (
+//             <ExpertiseCard key={i} ex={ex} />
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default Expertise;

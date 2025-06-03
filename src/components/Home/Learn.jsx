@@ -66,7 +66,7 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
               key={i}
               src={image.src}
               alt={image.alt || `team image ${i + 1}`}
-              className={` object-cover rounded-[12px] lg:relative h-[200px] sm:max-w-none `}
+              className={` object-cover rounded-[12px] lg:relative h-[200px] lg:h-[250px] sm:max-w-none `}
               data-tina-field={tinaField(image, "src")}
               style={{
                 // width: image?.width ?? 420,
