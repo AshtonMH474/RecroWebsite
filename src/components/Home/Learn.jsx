@@ -31,7 +31,7 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
       className={`bg-black learn min-h-[100vh] w-full mt-42 `}
       style={{
         // y: translateY,
-        height: isSmallScreen ? "200vh" : "100vh",
+        height: isSmallScreen ? "200vh" : "150vh",
         position: "relative",
         zIndex: 30,
         paddingBottom:'80px'
