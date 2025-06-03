@@ -69,12 +69,6 @@ blocks:
         right: 80
         bottom: 50
         zIndex: 10
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
-        width: 420
-        height: 220
-        bottom: 90
-        left: 80
     _template: learnTeam
 ---
 
