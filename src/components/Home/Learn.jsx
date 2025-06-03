@@ -1,8 +1,22 @@
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
 
 function Learn(props) {
+    
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const isSmall = window.innerWidth <= 767 && window.innerHeight <= 630;
+      setIsSmallScreen(isSmall);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
     // scrollYProgress tracks scroll from 0(top page) - 1(bottom page)
   const { scrollYProgress } = useViewportScroll();
 
@@ -14,16 +28,17 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
     <>
     {/* <motion.div */}
    <div
-      className="bg-black learn min-h-[130vh] w-full mt-32"
+      className={`bg-black learn min-h-[100vh] w-full mt-42 `}
       style={{
         // y: translateY,
+        height: isSmallScreen ? "200vh" : "100vh",
         position: "relative",
         zIndex: 30,
         paddingBottom:'80px'
       }}
     >
       <motion.div
-        className="flex flex-col md:gap-16 md:flex-row items-center justify-center h-screen w-full"
+        className="flex flex-col md:gap-16 md:flex-row items-center justify-center min-h-screen w-full"
         // style={{ opacity: contentOpacity }}
       >
         <div
@@ -45,7 +60,7 @@ const contentOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
             </div>
         </div>
 
-        <div className="move flex flex-col gap-y-4 md:relative top-[50px]">
+        <div className="move flex flex-col gap-y-4 lg:mt-[120px]">
           {props?.learnTeamImages?.map((image, i) => (
             <img
               key={i}
