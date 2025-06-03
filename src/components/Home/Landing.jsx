@@ -9,8 +9,8 @@ function Landing(props){
     <div className="flex flex-col items-center justify-center h-screen w-full">
         <div className='w-100 md:w-150' data-tina-field={tinaField(props,'heading')}>
             <TinaMarkdown content={props.heading} components={{
-                h1:props => <h1 className="text-[36px] md:text-[60px] font-bold text-center mb-4" {...props}/>,
-                h3:props => <h3 className="text-center secondary-text mb-6" {...props}/>
+                h1:props => <h1 className="text-[32px] md:text-[60px] font-bold text-center mb-4" {...props}/>,
+                h3:props => <h3 className="text-[16px] text-center secondary-text mb-6" {...props}/>
             }}/>
         </div>
         

@@ -108,54 +108,94 @@
 // export default Expertise;
 
 
+// import { tinaField } from "tinacms/dist/react";
+// import { motion, useScroll, useTransform } from "framer-motion";
+// import { useRef } from "react";
+// import ExpertiseCard from "./Expertise/ExpertiseCard";
+
+// function Expertise(props) {
+//   const sectionRef = useRef(null);
+//   const { scrollYProgress } = useScroll({
+//     target: sectionRef,
+//     offset: ["start start", "end start"],
+//   });
+
+//   const headingOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+//   const headingScale = useTransform(scrollYProgress, [0, 0.1], [0.8, 1]);
+
+//   const MAX_ITEMS = 6;
+
+//   const transforms = Array.from({ length: MAX_ITEMS }, (_, i) => {
+//     const start = 0.1 + i * 0.1;
+//     const end = start + 0.1;
+//     return {
+//       scale: useTransform(scrollYProgress, [start, end], [0.95, 1]),
+//       opacity: useTransform(scrollYProgress, [start, end], [0, 1]),
+//     };
+//   });
+
+//   const expertiseItems = props.expertise || [];
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className="relative mt-32"
+//       style={{
+//         height: `${expertiseItems.length * 80}vh`,
+//       }}
+//     >
+//       <motion.div
+//         style={{
+//           position: "sticky",
+//           top: 0,
+//           height: "100vh",
+//         }}
+//         className="flex flex-col justify-center items-center"
+//       >
+//         <motion.div
+//           className="pb-12 pt-12 flex flex-col items-center"
+//           style={{ opacity: headingOpacity, scale: headingScale }}
+//         >
+//           <h2
+//             data-tina-field={tinaField(props, "expertise_heading")}
+//             className="font-bold text-[36px]"
+//           >
+//             {props.expertise_heading}
+//           </h2>
+//           <div
+//             className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary`}
+//           ></div>
+//         </motion.div>
+
+//         {/* Vertically stacked cards */}
+//         <div className="flex flex-wrap justify-start gap-x-6 gap-y-12  max-w-[1000px] mx-auto items-center">
+//           {expertiseItems.map((ex, i) => (
+//             <ExpertiseCard
+//               key={i}
+//               ex={ex}
+//               transform={transforms[i] || {}}
+//             />
+//           ))}
+//         </div>
+//       </motion.div>
+//     </section>
+//   );
+// }
+
+// export default Expertise;
+
+
+
 import { tinaField } from "tinacms/dist/react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import ExpertiseCard from "./Expertise/ExpertiseCard";
 
 function Expertise(props) {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const headingOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
-  const headingScale = useTransform(scrollYProgress, [0, 0.1], [0.8, 1]);
-
-  const MAX_ITEMS = 6;
-
-  const transforms = Array.from({ length: MAX_ITEMS }, (_, i) => {
-    const start = 0.1 + i * 0.1;
-    const end = start + 0.1;
-    return {
-      scale: useTransform(scrollYProgress, [start, end], [0.95, 1]),
-      opacity: useTransform(scrollYProgress, [start, end], [0, 1]),
-    };
-  });
-
   const expertiseItems = props.expertise || [];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative"
-      style={{
-        height: `${expertiseItems.length * 80}vh`,
-      }}
-    >
-      <motion.div
-        style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-        }}
-        className="flex flex-col justify-center items-center"
-      >
-        <motion.div
-          className="pb-12 pt-12 flex flex-col items-center"
-          style={{ opacity: headingOpacity, scale: headingScale }}
-        >
+    <section className="relative mt-32">
+      <div className="flex flex-col justify-center items-center">
+        <div className="pb-12 pt-12 flex flex-col items-center">
           <h2
             data-tina-field={tinaField(props, "expertise_heading")}
             className="font-bold text-[36px]"
@@ -165,19 +205,14 @@ function Expertise(props) {
           <div
             className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary`}
           ></div>
-        </motion.div>
+        </div>
 
-        {/* Vertically stacked cards */}
-        <div className="flex flex-wrap justify-start gap-x-6 gap-y-12  max-w-[1000px] mx-auto items-center">
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-12 max-w-[1000px] mx-auto items-center">
           {expertiseItems.map((ex, i) => (
-            <ExpertiseCard
-              key={i}
-              ex={ex}
-              transform={transforms[i] || {}}
-            />
+            <ExpertiseCard key={i} ex={ex} />
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

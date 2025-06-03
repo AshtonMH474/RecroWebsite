@@ -5,5 +5,5 @@ export function IconRenderer({ iconName }) {
   const IconComponent = FaIcons[iconName];
   if (!IconComponent) return <span>Invalid icon</span>;
 //   returns the icon for display
-  return <IconComponent className="text-[#FAF3E0] text-[36px] sm:text-[50px]" />;
+  return <IconComponent className="text-[#FAF3E0] text-[50px]" />;
 }
