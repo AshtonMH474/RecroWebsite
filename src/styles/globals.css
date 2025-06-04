@@ -36,6 +36,13 @@ body {
   }
 }
 
+@media(max-height: 500px){
+  .expertise{
+    position: sticky;
+    top: 100px;
+  }
+}
+
 
 .nav{
   z-index: 100;

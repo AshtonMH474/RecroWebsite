@@ -205,8 +205,9 @@ function Expertise(props) {
   const expertiseItems = props.expertise || [];
   const sectionRef = useRef(null);
   const [rows, setRows] = useState(1);
+  const [vhMultiplier, setVhMultiplier] = useState(1);
 
-  // Calculate how many rows of cards will appear based on screen width
+  // Adjust cards per row based on screen width
   useEffect(() => {
     const updateRows = () => {
       const screenWidth = window.innerWidth;
@@ -228,6 +229,18 @@ function Expertise(props) {
     return () => window.removeEventListener("resize", updateRows);
   }, [expertiseItems.length]);
 
+  // Adjust scroll height multiplier based on short viewports
+  useEffect(() => {
+    const updateMultiplier = () => {
+      const isShort = window.innerHeight <= 600;
+      setVhMultiplier(isShort ? 2 : 1); // Increase scrollable height on short screens
+    };
+
+    updateMultiplier();
+    window.addEventListener("resize", updateMultiplier);
+    return () => window.removeEventListener("resize", updateMultiplier);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
@@ -241,26 +254,21 @@ function Expertise(props) {
     clamp: true,
   });
 
-  const isSticky = scrollYProgress.get() <= 0.3;
-
-
   const rowHeightVh = 65; // each row gets 65% of viewport height
-const headingHeightVh = 80; // the heading and intro area
-const totalHeightVh = rows * rowHeightVh + headingHeightVh;
+  const headingHeightVh = 80; // heading + intro height
+  const totalHeightVh = (rows * rowHeightVh + headingHeightVh) * vhMultiplier;
 
   return (
     <section
-  ref={sectionRef}
-  className="relative"
-  style={{ height: `${totalHeightVh}vh` }}
->
-      {/* Sticky Container */}
+      ref={sectionRef}
+      style={{ height: `${totalHeightVh}vh` }}
+      className="relative"
+    >
       <div
-        className={`${
-          isSticky
-            ? "sticky top-20 z-30 py-12 max-w-[1000px] mx-auto rounded-md"
-            : "relative py-12 max-w-[1000px] mx-auto rounded-md"
-        }`}
+        className={`
+          sticky top-20 z-30 py-12 max-w-[1000px] mx-auto rounded-md
+          [@media(max-height:600px)]:top-10
+        `}
       >
         <motion.h2
           data-tina-field={tinaField(props, "expertise_heading")}
@@ -289,6 +297,7 @@ const totalHeightVh = rows * rowHeightVh + headingHeightVh;
 }
 
 export default Expertise;
+
 
 
 
