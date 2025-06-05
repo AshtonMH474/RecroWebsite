@@ -3,11 +3,10 @@
 import { memo } from "react";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { FaArrowRight } from "react-icons/fa6";
 import { IconRenderer } from "@/components/utils/IconRenderer";
 
 const ExpertiseCard = memo(({ ex }) => {
-    console.log(ex)
+    
   return (
     <div className="border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6">
       <div className="flex items-center mb-4">

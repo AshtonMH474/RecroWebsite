@@ -12,7 +12,7 @@ function Learn(props) {
   });
 
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  console.log(props)
+  
   return (
     <>
       <div
