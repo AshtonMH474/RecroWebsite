@@ -1,6 +1,10 @@
 ---
 logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.png'
 links:
+  - link: ''
+    label: expertise
+    animation: true
+    style: button
   - link: /solutions
     label: solutions
     animation: false
