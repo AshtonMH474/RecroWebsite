@@ -17,11 +17,11 @@ function Landing(props){
         <div className="flex gap-x-8" >
             {props.buttons?.map((button,i) =>
                 button.style === 'border' ? (
-                    <button key={i} data-tina-field={tinaField(props.buttons[i], 'label')} className={`px-4 capitalize py-2 w-${button.width}  border primary-border rounded hover:text-white/80 transition-colors duration-300`}>
+                    <button key={i} data-tina-field={tinaField(props.buttons[i], 'label')} className={`px-8 capitalize py-2  border primary-border rounded hover:text-white/80 transition-colors duration-300`}>
                     {button.label}
                     </button>
                 ) : button.style === 'button' ? (
-                    <button key={i} data-tina-field={tinaField(props.buttons[i], 'label')} className={`bg-primary capitalize cursor-pointer px-4 py-2 w-${button.width}  rounded hover:opacity-80 text-white`}>
+                    <button key={i} data-tina-field={tinaField(props.buttons[i], 'label')} className={`bg-primary capitalize cursor-pointer px-8 py-2 w-auto   rounded hover:opacity-80 text-white`}>
                     {button.label}
                     </button>
                 ) : null

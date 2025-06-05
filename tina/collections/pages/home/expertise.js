@@ -20,11 +20,6 @@ export const expertise = {
             label:'Expertise',
             type:'object',
             list:true,
-            ui: {
-                validate: (items) => {
-                if (items?.length > 6) return "You can only have up to 6 items.";
-                },
-             },
             fields:[
                 {
                     name:'title',
@@ -41,6 +36,10 @@ export const expertise = {
                 {
                     name:'description',
                     type:'rich-text'
+                },
+                {
+                    name:'allContentLink',
+                    type:'string'
                 }
             ]
         }

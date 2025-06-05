@@ -4,7 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+html {
+  scroll-behavior: smooth;
+}
 
 html,body{
   overflow-x: clip;
@@ -83,5 +85,15 @@ body {
   cursor: pointer; 
 }
 
+.expertiseDes{
+  max-height: 100px;                /* Limit height */
+  display: -webkit-box;             /* Enable flex truncation */
+  -webkit-line-clamp: 5;            /* Approx. number of lines for 100px */
+  -webkit-box-orient: vertical;     /* Vertical layout for box */
+  overflow: hidden;                 /* Hide excess */
+  text-overflow: ellipsis;          /* Ellipsis style */
+  line-height: 20px;                /* Ensure line height matches clamp */
+  word-break: break-word;           /* Break long words */
+}
 
 
