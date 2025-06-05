@@ -47,19 +47,19 @@ export default function Home({res,navData,footerData}) {
         className="background Home h-screen bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
       >
         
-            <motion.div style={{ rotate }} className="mr-10 gear1">
+            <motion.div  style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear1">
               <GearIcon className="h-80 w-80 text-black" />
             </motion.div>
-            <motion.div style={{ rotate }} className="mr-10 gear2">
+            <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear2">
               <GearIcon className="h-50 w-50 " />
             </motion.div>
-            <motion.div style={{ rotate }} className="mr-10 gear3">
+            <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear3">
               <GearIcon className="h-65 w-65 text-black" />
             </motion.div>
-            <motion.div style={{ rotate }} className="mr-10 gear4">
+            <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear4">
               <GearIcon className="h-80 w-80 " />
             </motion.div>
-            <motion.div style={{ rotate }} className="mr-10 gear5">
+            <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear5">
               <GearIcon className="h-105 w-105 text-black" />
             </motion.div>
        
@@ -94,5 +94,3 @@ export default function Home({res,navData,footerData}) {
   );
 }
 
-
-// className="background Home bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"

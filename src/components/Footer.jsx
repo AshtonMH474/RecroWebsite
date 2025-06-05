@@ -13,12 +13,12 @@ function Footer({res}) {
     <div className="bg-black w-full  z-40">
         <div className="border-t border-b border-white/50 mb-16">
             <div className="flex justify-center">
-            <div className="relative gap-2 sm:gap-0 flex-col sm:flex-row bottom-10 inline-flex items-center justify-center bg-primary h-[60px] mx-auto sm:pt-0 sm:pb-0 pt-12 pb-12 px-6 rounded-[12px]">
-                <h3 data-tina-field={tinaField(res,'footerMessage')} className="text-white pr-4 sm:text[20px] text-[16px]">{res.footerMessage}</h3>
+            <div className="relative flex-col sm:flex-row bottom-10 inline-flex items-center justify-center bg-primary h-auto  mx-auto py-2  px-6 rounded-[12px]">
+                <h3 data-tina-field={tinaField(res,'footerMessage')} className="text-center text-white pr-4 pb-2 sm:pb-0 text-[16px]">{res.footerMessage}</h3>
 
                 <button
                 onClick={toggleForm}
-                className="cursor-pointer sm:text[20px] text-[16px] text-white border border-white/50 px-4 py-2 rounded hover:bg-white/10 transition"
+                className="cursor-pointer  text-[16px] text-white border border-white/50 px-2 py-2 rounded hover:bg-white/10 transition"
                 >
                 Contact Us
                 </button>
@@ -44,7 +44,7 @@ function Footer({res}) {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
-                    className="relative bottom-5 flex flex-col gap-4 sm:flex-row items-center justify-center sm:gap-30">
+                    className="relative bottom-5 flex  gap-6 sm:flex-row items-center justify-center sm:gap-30">
                         {res.links?.map((link,i) => 
                             link.link ? (
                                 <Link data-tina-field={tinaField(res.links[i], 'label')} key={i} href={link.link}>{link.label}</Link>
