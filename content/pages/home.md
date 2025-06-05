@@ -26,34 +26,40 @@ blocks:
           Enabling capability through the most cutting-edge Tailored solutions
           for every need.
         allContentLink: Learn More
+        contentIcon: FaArrowRight
       - title: Cyber Security
         icon: FaLock
         description: >
           Keeping most sensitive data behind closed doors Integrated and
           Intelligent
         allContentLink: Learn More
+        contentIcon: FaArrowRight
       - title: Analytics
         icon: FaChartLine
         description: |
           Transforming your organization's data into mission driving information
         allContentLink: Learn More
+        contentIcon: FaArrowRight
       - title: Consulting
         icon: FaPhoneAlt
         description: |
           Transforming your organization's data into mission driving information
         allContentLink: Learn More
+        contentIcon: FaArrowRight
       - title: Cloud Native
         icon: FaCoins
         description: >
           Moving you to the cutting edge of technology to drive innovation and
           growth.
         allContentLink: Learn More
+        contentIcon: FaArrowRight
       - title: Digital Solutions
         icon: FaTv
         description: >
           Bringing transformative digital solutions while meeting you where you
           are
         allContentLink: Learn More
+        contentIcon: FaArrowRight
     _template: expertise
   - headingLearnTeam: >
       # Learn about the **Team**
