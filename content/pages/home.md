@@ -11,11 +11,9 @@ blocks:
       - link: /signup
         label: Sign Up
         style: button
-        width: 30
       - link: /about
         label: about
         style: border
-        width: 30
     _template: landing
   - expertise_heading: Our Expertise
     underline_width: 80
@@ -68,6 +66,10 @@ blocks:
       At Recro, we bring together expertise, innovation, and dedication to
       deliver exceptional results. Our unique approach combines security-focused
       practices with cutting-edge solutions.
+    buttons:
+      - link: /about
+        label: About Us
+        style: border
     learnTeamImages:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
