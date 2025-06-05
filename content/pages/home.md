@@ -25,29 +25,35 @@ blocks:
         description: >
           Enabling capability through the most cutting-edge Tailored solutions
           for every need.
+        allContentLink: Learn More
       - title: Cyber Security
         icon: FaLock
         description: >
           Keeping most sensitive data behind closed doors Integrated and
           Intelligent
+        allContentLink: Learn More
       - title: Analytics
         icon: FaChartLine
         description: |
           Transforming your organization's data into mission driving information
+        allContentLink: Learn More
       - title: Consulting
         icon: FaPhoneAlt
         description: |
           Transforming your organization's data into mission driving information
+        allContentLink: Learn More
       - title: Cloud Native
         icon: FaCoins
         description: >
           Moving you to the cutting edge of technology to drive innovation and
           growth.
+        allContentLink: Learn More
       - title: Digital Solutions
         icon: FaTv
         description: >
           Bringing transformative digital solutions while meeting you where you
           are
+        allContentLink: Learn More
     _template: expertise
   - headingLearnTeam: >
       # Learn about the **Team**
@@ -61,7 +67,6 @@ blocks:
           https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
         width: 420
         height: 219
-        left: 80
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
         width: 420
