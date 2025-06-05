@@ -7,6 +7,27 @@ export const learnAboutTeamBlock = {
             type:'rich-text'
         },
         {
+            name: "buttons",
+      label: "Buttons",
+      type: "object",
+      list: true,
+      fields: [
+        {
+          type: "string",
+          name: "link",
+        },
+        {
+          type: "string",
+          name: "label",
+        },
+        {
+          type: "string",
+          name: "style",
+          options: ["border", "button"],
+        },
+      ],
+        },
+        {
             name:'learnTeamImages',
             label:'LearnTeamImages',
             type:'object',
