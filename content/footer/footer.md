@@ -1,5 +1,8 @@
 ---
 footerMessage: Contact Us and Let’s Reinvent Together
+buttons:
+  - label: Contact Us
+    style: border
 links:
   - link: /portal
     label: Portal
