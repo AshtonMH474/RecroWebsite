@@ -25,10 +25,6 @@ export const landingBlock = {
           name: "style",
           options: ["border", "button"],
         },
-        {
-          type: "number",
-          name: "width",
-        },
       ],
     },
   ],

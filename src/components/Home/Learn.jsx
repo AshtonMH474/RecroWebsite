@@ -12,7 +12,7 @@ function Learn(props) {
   });
 
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
+  
   return (
     <>
       <div
@@ -42,10 +42,33 @@ function Learn(props) {
                 ),
               }}
             />
-            <div className="pl-4 md:pl-0">
-              <button className="px-4 capitalize py-2 w-30 border primary-border rounded hover:text-white/80 transition-colors duration-300">
-                About Us
-              </button>
+            <div className="flex gap-x-8 pl-4 md:pl-0">
+          {props.buttons?.map((button, i) => {
+  
+            if (button.style === 'border') {
+                return (
+                <button
+                    key={i}
+                    data-tina-field={tinaField(props.buttons[i], 'label')}
+                    className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
+                >
+                    {button.label}
+                </button>
+                );
+            } else if (button.style === 'button') {
+                return (
+                <button
+                    key={i}
+                    data-tina-field={tinaField(props.buttons[i], 'label')}
+                    className="bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white"
+                >
+                    {button.label}
+                </button>
+                );
+            }
+            return null;
+            })}
+              
             </div>
           </motion.div>
 

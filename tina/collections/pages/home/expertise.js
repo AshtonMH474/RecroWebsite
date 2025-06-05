@@ -40,6 +40,14 @@ export const expertise = {
                 {
                     name:'allContentLink',
                     type:'string'
+                },
+                {
+                    name:'contentIcon',
+                    type:'string',
+                    options:iconNames,
+                    ui:{
+                        component:IconPickerField
+                    }
                 }
             ]
         }
