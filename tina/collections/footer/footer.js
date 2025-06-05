@@ -10,6 +10,23 @@ const footer = {
             type:"string"
         },
         {
+      name: "buttons",
+      label: "Buttons",
+      type: "object",
+      list: true,
+      fields: [
+        {
+          type: "string",
+          name: "label",
+        },
+        {
+          type: "string",
+          name: "style",
+          options: ["border", "button"],
+        },
+      ],
+    },
+        {
             name:"links",
             label:"Links",
             type:"object",

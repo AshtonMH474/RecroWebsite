@@ -15,13 +15,40 @@ function Footer({res}) {
             <div className="flex justify-center">
             <div className="relative flex-col sm:flex-row bottom-10 inline-flex items-center justify-center bg-primary h-auto  mx-auto py-2  px-6 rounded-[12px]">
                 <h3 data-tina-field={tinaField(res,'footerMessage')} className="text-center text-white pr-4 pb-2 sm:pb-0 text-[16px]">{res.footerMessage}</h3>
-
-                <button
+                <div className="flex gap-x-4">
+                {res.buttons?.map((button,i) => {
+                  if (button.style === 'border') {
+                    return (
+                    <button
+                        onClick={toggleForm}
+                        key={i}
+                        data-tina-field={tinaField(res.buttons[i], 'label')}
+                        className="px-4 capitalize py-2 border border-white rounded hover:text-white/80 transition-colors duration-300"
+                    >
+                        {button.label}
+                    </button>
+                    );
+                } else if (button.style === 'button') {
+                    return (
+                    <button
+                        onClick={toggleForm}
+                        key={i}
+                        data-tina-field={tinaField(res.buttons[i], 'label')}
+                        className="bg-[#3F3F38] capitalize cursor-pointer px-4 py-2 w-auto rounded hover:opacity-80 text-white"
+                    >
+                        {button.label}
+                    </button>
+                    );
+                }
+                    return null;
+                })}
+                </div>
+                {/* <button
                 onClick={toggleForm}
                 className="cursor-pointer  text-[16px] text-white border border-white/50 px-2 py-2 rounded hover:bg-white/10 transition"
                 >
                 Contact Us
-                </button>
+                </button> */}
             </div>
             </div>
 

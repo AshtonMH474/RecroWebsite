@@ -7,7 +7,7 @@ export default function Nav({ res, onExpertiseClick }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef(null)
   const buttonRef = useRef(null)
-
+    console.log(res)
   const toggleMenu = () => setMenuOpen(prev => !prev)
 
   useEffect(() => {
@@ -61,10 +61,10 @@ export default function Nav({ res, onExpertiseClick }) {
     md:max-h-none md:opacity-100 md:overflow-visible
   `}
 >
-        <button  onClick={() => {
+        <div data-tina-field={tinaField(res, 'animation')}><button  onClick={() => {
             toggleMenu()
             onExpertiseClick()
-        }} className="capitalize py-2 cursor-pointer text-white">Expertise</button>
+        }} className="capitalize py-2 cursor-pointer text-white">{res.animation}</button></div>
 
         {res.links?.map((link, i) =>
           link.style === 'link' && link.link ? (

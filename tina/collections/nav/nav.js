@@ -1,39 +1,4 @@
-// const nav = {
-//     name:'nav',
-//     label:'Navigation',
-//     path:'content/nav',
-//     format:'md',
-//     fields:[
-//         {   
-//             name:'logo',
-//             label:'Logo',
-//             type:'image'
-//         },
-//         {
-//             name:'links',
-//             label:'Links',
-//             type:"object",
-//             list:true,
-//             fields:[
-//                 {
-//                 type: "string",
-//                 name: "link",
-//                 },
-//                 {
-//                 type: "string",
-//                 name: "label",
-//                 },
-//                 {
-//                 type: "string",
-//                 name: "style",
-//                 options: ["link", "button"],
-//                 },
-//             ]
-//         },
-//     ]
-// }
 
-// export default nav;
 
 const nav = {
   name: "nav",
@@ -45,6 +10,11 @@ const nav = {
       name: "logo",
       label: "Logo",
       type: "image",
+    },
+    {
+        name:'animation',
+        label:'Animation Link Name',
+        type:'string'
     },
     {
       name: "links",
@@ -66,7 +36,8 @@ const nav = {
           type: "string",
           name: "label",
           label: "Link Label",
-        },
+          
+        },    
         {
           type: "string",
           name: "style",
