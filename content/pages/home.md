@@ -2,7 +2,7 @@
 title: Home
 blocks:
   - heading: >
-      # Reinventing How We Move Forward
+      # Reinventing How We Move Forward!
 
 
       ### Get in touch with Recro. We're here to answer your questions and
