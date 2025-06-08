@@ -48,6 +48,10 @@ export const expertise = {
                     ui:{
                         component:IconPickerField
                     }
+                },
+                {
+                    name:'content',
+                    type:'rich-text'
                 }
             ]
         }

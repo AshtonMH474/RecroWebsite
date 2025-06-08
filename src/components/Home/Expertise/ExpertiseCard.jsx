@@ -4,9 +4,17 @@ import { memo } from "react";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { IconRenderer } from "@/components/utils/IconRenderer";
+import { useModal } from "@/context/Modal";
+import ExpertiseModal from "./ExpertiseModal";
 
 const ExpertiseCard = memo(({ ex }) => {
     
+    const { setModalContent } = useModal()
+    const openModal = () => {
+        setModalContent(<ExpertiseModal ex={ex}/>)
+    }
+    
+
   return (
     <div className="border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6">
       <div className="flex items-center mb-4">
@@ -35,11 +43,12 @@ const ExpertiseCard = memo(({ ex }) => {
         />
       </div>
 
-      <div className="mt-3 primary-color flex items-center gap-x-1 text-[14px]">
+      <div onClick={openModal} className="mt-3 primary-color flex items-center gap-x-1 text-[14px]">
         <div data-tina-field={tinaField(ex, "allContentLink")}>{ex.allContentLink}</div>
         <div  data-tina-field={tinaField(ex, "contentIcon")}><IconRenderer color={'#B55914'} size={'14px'} iconName={ex.contentIcon} /></div>
         
       </div>
+      
     </div>
   );
 });
