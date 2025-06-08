@@ -53,6 +53,11 @@ body {
   left: 0;
 }
   
+@media(max-height:450px){
+  .landing{
+    margin-top: 50px;
+  }
+}
 
 .test{
   z-index: 10;
