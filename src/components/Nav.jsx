@@ -40,7 +40,7 @@ export default function Nav({ res, onExpertiseClick }) {
           <button
             ref={buttonRef}
             onClick={toggleMenu}
-            className="text-white text-[30px] px-3 py-2 rounded"
+            className="text-white text-[30px] px-3 pt-2 rounded"
           >
             ☰
           </button>
@@ -53,7 +53,7 @@ export default function Nav({ res, onExpertiseClick }) {
     flex flex-col md:flex-row items-start md:items-center
     gap-4 md:gap-x-8
     pl-8 md:pl-0
-    pb-4 md:pb-0
+    pb-0
     md:pr-16
     mt-2 md:mt-0
     ${menuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}

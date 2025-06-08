@@ -70,6 +70,15 @@ function ExpertiseModal({ex}) {
                 }}
               />
     </div>
+    <div data-tina-field={tinaField(ex,'content')}>
+        <TinaMarkdown
+        content={ex.content}
+        components={{
+            p:({children}) => {
+               return <p className="text-[#C2C2BC]  text-[16px]">{children}</p>
+            }
+        }}/>
+    </div>
     </div>
   </div>
 );
