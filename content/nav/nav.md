@@ -1,5 +1,5 @@
 ---
-logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.png'
+logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/logo.png'
 animation: expertise
 links:
   - link: /solutions
