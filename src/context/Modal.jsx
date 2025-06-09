@@ -1,5 +1,7 @@
+import { useRouter } from 'next/router';
 import { useRef, useState, useContext, createContext } from 'react';
 import ReactDOM from 'react-dom';
+
 
 
 
@@ -42,18 +44,30 @@ const closeModal = async () => {
 
 export function Modal() {
   const { modalRef, modalContent, closeModal } = useContext(ModalContext);
+    const router = useRouter()
+    const active = router.pathname.startsWith('/admin')
+    console.log(active)
+   console.log(router)
   // If there is no div referenced by the modalRef or modalContent is not a
   // truthy value, render nothing:
   if (!modalRef || !modalRef.current || !modalContent) return null;
 
-  // Render the following component to the div referenced by the modalRef
-  return ReactDOM.createPortal(
-    <div id="modal">
+
+  const modalELement = (
+     <div id="modal">
       <div id="modal-background" onClick={closeModal} />
       <div id="modal-content">
         {modalContent}
       </div>
-    </div>,
+    </div>
+  )
+
+   if (active) {
+    return modalELement;
+  }
+  // Render the following component to the div referenced by the modalRef
+  return ReactDOM.createPortal(
+    modalELement,
     modalRef.current
   );
 }
