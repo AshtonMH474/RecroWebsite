@@ -18,7 +18,7 @@ blocks:
   - expertise_heading: Our Expertise
     underline_width: 80
     expertise:
-      - title: Cloudas
+      - title: Cloud
         icon: FaCloud
         description: >
           Enabling capability through the most cutting-edge Tailored solutions
