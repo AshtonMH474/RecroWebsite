@@ -1,74 +1,57 @@
 import { useRouter } from 'next/router';
 import { useRef, useState, useContext, createContext } from 'react';
-import ReactDOM from 'react-dom';
-
-
-
 
 const ModalContext = createContext();
 
 export function ModalProvider({ children }) {
-  const modalRef = useRef();
   const [modalContent, setModalContent] = useState(null);
-  // callback function that will be called when modal is closing
   const [onModalClose, setOnModalClose] = useState(null);
 
-
-const closeModal = async () => {
-  setModalContent(null);
-
-  if (typeof onModalClose === 'function') {
-    setOnModalClose(null);
-    onModalClose();
-  }
-};
-
+  const closeModal = async () => {
+    setModalContent(null);
+    if (typeof onModalClose === 'function') {
+      setOnModalClose(null);
+      onModalClose();
+    }
+  };
 
   const contextValue = {
-    modalRef, // reference to modal div
-    modalContent, // React component to render inside modal
-    setModalContent, // function to set the React component to render inside modal
-    setOnModalClose, // function to set the callback function called when modal is closing
-    closeModal // function to close the modal
+    modalContent,
+    setModalContent,
+    setOnModalClose,
+    closeModal
   };
 
   return (
-    <>
-      <ModalContext.Provider value={contextValue}>
-        {children}
-      </ModalContext.Provider>
-      <div ref={modalRef} />
-    </>
+    <ModalContext.Provider value={contextValue}>
+      {children}
+      <Modal /> {/* Render modal inline here */}
+    </ModalContext.Provider>
   );
 }
 
 export function Modal() {
-  const { modalRef, modalContent, closeModal } = useContext(ModalContext);
-    const router = useRouter()
-    const active = router.pathname.startsWith('/admin')
-    console.log(active)
-   console.log(router)
-  // If there is no div referenced by the modalRef or modalContent is not a
-  // truthy value, render nothing:
-  if (!modalRef || !modalRef.current || !modalContent) return null;
+  const { modalContent, closeModal } = useContext(ModalContext);
+  const router = useRouter();
+  const active = router.pathname.startsWith('/admin');
 
+  if (!modalContent) return null;
 
-  const modalELement = (
-     <div id="modal">
-      <div id="modal-background" onClick={closeModal} />
-      <div id="modal-content">
+  return (
+    <div id="modal" style={{ position: 'fixed', top: 0, left: 0, zIndex: 1000,display:'flex', alignItems:'center',justifyContent:'center' }}>
+      <div id="modal-background" onClick={closeModal} style={{
+        position: 'fixed',
+        top: 0, left: 0,
+        width: '100vw',
+        height: '100vh',
+        background: 'rgba(0, 0, 0, 0.5)'
+      }} />
+      <div id="modal-content" style={{
+        position: 'absolute',
+      }}>
         {modalContent}
       </div>
     </div>
-  )
-
-   if (active) {
-    return modalELement;
-  }
-  // Render the following component to the div referenced by the modalRef
-  return ReactDOM.createPortal(
-    modalELement,
-    modalRef.current
   );
 }
 

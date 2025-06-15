@@ -4,6 +4,7 @@ import { forwardRef, useRef, useState, useEffect, useImperativeHandle } from "re
 import { useScroll, useTransform, motion } from "framer-motion";
 import ExpertiseCard from "./Expertise/ExpertiseCard";
 import { tinaField } from "tinacms/dist/react";
+import ExpertiseModal from "./Expertise/ExpertiseModal";
 
 const Expertise = forwardRef(function Expertise(props, ref) {
   const expertiseItems = props.expertise || [];
@@ -11,6 +12,13 @@ const Expertise = forwardRef(function Expertise(props, ref) {
   const [rows, setRows] = useState(1);
   const [vhMultiplier, setVhMultiplier] = useState(1);
   const [short, setShort] = useState(false);
+
+
+  // variables for expertise modals
+  const [expandedCardIndex, setExpandedCardIndex] = useState(null);
+  const openCard = (index) => setExpandedCardIndex(index);
+  const closeCard = () => setExpandedCardIndex(null);
+
 
   useImperativeHandle(ref, () => ({
     scrollToHeading: () => {
@@ -54,6 +62,7 @@ const Expertise = forwardRef(function Expertise(props, ref) {
   const totalHeightVh = (rows * rowHeightVh + headingHeightVh) * vhMultiplier;
 
   return (
+    <>
     <section
       ref={sectionRef}
       style={{ height: `${totalHeightVh}vh` }}
@@ -82,11 +91,20 @@ const Expertise = forwardRef(function Expertise(props, ref) {
           style={{ opacity: cardsOpacity, scale: cardsScale }}
         >
           {expertiseItems.map((ex, i) => (
-            <ExpertiseCard key={i} ex={ex} />
+            <ExpertiseCard key={i} ex={ex}  isExpanded={expandedCardIndex === i}
+            onExpand={() => openCard(i)}
+            onClose={closeCard}/>
           ))}
         </motion.div>
       </div>
     </section>
+    {expandedCardIndex !== null && (
+        <ExpertiseModal
+          ex={expertiseItems[expandedCardIndex]}
+          onClose={closeCard}
+        />
+      )}
+  </>
   );
 });
 
