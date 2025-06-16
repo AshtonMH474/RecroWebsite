@@ -1,40 +1,67 @@
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { IconRenderer } from "@/components/utils/IconRenderer";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { IoMdClose } from "react-icons/io";
 
-
-
-function ExpertiseModal({ ex,  onClose}) {
+function ExpertiseModal({ ex, onClose }) {
   useEffect(() => {
     const preventScroll = (e) => e.preventDefault();
-    window.addEventListener('touchmove', preventScroll, { passive: false });
-    window.addEventListener('wheel', preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+    window.addEventListener("wheel", preventScroll, { passive: false });
 
     return () => {
-      window.removeEventListener('touchmove', preventScroll);
-      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
+      window.removeEventListener("wheel", preventScroll);
     };
   }, []);
 
-
   return (
-    <div className="fixed top-0 right-0 bottom-0 left-0 flex justify-center items-center " style={{zIndex:'1000'}} onClick={onClose}>
-      {/* Overlay: click outside closes */}
-      <div
-        className="absolute inset-0 bg-black/70 z-[999]"
-        onClick={onClose}
+    <div
+      className="fixed inset-0 flex justify-center items-center z-[1000]"
+      onClick={onClose}
+    >
+      {/* Faded Background */}
+      <motion.div
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm z-[999]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
       />
-      <div
-        className="relative border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[50%] h-[50%] p-4 z-[1000] overflow-hidden"
+
+      {/* Spinning Modal Content */}
+      <motion.div
+        onClick={(e) => e.stopPropagation()} // Prevent backdrop click from closing
+        initial={{ opacity: 0, scale: 0.8, rotate: -180 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        exit={{ opacity: 0, scale: 0.8, rotate: 180 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative z-[1000] border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[60%] h-[50%] p-4 overflow-hidden"
       >
-        <div className="flex items-center">
-          <div data-tina-field={tinaField(ex, "icon")} className="bg-primary rounded-[10px] h-16 w-16 flex items-center justify-center">
-            <IconRenderer size={'50px'} color={'#FAF3E0'} iconName={ex.icon} />
+        {/* Header with Close */}
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex items-center">
+            <div
+              data-tina-field={tinaField(ex, "icon")}
+              className="bg-primary rounded-[10px] h-16 w-16 flex items-center justify-center"
+            >
+              <IconRenderer size={"50px"} color={"#FAF3E0"} iconName={ex.icon} />
+            </div>
+            <h3
+              data-tina-field={tinaField(ex, "title")}
+              className="pl-3 text-[24px] font-bold"
+            >
+              {ex.title}
+            </h3>
           </div>
-          <h3 data-tina-field={tinaField(ex, "title")} className="pl-3 text-[24px] font-bold">{ex.title}</h3>
+          <button onClick={onClose} aria-label="Close Modal">
+            <IoMdClose className="text-[24px] text-white hover:text-primary transition" />
+          </button>
         </div>
 
+        {/* Description */}
         <div data-tina-field={tinaField(ex, "description")}>
           <TinaMarkdown
             content={ex.description}
@@ -46,10 +73,11 @@ function ExpertiseModal({ ex,  onClose}) {
           />
         </div>
 
+        {/* Content Scrollable */}
         <div
-          data-tina-field={tinaField(ex, 'content')}
+          data-tina-field={tinaField(ex, "content")}
           className="overflow-y-auto mt-4 pr-2"
-          style={{ maxHeight: 'calc(100% - 120px)' }}
+          style={{ maxHeight: "calc(100% - 120px)" }}
         >
           <TinaMarkdown
             content={ex.content}
@@ -60,9 +88,9 @@ function ExpertiseModal({ ex,  onClose}) {
             }}
           />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
 
-export default ExpertiseModal
+export default ExpertiseModal;
