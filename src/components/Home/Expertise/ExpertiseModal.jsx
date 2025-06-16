@@ -7,15 +7,28 @@ import { IoMdClose } from "react-icons/io";
 
 function ExpertiseModal({ ex, onClose }) {
   useEffect(() => {
-    const preventScroll = (e) => e.preventDefault();
-    window.addEventListener("touchmove", preventScroll, { passive: false });
-    window.addEventListener("wheel", preventScroll, { passive: false });
+    const scrollY = window.scrollY;
+
+    // Lock scroll and preserve current position
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+    document.body.style.width = '100%';
 
     return () => {
-      window.removeEventListener("touchmove", preventScroll);
-      window.removeEventListener("wheel", preventScroll);
+      // Restore scroll position
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY); // restore to the same spot
     };
   }, []);
+
 
   return (
     <div
