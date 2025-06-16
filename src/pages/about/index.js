@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import { useTina } from "tinacms/dist/react";
 import Footer from "@/components/Footer";
 import LandingAbout from "@/components/About/Landing";
+import { useExpertise } from "@/context/ExpertiseContext";
 
 
 export async function getStaticProps(){
@@ -24,6 +25,7 @@ export async function getStaticProps(){
 
 function About({res,navData,footerData}){
     const ref = useRef(null)
+    const {expertiseRef} = useExpertise()
     const { scrollY } = useScroll();
     const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
     clamp: false, // disables clamping so it keeps going beyond 360
@@ -33,9 +35,13 @@ function About({res,navData,footerData}){
     const {data:navContent} = useTina(navData)
     const {data:footerContent} = useTina(footerData)
 
+    const scrollToExpertise = () => {
+        expertiseRef.current?.scrollToHeading();
+    };
+
     return (
         <>
-            <Nav res={navContent.nav}/>
+            <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
             <div
             ref={ref}
             className="background Home h-screen bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"

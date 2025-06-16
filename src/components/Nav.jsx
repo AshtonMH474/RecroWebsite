@@ -2,8 +2,10 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { tinaField } from 'tinacms/dist/react'
+import { useRouter } from 'next/router'
 
 export default function Nav({ res, onExpertiseClick }) {
+  const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef(null)
   const buttonRef = useRef(null)
@@ -27,13 +29,19 @@ export default function Nav({ res, onExpertiseClick }) {
     }
   }, [])
 
+  const handleExpertise = async () => {
+   
+    if(router.pathname != '/') await  router.push('/')
+    await onExpertiseClick()
+  }
+
   if (!res) return null
 
   return (
     <div className="z-[101] bg-black w-full flex flex-col md:flex-row justify-between md:items-center nav p-0">
       <div className='flex justify-between items-center'>
         <div data-tina-field={tinaField(res, 'logo')}>
-          <img className="h-20 md:h-30 cursor-pointer pl-4 md:pl-16" src={res.logo} alt="logo" />
+          <Link href={'/'}><img className="h-20 md:h-30 cursor-pointer pl-4 md:pl-16" src={res.logo} alt="logo" /></Link>
         </div>
 
         <div className="md:hidden ml-auto pb-4 pr-4 flex items-center h-full">
@@ -62,7 +70,7 @@ export default function Nav({ res, onExpertiseClick }) {
 >
         <div data-tina-field={tinaField(res, 'animation')}><button  onClick={() => {
             toggleMenu()
-            onExpertiseClick()
+            handleExpertise()
         }} className="capitalize py-2 cursor-pointer text-white">{res.animation}</button></div>
 
         {res.links?.map((link, i) =>
