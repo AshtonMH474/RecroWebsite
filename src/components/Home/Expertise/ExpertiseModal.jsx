@@ -51,14 +51,14 @@ function ExpertiseModal({ ex, onClose }) {
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
         exit={{ opacity: 0, scale: 0.8, rotate: 180 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-[1000] border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[60%] h-[50%] p-4 overflow-hidden"
+        className="relative z-[1000] border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[60%] h-[40%] p-4 overflow-hidden"
       >
         {/* Header with Close */}
         <div className="flex justify-between items-start mb-4">
           <div className="flex items-center">
             <div
               data-tina-field={tinaField(ex, "icon")}
-              className="bg-primary rounded-[10px] h-16 w-16 flex items-center justify-center"
+              className="bg-primary rounded-[10px] h-16 w-16 min-w-16 flex items-center justify-center"
             >
               <IconRenderer size={"50px"} color={"#FAF3E0"} iconName={ex.icon} />
             </div>
