@@ -13,6 +13,7 @@ const Expertise = forwardRef(function Expertise(props, ref) {
   const [rows, setRows] = useState(1);
   const [vhMultiplier, setVhMultiplier] = useState(1);
   const [short, setShort] = useState(false);
+  const [height,setHeight] = useState(false)
 
 
   // variables for expertise modals
@@ -37,7 +38,9 @@ const Expertise = forwardRef(function Expertise(props, ref) {
       setRows(Math.ceil(expertiseItems.length / cardsPerRow));
 
       const isShort = window.innerHeight <= 600;
+      const isHeight = window.innerHeight >= 1000;
       if (isShort) setShort(true);
+      if(isHeight) setHeight(true)
       setVhMultiplier(isShort ? 2 : 1);
     };
 
@@ -77,8 +80,11 @@ const Expertise = forwardRef(function Expertise(props, ref) {
       className="relative"
     >
       <div
-        className="sticky top-20 z-30 py-12 max-w-[1000px] mx-auto rounded-md [@media(max-height:600px)]:top-10"
-        style={{ paddingTop: short ? "5rem" : "3rem" }}
+        className="sticky   z-30 py-12 max-w-[1000px] mx-auto rounded-md [@media(max-height:600px)]:top-10"
+        style={{ paddingTop: short ? "5rem" : "3rem" ,
+          position:'sticky',
+          top: height ? '200px' : '80px'
+        }}
       >
         <motion.h2
           data-tina-field={tinaField(props, "expertise_heading")}
