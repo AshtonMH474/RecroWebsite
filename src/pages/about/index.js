@@ -1,15 +1,41 @@
 import GearIcon from "@/components/GearIcon";
 import { useRef } from "react"
 import { useScroll, useTransform, motion } from "framer-motion";
+import Nav from "@/components/Nav";
+import { useTina } from "tinacms/dist/react";
+import Footer from "@/components/Footer";
+import LandingAbout from "@/components/About/Landing";
 
-function About(){
+
+export async function getStaticProps(){
+    const {client} = await import('../../../tina/__generated__/databaseClient')
+    const res = await client.queries.page({relativePath:'about.md'})
+    const navRes = await client.queries.nav({relativePath:'nav.md'})
+    const footerRes = await client.queries.footer({relativePath:"footer.md"})
+    return {
+      props:{
+        res:res,
+        navData:navRes,
+        footerData:footerRes
+      }
+    }
+  
+}
+
+function About({res,navData,footerData}){
     const ref = useRef(null)
     const { scrollY } = useScroll();
     const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
     clamp: false, // disables clamping so it keeps going beyond 360
     });
+
+    const {data} = useTina(res)
+    const {data:navContent} = useTina(navData)
+    const {data:footerContent} = useTina(footerData)
+
     return (
         <>
+            <Nav res={navContent.nav}/>
             <div
             ref={ref}
             className="background Home h-screen bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
@@ -32,7 +58,15 @@ function About(){
                 </motion.div>
        
           
-        </div>
+            </div>
+             {data.page.blocks?.map((block,i) => {
+        switch(block?.__typename){
+          case "PageBlocksLanding":{
+            return <LandingAbout key={i} {...block}/>
+          }
+        }
+      })}
+            <Footer res={footerContent.footer}/>
         </>
     )
 }

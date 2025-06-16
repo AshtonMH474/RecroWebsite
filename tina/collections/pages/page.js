@@ -10,6 +10,7 @@ const pages = {
   ui: {
     router: (props) => {
       if (props.document._sys.relativePath === "home.md") return "/";
+      if (props.document._sys.relativePath === "about.md") return "/about";
     },
   },
   fields: [
