@@ -8,7 +8,7 @@ import ExpertiseModal from "./Expertise/ExpertiseModal";
 
 const Expertise = forwardRef(function Expertise(props, ref) {
   // used for animations
-  const expertiseItems = props.expertise || [];
+  const expertiseItems = props.cards || [];
   const sectionRef = useRef(null);
   const [rows, setRows] = useState(1);
   const [vhMultiplier, setVhMultiplier] = useState(1);
@@ -87,11 +87,11 @@ const Expertise = forwardRef(function Expertise(props, ref) {
         }}
       >
         <motion.h2
-          data-tina-field={tinaField(props, "expertise_heading")}
+          data-tina-field={tinaField(props, "cards_heading")}
           className="font-bold text-[36px] text-white text-center"
           style={{ opacity: headingOpacity }}
         >
-          {props.expertise_heading}
+          {props.cards_heading}
         </motion.h2>
 
         <motion.div

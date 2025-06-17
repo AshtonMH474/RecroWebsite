@@ -6,6 +6,7 @@ import { useTina } from "tinacms/dist/react";
 import Footer from "@/components/Footer";
 import LandingAbout from "@/components/About/Landing";
 import { useExpertise } from "@/context/ExpertiseContext";
+import Approach from "@/components/About/Approach";
 
 
 export async function getStaticProps(){
@@ -69,6 +70,9 @@ function About({res,navData,footerData}){
         switch(block?.__typename){
           case "PageBlocksLanding":{
             return <LandingAbout key={i} {...block}/>
+          }
+          case "PageBlocksCards":{
+            return <Approach key={i} {...block}/>
           }
         }
       })}
