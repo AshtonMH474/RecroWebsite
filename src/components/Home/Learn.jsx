@@ -2,6 +2,7 @@ import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 
 function Learn(props) {
   const learnRef = useRef(null);
@@ -47,23 +48,30 @@ function Learn(props) {
   
             if (button.style === 'border') {
                 return (
+                <Link href={button.link}>
                 <button
                     key={i}
                     data-tina-field={tinaField(props.buttons[i], 'label')}
                     className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
                 >
+                    
                     {button.label}
                 </button>
+                </Link>
                 );
             } else if (button.style === 'button') {
                 return (
+                   <Link href={button.link}>
                 <button
                     key={i}
                     data-tina-field={tinaField(props.buttons[i], 'label')}
                     className="bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white"
                 >
+                 
                     {button.label}
+                 
                 </button>
+                 </Link>
                 );
             }
             return null;
