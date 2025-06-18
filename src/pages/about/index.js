@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import LandingAbout from "@/components/About/Landing";
 import { useExpertise } from "@/context/ExpertiseContext";
 import Approach from "@/components/About/Approach";
+import Leadership from "@/components/About/Leadership";
 
 
 export async function getStaticProps(){
@@ -76,6 +77,7 @@ function About({res,navData,footerData}){
           }
         }
       })}
+            <Leadership/>
             <Footer res={footerContent.footer}/>
         </>
     )

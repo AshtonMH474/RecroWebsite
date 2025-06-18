@@ -26,20 +26,6 @@ export class CustomAuthProvider extends AbstractAuthProvider {
   }
 
   async getToken() {
-    // const res = await fetch('/api/auth/session');
-    // const session = await res.json();
-    // return { id_token: session?.id_token };
-
-    //  const res = await fetch('/api/auth/session');
-    
-    // if (!res.ok) {
-    //   await this._handleExpiredSession();
-    //   return null;
-    // }
-
-    // const session = await res.json();
-    // console.log(session)
-    // return { id_token: session?.id_token };
 
     const res = await fetch('/api/auth/session');
 
@@ -59,9 +45,6 @@ export class CustomAuthProvider extends AbstractAuthProvider {
   try {
     const decoded = jwtDecode(token);
     const now = Date.now() / 1000;
-    console.log(new Date(decoded.exp * 1000).toString())
-    console.log("exp:",decoded.exp)
-    console.log("now:",now)
 
     if (decoded.exp && decoded.exp < now) {
       console.warn('[Auth] Token expired');
@@ -82,9 +65,6 @@ export class CustomAuthProvider extends AbstractAuthProvider {
       await signOut({ });
   }
     async authorize() {
-    // const res = await fetch("/api/auth/session");
-    // const session = await res.json();
-    // return !!session?.user;
     const res = await fetch("/api/auth/session");
 
     if (!res.ok) {
