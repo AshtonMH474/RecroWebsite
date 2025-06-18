@@ -8,6 +8,7 @@ import Nav from "../components/Nav";
 import Expertise from "../components/Home/Expertise";
 import Learn from "@/components/Home/Learn";
 import Footer from "@/components/Footer";
+import { useExpertise } from "@/context/ExpertiseContext";
 
 
 
@@ -29,7 +30,7 @@ export async function getStaticProps(){
 
 export default function Home({res,navData,footerData}) {
   const ref = useRef(null);
-   const expertiseRef = useRef();
+  const {expertiseRef} = useExpertise()
   const { scrollY } = useScroll();
   const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
     clamp: false, // disables clamping so it keeps going beyond 360
@@ -76,7 +77,7 @@ export default function Home({res,navData,footerData}) {
           case "PageBlocksLanding":{
             return <Landing key={i} {...block}/>
           }
-          case "PageBlocksExpertise":{
+          case "PageBlocksCards":{
             return <Expertise key={i} ref={expertiseRef} {...block}/>
           }
         case "PageBlocksLearnTeam":{

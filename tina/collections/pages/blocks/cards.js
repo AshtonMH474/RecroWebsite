@@ -3,12 +3,12 @@ import * as FaIcons from "react-icons/fa";
 import { IconPickerField } from "../../../components/IconPicker";
 const iconNames = Object.keys(FaIcons);
 
-export const expertise = {
-    name:"expertise",
-    label:"Expertise",
+export const cards = {
+    name:"cards",
+    label:"Cards",
     fields:[
         {
-            name:"expertise_heading",
+            name:"cards_heading",
             type:'string'
         },
         {
@@ -16,8 +16,8 @@ export const expertise = {
             type:'number'
         },
         {
-            name:'expertise',
-            label:'Expertise',
+            name:'cards',
+            label:'Cards',
             type:'object',
             list:true,
             fields:[

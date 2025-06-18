@@ -15,9 +15,9 @@ blocks:
         label: about
         style: border
     _template: landing
-  - expertise_heading: Our Expertise
+  - cards_heading: Our Expertise
     underline_width: 80
-    expertise:
+    cards:
       - title: Cloud
         icon: FaCloud
         description: >
@@ -195,7 +195,7 @@ blocks:
           with our expert system administrators. Product Expertise: Our team has
           ample experience with ServiceNow, Archer, Kubernetes, and various
           additional systems that can benefit your operation.
-    _template: expertise
+    _template: cards
   - headingLearnTeam: >
       # Learn about the **Team**
 

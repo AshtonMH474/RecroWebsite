@@ -1,6 +1,6 @@
-import { expertise } from "./home/expertise";
-import { landingBlock } from "./home/landing";
-import { learnAboutTeamBlock } from "./home/learn";
+import { cards } from "./blocks/cards";
+import { landingBlock } from "./blocks/landing";
+import { learnAboutTeamBlock } from "./blocks/learn";
 
 const pages = {
   name: "page",
@@ -10,6 +10,7 @@ const pages = {
   ui: {
     router: (props) => {
       if (props.document._sys.relativePath === "home.md") return "/";
+      if (props.document._sys.relativePath === "about.md") return "/about";
     },
   },
   fields: [
@@ -22,7 +23,7 @@ const pages = {
       label: "Blocks",
       type: "object",
       list: true,
-      templates: [landingBlock,expertise,learnAboutTeamBlock],
+      templates: [landingBlock,cards,learnAboutTeamBlock],
     },
   ],
 };

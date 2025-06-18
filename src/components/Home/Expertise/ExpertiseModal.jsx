@@ -70,7 +70,7 @@ function ExpertiseModal({ ex, onClose }) {
             </h3>
           </div>
           <button onClick={onClose} aria-label="Close Modal">
-            <IoMdClose className="text-[24px] text-white hover:text-primary transition" />
+            <IoMdClose className="cursor-pointer text-[24px] text-white hover:text-primary transition" />
           </button>
         </div>
 
