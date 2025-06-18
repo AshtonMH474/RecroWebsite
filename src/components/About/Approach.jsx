@@ -4,7 +4,6 @@ import { tinaField } from "tinacms/dist/react";
 import ApproachCard from "./Approach/ApproachCard";
 
 function Approach(props){
-    console.log(props)
     const approachItems = props.cards || [];
     const sectionRef = useRef(null);
     const [rows,setRows] = useState(1);
