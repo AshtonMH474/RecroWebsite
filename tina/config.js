@@ -27,7 +27,7 @@ export default defineConfig({
     ? new LocalAuthProvider()
     : new CustomAuthProvider(),
 
-
+  
   build: {
     outputFolder: "admin",
     publicFolder: "public",
