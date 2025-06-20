@@ -71,42 +71,92 @@ blocks:
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
         title: Title
+        bio: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor, vitae tincidunt orci enim id nulla..
     _template: leadership
 ---
 

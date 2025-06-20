@@ -27,6 +27,11 @@ export const leadershipBlock = {
                     name:'title',
                     label:'Title',
                     type:'string'
+                },
+                {
+                    name:'bio',
+                    label:'Bio',
+                    type:'rich-text'
                 }
             ]
         }

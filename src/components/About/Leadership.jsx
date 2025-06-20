@@ -104,7 +104,7 @@ function Leadership(props) {
                 : "cursor-pointer border border-white/15 bg-[#1A1A1E] text-white hover:opacity-80 transition-opacity duration-200"
             }`}
           >
-            Page {i + 1}
+           {i + 1}
           </button>
         ))}
       </div>
