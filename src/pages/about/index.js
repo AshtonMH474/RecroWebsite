@@ -40,7 +40,6 @@ function About({res,navData,footerData}){
     const scrollToExpertise = () => {
         expertiseRef.current?.scrollToHeading();
     };
-
     return (
         <>
             <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
@@ -75,9 +74,12 @@ function About({res,navData,footerData}){
           case "PageBlocksCards":{
             return <Approach key={i} {...block}/>
           }
+          case "PageBlocksLeadership":{
+            return <Leadership key={i} {...block}/>
+          }
         }
       })}
-            <Leadership/>
+            
             <Footer res={footerContent.footer}/>
         </>
     )
