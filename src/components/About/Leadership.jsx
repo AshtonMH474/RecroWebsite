@@ -39,7 +39,7 @@ function Leadership({ leaders = [], leadershipHeading }) {
             animate="center"
             exit="exit"
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="flex flex-wrap justify-center gap-x-6 gap-y-20 max-w-[1000px] mx-auto px-4"
+            className="flex flex-wrap justify-center gap-x-6 gap-y-12 max-w-[1000px] mx-auto px-4"
           >
             {visibleCards.map((leader, i) => (
               <LeaderCard key={i} leader={leader} />
