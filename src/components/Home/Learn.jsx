@@ -45,13 +45,13 @@ function Learn(props) {
             />
             <div className="flex gap-x-8 pl-4 md:pl-0">
           {props.buttons?.map((button, i) => {
-  
+            const key = button.id || button.label || i;
             if (button.style === 'border') {
                 return (
-                <Link href={button.link}>
+                <Link href={button.link} key={key}>
                 <button
-                    key={i}
-                    data-tina-field={tinaField(props.buttons[i], 'label')}
+                    
+                    data-tina-field={tinaField(button, 'label')}
                     className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
                 >
                     
@@ -61,10 +61,10 @@ function Learn(props) {
                 );
             } else if (button.style === 'button') {
                 return (
-                   <Link href={button.link}>
+                   <Link href={button.link} key={key}>
                 <button
-                    key={i}
-                    data-tina-field={tinaField(props.buttons[i], 'label')}
+                    
+                    data-tina-field={tinaField(button, 'label')}
                     className="bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white"
                 >
                  
@@ -86,7 +86,7 @@ function Learn(props) {
           >
             {props?.learnTeamImages?.map((image, i) => (
               <img
-                key={i}
+                key={image.id || image.src || i}
                 src={image.src}
                 alt={image.alt || `team image ${i + 1}`}
                 className="object-cover rounded-[12px] lg:relative h-[200px] lg:h-[250px] sm:max-w-none"
