@@ -14,6 +14,8 @@ const Expertise = forwardRef(function Expertise(props, ref) {
   const [vhMultiplier, setVhMultiplier] = useState(1);
   const [short, setShort] = useState(false);
   const [height,setHeight] = useState(false)
+  const [sectionHeight, setSectionHeight] = useState(0);
+
 
 
   // variables for expertise modals
@@ -31,29 +33,38 @@ const Expertise = forwardRef(function Expertise(props, ref) {
 
 
   // this is to adjust animation based on screen size
-  useEffect(() => {
-    const updateLayout = () => {
-      const screenWidth = window.innerWidth;
-      const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
-      setRows(Math.ceil(expertiseItems.length / cardsPerRow));
+useEffect(() => {
+  const updateLayout = () => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
 
-      const isShort = window.innerHeight <= 600;
-      const isHeight = window.innerHeight >= 1000;
-      if (isShort) setShort(true);
-      if(isHeight) setHeight(true)
-      setVhMultiplier(isShort ? 2 : 1);
-    };
+    const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
+    const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
+    setRows(newRows);
 
-    updateLayout();
-    let timeout;
-    const handleResize = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(updateLayout, 150);
-    };
+    const isShort = screenHeight <= 600;
+    const isHeight = screenHeight >= 1000;
+    if (isShort) setShort(true);
+    if (isHeight) setHeight(true);
+    setVhMultiplier(isShort ? 2 : 1);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [expertiseItems.length]);
+    const rowHeightPx = 0.65 * screenHeight; // 65vh
+    const headingHeightPx = 0.8 * screenHeight; // 80vh
+    const calculatedHeight = (newRows * rowHeightPx + headingHeightPx) * (isShort ? 2 : 1);
+    setSectionHeight(calculatedHeight);
+  };
+
+  let timeout;
+  updateLayout();
+  const handleResize = () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(updateLayout, 150);
+  };
+
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, [expertiseItems.length]);
+
 
 
 
@@ -76,7 +87,7 @@ const Expertise = forwardRef(function Expertise(props, ref) {
     <>
     <section
       ref={sectionRef}
-      style={{ height: `${totalHeightVh}vh` }}
+      style={{ height: `${sectionHeight}px` }}
       className="relative"
     >
       <div
