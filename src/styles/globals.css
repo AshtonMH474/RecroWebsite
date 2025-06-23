@@ -14,7 +14,7 @@ html,body{
 html,
 body,
 #__next {
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 body {
@@ -23,7 +23,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
   height: 100%;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);;
   overscroll-behavior-y: none;
 }
 
@@ -32,7 +32,7 @@ body {
   top: 0;
   left: 0;
   z-index: -20;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);;
   width: 100%;
   margin: 0;
   padding: 0;
