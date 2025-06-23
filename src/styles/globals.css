@@ -6,6 +6,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 html,body{
@@ -28,7 +29,7 @@ body {
 }
 
 .background.Home{
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: -20;
