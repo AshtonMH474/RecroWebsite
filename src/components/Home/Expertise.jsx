@@ -159,23 +159,46 @@ const Expertise = forwardRef(function Expertise(props, ref) {
   }));
 
   // Initial layout setup only (no resize listener)
-  useEffect(() => {
+useEffect(() => {
+  const updateRows = () => {
     const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    console.log('hi')
-    const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
-    const calculatedRows = Math.ceil(expertiseItems.length / cardsPerRow);
-    setRows(calculatedRows);
 
-    setShort(screenHeight <= 600);
-    setTall(screenHeight >= 1000);
+    const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
+    const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
 
-    const rowHeightPx = 0.65 * screenHeight;
-    const headingHeightPx = 0.8 * screenHeight;
-    const calculatedHeight = (calculatedRows * rowHeightPx + headingHeightPx) * (screenHeight <= 600 ? 2 : 1);
+    setRows(newRows);
+  };
 
-    setSectionHeight(calculatedHeight);
-  }, [expertiseItems.length]);
+  updateRows(); // Initial
+  window.addEventListener("resize", updateRows);
+
+  return () => window.removeEventListener("resize", updateRows);
+}, [expertiseItems.length]);
+
+// 2️⃣ When rows change, recalculate section height and flags
+useEffect(() => {
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
+  const isShort = screenHeight <= 600;
+  const isTall = screenHeight >= 1000;
+
+  setShort(isShort);
+  setTall(isTall);
+
+  const stickyMultiplier = cardsPerRow === 1 ? 1.5 : 1;
+  const rowHeightPx = 0.8 * screenHeight;
+  const headingHeightPx = 0.8 * screenHeight;
+
+  const calculatedHeight =
+    (rows * rowHeightPx + headingHeightPx) *
+    (isShort ? 2 : 1) *
+    stickyMultiplier;
+
+  setSectionHeight(calculatedHeight);
+}, [rows]);
+
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
