@@ -8,12 +8,30 @@ import { useEffect } from "react";
 export default function App({ Component, pageProps }) {
     useEffect(() => {
     const setVH = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      if (window.visualViewport) {
+        const vh = window.visualViewport.height * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+      } else {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+      }
     };
+
     setVH();
-    window.addEventListener('resize', setVH);
-    return () => window.removeEventListener('resize', setVH);
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", setVH);
+    } else {
+      window.addEventListener("resize", setVH);
+    }
+
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", setVH);
+      } else {
+        window.removeEventListener("resize", setVH);
+      }
+    };
   }, []);
   return (
     <>

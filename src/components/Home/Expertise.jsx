@@ -158,46 +158,46 @@ const Expertise = forwardRef(function Expertise(props, ref) {
     },
   }));
 
-    // Initial layout setup only (no resize listener)
-  useEffect(() => {
-    const updateRows = () => {
-      const screenWidth = window.innerWidth;
-
-      const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
-      const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
-
-      setRows(newRows);
-    };
-
-    updateRows(); // Initial
-    window.addEventListener("resize", updateRows);
-
-    return () => window.removeEventListener("resize", updateRows);
-  }, [expertiseItems.length]);
-
-  // 2️⃣ When rows change, recalculate section height and flags
-  useEffect(() => {
+  // Initial layout setup only (no resize listener)
+useEffect(() => {
+  const updateRows = () => {
     const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
 
     const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
-    const isShort = screenHeight <= 600;
-    const isTall = screenHeight >= 1000;
+    const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
 
-    setShort(isShort);
-    setTall(isTall);
+    setRows(newRows);
+  };
 
-    const stickyMultiplier = cardsPerRow === 1 ? 1.5 : 1;
-    const rowHeightPx = 0.8 * screenHeight;
-    const headingHeightPx = 0.8 * screenHeight;
+  updateRows(); // Initial
+  window.addEventListener("resize", updateRows);
 
-    const calculatedHeight =
-      (rows * rowHeightPx + headingHeightPx) *
-      (isShort ? 2 : 1) *
-      stickyMultiplier;
+  return () => window.removeEventListener("resize", updateRows);
+}, [expertiseItems.length]);
 
-    setSectionHeight(calculatedHeight);
-  }, [rows]);
+// 2️⃣ When rows change, recalculate section height and flags
+useEffect(() => {
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
+  const isShort = screenHeight <= 600;
+  const isTall = screenHeight >= 1000;
+
+  setShort(isShort);
+  setTall(isTall);
+
+  const stickyMultiplier = cardsPerRow === 1 ? 1.5 : 1;
+  const rowHeightPx = 0.8 * screenHeight;
+  const headingHeightPx = 0.8 * screenHeight;
+
+  const calculatedHeight =
+    (rows * rowHeightPx + headingHeightPx) *
+    (isShort ? 2 : 1) *
+    stickyMultiplier;
+
+  setSectionHeight(calculatedHeight);
+}, [rows]);
 
 
   const { scrollYProgress } = useScroll({
@@ -219,25 +219,25 @@ const Expertise = forwardRef(function Expertise(props, ref) {
         <div
           className="z-30 py-12 max-w-[1000px] mx-auto rounded-md"
           style={{
-            position: "",
+            position: "sticky",
             paddingTop: short ? "5rem" : "3rem",
             top: tall ? "200px" : "80px",
           }}
         >
-          <h2
+          <motion.h2
             data-tina-field={tinaField(props, "cards_heading")}
             className="font-bold text-[36px] text-white text-center"
             style={{ opacity: headingOpacity }}
           >
             {props.cards_heading}
-          </h2>
+          </motion.h2>
 
-          <div
+          <motion.div
             className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary mx-auto mt-2`}
             style={{ opacity: headingOpacity }}
           />
 
-          <div
+          <motion.div
             id="target"
             className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
             style={{ opacity: cardsOpacity, scale: cardsScale }}
@@ -251,7 +251,7 @@ const Expertise = forwardRef(function Expertise(props, ref) {
                 onClose={closeCard}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
