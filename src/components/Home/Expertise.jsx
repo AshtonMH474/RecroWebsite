@@ -34,24 +34,54 @@ const Expertise = forwardRef(function Expertise(props, ref) {
 
   // this is to adjust animation based on screen size
 useEffect(() => {
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
+  const MIN_CHANGE = 100; // px
 
-  const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
-  const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
-  setRows(newRows);
+  let prevWidth = window.innerWidth;
+  let prevHeight = window.innerHeight;
 
-  const isShort = screenHeight <= 600;
-  const isHeight = screenHeight >= 1000;
-  if (isShort) setShort(true);
-  if (isHeight) setHeight(true);
-  setVhMultiplier(isShort ? 2 : 1);
+  const updateLayout = () => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
 
-  const rowHeightPx = 0.65 * screenHeight; // 65vh
-  const headingHeightPx = 0.8 * screenHeight; // 80vh
-  const calculatedHeight = (newRows * rowHeightPx + headingHeightPx) * (isShort ? 2 : 1);
-  setSectionHeight(calculatedHeight);
-}, []);
+    // Only continue if size change is significant
+    const widthChange = Math.abs(screenWidth - prevWidth);
+    const heightChange = Math.abs(screenHeight - prevHeight);
+
+    if (widthChange < MIN_CHANGE && heightChange < MIN_CHANGE) {
+      return;
+    }
+
+    prevWidth = screenWidth;
+    prevHeight = screenHeight;
+
+    const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
+    const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
+    setRows(newRows);
+
+    const isShort = screenHeight <= 600;
+    const isHeight = screenHeight >= 1000;
+    if (isShort) setShort(true);
+    if (isHeight) setHeight(true);
+    setVhMultiplier(isShort ? 2 : 1);
+
+    const rowHeightPx = 0.65 * screenHeight; // 65vh
+    const headingHeightPx = 0.8 * screenHeight; // 80vh
+    const calculatedHeight = (newRows * rowHeightPx + headingHeightPx) * (isShort ? 2 : 1);
+    setSectionHeight(calculatedHeight);
+  };
+
+  // Run once on mount
+  updateLayout();
+
+  let resizeTimeout;
+  const handleResize = () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(updateLayout, 100);
+  };
+
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, [expertiseItems.length]);
 
 
 
