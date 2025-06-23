@@ -2,25 +2,27 @@
 import { tinaField } from "tinacms/dist/react";
 import LeaderInfo from "./LeaderInfo";
 import LeaderBio from "./LeaderBio";
+import { useState } from "react";
 
 function LeaderCard({ leader }) {
-    
+  const [isVisable,setVisable] = useState()
   return (
     <div
       data-tina-field={tinaField(leader, "src")}
       role="img"
       aria-label={`${leader.name}, ${leader.title}`}
-      className="relative group w-[300px] h-[260px] rounded-[8px] overflow-hidden shadow-md transform transition-all duration-300 hover:scale-105"
+      className="cursor-pointer relative group w-[300px] h-[260px] rounded-[8px] overflow-hidden shadow-md transform transition-all duration-300 hover:scale-105"
+      onClick={() => setVisable(!isVisable)}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-300 group-hover:opacity-0"
         style={{ backgroundImage: `url(${leader.src})` }}
       />
 
-      <div className="absolute inset-0 bg-[#1A1A1E] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className={`absolute inset-0 bg-[#1A1A1E] ${isVisable ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}  transition-opacity duration-300`}/>
 
-      <LeaderInfo leader={leader} />
-      <LeaderBio leader={leader}/>
+     {!isVisable && (<LeaderInfo leader={leader} />)} 
+      <LeaderBio leader={leader} isVisable={isVisable}/>
     </div>
   );
 }
