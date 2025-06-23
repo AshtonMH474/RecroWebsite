@@ -54,15 +54,9 @@ useEffect(() => {
     setSectionHeight(calculatedHeight);
   };
 
-  let timeout;
   updateLayout();
-  const handleResize = () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(updateLayout, 150);
-  };
 
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
+
 }, []);
 
 
