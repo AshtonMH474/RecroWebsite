@@ -162,7 +162,7 @@ const Expertise = forwardRef(function Expertise(props, ref) {
   useEffect(() => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-
+    console.log('hi')
     const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
     const calculatedRows = Math.ceil(expertiseItems.length / cardsPerRow);
     setRows(calculatedRows);
@@ -245,6 +245,7 @@ const Expertise = forwardRef(function Expertise(props, ref) {
 });
 
 export default Expertise;
+
 
 
 
