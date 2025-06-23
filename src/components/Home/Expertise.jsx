@@ -34,36 +34,25 @@ const Expertise = forwardRef(function Expertise(props, ref) {
 
   // this is to adjust animation based on screen size
 useEffect(() => {
-  const updateLayout = () => {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
 
-    const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
-    const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
-    setRows(newRows);
+  const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
+  const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
+  setRows(newRows);
 
-    const isShort = screenHeight <= 600;
-    const isHeight = screenHeight >= 1000;
-    if (isShort) setShort(true);
-    if (isHeight) setHeight(true);
-    setVhMultiplier(isShort ? 2 : 1);
+  const isShort = screenHeight <= 600;
+  const isHeight = screenHeight >= 1000;
+  if (isShort) setShort(true);
+  if (isHeight) setHeight(true);
+  setVhMultiplier(isShort ? 2 : 1);
 
-    const rowHeightPx = 0.65 * screenHeight; // 65vh
-    const headingHeightPx = 0.8 * screenHeight; // 80vh
-    const calculatedHeight = (newRows * rowHeightPx + headingHeightPx) * (isShort ? 2 : 1);
-    setSectionHeight(calculatedHeight);
-  };
+  const rowHeightPx = 0.65 * screenHeight; // 65vh
+  const headingHeightPx = 0.8 * screenHeight; // 80vh
+  const calculatedHeight = (newRows * rowHeightPx + headingHeightPx) * (isShort ? 2 : 1);
+  setSectionHeight(calculatedHeight);
+}, []);
 
-  let timeout;
-  updateLayout();
-  const handleResize = () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(updateLayout, 150);
-  };
-
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, [expertiseItems.length]);
 
 
 
@@ -78,10 +67,7 @@ useEffect(() => {
   const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], { clamp: true });
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
 
-  // getting right heigh of div based on rows
-  const rowHeightVh = 65;
-  const headingHeightVh = 80;
-  const totalHeightVh = (rows * rowHeightVh + headingHeightVh) * vhMultiplier;
+
 
   return (
     <>
