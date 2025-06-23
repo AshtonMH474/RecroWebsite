@@ -34,7 +34,7 @@ const Expertise = forwardRef(function Expertise(props, ref) {
 
   // this is to adjust animation based on screen size
 useEffect(() => {
-  const MIN_CHANGE = 100; // px
+  const MIN_CHANGE = 400; // px
 
   let prevWidth = window.innerWidth;
   let prevHeight = window.innerHeight;
