@@ -34,25 +34,9 @@ const Expertise = forwardRef(function Expertise(props, ref) {
 
   // this is to adjust animation based on screen size
 useEffect(() => {
-  const MIN_CHANGE = 400; // px
-
-  let prevWidth = window.innerWidth;
-  let prevHeight = window.innerHeight;
-
   const updateLayout = () => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-
-    // Only continue if size change is significant
-    const widthChange = Math.abs(screenWidth - prevWidth);
-    const heightChange = Math.abs(screenHeight - prevHeight);
-
-    if (widthChange < MIN_CHANGE && heightChange < MIN_CHANGE) {
-      return;
-    }
-
-    prevWidth = screenWidth;
-    prevHeight = screenHeight;
 
     const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 1024 ? 2 : 3;
     const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
@@ -70,19 +54,16 @@ useEffect(() => {
     setSectionHeight(calculatedHeight);
   };
 
-  // Run once on mount
+  let timeout;
   updateLayout();
-
-  let resizeTimeout;
   const handleResize = () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(updateLayout, 100);
+    clearTimeout(timeout);
+    timeout = setTimeout(updateLayout, 150);
   };
 
   window.addEventListener("resize", handleResize);
   return () => window.removeEventListener("resize", handleResize);
-}, [expertiseItems.length]);
-
+}, []);
 
 
 
@@ -97,13 +78,16 @@ useEffect(() => {
   const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], { clamp: true });
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
 
-
+  // getting right heigh of div based on rows
+  const rowHeightVh = 65;
+  const headingHeightVh = 80;
+  const totalHeightVh = (rows * rowHeightVh + headingHeightVh) * vhMultiplier;
 
   return (
     <>
     <section
       ref={sectionRef}
-      style={{ height: `${sectionHeight}px` }}
+      style={{ height: `${totalHeightVh}vh` }}
       className="relative"
     >
       <div
