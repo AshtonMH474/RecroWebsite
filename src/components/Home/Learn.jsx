@@ -1,12 +1,24 @@
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 function Learn(props) {
   const learnRef = useRef(null);
+ 
 
+  useEffect(() => {
+    const setVH = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    setVH(); // Set on mount
+    window.addEventListener("resize", setVH);
+
+    return () => window.removeEventListener("resize", setVH);
+  }, []);
   const { scrollYProgress } = useScroll({
     target: learnRef,
     offset: ["start end", "start start"],
@@ -17,9 +29,11 @@ function Learn(props) {
   return (
     <>
       <div
-        ref={learnRef}
-        className="bg-black min-h-screen w-full mt-42 relative z-30 pb-20"
-      >
+    ref={learnRef}
+    className="bg-black w-full mt-42 relative z-30 pb-20"
+    style={{ minHeight: "calc(var(--vh, 1vh) * 100)" }}
+    >
+
         <div className="flex flex-col md:gap-16 md:flex-row items-center justify-center min-h-screen w-full">
           <motion.div
             style={{ opacity: contentOpacity }}

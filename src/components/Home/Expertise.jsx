@@ -158,46 +158,46 @@ const Expertise = forwardRef(function Expertise(props, ref) {
     },
   }));
 
-  // Initial layout setup only (no resize listener)
-useEffect(() => {
-  const updateRows = () => {
+    // Initial layout setup only (no resize listener)
+  useEffect(() => {
+    const updateRows = () => {
+      const screenWidth = window.innerWidth;
+
+      const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
+      const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
+
+      setRows(newRows);
+    };
+
+    updateRows(); // Initial
+    window.addEventListener("resize", updateRows);
+
+    return () => window.removeEventListener("resize", updateRows);
+  }, [expertiseItems.length]);
+
+  // 2️⃣ When rows change, recalculate section height and flags
+  useEffect(() => {
     const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
 
     const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
-    const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
+    const isShort = screenHeight <= 600;
+    const isTall = screenHeight >= 1000;
 
-    setRows(newRows);
-  };
+    setShort(isShort);
+    setTall(isTall);
 
-  updateRows(); // Initial
-  window.addEventListener("resize", updateRows);
+    const stickyMultiplier = cardsPerRow === 1 ? 1.5 : 1;
+    const rowHeightPx = 0.8 * screenHeight;
+    const headingHeightPx = 0.8 * screenHeight;
 
-  return () => window.removeEventListener("resize", updateRows);
-}, [expertiseItems.length]);
+    const calculatedHeight =
+      (rows * rowHeightPx + headingHeightPx) *
+      (isShort ? 2 : 1) *
+      stickyMultiplier;
 
-// 2️⃣ When rows change, recalculate section height and flags
-useEffect(() => {
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
-
-  const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
-  const isShort = screenHeight <= 600;
-  const isTall = screenHeight >= 1000;
-
-  setShort(isShort);
-  setTall(isTall);
-
-  const stickyMultiplier = cardsPerRow === 1 ? 1.5 : 1;
-  const rowHeightPx = 0.8 * screenHeight;
-  const headingHeightPx = 0.8 * screenHeight;
-
-  const calculatedHeight =
-    (rows * rowHeightPx + headingHeightPx) *
-    (isShort ? 2 : 1) *
-    stickyMultiplier;
-
-  setSectionHeight(calculatedHeight);
-}, [rows]);
+    setSectionHeight(calculatedHeight);
+  }, [rows]);
 
 
   const { scrollYProgress } = useScroll({
