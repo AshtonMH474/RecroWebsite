@@ -5,6 +5,7 @@ import LeaderBio from "./LeaderBio";
 import { useState } from "react";
 
 function LeaderCard({ leader }) {
+  // using this to show if bio should be visable or not
   const [isVisable,setVisable] = useState()
   return (
     <div
