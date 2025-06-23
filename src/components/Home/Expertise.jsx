@@ -219,25 +219,25 @@ const Expertise = forwardRef(function Expertise(props, ref) {
         <div
           className="z-30 py-12 max-w-[1000px] mx-auto rounded-md"
           style={{
-            position: "sticky",
+            position: "",
             paddingTop: short ? "5rem" : "3rem",
             top: tall ? "200px" : "80px",
           }}
         >
-          <motion.h2
+          <h2
             data-tina-field={tinaField(props, "cards_heading")}
             className="font-bold text-[36px] text-white text-center"
             style={{ opacity: headingOpacity }}
           >
             {props.cards_heading}
-          </motion.h2>
+          </h2>
 
-          <motion.div
+          <div
             className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary mx-auto mt-2`}
             style={{ opacity: headingOpacity }}
           />
 
-          <motion.div
+          <div
             id="target"
             className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
             style={{ opacity: cardsOpacity, scale: cardsScale }}
@@ -251,7 +251,7 @@ const Expertise = forwardRef(function Expertise(props, ref) {
                 onClose={closeCard}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
