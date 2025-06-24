@@ -10,7 +10,7 @@ function Footer({res}) {
   const toggleForm = () => setShowForm((prev) => !prev);
 
   return (
-    <div className="bg-black w-full  z-40"  style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+    <div className="bg-black w-full  z-40"  >
         <div className="border-t border-b border-white/50 mb-16">
             <div className="flex justify-center">
             <div className="relative flex-col sm:flex-row bottom-10 inline-flex items-center justify-center bg-primary h-auto  mx-auto py-2  px-6 rounded-[12px]">
