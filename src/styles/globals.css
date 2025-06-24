@@ -16,7 +16,7 @@ html,body{
 html,
 body,
 #__next {
-  height: 100dvh;
+  min-height: 100dvh;
 }
 
 body {
@@ -24,7 +24,6 @@ body {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
-  height: auto;
   min-height: 100dvh;
   overscroll-behavior-y: none;
 }

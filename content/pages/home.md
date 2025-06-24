@@ -1,30 +1,20 @@
 ---
 title: Home
 blocks:
-  - headingLearnTeam: >
-      # Learn about the **Team**
+  - heading: >
+      # Reinventing How We Move Forward
 
 
-      At Recro, we bring together expertise, innovation, and dedication to
-      deliver exceptional results. Our unique approach combines security-focused
-      practices with cutting-edge solutions.
+      ### Get in touch with Recro. We're here to answer your questions and
+      discuss how we can help grow your career.
     buttons:
+      - link: /signup
+        label: Sign Up
+        style: button
       - link: /about
-        label: About Us
+        label: about
         style: border
-    learnTeamImages:
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
-        width: 420
-        height: 219
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
-        width: 420
-        height: 219
-        right: 80
-        bottom: 50
-        zIndex: 10
-    _template: learnTeam
+    _template: landing
   - cards_heading: Our Expertise
     underline_width: 80
     cards:
@@ -206,19 +196,29 @@ blocks:
           ample experience with ServiceNow, Archer, Kubernetes, and various
           additional systems that can benefit your operation.
     _template: cards
-  - heading: >
-      # Reinventing How We Move Forward
+  - headingLearnTeam: >
+      # Learn about the **Team**
 
 
-      ### Get in touch with Recro. We're here to answer your questions and
-      discuss how we can help grow your career.
+      At Recro, we bring together expertise, innovation, and dedication to
+      deliver exceptional results. Our unique approach combines security-focused
+      practices with cutting-edge solutions.
     buttons:
-      - link: /signup
-        label: Sign Up
-        style: button
       - link: /about
-        label: about
+        label: About Us
         style: border
-    _template: landing
+    learnTeamImages:
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
+        width: 420
+        height: 219
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
+        width: 420
+        height: 219
+        right: 80
+        bottom: 50
+        zIndex: 10
+    _template: learnTeam
 ---
 

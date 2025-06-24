@@ -200,6 +200,7 @@ useEffect(() => {
 }, [rows]);
 
 
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
@@ -213,11 +214,11 @@ useEffect(() => {
     <>
       <section
         ref={sectionRef}
-        style={{ height: `${sectionHeight}px`,overflowAnchor:'none' }}
+        style={{ height: `${sectionHeight}px` }}
         className="relative"
       >
         <div
-          className="z-30  max-w-[1000px] mx-auto rounded-md"
+          className="z-30 py-12 max-w-[1000px] mx-auto rounded-md"
           style={{
             position: "sticky",
             paddingTop: short ? "5rem" : "3rem",
@@ -239,7 +240,7 @@ useEffect(() => {
 
           <motion.div
             id="target"
-            className=" pt-12 flex flex-wrap justify-center gap-x-6"
+            className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
             style={{ opacity: cardsOpacity, scale: cardsScale }}
           >
             {expertiseItems.map((ex, i) => (

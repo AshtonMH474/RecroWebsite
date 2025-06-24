@@ -51,9 +51,9 @@ export default function Home({res,navData,footerData}) {
   
     <>
       <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
-      {/* <div
+      <div
         ref={ref}
-        style={{ height: '100dvh',overflowAnchor:'none'}}
+        style={{ minHeight: '100dvh',overflowAnchor:'none'}}
         className="background Home  bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
       >
         
@@ -74,7 +74,7 @@ export default function Home({res,navData,footerData}) {
             </motion.div>
        
           
-      </div> */}
+      </div>
       {data.page.blocks?.map((block,i) => {
         switch(block?.__typename){
           case "PageBlocksLanding":{
