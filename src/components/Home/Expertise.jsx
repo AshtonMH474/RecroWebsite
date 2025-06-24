@@ -213,7 +213,7 @@ useEffect(() => {
     <>
       <section
         ref={sectionRef}
-        style={{ height: `${sectionHeight}px` }}
+        style={{ height: `${sectionHeight}px`,overflowAnchor:'none' }}
         className="relative"
       >
         <div
