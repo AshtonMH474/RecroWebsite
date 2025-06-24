@@ -17,8 +17,9 @@ function Learn(props) {
   return (
     <>
       <div
+        style={{ height: 'calc(var(--vh, 1vh) * 200)' }}
         ref={learnRef}
-        className="bg-black overflow-hidden min-h-screen w-full mt-42 relative z-30 pb-20"
+        className="bg-black   w-full mt-42 relative z-30 pb-20"
       >
         <div className="flex flex-col md:gap-16 md:flex-row pt-32 items-center justify-center min-h-screen w-full">
           <motion.div
