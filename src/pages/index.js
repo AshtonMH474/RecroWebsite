@@ -80,9 +80,9 @@ export default function Home({res,navData,footerData}) {
           case "PageBlocksLanding":{
             return <Landing key={i} {...block}/>
           }
-          case "PageBlocksCards":{
-            return <Expertise key={i} ref={expertiseRef} {...block}/>
-          }
+          // case "PageBlocksCards":{
+          //   return <Expertise key={i} ref={expertiseRef} {...block}/>
+          // }
         case "PageBlocksLearnTeam":{
           return <Learn key={i} {...block}/>
         }
