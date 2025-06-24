@@ -10,10 +10,7 @@ html {
 }
 
 html,body{
-   height: auto;
-  min-height: calc(var(--vh, 1vh) * 100);
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  overflow-x: clip;
 }
 html,
 body,
@@ -32,14 +29,16 @@ body {
 }
 
 .background.Home{
- position: absolute; /* changed from fixed */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  min-height: calc(var(--vh, 1vh) * 100);
   z-index: -20;
+  min-height: 100dvh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: black;
   background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 85%);
-  pointer-events: none;
 }
 
 @media(max-width: 1150px){
