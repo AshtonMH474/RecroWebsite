@@ -25,20 +25,6 @@ blocks:
         bottom: 50
         zIndex: 10
     _template: learnTeam
-  - heading: >
-      # Reinventing How We Move Forward
-
-
-      ### Get in touch with Recro. We're here to answer your questions and
-      discuss how we can help grow your career.
-    buttons:
-      - link: /signup
-        label: Sign Up
-        style: button
-      - link: /about
-        label: about
-        style: border
-    _template: landing
   - cards_heading: Our Expertise
     underline_width: 80
     cards:
@@ -220,5 +206,19 @@ blocks:
           ample experience with ServiceNow, Archer, Kubernetes, and various
           additional systems that can benefit your operation.
     _template: cards
+  - heading: >
+      # Reinventing How We Move Forward
+
+
+      ### Get in touch with Recro. We're here to answer your questions and
+      discuss how we can help grow your career.
+    buttons:
+      - link: /signup
+        label: Sign Up
+        style: button
+      - link: /about
+        label: about
+        style: border
+    _template: landing
 ---
 
