@@ -134,15 +134,15 @@ function Learn(props) {
     <>
       <div
         ref={learnRef}
-        className="bg-black w-full mt-10 relative z-30 pb-20"
-        style={{ minHeight: " 100dvh" }}
+        className="bg-black overflow-hidden w-full mt-10 relative z-30 pb-20"
+        style={{ minHeight: "100dvh" ,overflowAnchor:'none'}}
       >
         <div
           className="flex flex-col md:gap-16 md:flex-row items-center justify-center w-full"
           style={{ minHeight: " 100dvh" }}
         >
-          <div
-            // style={{ opacity: contentOpacity }}
+          <motion.div
+            style={{ opacity: contentOpacity }}
             className="pl-4 mt-16 sm:static md:w-[700px] mb-32"
             data-tina-field={tinaField(props, "headingLearnTeam")}
           >
@@ -192,10 +192,10 @@ function Learn(props) {
                 return null;
               })}
             </div>
-          </div>
+          </motion.div>
 
-          <div
-            // style={{ opacity: contentOpacity }}
+          <motion.div
+            style={{ opacity: contentOpacity }}
             className="move flex flex-col gap-y-4 lg:mt-[120px]"
           >
             {props?.learnTeamImages?.map((image, i) => (
@@ -214,7 +214,7 @@ function Learn(props) {
                 }}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="bg-black h-[100px] w-full" />
