@@ -13,7 +13,7 @@ function Learn(props) {
   });
 
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  
+ 
   return (
     <>
       <div
@@ -21,7 +21,7 @@ function Learn(props) {
         ref={learnRef}
         className="bg-black   w-full mt-42 relative z-30 pb-20"
       >
-        <div className="flex flex-col md:gap-16 md:flex-row pt-32 items-center justify-center min-h-screen w-full">
+        <div style={{minHeight:'calc(var(--vh, 1vh) * 100)' }} className="flex flex-col md:gap-16 md:flex-row pt-32 items-center justify-center  w-full">
           <div
             style={{ opacity: contentOpacity }}
             className="pl-4 mt-16 sm:static md:w-[700px] mb-32"

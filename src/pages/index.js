@@ -52,12 +52,12 @@ export default function Home({res,navData,footerData}) {
   
     <>
       <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
-      {/* <div
+      <div
         ref={ref}
         style={{ height: 'calc(var(--vh, 1vh) * 100)', }}
         className="background Home  bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
       >
-        
+{/*         
             <motion.div  style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear1">
               <GearIcon className="h-80 w-80 text-black" />
             </motion.div>
@@ -72,20 +72,20 @@ export default function Home({res,navData,footerData}) {
             </motion.div>
             <motion.div style={{ rotate, transformOrigin: "center center" }} className="mr-10 gear5">
               <GearIcon className="h-105 w-105 text-black" />
-            </motion.div>
+            </motion.div> */}
        
           
-      </div> */}
+      </div>
      {data.page.blocks?.map((block,i) => {
   switch(block?.__typename){
     case "PageBlocksLanding":
       return <Landing key={i} {...block}/>;
 
-    case "PageBlocksCards":
-      // return <Expertise key={i} ref={expertiseRef} {...block}/>;
+    // case "PageBlocksCards":
+    //   return <Expertise key={i} ref={expertiseRef} {...block}/>;
 
     case "PageBlocksLearnTeam":
-      return <Learn key={i} {...block}/>;
+      if(i == 2) return <Learn key={i} {...block}/>;
 
     default:
       console.warn("Unknown block type:", block?.__typename);
