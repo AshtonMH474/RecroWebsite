@@ -1,6 +1,30 @@
 ---
 title: Home
 blocks:
+  - headingLearnTeam: >
+      # Learn about the **Team**
+
+
+      At Recro, we bring together expertise, innovation, and dedication to
+      deliver exceptional results. Our unique approach combines security-focused
+      practices with cutting-edge solutions.
+    buttons:
+      - link: /about
+        label: About Us
+        style: border
+    learnTeamImages:
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
+        width: 420
+        height: 219
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
+        width: 420
+        height: 219
+        right: 80
+        bottom: 50
+        zIndex: 10
+    _template: learnTeam
   - heading: >
       # Reinventing How We Move Forward
 
@@ -196,29 +220,5 @@ blocks:
           ample experience with ServiceNow, Archer, Kubernetes, and various
           additional systems that can benefit your operation.
     _template: cards
-  - headingLearnTeam: >
-      # Learn about the **Team**
-
-
-      At Recro, we bring together expertise, innovation, and dedication to
-      deliver exceptional results. Our unique approach combines security-focused
-      practices with cutting-edge solutions.
-    buttons:
-      - link: /about
-        label: About Us
-        style: border
-    learnTeamImages:
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
-        width: 420
-        height: 219
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
-        width: 420
-        height: 219
-        right: 80
-        bottom: 50
-        zIndex: 10
-    _template: learnTeam
 ---
 

@@ -77,15 +77,16 @@ export default function Home({res,navData,footerData}) {
       </div> */}
       {data.page.blocks?.map((block,i) => {
         switch(block?.__typename){
-          // case "PageBlocksLanding":{
-          //   return <Landing key={i} {...block}/>
-          // }
+          
           // case "PageBlocksCards":{
           //   return <Expertise key={i} ref={expertiseRef} {...block}/>
           // }
         case "PageBlocksLearnTeam":{
           return <Learn key={i} {...block}/>
         }
+        case "PageBlocksLanding":{
+            return <Landing key={i} {...block}/>
+          }
         }
       })}
 
