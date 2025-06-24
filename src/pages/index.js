@@ -55,9 +55,9 @@ export default function Home({res,navData,footerData}) {
       <div
         ref={ref}
         style={{ height: 'calc(var(--vh, 1vh) * 100)', }}
-        className="background Home  bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
+        className="background Home  overflow-hidden bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
       >
-{/*         
+        
             <motion.div  style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear1">
               <GearIcon className="h-80 w-80 text-black" />
             </motion.div>
@@ -72,7 +72,7 @@ export default function Home({res,navData,footerData}) {
             </motion.div>
             <motion.div style={{ rotate, transformOrigin: "center center" }} className="mr-10 gear5">
               <GearIcon className="h-105 w-105 text-black" />
-            </motion.div> */}
+            </motion.div>
        
           
       </div>
@@ -81,11 +81,11 @@ export default function Home({res,navData,footerData}) {
     case "PageBlocksLanding":
       return <Landing key={i} {...block}/>;
 
-    // case "PageBlocksCards":
-    //   return <Expertise key={i} ref={expertiseRef} {...block}/>;
+    case "PageBlocksCards":
+      return <Expertise key={i} ref={expertiseRef} {...block}/>;
 
     case "PageBlocksLearnTeam":
-      if(i == 2) return <Learn key={i} {...block}/>;
+      return <Learn key={i} {...block}/>;
 
     default:
       console.warn("Unknown block type:", block?.__typename);

@@ -18,7 +18,7 @@ html,
 body,
 #__next {
   min-height: calc(var(--vh, 1vh) * 100);
-
+  
 }
 
 body {
