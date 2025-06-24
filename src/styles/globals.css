@@ -10,8 +10,8 @@ html {
 }
 
 html,body{
-  /* overflow-anchor: none; */
-  overflow-x: visible;
+  overflow-anchor: none;
+  /* overflow-x: visible; */
 }
 html,
 body,
