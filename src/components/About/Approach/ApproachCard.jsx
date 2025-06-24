@@ -1,6 +1,6 @@
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { IconRenderer } from "@/components/utils/IconRenderer";
+import IconRenderer from "@/components/utils/IconRenderer";
 
 const ApproachCard = ({ ex }) => {
     return (

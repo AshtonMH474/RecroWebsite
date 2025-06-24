@@ -114,7 +114,7 @@
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import {  useRef } from "react";
 import Link from "next/link";
 
 function Learn(props) {

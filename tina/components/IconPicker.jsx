@@ -8,7 +8,7 @@ export const iconOptions = Object.entries(FaIcons).map(([name, Icon]) => ({
   Icon: Icon,
 }));
 
-export const IconPickerField = ({ input, field }) => {
+export const IconPickerField = ({ input }) => {
   const [search, setSearch] = useState("");
 
   const filtered = iconOptions.filter(opt =>

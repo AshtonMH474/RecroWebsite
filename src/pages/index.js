@@ -54,7 +54,7 @@ export default function Home({res,navData,footerData}) {
       <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
       <div
         ref={ref}
-        style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+        style={{ height: 'calc(var(--vh, 1vh) * 100)', paddingBottom: 'env(safe-area-inset-bottom)' }}
         className="background Home  bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
       >
         
@@ -76,27 +76,25 @@ export default function Home({res,navData,footerData}) {
        
           
       </div>
-      {data.page.blocks?.map((block,i) => {
-        switch(block?.__typename){
-          case "PageBlocksLanding":{
-            return <Landing key={i} {...block}/>
-          }
-          case "PageBlocksCards":{
-            return <Expertise key={i} ref={expertiseRef} {...block}/>
-          }
-        case "PageBlocksLearnTeam":{
-          return <Learn key={i} {...block}/>
-        }
-        }
-      })}
+     {data.page.blocks?.map((block,i) => {
+  switch(block?.__typename){
+    case "PageBlocksLanding":
+      return <Landing key={i} {...block}/>;
+
+    case "PageBlocksCards":
+      return <Expertise key={i} ref={expertiseRef} {...block}/>;
+
+    case "PageBlocksLearnTeam":
+      return <Learn key={i} {...block}/>;
+
+    default:
+      console.warn("Unknown block type:", block?.__typename);
+      return null;
+  }
+})}
 
 
       <Footer res={footerContent.footer}/>
-      
-
-      
-      
-
       
 
   
@@ -104,4 +102,7 @@ export default function Home({res,navData,footerData}) {
     </>
   );
 }
+
+
+
 

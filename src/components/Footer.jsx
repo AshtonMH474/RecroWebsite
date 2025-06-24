@@ -10,7 +10,7 @@ function Footer({res}) {
   const toggleForm = () => setShowForm((prev) => !prev);
 
   return (
-    <div className="bg-black w-full  z-40">
+    <div className="bg-black w-full  z-40"  style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
         <div className="border-t border-b border-white/50 mb-16">
             <div className="flex justify-center">
             <div className="relative flex-col sm:flex-row bottom-10 inline-flex items-center justify-center bg-primary h-auto  mx-auto py-2  px-6 rounded-[12px]">
@@ -43,12 +43,6 @@ function Footer({res}) {
                     return null;
                 })}
                 </div>
-                {/* <button
-                onClick={toggleForm}
-                className="cursor-pointer  text-[16px] text-white border border-white/50 px-2 py-2 rounded hover:bg-white/10 transition"
-                >
-                Contact Us
-                </button> */}
             </div>
             </div>
 
