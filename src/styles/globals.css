@@ -30,6 +30,9 @@ body {
   overscroll-behavior-y: none;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+} 
 .background.Home{
   position: fixed;
   top: 0;
