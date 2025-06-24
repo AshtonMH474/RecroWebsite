@@ -7,7 +7,6 @@ import { useEffect } from "react";
 export default function App({ Component, pageProps }) {
   useEffect(() => {
     const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    console.log(isMobile)
     if (!isMobile) return; // 🔒 Only apply fix on mobile
 
     const setVH = () => {
@@ -28,10 +27,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-        /> */}
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 
 
