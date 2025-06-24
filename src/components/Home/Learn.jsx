@@ -17,7 +17,7 @@ function Learn(props) {
   return (
     <>
       <div
-        style={{ height: 'calc(var(--vh, 1vh) * 200)' }}
+        style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
         ref={learnRef}
         className="bg-black   w-full mt-42 relative z-30 pb-20"
       >
