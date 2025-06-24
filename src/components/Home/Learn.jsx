@@ -22,7 +22,7 @@ function Learn(props) {
         className="bg-black   w-full mt-42 relative z-30 pb-20"
       >
         <div className="flex flex-col md:gap-16 md:flex-row pt-32 items-center justify-center min-h-screen w-full">
-          <motion.div
+          <div
             style={{ opacity: contentOpacity }}
             className="pl-4 mt-16 sm:static md:w-[700px] mb-32"
             data-tina-field={tinaField(props, "headingLearnTeam")}
@@ -79,9 +79,9 @@ function Learn(props) {
             })}
               
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
+          <div
             style={{ opacity: contentOpacity }}
             className="move flex flex-col gap-y-4 lg:mt-[120px]"
           >
@@ -101,7 +101,7 @@ function Learn(props) {
                 }}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
       <div className="bg-black h-[100px] w-full" />

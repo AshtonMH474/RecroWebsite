@@ -52,7 +52,7 @@ export default function Home({res,navData,footerData}) {
   
     <>
       <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
-      <div
+      {/* <div
         ref={ref}
         style={{ height: 'calc(var(--vh, 1vh) * 100)', }}
         className="background Home  bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
@@ -75,14 +75,14 @@ export default function Home({res,navData,footerData}) {
             </motion.div>
        
           
-      </div>
+      </div> */}
      {data.page.blocks?.map((block,i) => {
   switch(block?.__typename){
     case "PageBlocksLanding":
       return <Landing key={i} {...block}/>;
 
     case "PageBlocksCards":
-      return <Expertise key={i} ref={expertiseRef} {...block}/>;
+      // return <Expertise key={i} ref={expertiseRef} {...block}/>;
 
     case "PageBlocksLearnTeam":
       return <Learn key={i} {...block}/>;
