@@ -10,12 +10,12 @@ function Footer({res}) {
   const toggleForm = () => setShowForm((prev) => !prev);
 
   return (
-    <div className="bg-black w-full px-4 py-10 z-40"  >
+    <div className="bg-black w-full  z-40"  >
         <div className="border-t border-b border-white/50 mb-16">
             <div className="flex justify-center">
             <div className="relative flex-col sm:flex-row bottom-10 inline-flex items-center justify-center bg-primary h-auto  mx-auto py-2  px-6 rounded-[12px]">
                 <h3 data-tina-field={tinaField(res,'footerMessage')} className="text-center text-white pr-4 pb-2 sm:pb-0 text-[16px]">{res.footerMessage}</h3>
-                <div className="flex flex-wrap gap-4 justify-center">
+                <div className="flex gap-x-4">
                 {res.buttons?.map((button,i) => {
                   if (button.style === 'border') {
                     return (
@@ -55,9 +55,7 @@ function Footer({res}) {
                 exit={{ opacity: 0, y: 50 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                    <div>
-                <ContactUsForm className="w-full max-w-4xl"/>
-                </div>
+                <ContactUsForm />
                 </motion.div>
             )}
             </AnimatePresence>
