@@ -17,11 +17,12 @@ export async function getStaticProps(){
     const res = await client.queries.page({relativePath:'home.md'})
     const navRes = await client.queries.nav({relativePath:'nav.md'})
     const footerRes = await client.queries.footer({relativePath:"footer.md"})
+
     return {
       props:{
         res:res,
         navData:navRes,
-        footerData:footerRes
+        footerData:footerRes,
       }
     }
   
@@ -30,6 +31,7 @@ export async function getStaticProps(){
 
 export default function Home({res,navData,footerData}) {
   const ref = useRef(null);
+ 
   const {expertiseRef} = useExpertise()
   const { scrollY } = useScroll();
   const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
@@ -51,23 +53,23 @@ export default function Home({res,navData,footerData}) {
       <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
       <div
         ref={ref}
-        style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+        style={{ height: ' 100dvh' }}
         className="background Home  bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
       >
         
-            <motion.div  style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear1">
+            <motion.div  style={{ rotate, transformOrigin: "center center", }} className="mr-10 gear1">
               <GearIcon className="h-80 w-80 text-black" />
             </motion.div>
-            <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear2">
+            <motion.div style={{ rotate, transformOrigin: "center center",  }} className="mr-10 gear2">
               <GearIcon className="h-50 w-50 " />
             </motion.div>
-            <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear3">
+            <motion.div style={{ rotate, transformOrigin: "center center", }} className="mr-10 gear3">
               <GearIcon className="h-65 w-65 text-black" />
             </motion.div>
-            <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear4">
+            <motion.div style={{ rotate, transformOrigin: "center center",  }} className="mr-10 gear4">
               <GearIcon className="h-80 w-80 " />
             </motion.div>
-            <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear5">
+            <motion.div style={{ rotate, transformOrigin: "center center",  }} className="mr-10 gear5">
               <GearIcon className="h-105 w-105 text-black" />
             </motion.div>
        
