@@ -53,7 +53,7 @@ export default function Home({res,navData,footerData}) {
       <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
       <div
         ref={ref}
-        style={{ height: '100dvh' }}
+        style={{ height: '100dvh'  }}
         className="background Home  bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
       >
         
