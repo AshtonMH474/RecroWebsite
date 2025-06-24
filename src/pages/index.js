@@ -50,7 +50,7 @@ export default function Home({res,navData,footerData}) {
   return (
   
     <>
-      {/* <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/> */}
+      <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
       <div
         ref={ref}
         style={{ height: '100dvh' }}

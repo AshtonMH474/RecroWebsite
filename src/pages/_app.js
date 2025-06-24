@@ -4,45 +4,32 @@ import "@/styles/gears.css";
 import { ExpertiseProvider } from "@/context/ExpertiseContext";
 import { useEffect } from "react";
 
-
 export default function App({ Component, pageProps }) {
-    useEffect(() => {
+  useEffect(() => {
     const setVH = () => {
-      if (window.visualViewport) {
-        const vh = window.visualViewport.height * 0.01;
-        document.documentElement.style.setProperty("--vh", `${vh}px`);
-      } else {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty("--vh", `${vh}px`);
-      }
+      const vh = window.visualViewport?.height || window.innerHeight;
+      document.documentElement.style.setProperty("--vh", `${vh * 0.01}px`);
     };
-
     setVH();
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", setVH);
-    } else {
-      window.addEventListener("resize", setVH);
-    }
-
+    window.visualViewport?.addEventListener("resize", setVH);
+    window.addEventListener("orientationchange", setVH);
     return () => {
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener("resize", setVH);
-      } else {
-        window.removeEventListener("resize", setVH);
-      }
+      window.visualViewport?.removeEventListener("resize", setVH);
+      window.removeEventListener("orientationchange", setVH);
     };
   }, []);
+
   return (
     <>
       <Head>
-       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
-        <ExpertiseProvider>
-          <Component {...pageProps} />
-        </ExpertiseProvider>
-    
+      <ExpertiseProvider>
+        <Component {...pageProps} />
+      </ExpertiseProvider>
     </>
   );
-  
 }
