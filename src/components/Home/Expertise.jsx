@@ -215,7 +215,7 @@ useEffect(() => {
       <section
         ref={sectionRef}
         style={{ height: `${sectionHeight}px` }}
-        className="relative"
+        className="relative "
       >
         <div
           className="z-30 py-12 max-w-[1000px] mx-auto rounded-md"
@@ -240,7 +240,7 @@ useEffect(() => {
 
           <motion.div
             id="target"
-            className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
+            className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12 overflow-hidden"
             style={{ opacity: cardsOpacity, scale: cardsScale }}
           >
             {expertiseItems.map((ex, i) => (

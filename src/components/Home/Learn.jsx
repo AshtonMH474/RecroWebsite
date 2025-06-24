@@ -19,7 +19,7 @@ function Learn(props) {
       <div
         style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
         ref={learnRef}
-        className="bg-black   w-full mt-42 relative z-30 pb-20"
+        className="bg-black overflow-hidden  w-full mt-42 relative z-30 pb-20"
       >
         <div style={{minHeight:'calc(var(--vh, 1vh) * 100)' }} className="flex flex-col md:gap-16 md:flex-row pt-32 items-center justify-center  w-full">
           <div
