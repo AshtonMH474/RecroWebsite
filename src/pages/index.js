@@ -83,14 +83,14 @@ export default function Home({res,navData,footerData}) {
           case "PageBlocksCards":{
             return <Expertise key={i} ref={expertiseRef} {...block}/>
           }
-        // case "PageBlocksLearnTeam":{
-        //   return <Learn key={i} {...block}/>
-        // }
+        case "PageBlocksLearnTeam":{
+          return <Learn key={i} {...block}/>
+        }
         }
       })}
 
 
-      <Footer res={footerContent.footer}/>
+      {/* <Footer res={footerContent.footer}/> */}
       
 
       
