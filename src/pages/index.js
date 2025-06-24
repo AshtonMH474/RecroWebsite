@@ -43,7 +43,7 @@ export default function Home({ res, navData, footerData }) {
   return (
     <>
       <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise} />
-      <div
+      {/* <div
         ref={ref}
         // Removed inline height: '100vh'. Now using CSS class
         // style={{ height: '100vh', overflowAnchor:'none'}}
@@ -79,7 +79,7 @@ export default function Home({ res, navData, footerData }) {
         >
           <GearIcon className="h-105 w-105 text-black" />
         </motion.div>
-      </div>
+      </div> */}
       {data.page.blocks?.map((block, i) => {
         switch (block?.__typename) {
           case "PageBlocksLanding": {
