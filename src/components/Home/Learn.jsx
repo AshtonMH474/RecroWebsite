@@ -114,7 +114,7 @@
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { motion, useScroll, useTransform } from "framer-motion";
-import {  useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 
 function Learn(props) {
@@ -134,7 +134,7 @@ function Learn(props) {
     <>
       <div
         ref={learnRef}
-        className="bg-black overflow-hidden w-full mt-10 relative z-30 pb-20"
+        className="bg-black w-full mt-10 relative z-30 pb-20"
         style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
       >
         <div
