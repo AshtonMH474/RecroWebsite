@@ -215,10 +215,10 @@ useEffect(() => {
       <section
         ref={sectionRef}
         style={{ height: `${sectionHeight}px` }}
-        className="relative overflow-hidden "
+        className="relative "
       >
         <div
-          className="overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md"
+          className=" overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md"
           style={{
             position: "sticky",
             paddingTop: short ? "5rem" : "3rem",
