@@ -11,6 +11,7 @@ html {
 
 html,body{
   overflow-x: clip;
+   overflow-x: hidden;
 }
 html,
 body,
