@@ -1,4 +1,4 @@
-/* @import "tailwindcss";
+@import "tailwindcss";
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +16,10 @@ html,body{
 html,
 body,
 #__next {
-  min-height: 100vh;
+  overflow-y: auto;
+  height: 100%;
+  min-height: calc(var(--vh, 1vh) * 100);
+
 }
 
 body {
@@ -24,7 +27,7 @@ body {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   overscroll-behavior-y: none;
 }
 
@@ -33,7 +36,7 @@ body {
   top: 0;
   left: 0;
   z-index: -20;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   margin: 0;
   padding: 0;
@@ -106,152 +109,13 @@ body {
 
 .expertiseDes{
   max-height: 100px;                /* Limit height */
-  /* display: -webkit-box;             Enable flex truncation */
-  /* -webkit-line-clamp: 5;            Approx. number of lines for 100px */
-  /* -webkit-box-orient: vertical;     Vertical layout for box */
-  /* overflow: hidden;                 Hide excess */
-  /* text-overflow: ellipsis;          Ellipsis style */
-  /* line-height: 20px;                Ensure line height matches clamp */
-  /* word-break: break-word;           Break long words */
-/* }  */
-@import "tailwindcss";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* --- Base HTML/Body/Next.js Root Styles --- */
-html {
-  scroll-behavior: smooth;
-  /* Use overflow-x: hidden to prevent horizontal scrolling unless explicitly needed by content */
-  /* This is generally safer than 'visible' if you're trying to prevent layout shifts */
-  overflow-x: hidden;
+  display: -webkit-box;             /* Enable flex truncation */
+  -webkit-line-clamp: 5;            /* Approx. number of lines for 100px */
+  -webkit-box-orient: vertical;     /* Vertical layout for box */
+  overflow: hidden;                 /* Hide excess */
+  text-overflow: ellipsis;          /* Ellipsis style */
+  line-height: 20px;                /* Ensure line height matches clamp */
+  word-break: break-word;           /* Break long words */
 }
 
-html,
-body,
-#__next {
-  /* Using min-height: 100% here allows the content to expand beyond the viewport height if needed.
-     The --vh units will be applied to specific sections. */
-  min-height: 100%;
-  /* Ensure the root element doesn't have an unwanted default overflow-x */
-  overflow-x: hidden;
-}
-
-body {
-  background: var(--background); /* Assuming --background is defined elsewhere if needed */
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: black;
-  /* min-height: 100vh; is often not needed here if sections handle their own height with --vh */
-  /* Remove overscroll-behavior-y: none; if you want native pull-to-refresh on mobile */
-  /* If you want to disable it, ensure it's truly desired for all content */
-  /* overscroll-behavior-y: none; */
-}
-
-/* --- VH Units for Stable Viewport Height --- */
-/* Class for sections that should occupy the full stable viewport height */
-.full-screen-section {
-  height: calc(var(--vh, 1vh) * 100);
-}
-
-/* Class for sections that should have a minimum height of the full stable viewport height */
-.min-full-screen-section {
-  min-height: calc(var(--vh, 1vh) * 100);
-}
-
-/* --- Home Background Styles --- */
-.background.Home {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -20;
-  /* Use the --vh variable for stable height */
-  height: calc(var(--vh, 1vh) * 100);
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background: black; /* Fallback for older browsers */
-  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 85%);
-}
-
-@media (max-width: 1150px) {
-  .background.Home {
-    background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 85%);
-  }
-}
-@media (max-width: 800px) {
-  .background.Home {
-    background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 90%);
-  }
-}
-
-/* --- Navigation Styles --- */
-.nav {
-  z-index: 100;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%; /* Ensure nav spans full width */
-}
-
-/* --- Media Queries for Specific Components --- */
-@media (max-height: 500px) {
-  /* This media query will now work relative to the stable viewport height */
-  .expertise {
-    position: sticky;
-    top: 100px;
-  }
-}
-
-@media (max-height: 450px) {
-  .landing {
-    margin-top: 50px;
-  }
-}
-
-/* --- Test Element (if still needed) --- */
-.test {
-  z-index: 10;
-  background-color: white;
-  height: 100px;
-  width: 100px;
-  position: relative;
-  top: 2000px;
-}
-
-/* --- Color and Utility Classes --- */
-.bg-primary {
-  background-color: #B55914;
-}
-
-.primary-color {
-  color: #B55914;
-}
-.secondary-text {
-  color: #C2C2BC;
-}
-.block {
-  border: 1px white solid;
-  flex-direction: column;
-}
-.primary-border {
-  border: 1px solid #B55914;
-}
-.primary-border:hover {
-  border-color: rgba(181, 89, 20, 0.5);
-  cursor: pointer;
-}
-
-/* --- Expertise Description Truncation --- */
-.expertiseDes {
-  max-height: 100px; /* Limit height */
-  display: -webkit-box; /* Enable flex truncation */
-  -webkit-line-clamp: 5; /* Approx. number of lines for 100px */
-  -webkit-box-orient: vertical; /* Vertical layout for box */
-  overflow: hidden; /* Hide excess */
-  text-overflow: ellipsis; /* Ellipsis style */
-  line-height: 20px; /* Ensure line height matches clamp */
-  word-break: break-word; /* Break long words */
-}
 
