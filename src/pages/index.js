@@ -86,7 +86,6 @@ export default function Home({res,navData,footerData}) {
       return <Expertise key={i} ref={expertiseRef} {...block}/>;
 
     case "PageBlocksLearnTeam":
-      console.log(i)
       return <Learn key={i} {...block}/>;
 
     default:
