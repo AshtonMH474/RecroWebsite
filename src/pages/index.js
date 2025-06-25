@@ -58,7 +58,7 @@ export default function Home({res,navData,footerData}) {
         className="background Home  overflow-hidden bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
       >
         
-            <motion.div  style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear1">
+            {/* <motion.div  style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear1">
               <GearIcon className="h-80 w-80 text-black" />
             </motion.div>
             <motion.div style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear2">
@@ -72,7 +72,7 @@ export default function Home({res,navData,footerData}) {
             </motion.div>
             <motion.div style={{ rotate, transformOrigin: "center center" }} className="mr-10 gear5">
               <GearIcon className="h-105 w-105 text-black" />
-            </motion.div>
+            </motion.div> */}
        
           
       </div>
