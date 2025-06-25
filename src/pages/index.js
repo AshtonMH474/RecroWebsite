@@ -30,17 +30,17 @@ export async function getStaticProps(){
 }
 
 
-// export default function Home({res,navData,footerData}) {
-export default function Home({res,footerData}){
+export default function Home({res,navData,footerData}) {
+
   const ref = useRef(null);
  
   const {expertiseRef} = useExpertise()
-  // const { scrollY } = useScroll();
-  // const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
-  //   clamp: false, // disables clamping so it keeps going beyond 360
-  // });
+  const { scrollY } = useScroll();
+  const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
+    clamp: false, // disables clamping so it keeps going beyond 360
+  });
   const {data} = useTina(res)
-  // const {data:navContent} = useTina(navData)
+  const {data:navContent} = useTina(navData)
   const {data:footerContent} = useTina(footerData)
 
 
@@ -52,14 +52,14 @@ export default function Home({res,footerData}){
   return (
   
     <>
-      {/* <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/> */}
+      <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
       <div
         ref={ref}
         style={{minHeight:'calc(var(--vh, 1vh) * 100)'}}
         className="background Home  overflow-hidden bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
       >
         
-            {/* <motion.div  style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear1">
+            <motion.div  style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear1">
               <GearIcon className="h-80 w-80 text-black" />
             </motion.div>
             <motion.div style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear2">
@@ -73,7 +73,7 @@ export default function Home({res,footerData}){
             </motion.div>
             <motion.div style={{ rotate, transformOrigin: "center center" }} className="mr-10 gear5">
               <GearIcon className="h-105 w-105 text-black" />
-            </motion.div> */}
+            </motion.div>
        
           
       </div>
@@ -96,7 +96,7 @@ export default function Home({res,footerData}){
 })}
 
 
-      {/* <Footer res={footerContent.footer}/> */}
+      <Footer res={footerContent.footer}/>
       
 
   

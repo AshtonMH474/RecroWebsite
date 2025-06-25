@@ -42,7 +42,7 @@ body {
   margin: 0;
   padding: 0;
   background: black;
-  background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 85%);
+  background: radial-gradient(circle at 160% 230%, #B55A14 55%, #000000 85%);
 }
 
 @media(max-width: 1150px){
