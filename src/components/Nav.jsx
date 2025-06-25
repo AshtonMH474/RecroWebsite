@@ -75,12 +75,27 @@ export default function Nav({ res, onExpertiseClick }) {
 
         {/* Menu Icon (Mobile) */}
         <div className="lg:hidden">
-          <button
+            <button
             ref={buttonRef}
             onClick={toggleMenu}
-            className="text-white text-[30px] px-3 pt-2"
+            aria-label="Toggle menu"
+            className="flex flex-col justify-center items-center w-10 h-10 relative z-[200]"
           >
-            ☰
+              <span
+                className={`block w-6 h-[2px] bg-white transition-all duration-300 ${
+                  menuOpen ? 'rotate-45 translate-y-[7px]' : ''
+                }`}
+              ></span>
+              <span
+                className={`block w-6 h-[2px] bg-white my-[6px] transition-all duration-300 ${
+                  menuOpen ? 'opacity-0' : ''
+                }`}
+              ></span>
+              <span
+                className={`block w-6 h-[2px] bg-white transition-all duration-300 ${
+                  menuOpen ? '-rotate-45 -translate-y-[7px]' : ''
+                }`}
+              ></span>
           </button>
         </div>
 
