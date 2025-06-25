@@ -71,14 +71,14 @@ function Learn(props) {
             className="flex flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8"
           >
             {props?.learnTeamImages?.map((image, i) => (
-              <div   style={{
+              <div key={image.id || image.src || i}   style={{
                   top: image?.top ?? "auto",
                   left: image?.left ?? "auto",
                   right: image?.right ?? "auto",
                   bottom: image?.bottom ?? "auto",
                   zIndex: image?.zIndex ?? "auto"}} className="aspect-[16/9] w-full md:max-w-[425px] md:relative  overflow-hidden rounded-[20px]">
               <img
-                key={image.id || image.src || i}
+               
                 src={image.src}
                 alt={image.alt || `team image ${i + 1}`}
                 className=" object-cover"
