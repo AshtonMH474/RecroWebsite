@@ -25,7 +25,7 @@ body {
   background: var(--background);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: orange;
+  background-color: black;
   overscroll-behavior-y: none;
 }
 

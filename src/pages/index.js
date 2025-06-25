@@ -32,9 +32,9 @@ export async function getStaticProps(){
 
 // export default function Home({res,navData,footerData}) {
 export default function Home({res,footerData}){
-  // const ref = useRef(null);
+  const ref = useRef(null);
  
-  // const {expertiseRef} = useExpertise()
+  const {expertiseRef} = useExpertise()
   // const { scrollY } = useScroll();
   // const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
   //   clamp: false, // disables clamping so it keeps going beyond 360
@@ -44,9 +44,9 @@ export default function Home({res,footerData}){
   const {data:footerContent} = useTina(footerData)
 
 
-  // const scrollToExpertise = () => {
-  //   expertiseRef.current?.scrollToHeading();
-  // };
+  const scrollToExpertise = () => {
+    expertiseRef.current?.scrollToHeading();
+  };
   
 
   return (
@@ -54,9 +54,9 @@ export default function Home({res,footerData}){
     <>
       {/* <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/> */}
       <div
-        // ref={ref}
+        ref={ref}
         style={{minHeight:'calc(var(--vh, 1vh) * 100)'}}
-        // className="background Home  overflow-hidden bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
+        className="background Home  overflow-hidden bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
       >
         
             {/* <motion.div  style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear1">
@@ -82,8 +82,8 @@ export default function Home({res,footerData}){
     case "PageBlocksLanding":
       return <Landing key={i} {...block}/>;
 
-    // case "PageBlocksCards":
-    //   return <Expertise key={i} ref={expertiseRef} {...block}/>;
+    case "PageBlocksCards":
+      return <Expertise key={i} ref={expertiseRef} {...block}/>;
 
     // case "PageBlocksLearnTeam":
     //   console.log(i)
@@ -96,7 +96,7 @@ export default function Home({res,footerData}){
 })}
 
 
-      <Footer res={footerContent.footer}/>
+      {/* <Footer res={footerContent.footer}/> */}
       
 
   
