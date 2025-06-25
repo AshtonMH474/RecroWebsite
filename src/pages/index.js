@@ -85,9 +85,9 @@ export default function Home({res,footerData}){
     case "PageBlocksCards":
       return <Expertise key={i} ref={expertiseRef} {...block}/>;
 
-    // case "PageBlocksLearnTeam":
-    //   console.log(i)
-    //   return <Learn key={i} {...block}/>;
+    case "PageBlocksLearnTeam":
+      console.log(i)
+      return <Learn key={i} {...block}/>;
 
     default:
       console.warn("Unknown block type:", block?.__typename);
