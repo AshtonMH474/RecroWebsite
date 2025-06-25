@@ -1,12 +1,13 @@
 
-import Landing from "../components/Home/Landing";
+import Landing from "../components/Landing";
 import {useTina} from 'tinacms/dist/react'
 import Nav from "../components/Nav";
-import Expertise from "../components/Home/Expertise";
-import Learn from "@/components/Home/Learn";
+import Learn from "@/components/Learn";
 import Footer from "@/components/Footer";
 import { useExpertise } from "@/context/ExpertiseContext";
 import BG from "@/components/BG";
+import Cards from "../components/Cards/Cards";
+import Leadership from "@/components/Leadership/Leadership";
 
 
 
@@ -52,11 +53,13 @@ export default function Home({res,navData,footerData}) {
       return <Landing key={i} {...block}/>;
 
     case "PageBlocksCards":
-      return <Expertise key={i} ref={expertiseRef} {...block}/>;
+      return <Cards key={i} ref={expertiseRef} {...block}/>;
 
+    case "PageBlocksLeadership":{
+      return <Leadership key={i} {...block}/>
+    }
     case "PageBlocksLearnTeam":
       return <Learn key={i} {...block}/>;
-
     default:
       console.warn("Unknown block type:", block?.__typename);
       return null;

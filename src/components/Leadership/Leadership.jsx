@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { tinaField } from "tinacms/dist/react";
-import LeaderCard from "./Leadership/LeaderCard";
-import Pagination from "./Leadership/Pagination";
+import LeaderCard from "./LeaderCard";
+import Pagination from "./Pagination";
 import GearIcon from "../GearIcon";
-import { animationVariants } from "./Leadership/LeaderAnimations";
+import { animationVariants } from "./LeaderAnimations";
 
 function Leadership(props) {
   // all the cards infos

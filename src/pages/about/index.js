@@ -2,10 +2,11 @@ import Nav from "@/components/Nav";
 import { useTina } from "tinacms/dist/react";
 import Footer from "@/components/Footer";
 import { useExpertise } from "@/context/ExpertiseContext";
-import Approach from "@/components/About/Approach";
-import Leadership from "@/components/About/Leadership";
+import Leadership from "@/components/Leadership/Leadership";
 import BG from "@/components/BG";
-import Landing from "@/components/Home/Landing";
+import Landing from "@/components/Landing";
+import Cards from "@/components/Cards/Cards";
+import Learn from "@/components/Learn";
 
 
 export async function getStaticProps(){
@@ -45,11 +46,16 @@ function About({res,navData,footerData}){
             return <Landing key={i} {...block}/>
           }
           case "PageBlocksCards":{
-            return <Approach key={i} {...block}/>
+            return <Cards key={i} {...block}/>
           }
           case "PageBlocksLeadership":{
             return <Leadership key={i} {...block}/>
           }
+           case "PageBlocksLearnTeam":
+              return <Learn key={i} {...block}/>;
+          default:
+          console.warn("Unknown block type:", block?.__typename);
+          return null;
         }
       })}
             
