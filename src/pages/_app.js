@@ -11,8 +11,8 @@ export default function App({ Component, pageProps }) {
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     };
     setVh();
-    window.addEventListener('resize', setVh);
-    return () => window.removeEventListener('resize', setVh);
+    // window.addEventListener('resize', setVh);
+    // return () => window.removeEventListener('resize', setVh);
   }, []);
 
   return (
