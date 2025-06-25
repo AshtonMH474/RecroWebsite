@@ -2,17 +2,15 @@ import {TinaMarkdown} from 'tinacms/dist/rich-text'
 import { tinaField } from 'tinacms/dist/react'
 
 function Landing(props){
-    
-    
-
     return(
     <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }} className="landing flex flex-col items-center justify-center  w-full">
-        <div className='w-90 md:w-150' data-tina-field={tinaField(props,'heading')}>
+        {props.heading && (<div className='w-90 md:w-150' data-tina-field={tinaField(props,'heading')}>
             <TinaMarkdown content={props.heading} components={{
                 h1:props => <h1 className="text-[32px] md:text-[40px] lg:text-[60px] font-bold text-center mb-4" {...props}/>,
+                bold:props => <span className="primary-color" {...props} />,
                 h3:props => <h3 className="text-[16px] text-center secondary-text mb-6" {...props}/>
             }}/>
-        </div>
+        </div>)}
         
         <div className="flex gap-x-8" >
             {props.buttons?.map((button,i) =>
