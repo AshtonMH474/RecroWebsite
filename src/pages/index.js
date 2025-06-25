@@ -51,7 +51,7 @@ export default function Home({res,navData,footerData}) {
   return (
   
     <>
-      <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
+      {/* <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/> */}
       <div
         ref={ref}
         style={{ height: 'calc(var(--vh, 1vh) * 100)', }}
@@ -95,7 +95,7 @@ export default function Home({res,navData,footerData}) {
 })}
 
 
-      <Footer res={footerContent.footer}/>
+      {/* <Footer res={footerContent.footer}/> */}
       
 
   
