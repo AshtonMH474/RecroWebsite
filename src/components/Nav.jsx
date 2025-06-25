@@ -9,6 +9,13 @@ export default function Nav({ res, onExpertiseClick }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef(null)
   const buttonRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+  if (menuOpen) {
+    setIsVisible(true)
+  }
+}, [menuOpen])
 
   const toggleMenu = () => setMenuOpen(prev => !prev)
 
@@ -142,6 +149,9 @@ export default function Nav({ res, onExpertiseClick }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
+          onAnimationComplete={() => {
+          if (!menuOpen) setIsVisible(false)
+          }}
           ref={menuRef}
           className="fixed top-20 left-0 w-full h-[calc(100vh-80px)] bg-black z-[100] flex flex-col items-start px-8 py-6 gap-6 lg:hidden transition-all duration-300"
         >
