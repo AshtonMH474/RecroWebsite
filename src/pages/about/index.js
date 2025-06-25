@@ -45,7 +45,7 @@ function About({res,navData,footerData}){
             <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
             <div
             ref={ref}
-            style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+            style={{ height: 'calc(var(--vh, 1vh) * 130)' }}
             className="background Home overflow-hidden bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
             >
         
