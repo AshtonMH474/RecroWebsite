@@ -134,7 +134,7 @@ export default function Nav({ res, onExpertiseClick }) {
       </div>
 
       {/* MOBILE MENU */}
-      <AnimatePresence>
+      <AnimatePresence mode='wait'>
       {menuOpen && (
         <motion.div
           key="mobile-menu"
