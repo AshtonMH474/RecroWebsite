@@ -4,108 +4,90 @@ import { motion, AnimatePresence } from "framer-motion";
 import ContactUsForm from "./ContactUsForm";
 import { tinaField } from "tinacms/dist/react";
 
-function Footer({ res }) {
+function Footer({res}) {
   const [showForm, setShowForm] = useState(false);
+
   const toggleForm = () => setShowForm((prev) => !prev);
 
   return (
-    <footer className="bg-black overflow-hidden w-full z-40 mt-16">
-      <div className="border-t border-b border-white/50 py-8 px-4">
-        {/* Top section with message and buttons */}
-        <div className="flex justify-center">
-          <div className="flex flex-col sm:flex-row items-center bg-primary py-4 px-6 rounded-[12px]">
-            <h3
-              data-tina-field={tinaField(res, "footerMessage")}
-              className="text-white text-center text-[16px] mb-2 sm:mb-0 sm:pr-4"
-            >
-              {res.footerMessage}
-            </h3>
-
-            <div className="flex gap-4">
-              {res.buttons?.map((button, i) => {
-                const baseStyles = "capitalize px-4 py-2 rounded transition-colors duration-300";
-                const sharedProps = {
-                  key: i,
-                  onClick: toggleForm,
-                  "data-tina-field": tinaField(res.buttons[i], "label"),
-                };
-
-                if (button.style === "border") {
-                  return (
+    <div className="bg-black w-full  z-40"  >
+        <div className="border-t border-b border-white/50 mb-16">
+            <div className="flex justify-center">
+            <div className="relative flex-col sm:flex-row bottom-10 inline-flex items-center justify-center bg-primary h-auto  mx-auto py-2  px-6 rounded-[12px]">
+                <h3 data-tina-field={tinaField(res,'footerMessage')} className="text-center text-white pr-4 pb-2 sm:pb-0 text-[16px]">{res.footerMessage}</h3>
+                <div className="flex gap-x-4">
+                {res.buttons?.map((button,i) => {
+                  if (button.style === 'border') {
+                    return (
                     <button
-                      {...sharedProps}
-                      className={`${baseStyles} border border-white text-white hover:text-white/80`}
+                        onClick={toggleForm}
+                        key={i}
+                        data-tina-field={tinaField(res.buttons[i], 'label')}
+                        className="px-4 capitalize py-2 border border-white rounded hover:text-white/80 transition-colors duration-300"
                     >
-                      {button.label}
+                        {button.label}
                     </button>
-                  );
-                }
-
-                if (button.style === "button") {
-                  return (
+                    );
+                } else if (button.style === 'button') {
+                    return (
                     <button
-                      {...sharedProps}
-                      className={`${baseStyles} bg-[#3F3F38] text-white hover:opacity-80`}
+                        onClick={toggleForm}
+                        key={i}
+                        data-tina-field={tinaField(res.buttons[i], 'label')}
+                        className="bg-[#3F3F38] capitalize cursor-pointer px-4 py-2 w-auto rounded hover:opacity-80 text-white"
                     >
-                      {button.label}
+                        {button.label}
                     </button>
-                  );
+                    );
                 }
-
-                return null;
-              })}
+                    return null;
+                })}
+                </div>
             </div>
-          </div>
+            </div>
+
+            {/* Animated Contact Form */}
+            <AnimatePresence>
+            {showForm && (
+                <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                <ContactUsForm />
+                </motion.div>
+            )}
+            </AnimatePresence>
+            
+                {/* Links */}
+                    <motion.div key={showForm ? "withForm" : "noForm"}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
+                    className="relative bottom-5 flex  gap-6 sm:flex-row items-center justify-center sm:gap-30">
+                        {res.links?.map((link,i) => 
+                            link.link ? (
+                                <Link data-tina-field={tinaField(res.links[i], 'label')} key={i} href={link.link}>{link.label}</Link>
+                            ) : null
+                        )}
+                    </motion.div>
         </div>
 
-        {/* Contact Form */}
-        <AnimatePresence>
-          {showForm && (
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="mt-6"
-            >
-              <ContactUsForm />
+            {/* Footer Text */}
+            <motion.div key={showForm ? "withForm" : "noForm"}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }} className="flex justify-center">
+                <h3 data-tina-field={tinaField(res,'copyright')} className="relative bottom-8 text-center">
+                    {res.copyright}
+                </h3>
             </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Footer Links */}
-        <motion.div
-          key={showForm ? "withForm" : "noForm"}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
-          className="flex justify-center gap-6 flex-wrap mt-6"
-        >
-          {res.links?.map((link, i) =>
-            link.link ? (
-              <Link key={i} href={link.link} data-tina-field={tinaField(res.links[i], "label")}>
-                <span className="text-white hover:underline">{link.label}</span>
-              </Link>
-            ) : null
-          )}
-        </motion.div>
-      </div>
-
-      {/* Footer copyright */}
-      <motion.div
-        key={showForm ? "withForm" : "noForm"}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
-        className="text-center text-white py-4"
-      >
-        <h3 data-tina-field={tinaField(res, "copyright")}>{res.copyright}</h3>
-      </motion.div>
-    </footer>
+        
+    </div>
   );
 }
 
 export default Footer;
-
 
 

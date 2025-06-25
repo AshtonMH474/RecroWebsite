@@ -56,7 +56,7 @@ export default function Home({res,footerData}){
       <div
         // ref={ref}
         style={{minHeight:'calc(var(--vh, 1vh) * 100)'}}
-        className="background Home  overflow-hidden bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
+        // className="background Home  overflow-hidden bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end pb-40"
       >
         
             {/* <motion.div  style={{ rotate, transformOrigin: "center center"}} className="mr-10 gear1">
