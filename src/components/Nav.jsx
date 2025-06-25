@@ -131,17 +131,25 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { tinaField } from 'tinacms/dist/react'
 import { useRouter } from 'next/router'
-import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Nav({ res, onExpertiseClick }) {
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const menuRef = useRef(null)
   const buttonRef = useRef(null)
 
-  const toggleMenu = () => setMenuOpen(prev => !prev)
+  const toggleMenu = () => {
+    if (menuOpen) {
+      setMenuOpen(false)
+      setTimeout(() => setIsVisible(false), 300) // wait for fade-out
+    } else {
+      setIsVisible(true)
+      setTimeout(() => setMenuOpen(true), 10) // short delay to allow transition
+    }
+  }
 
-  // Close menu on outside click
+  // Close on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -150,31 +158,24 @@ export default function Nav({ res, onExpertiseClick }) {
         buttonRef.current &&
         !buttonRef.current.contains(event.target)
       ) {
-        setMenuOpen(false)
+        toggleMenu()
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  // Prevent scrolling when menu is open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
   }, [menuOpen])
 
-  // Handle special expertise button logic
+  // Prevent scrolling
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+  }, [menuOpen])
+
   const handleExpertise = async () => {
     toggleMenu()
     if (router.pathname !== '/') {
       const handleRouteDone = () => {
         setTimeout(() => {
-          if (typeof onExpertiseClick === 'function') {
-            onExpertiseClick()
-          }
+          if (typeof onExpertiseClick === 'function') onExpertiseClick()
         }, 200)
         router.events.off('routeChangeComplete', handleRouteDone)
       }
@@ -182,9 +183,7 @@ export default function Nav({ res, onExpertiseClick }) {
       await router.push('/')
     } else {
       setTimeout(() => {
-        if (typeof onExpertiseClick === 'function') {
-          onExpertiseClick()
-        }
+        if (typeof onExpertiseClick === 'function') onExpertiseClick()
       }, 200)
     }
   }
@@ -202,31 +201,18 @@ export default function Nav({ res, onExpertiseClick }) {
           </Link>
         </div>
 
-        {/* Menu Icon (Mobile) */}
+        {/* Mobile Menu Button */}
         <div className="lg:hidden">
-         <button
-  ref={buttonRef}
-  onClick={toggleMenu}
-  aria-label="Toggle menu"
-  className="flex flex-col justify-center items-center w-10 h-10 relative z-[200]"
->
-  <span
-    className={`block w-6 h-[2px] bg-white transition-all duration-300 ${
-      menuOpen ? 'rotate-45 translate-y-[7px]' : ''
-    }`}
-  ></span>
-  <span
-    className={`block w-6 h-[2px] bg-white my-[6px] transition-all duration-300 ${
-      menuOpen ? 'opacity-0' : ''
-    }`}
-  ></span>
-  <span
-    className={`block w-6 h-[2px] bg-white transition-all duration-300 ${
-      menuOpen ? '-rotate-45 -translate-y-[7px]' : ''
-    }`}
-  ></span>
-</button>
-
+          <button
+            ref={buttonRef}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+            className="flex flex-col justify-center items-center w-10 h-10 relative z-[200]"
+          >
+            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <span className={`block w-6 h-[2px] bg-white my-[6px] transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+          </button>
         </div>
 
         {/* Desktop Nav */}
@@ -238,15 +224,9 @@ export default function Nav({ res, onExpertiseClick }) {
           >
             {res.animation}
           </button>
-
           {res.links?.map((link, i) =>
             link.style === 'link' ? (
-              <Link
-                key={i}
-                href={link.link}
-                className="capitalize py-2 cursor-pointer text-white"
-                data-tina-field={tinaField(res.links[i], 'label')}
-              >
+              <Link key={i} href={link.link} className="capitalize py-2 cursor-pointer text-white" data-tina-field={tinaField(res.links[i], 'label')}>
                 {link.label}
               </Link>
             ) : link.style === 'button' ? (
@@ -264,12 +244,12 @@ export default function Nav({ res, onExpertiseClick }) {
       </div>
 
       {/* MOBILE MENU */}
-     
-      {menuOpen && (
+      {isVisible && (
         <div
-      
           ref={menuRef}
-          className="fixed top-20 left-0 w-full h-[calc(100vh-80px)] bg-black z-[100] flex flex-col items-start px-8 py-6 gap-6 lg:hidden transition-all duration-500 ease-in-out"
+          className={`fixed top-20 left-0 w-full h-[calc(100vh-80px)] bg-black z-[100] flex flex-col items-start px-8 py-6 gap-6 lg:hidden transition-opacity duration-300 ease-in-out ${
+            menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
         >
           <button
             onClick={handleExpertise}
@@ -278,14 +258,13 @@ export default function Nav({ res, onExpertiseClick }) {
           >
             {res.animation}
           </button>
-
           {res.links?.map((link, i) =>
             link.style === 'link' ? (
               <Link
                 key={i}
                 href={link.link}
                 onClick={toggleMenu}
-                className="capitalize py-2 text-white  w-full  "
+                className="capitalize py-2 text-white w-full"
                 data-tina-field={tinaField(res.links[i], 'label')}
               >
                 {link.label}
@@ -303,10 +282,8 @@ export default function Nav({ res, onExpertiseClick }) {
           )}
         </div>
       )}
-     
 
-      
       <div className="h-10" />
     </>
   )
-} 
+}
