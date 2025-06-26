@@ -9,6 +9,7 @@ import Cards from "@/components/Cards/Cards";
 import Learn from "@/components/Learn";
 
 
+
 export async function getStaticProps(){
     const {client} = await import('../../../tina/__generated__/databaseClient')
     const res = await client.queries.page({relativePath:'about.md'})
@@ -58,6 +59,8 @@ function About({res,navData,footerData}){
           return null;
         }
       })}
+
+            
             
             <Footer res={footerContent.footer}/>
         </>

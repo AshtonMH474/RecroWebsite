@@ -8,6 +8,7 @@ import { useExpertise } from "@/context/ExpertiseContext";
 import BG from "@/components/BG";
 import Cards from "../components/Cards/Cards";
 import Leadership from "@/components/Leadership/Leadership";
+import Jobs from "@/components/Jobs/Jobs";
 
 
 
@@ -16,19 +17,21 @@ export async function getStaticProps(){
     const res = await client.queries.page({relativePath:'home.md'})
     const navRes = await client.queries.nav({relativePath:'nav.md'})
     const footerRes = await client.queries.footer({relativePath:"footer.md"})
-
+    const resJobs = await fetch('https://ats.recro.com/api/joblistings')
+    const jobs = await resJobs.json()
     return {
       props:{
         res:res,
         navData:navRes,
         footerData:footerRes,
+        jobs:jobs
       }
     }
   
 }
 
 
-export default function Home({res,navData,footerData}) {
+export default function Home({res,navData,footerData,jobs}) {
 
  
   const {expertiseRef} = useExpertise()
@@ -41,7 +44,6 @@ export default function Home({res,navData,footerData}) {
     expertiseRef.current?.scrollToHeading();
   };
   
-
   return (
   
     <>
@@ -60,13 +62,13 @@ export default function Home({res,navData,footerData}) {
     }
     case "PageBlocksLearnTeam":
       return <Learn key={i} {...block}/>;
+    // case "PageBlocksJobs":
+    //   return <Jobs key={i} jobs={jobs} {...block}/>;
     default:
       console.warn("Unknown block type:", block?.__typename);
       return null;
   }
 })}
-
-
       <Footer res={footerContent.footer}/>
       
 

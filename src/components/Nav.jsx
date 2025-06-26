@@ -37,10 +37,6 @@ export default function Nav({ res, onExpertiseClick }) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [menuOpen])
 
-  // Prevent scrolling
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-  }, [menuOpen])
 
   const handleExpertise = async () => {
     toggleMenu()
