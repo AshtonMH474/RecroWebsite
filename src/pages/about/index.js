@@ -1,13 +1,12 @@
-import GearIcon from "@/components/GearIcon";
-import { useRef } from "react"
-import { useScroll, useTransform, motion } from "framer-motion";
 import Nav from "@/components/Nav";
 import { useTina } from "tinacms/dist/react";
 import Footer from "@/components/Footer";
-import LandingAbout from "@/components/About/Landing";
 import { useExpertise } from "@/context/ExpertiseContext";
-import Approach from "@/components/About/Approach";
-import Leadership from "@/components/About/Leadership";
+import Leadership from "@/components/Leadership/Leadership";
+import BG from "@/components/BG";
+import Landing from "@/components/Landing";
+import Cards from "@/components/Cards/Cards";
+import Learn from "@/components/Learn";
 
 
 export async function getStaticProps(){
@@ -26,12 +25,9 @@ export async function getStaticProps(){
 }
 
 function About({res,navData,footerData}){
-    const ref = useRef(null)
+   
     const {expertiseRef} = useExpertise()
-    const { scrollY } = useScroll();
-    const rotate = useTransform(scrollY, [0, 3000], [0, 360], {
-    clamp: false, // disables clamping so it keeps going beyond 360
-    });
+   
 
     const {data} = useTina(res)
     const {data:navContent} = useTina(navData)
@@ -43,40 +39,23 @@ function About({res,navData,footerData}){
     return (
         <>
             <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
-            <div
-            ref={ref}
-            className="background Home h-screen bg-fixed bg-center bg-cover sm:bg-cover bg-contain flex flex-col items-end"
-            >
-        
-                <motion.div  style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear1">
-                <GearIcon className="h-80 w-80 text-black" />
-                </motion.div>
-                <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear2">
-                <GearIcon className="h-50 w-50 " />
-                </motion.div>
-                <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear3">
-                <GearIcon className="h-65 w-65 text-black" />
-                </motion.div>
-                <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear4">
-                <GearIcon className="h-80 w-80 " />
-                </motion.div>
-                <motion.div style={{ rotate, transformOrigin: "center center", willChange: "transform" }} className="mr-10 gear5">
-                <GearIcon className="h-105 w-105 text-black" />
-                </motion.div>
-       
-          
-            </div>
+            <BG/>
              {data.page.blocks?.map((block,i) => {
         switch(block?.__typename){
           case "PageBlocksLanding":{
-            return <LandingAbout key={i} {...block}/>
+            return <Landing key={i} {...block}/>
           }
           case "PageBlocksCards":{
-            return <Approach key={i} {...block}/>
+            return <Cards key={i} {...block}/>
           }
           case "PageBlocksLeadership":{
             return <Leadership key={i} {...block}/>
           }
+           case "PageBlocksLearnTeam":
+              return <Learn key={i} {...block}/>;
+          default:
+          console.warn("Unknown block type:", block?.__typename);
+          return null;
         }
       })}
             

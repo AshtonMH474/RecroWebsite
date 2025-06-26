@@ -1,105 +1,4 @@
 
-// import { useEffect, useRef, useState } from 'react'
-// import Link from 'next/link'
-// import { tinaField } from 'tinacms/dist/react'
-// import { useRouter } from 'next/router'
-
-// export default function Nav({ res, onExpertiseClick }) {
-//   const router = useRouter()
-//   const [menuOpen, setMenuOpen] = useState(false)
-//   const menuRef = useRef(null)
-//   const buttonRef = useRef(null)
-//   const toggleMenu = () => setMenuOpen(prev => !prev)
-
-//   useEffect(() => {
-//     const handleClickOutside = (event) => {
-//       if (
-//         menuRef.current &&
-//         !menuRef.current.contains(event.target) &&
-//         buttonRef.current &&
-//         !buttonRef.current.contains(event.target)
-//       ) {
-//         setMenuOpen(false)
-//       }
-//     }
-
-//     document.addEventListener('mousedown', handleClickOutside)
-//     return () => {
-//       document.removeEventListener('mousedown', handleClickOutside)
-//     }
-//   }, [])
-
-//   const handleExpertise = async () => {
-   
-//     if(router.pathname != '/') await  router.push('/')
-//     await onExpertiseClick()
-//   }
-
-//   if (!res) return null
-
-//   return (
-//     <div className="z-[101] bg-black w-full flex flex-col md:flex-row justify-between md:items-center nav p-0">
-//       <div className='flex justify-between items-center'>
-//         <div data-tina-field={tinaField(res, 'logo')}>
-//           <Link href={'/'}><img className="h-20 md:h-30 cursor-pointer pl-4 md:pl-16" src={res.logo} alt="logo" /></Link>
-//         </div>
-
-//         <div className="md:hidden ml-auto pb-4 pr-4 flex items-center h-full">
-//           <button
-//             ref={buttonRef}
-//             onClick={toggleMenu}
-//             className="text-white text-[30px] px-3 pt-2 rounded"
-//           >
-//             ☰
-//           </button>
-//         </div>
-//       </div>
-
-//     <div
-//   ref={menuRef}
-//   className={`transition-all duration-500 ease-in-out overflow-hidden
-//     flex flex-col md:flex-row items-start md:items-center
-//     gap-4 md:gap-x-8
-//     pl-8 md:pl-0
-//     pb-0
-//     md:pr-16
-//     mt-2 md:mt-0
-//     ${menuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
-//     md:max-h-none md:opacity-100 md:overflow-visible
-//   `}
-// >
-//         <div data-tina-field={tinaField(res, 'animation')}><button  onClick={() => {
-//             toggleMenu()
-//             handleExpertise()
-//         }} className="capitalize py-2 cursor-pointer text-white">{res.animation}</button></div>
-
-//         {res.links?.map((link, i) =>
-//           link.style === 'link' && link.link ? (
-//             <Link
-//                 onClick={toggleMenu}
-//               key={i}
-//               data-tina-field={tinaField(res.links[i], 'label')}
-//               className="capitalize py-2 cursor-pointer text-white"
-//               href={link.link}
-//             >
-//               {link.label}
-//             </Link>
-//           ) : link.style === 'button' && link.link ? (
-//             <button
-//                 onClick={toggleMenu}
-//               key={i}
-//               data-tina-field={tinaField(res.links[i], 'label')}
-//               className="bg-primary text-white cursor-pointer w-auto px-8 py-2 rounded hover:opacity-80 capitalize"
-//             >
-//               {link.label}
-//             </button>
-//           ) : null
-//         )}
-//       </div>
-//     </div>
-//   )
-// }
-
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { tinaField } from 'tinacms/dist/react'
@@ -108,11 +7,21 @@ import { useRouter } from 'next/router'
 export default function Nav({ res, onExpertiseClick }) {
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const menuRef = useRef(null)
   const buttonRef = useRef(null)
 
-  const toggleMenu = () => setMenuOpen(prev => !prev)
+  const toggleMenu = () => {
+    if (menuOpen) {
+      setMenuOpen(false)
+      setTimeout(() => setIsVisible(false), 300) // wait for fade-out
+    } else {
+      setIsVisible(true)
+      setTimeout(() => setMenuOpen(true), 10) // short delay to allow transition
+    }
+  }
 
+  // Close on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -121,107 +30,132 @@ export default function Nav({ res, onExpertiseClick }) {
         buttonRef.current &&
         !buttonRef.current.contains(event.target)
       ) {
-        setMenuOpen(false)
+        toggleMenu()
       }
     }
-
     document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [menuOpen])
 
- const handleExpertise = async () => {
-  toggleMenu()
+  // Prevent scrolling
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+  }, [menuOpen])
 
-  if (router.pathname !== '/') {
-    const handleRouteDone = () => {
-      setTimeout(() => {
-        if (typeof onExpertiseClick === 'function') {
-          onExpertiseClick()
-        }
-      }, 200) // 👈 Adjust delay if needed (200ms is a safe starting point)
-      router.events.off('routeChangeComplete', handleRouteDone)
-    }
-
-    router.events.on('routeChangeComplete', handleRouteDone)
-    await router.push('/')
-  } else {
-    setTimeout(() => {
-      if (typeof onExpertiseClick === 'function') {
-        onExpertiseClick()
+  const handleExpertise = async () => {
+    toggleMenu()
+    if (router.pathname !== '/') {
+      const handleRouteDone = () => {
+        setTimeout(() => {
+          if (typeof onExpertiseClick === 'function') onExpertiseClick()
+        }, 200)
+        router.events.off('routeChangeComplete', handleRouteDone)
       }
-    }, 200)
+      router.events.on('routeChangeComplete', handleRouteDone)
+      await router.push('/')
+    } else {
+      setTimeout(() => {
+        if (typeof onExpertiseClick === 'function') onExpertiseClick()
+      }, 200)
+    }
   }
-}
 
   if (!res) return null
 
   return (
-    <div className="z-[101] bg-black w-full flex flex-col md:flex-row justify-between md:items-center nav p-0">
-      <div className='flex justify-between items-center'>
-        <div data-tina-field={tinaField(res, 'logo')}>
-          <Link href={'/'}>
-            <img className="h-20 md:h-30 cursor-pointer pl-4 md:pl-16" src={res.logo} alt="logo" />
+    <>
+      {/* NAVBAR */}
+      <div className="fixed top-0 left-0 w-full z-[101] bg-black flex justify-between items-center h-20 px-4 lg:px-16">
+        {/* Logo */}
+        <div className='pl-4 lg:pl-0' data-tina-field={tinaField(res, 'logo')}>
+          <Link href="/">
+            <img className="h-20 lg:h-30 cursor-pointer" src={res.logo} alt="logo" />
           </Link>
         </div>
 
-        <div className="md:hidden ml-auto pb-4 pr-4 flex items-center h-full">
+        {/* Mobile Menu Button */}
+        <div className="lg:hidden">
           <button
             ref={buttonRef}
             onClick={toggleMenu}
-            className="text-white text-[30px] px-3 pt-2 rounded"
+            aria-label="Toggle menu"
+            className="flex flex-col justify-center items-center w-10 h-10 relative z-[200]"
           >
-            ☰
+            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <span className={`block w-6 h-[2px] bg-white my-[6px] transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
           </button>
         </div>
-      </div>
 
-      <div
-        ref={menuRef}
-        className={`transition-all duration-500 ease-in-out overflow-hidden
-          flex flex-col md:flex-row items-start md:items-center
-          gap-4 md:gap-x-8
-          pl-8 md:pl-0
-          pb-0
-          md:pr-16
-          mt-2 md:mt-0
-          ${menuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
-          md:max-h-none md:opacity-100 md:overflow-visible
-        `}
-      >
-        <div data-tina-field={tinaField(res, 'animation')}>
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex items-center gap-8">
           <button
             onClick={handleExpertise}
             className="capitalize py-2 cursor-pointer text-white"
+            data-tina-field={tinaField(res, 'animation')}
           >
             {res.animation}
           </button>
+          {res.links?.map((link, i) =>
+            link.style === 'link' ? (
+              <Link key={i} href={link.link} className="capitalize py-2 cursor-pointer text-white" data-tina-field={tinaField(res.links[i], 'label')}>
+                {link.label}
+              </Link>
+            ) : link.style === 'button' ? (
+              <button
+                key={i}
+                onClick={toggleMenu}
+                className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize"
+                data-tina-field={tinaField(res.links[i], 'label')}
+              >
+                {link.label}
+              </button>
+            ) : null
+          )}
         </div>
-
-        {res.links?.map((link, i) =>
-          link.style === 'link' && link.link ? (
-            <Link
-              key={i}
-              href={link.link}
-              onClick={toggleMenu}
-              data-tina-field={tinaField(res.links[i], 'label')}
-              className="capitalize py-2 cursor-pointer text-white"
-            >
-              {link.label}
-            </Link>
-          ) : link.style === 'button' && link.link ? (
-            <button
-              key={i}
-              onClick={toggleMenu}
-              data-tina-field={tinaField(res.links[i], 'label')}
-              className="bg-primary text-white cursor-pointer w-auto px-8 py-2 rounded hover:opacity-80 capitalize"
-            >
-              {link.label}
-            </button>
-          ) : null
-        )}
       </div>
-    </div>
+
+      {/* MOBILE MENU */}
+      {isVisible && (
+        <div
+          ref={menuRef}
+          className={`fixed top-20 left-0 w-full h-[calc(100vh-80px)] bg-black z-[100] flex flex-col items-start px-8 py-6 gap-6 lg:hidden transition-opacity duration-300 ease-in-out ${
+            menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <button
+            onClick={handleExpertise}
+            className="capitalize py-2 text-white"
+            data-tina-field={tinaField(res, 'animation')}
+          >
+            {res.animation}
+          </button>
+          {res.links?.map((link, i) =>
+            link.style === 'link' ? (
+              <Link
+                key={i}
+                href={link.link}
+                onClick={toggleMenu}
+                className="capitalize py-2 text-white w-full"
+                data-tina-field={tinaField(res.links[i], 'label')}
+              >
+                {link.label}
+              </Link>
+            ) : link.style === 'button' ? (
+              <button
+                key={i}
+                onClick={toggleMenu}
+                className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize"
+                data-tina-field={tinaField(res.links[i], 'label')}
+              >
+                {link.label}
+              </button>
+            ) : null
+          )}
+        </div>
+      )}
+
+      <div className="h-10" />
+    </>
   )
 }

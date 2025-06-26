@@ -13,17 +13,21 @@ function Learn(props) {
   });
 
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  
+
   return (
     <>
       <div
         ref={learnRef}
-        className="bg-black min-h-screen w-full mt-42 relative z-30 pb-20"
+        style={{ minHeight: '100dvh' }}
+        className="bg-black overflow-hidden w-full mt-42 relative z-30 pb-20"
       >
-        <div className="flex flex-col md:gap-16 md:flex-row items-center justify-center min-h-screen w-full">
+        <div
+          style={{ minHeight: '100%' }}
+          className="flex flex-col lg:gap-x-16  lg:flex-row pt-32 items-center justify-center "
+        >
           <motion.div
             style={{ opacity: contentOpacity }}
-            className="pl-4 mt-16 sm:static md:w-[700px] mb-32"
+            className="px-8 mt-16 w-[95%] max-w-[700px] mb-32 "
             data-tina-field={tinaField(props, "headingLearnTeam")}
           >
             <TinaMarkdown
@@ -44,52 +48,40 @@ function Learn(props) {
               }}
             />
             <div className="flex gap-x-8 pl-4 md:pl-0">
-          {props.buttons?.map((button, i) => {
-            const key = button.id || button.label || i;
-            if (button.style === 'border') {
+              {props.buttons?.map((button, i) => {
+                const key = button.id || button.label || i;
+                const baseProps = {
+                  "data-tina-field": tinaField(button, "label"),
+                  className:
+                    button.style === "border"
+                      ? "px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
+                      : "bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white",
+                };
                 return (
-                <Link href={button.link} key={key}>
-                <button
-                    
-                    data-tina-field={tinaField(button, 'label')}
-                    className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-                >
-                    
-                    {button.label}
-                </button>
-                </Link>
+                  <Link href={button.link} key={key}>
+                    <button {...baseProps}>{button.label}</button>
+                  </Link>
                 );
-            } else if (button.style === 'button') {
-                return (
-                   <Link href={button.link} key={key}>
-                <button
-                    
-                    data-tina-field={tinaField(button, 'label')}
-                    className="bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white"
-                >
-                 
-                    {button.label}
-                 
-                </button>
-                 </Link>
-                );
-            }
-            return null;
-            })}
-              
+              })}
             </div>
           </motion.div>
 
           <motion.div
             style={{ opacity: contentOpacity }}
-            className="move flex flex-col gap-y-4 lg:mt-[120px]"
+            className="flex flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8"
           >
             {props?.learnTeamImages?.map((image, i) => (
+              <div key={image.id || image.src || i}   style={{
+                  top: image?.top ?? "auto",
+                  left: image?.left ?? "auto",
+                  right: image?.right ?? "auto",
+                  bottom: image?.bottom ?? "auto",
+                  zIndex: image?.zIndex ?? "auto"}} className="aspect-[16/9] w-full md:max-w-[425px] md:relative  overflow-hidden rounded-[20px]">
               <img
-                key={image.id || image.src || i}
+               
                 src={image.src}
                 alt={image.alt || `team image ${i + 1}`}
-                className="object-cover rounded-[12px] lg:relative h-[200px] lg:h-[250px] sm:max-w-none"
+                className=" object-cover"
                 data-tina-field={tinaField(image, "src")}
                 style={{
                   top: image?.top ?? "auto",
@@ -99,10 +91,12 @@ function Learn(props) {
                   zIndex: image?.zIndex ?? "auto",
                 }}
               />
+              </div>
             ))}
           </motion.div>
         </div>
       </div>
+
       <div className="bg-black h-[100px] w-full" />
     </>
   );

@@ -5,16 +5,20 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  
+  overflow-x: hidden;
 }
 
 html,body{
-  overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: visible;
+  
 }
 html,
 body,
 #__next {
-  height: 100%;
+ 
+  
 }
 
 body {
@@ -22,14 +26,18 @@ body {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
+  overscroll-behavior-y: none;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+} 
 .background.Home{
   position: fixed;
   top: 0;
   left: 0;
   z-index: -20;
-  min-height: 100vh;
+  /* min-height: '100dvh'; */
   width: 100%;
   margin: 0;
   padding: 0;
@@ -112,3 +120,17 @@ body {
 }
 
 
+.noContentDes{
+  max-height: 200px;                /* Limit height */
+  display: -webkit-box;             /* Enable flex truncation */
+  -webkit-line-clamp: 7;            /* Approx. number of lines for 100px */
+  -webkit-box-orient: vertical;     /* Vertical layout for box */
+  overflow: hidden;                 /* Hide excess */
+  text-overflow: ellipsis;          /* Ellipsis style */
+  line-height: 20px;                /* Ensure line height matches clamp */
+  word-break: break-word;           /* Break long words */
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

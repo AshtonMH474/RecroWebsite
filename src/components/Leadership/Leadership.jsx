@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { tinaField } from "tinacms/dist/react";
-import LeaderCard from "./Leadership/LeaderCard";
-import Pagination from "./Leadership/Pagination";
+import LeaderCard from "./LeaderCard";
+import Pagination from "./Pagination";
 import GearIcon from "../GearIcon";
-import { animationVariants } from "./Leadership/LeaderAnimations";
+import { animationVariants } from "./LeaderAnimations";
+
 function Leadership(props) {
   // all the cards infos
   const leaders = props.leaders || []
@@ -32,7 +33,7 @@ function Leadership(props) {
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <div ref={leadershipRef} className="bg-black min-h-screen w-full pt-30 pb-24 pb-12 relative overflow-hidden">
+    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="bg-black  w-full pt-30 pb-24 pb-12 relative overflow-hidden">
         <motion.div
         style={{ opacity: contentOpacity }}
         className="w-full"

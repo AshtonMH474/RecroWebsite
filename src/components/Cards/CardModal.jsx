@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { IconRenderer } from "@/components/utils/IconRenderer";
+import IconRenderer from "@/components/utils/IconRenderer";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { IoMdClose } from "react-icons/io";
 
-function ExpertiseModal({ ex, onClose }) {
+function CardModal({ ex, onClose }) {
   useEffect(() => {
     const scrollY = window.scrollY;
 
@@ -106,4 +106,4 @@ function ExpertiseModal({ ex, onClose }) {
   );
 }
 
-export default ExpertiseModal;
+export default CardModal;
