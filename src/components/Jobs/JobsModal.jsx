@@ -2,8 +2,8 @@ import { motion } from "framer-motion"
 import { useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { parseJobDescription, stripHTML, stripInlineStyles, stripInlineStylesBrowser } from "../utils/HtmlRemover";
-import Jobs from "./Jobs";
+import {  stripInlineStylesBrowser } from "../utils/HtmlRemover";
+
 
 
 function JobsModal({onClose,job}){
@@ -34,9 +34,8 @@ function JobsModal({onClose,job}){
      
       let jobApplyUrlId = job.listingUrl.split('/')[4]
       let jobDesHtml = stripInlineStylesBrowser(job.description)
-      console.log(stripInlineStylesBrowser(job.description))
-      let jobDes = parseJobDescription(stripHTML(job.description))
-      console.log(jobDes)
+
+      
     return(
         <div onClick={onClose} className="fixed inset-0 flex justify-center items-center z-[1000]">
             <motion.div initial={{ opacity: 0 }}
@@ -51,7 +50,7 @@ function JobsModal({onClose,job}){
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             exit={{ opacity: 0, scale: 0.8, rotate: 180 }}
             transition={{ duration: 0.6, ease: "easeOut" }} 
-            className="relative z-[1000] border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[80%] h-[80%] sm:w-[60%] sm:h-[70%] md:h-[50%] p-4 overflow-hidden flex ">
+            className="modal-mobile-landscape relative z-[1000] border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[80%] h-[80%] sm:w-[60%] sm:h-[70%] md:h-[70%] p-4 overflow-hidden flex ">
                 <div className="pb-2 px-4">
                     <div className="flex items-start justify-between">
                         <h3 className="text-[24px] font-bold">{job.title}</h3>
@@ -74,7 +73,7 @@ function JobsModal({onClose,job}){
                         </a>
                     </div>
                     <div style={{ maxHeight: "calc(100% - 120px)" }} className=" list-disc list-inside overflow-y-auto pt-4 flex flex-col gap-y-2 text-[#C2C2BC] text-[14px] ">
-                        <div className="list-disc list-inside" dangerouslySetInnerHTML={{__html:jobDesHtml}}/>
+                        <div className="content" dangerouslySetInnerHTML={{__html:jobDesHtml}}/>
                     </div>
                 </div>
             </motion.div>
