@@ -11,6 +11,7 @@ html {
 
 html,body{
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   overflow-x: visible;
   
 }
@@ -121,9 +122,9 @@ body {
 
 
 .noContentDes{
-  max-height: 200px;                /* Limit height */
+  max-height: 180px;                /* Limit height */
   display: -webkit-box;             /* Enable flex truncation */
-  -webkit-line-clamp: 7;            /* Approx. number of lines for 100px */
+  -webkit-line-clamp: 6;            /* Approx. number of lines for 100px */
   -webkit-box-orient: vertical;     /* Vertical layout for box */
   overflow: hidden;                 /* Hide excess */
   text-overflow: ellipsis;          /* Ellipsis style */
@@ -133,4 +134,16 @@ body {
 
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+.content ul{
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .modal-mobile-landscape {
+    height: 90% !important;
+    width: 90% !important;
+  }
 }
