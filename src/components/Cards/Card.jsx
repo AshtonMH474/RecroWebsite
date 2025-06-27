@@ -13,19 +13,23 @@ const Card = ({ ex, onExpand }) => {
         className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 ${ex.content.children.length ? "cursor-pointer" : ""}`}
         onClick={onExpand}
       >
-        <div className="flex items-center mb-4">
-          {ex.icon && (<div
-            data-tina-field={tinaField(ex, "icon")}
-            className="bg-primary rounded-[10px] h-16 w-16 flex items-center justify-center"
-          >
-            <IconRenderer size={"50px"} color={"#FAF3E0"} iconName={ex.icon} />
-          </div>)}
-          {ex.title && (<h3
-            data-tina-field={tinaField(ex, "title")}
-            className="pl-3 text-[24px] font-bold"
-          >
-            {ex.title}
-          </h3>)}
+        <div className="flex items-center mb-3 gap-x-3">
+          {ex.icon && (
+            <div
+              data-tina-field={tinaField(ex, "icon")}
+              className="bg-primary rounded-[10px] h-16 w-16 flex-shrink-0 flex items-center justify-center"
+            >
+              <IconRenderer size="50px" color="#FAF3E0" iconName={ex.icon} />
+            </div>
+          )}
+          {ex.title && (
+            <h3
+              data-tina-field={tinaField(ex, "title")}
+              className="text-[20px] font-bold text-white leading-tight flex-1"
+            >
+              {ex.title}
+            </h3>
+          )}
         </div>
 
        {ex.description && ( <div data-tina-field={tinaField(ex, "description")}>

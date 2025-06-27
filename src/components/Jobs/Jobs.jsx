@@ -1,9 +1,10 @@
 import { useState } from "react";
-import {parseJobDescription, stripHTML} from "../utils/HtmlRemover"
 import Pagination from "../Leadership/Pagination";
 import JobCard from "./JobCard";
 import { tinaField } from "tinacms/dist/react";
 import JobsModal from "./JobsModal";
+import { motion, AnimatePresence } from "framer-motion";
+import { animationVariants } from "../Leadership/LeaderAnimations";
 
 
 function Jobs(props){
@@ -26,9 +27,7 @@ function Jobs(props){
     const [expandedCardIndex, setExpandedCardIndex] = useState(null); 
     const openCard = (index) => setExpandedCardIndex(index);
     const closeCard = () => setExpandedCardIndex(null);
-    // let jobDes = stripHTML(jobs[0].description)
-    // console.log(jobDes)
-    // console.log(parseJobDescription(jobDes))
+   
     return(
         <>
             <div style={{minHeight:'100dvh'}}
@@ -37,20 +36,33 @@ function Jobs(props){
                     {props.jobsHeading && (<h2 data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[36px] text-white">{props.jobsHeading}</h2>)}
                     <div className="rounded-[12px] h-1 w-80 bg-primary mt-2"></div>
                 </div>
-                <div className="flex flex-wrap items-center justify-center mx-auto gap-x-6 gap-y-12 max-w-[1000px]">
-                    {visibleCards.map((job, i) => {
-                        const actualIndex = startIndex + i;
-                        return (
-                            <JobCard 
-                            key={actualIndex} 
-                            job={job} 
-                            props={props} 
-                            onClose={closeCard} 
-                            onExpand={() => openCard(actualIndex)} 
-                            isExpanded={expandedCardIndex === actualIndex} 
+                   <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
+                    <AnimatePresence custom={direction} mode="wait">
+                        <motion.div
+                        key={startIndex} // Triggers re-render on pagination
+                        custom={direction}
+                        variants={animationVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
+                        >
+                        {visibleCards.map((job, i) => {
+                            const actualIndex = startIndex + i;
+                            return (
+                            <JobCard
+                                key={actualIndex}
+                                job={job}
+                                props={props}
+                                onClose={closeCard}
+                                onExpand={() => openCard(actualIndex)}
+                                isExpanded={expandedCardIndex === actualIndex}
                             />
-                        );
-                    })}
+                            );
+                        })}
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
                 <Pagination totalPages={totalPages}
                 currentPage={startIndex / visibleCount}

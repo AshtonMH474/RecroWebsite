@@ -1,19 +1,20 @@
-import Nav from "@/components/Nav";
-import { useTina } from "tinacms/dist/react";
-import Footer from "@/components/Footer";
-import { useExpertise } from "@/context/ExpertiseContext";
-import Leadership from "@/components/Leadership/Leadership";
-import BG from "@/components/BG";
-import Landing from "@/components/Landing";
-import Cards from "@/components/Cards/Cards";
-import Learn from "@/components/Learn";
-import Jobs from "@/components/Jobs/Jobs";
+import BG from '@/components/BG'
+import Cards from '@/components/Cards/Cards'
+import Footer from '@/components/Footer'
+import Jobs from '@/components/Jobs/Jobs'
+import Landing from '@/components/Landing'
+import Leadership from '@/components/Leadership/Leadership'
+import Learn from '@/components/Learn'
+import Nav from '@/components/Nav'
+import { useExpertise } from '@/context/ExpertiseContext'
+import { useTina } from 'tinacms/dist/react'
+
 
 
 
 export async function getStaticProps(){
     const {client} = await import('../../../tina/__generated__/databaseClient')
-    const res = await client.queries.page({relativePath:'about.md'})
+    const res = await client.queries.page({relativePath:'careers.md'})
     const navRes = await client.queries.nav({relativePath:'nav.md'})
     const footerRes = await client.queries.footer({relativePath:"footer.md"})
     const resJobs = await fetch('https://ats.recro.com/api/joblistings')
@@ -29,19 +30,18 @@ export async function getStaticProps(){
   
 }
 
-function About({res,navData,footerData,jobs}){
-   
-    const {expertiseRef} = useExpertise()
-   
 
+function Careers({res,navData,footerData,jobs}){
     const {data} = useTina(res)
     const {data:navContent} = useTina(navData)
     const {data:footerContent} = useTina(footerData)
+    const {expertiseRef} = useExpertise()
 
-    const scrollToExpertise = () => {
+     const scrollToExpertise = () => {
         expertiseRef.current?.scrollToHeading();
     };
-    return (
+
+    return(
         <>
             <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
             <BG/>
@@ -65,12 +65,9 @@ function About({res,navData,footerData,jobs}){
                     return null;
                 }
                 })}
-
-            
-            
-            <Footer res={footerContent.footer}/>
+                <Footer res={footerContent.footer}/>
         </>
     )
 }
 
-export default About
+export default Careers

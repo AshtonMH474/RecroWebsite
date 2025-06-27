@@ -222,9 +222,5 @@ blocks:
         bottom: 50
         zIndex: 10
     _template: learnTeam
-  - jobsHeading: Openings
-    buttonLabel: View Job
-    buttonType: button
-    _template: jobs
 ---
 

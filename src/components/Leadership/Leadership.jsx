@@ -33,20 +33,21 @@ function Leadership(props) {
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="bg-black  w-full pt-30 pb-24 pb-12 relative overflow-hidden">
+    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="bg-black  w-full  pb-24  overflow-hidden">
         <motion.div
         style={{ opacity: contentOpacity }}
-        className="w-full"
+        className=""
         >
-          <h2
-            data-tina-field={tinaField(props, "leadershipHeading")}
-            className="font-bold text-[36px] text-white text-center"
-          >
-            {props.leadershipHeading}
-          </h2>
-          <div className="rounded-[12px] h-1 w-80 bg-primary mx-auto mt-2"></div>
-
-          <div className="relative mt-8 flex justify-center items-center min-h-[600px]">
+          <div className="flex flex-col items-center mt-32 pb-12">
+            <h2
+              data-tina-field={tinaField(props, "leadershipHeading")}
+              className="font-bold text-[36px] text-white text-center"
+            >
+              {props.leadershipHeading}
+            </h2>
+            <div className="rounded-[12px] h-1 w-80 bg-primary mx-auto mt-2"></div>
+          </div>
+          <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
             <AnimatePresence custom={direction} mode="wait">
               <motion.div
                 key={startIndex}
@@ -56,7 +57,7 @@ function Leadership(props) {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="flex flex-wrap justify-center gap-x-6 gap-y-12 max-w-[1000px] mx-auto px-4 absolute w-full"
+                className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
               >
                 {visibleCards.map((leader, i) => (
                   <LeaderCard key={i} leader={leader} />

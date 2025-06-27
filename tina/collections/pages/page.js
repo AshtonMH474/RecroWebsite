@@ -13,6 +13,7 @@ const pages = {
     router: (props) => {
       if (props.document._sys.relativePath === "home.md") return "/";
       if (props.document._sys.relativePath === "about.md") return "/about";
+      if (props.document._sys.relativePath === "careers.md") return "/careers";
     },
   },
   fields: [
