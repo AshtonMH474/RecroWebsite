@@ -60,10 +60,10 @@ export default function Home({res,navData,footerData,jobs}) {
     case "PageBlocksLeadership":{
       return <Leadership key={i} {...block}/>
     }
-    // case "PageBlocksLearnTeam":
-    //   return <Learn key={i} {...block}/>;
-    case "PageBlocksJobs":
-      return <Jobs key={i} jobs={jobs} {...block}/>;
+    case "PageBlocksLearnTeam":
+      return <Learn key={i} {...block}/>;
+    // case "PageBlocksJobs":
+    //   return <Jobs key={i} jobs={jobs} {...block}/>;
     default:
       console.warn("Unknown block type:", block?.__typename);
       return null;
