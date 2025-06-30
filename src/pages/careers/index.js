@@ -3,6 +3,7 @@ import Cards from '@/components/Cards/Cards'
 import Footer from '@/components/Footer'
 import Jobs from '@/components/Jobs/Jobs'
 import Landing from '@/components/Landing'
+import Landing2 from '@/components/Landing2'
 import Leadership from '@/components/Leadership/Leadership'
 import Learn from '@/components/Learn'
 import Nav from '@/components/Nav'
@@ -45,11 +46,13 @@ function Careers({res,navData,footerData,jobs}){
         <>
             <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
             <BG/>
+            
              {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":
                     return <Landing key={i} {...block}/>;
-
+                    case "PageBlocksLanding2":
+                      return <Landing2 key={i} {...block}/>;
                     case "PageBlocksCards":
                     return <Cards key={i} ref={expertiseRef} {...block}/>;
 

@@ -1,6 +1,24 @@
 ---
 title: careers
 blocks:
+  - headingLanding2: >
+      # **Join** the Team
+
+
+      ### Recro is always seeking passionate individuals to join our team. If
+      you're ready to challenge the status quo and make an impact, apply today!
+    buttons:
+      - link: /jobs
+        label: View Open Postions
+        style: border
+    landing2Images:
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/images%201.png
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/6a0fa8af-1b1a-4f25-aa51-3ae2579d4e95[1]%201.png
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/360_F_176912892_A8xCQOtoUeiOzoNgbftc2nnTxi56Pr3P%201.png
+    _template: landing2
   - cards_heading: Our Benefits
     underline_width: 80
     cards:
