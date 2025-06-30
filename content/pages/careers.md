@@ -9,11 +9,11 @@ blocks:
       you're ready to challenge the status quo and make an impact, apply today!
     buttons:
       - link: /jobs
-        label: View Open Postions
+        label: View Open Positions
         style: border
     landing2Images:
       - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/images%201.png
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/untitled-design-2_bw-0-6-1920x1080.jpg
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/6a0fa8af-1b1a-4f25-aa51-3ae2579d4e95[1]%201.png
       - src: >-
@@ -28,6 +28,8 @@ blocks:
           Recro wants you to retire worry-free. We offer 401k matching up to 6%
           that immediately vests in addition to an end of year profit sharing
           401k bonus of 15-18% historically.
+        allContentLink: ''
+        contentIcon: FaArrowRight
         content: ''
       - title: 'PREMIERE MEDICAL, DENTAL, AND VISION'
         icon: FaHeart
