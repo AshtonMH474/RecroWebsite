@@ -67,6 +67,61 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Failed to submit form." });
   }
 }
+// export default async function handler(req, res) {
+//   if (req.method !== "POST") {
+//     return res.status(405).json({ error: "Method not allowed" });
+//   }
 
+//   const { firstName, lastName, email, organization, subject, message, hutk } = req.body;
 
+//   if (!email) {
+//     return res.status(400).json({ error: "Email is required" });
+//   }
+
+//   const contactData = {
+//     properties: {
+//       email,
+//       firstname: firstName,
+//       lastname: lastName,
+//       company: organization,
+//     },
+//   };
+
+//   try {
+//     // Step 1: Create the contact
+//     const hubspotRes = await fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${process.env.HUBSPOT_API}`,
+//       },
+//       body: JSON.stringify(contactData),
+//     });
+
+//     if (!hubspotRes.ok) {
+//       const errorData = await hubspotRes.json();
+//       return res.status(hubspotRes.status).json({ error: errorData.message || "HubSpot API error" });
+//     }
+
+//     // Step 2: Associate the tracking cookie (hutk) with the contact
+//     if (hutk) {
+//       await fetch("https://api.hubapi.com/contacts/v1/contact/utk/associate", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${process.env.HUBSPOT_API}`,
+//         },
+//         body: JSON.stringify({
+//           email,
+//           utk: hutk,
+//         }),
+//       });
+//       console.log('worked')
+//     }
+
+//     return res.status(200).json({ message: "Contact created and tracking cookie associated" });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message || "Internal Server Error" });
+//   }
+// }
 
