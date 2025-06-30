@@ -6,14 +6,19 @@ function ContactUsForm() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-
+      //   const hutk = document.cookie
+      // .split('; ')
+      // .find(row => row.startsWith('hubspotutk='))
+      // ?.split('=')[1];
+      // console.log(hutk)
         const formData ={
             firstName:e.target.firstName.value,
             lastName:e.target.lastName.value,
             email:e.target.email.value,
             organization:e.target.organization.value,
             subject:e.target.subject.value,
-            message:e.target.message.value
+            message:e.target.message.value,
+            // hutk
         }
 
         const res = await fetch("/api/submit-form",{
