@@ -1,38 +1,66 @@
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 
 
 
 function ContactUsForm() {
-
+    const router = useRouter()
+    const [isCareers,setCareers] = useState(false)
+    useEffect(() => {
+      if(router.pathname == '/careers') setCareers(true)
+    },[])
+    
+    
     const handleSubmit = async(e) => {
         e.preventDefault();
-      //   const hutk = document.cookie
-      // .split('; ')
-      // .find(row => row.startsWith('hubspotutk='))
-      // ?.split('=')[1];
-      // console.log(hutk)
-        const formData ={
-            firstName:e.target.firstName.value,
-            lastName:e.target.lastName.value,
-            email:e.target.email.value,
-            organization:e.target.organization.value,
-            subject:e.target.subject.value,
-            message:e.target.message.value,
-            // hutk
+        let formData;
+        if(isCareers){
+                 formData = {
+                    firstName:e.target.firstName.value,
+                    lastName:e.target.lastName.value,
+                    email:e.target.email.value,
+                    phone:e.target.phone.value,
+                    subject:e.target.subject.value,
+                    message:e.target.message.value,
+                }
+                
+        }else{
+
+                formData = {
+                    firstName:e.target.firstName.value,
+                    lastName:e.target.lastName.value,
+                    email:e.target.email.value,
+                    organization:e.target.organization.value,
+                    subject:e.target.subject.value,
+                    message:e.target.message.value,
+                  
+                }
         }
 
-        const res = await fetch("/api/submit-form",{
-            method:"POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-        })
+                const res = await fetch("/api/submit-form",{
+                    method:"POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                })
 
-        if (res.ok) {
-        alert("Submitted successfully!");
-        } else {
-        alert("Failed to submit.");
-        }
+                if (res.ok) {
+                e.target.firstName.value = ""
+                e.target.lastName.value = ""
+                e.target.email.value = ""
+                e.target.subject.value = ""
+                e.target.message.value = ""
 
+                if(e.target.organization){
+                  e.target.organization.value = ""
+                } else e.target.phone.value = ""
+                
+
+                alert("Submitted successfully!");
+                } else {
+                alert("Failed to submit.");
+                }
+      
     }
   
     return (
@@ -59,13 +87,13 @@ function ContactUsForm() {
             <input
               type="email"
               name="email"
-              placeholder="Company Email"
+              placeholder={isCareers ? "Email" : "Company Email"}
               className="w-full sm:w-1/2 p-2 rounded bg-[#2A2A2E] text-white placeholder-white/70"
             />
             <input
               type="text"
-              name="organization"
-              placeholder="Organization"
+              name={isCareers ? "phone":"organization"}
+              placeholder={isCareers ? "Phone Number" : "Organization"}
               className="w-full sm:w-1/2 p-2 rounded bg-[#2A2A2E] text-white placeholder-white/70"
             />
           </div>

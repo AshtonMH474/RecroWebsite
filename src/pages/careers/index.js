@@ -17,7 +17,7 @@ export async function getStaticProps(){
     const {client} = await import('../../../tina/__generated__/databaseClient')
     const res = await client.queries.page({relativePath:'careers.md'})
     const navRes = await client.queries.nav({relativePath:'nav.md'})
-    const footerRes = await client.queries.footer({relativePath:"footer.md"})
+    const footerRes = await client.queries.footer({relativePath:"footerCareers.md"})
     const resJobs = await fetch('https://ats.recro.com/api/joblistings')
     const jobs = await resJobs.json()
     return {
@@ -46,13 +46,12 @@ function Careers({res,navData,footerData,jobs}){
         <>
             <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
             <BG/>
-            
              {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":
                     return <Landing key={i} {...block}/>;
                     case "PageBlocksLanding2":
-                      return <Landing2 key={i} {...block}/>;
+                        return <Landing2 key={i} {...block}/>;
                     case "PageBlocksCards":
                     return <Cards key={i} ref={expertiseRef} {...block}/>;
 

@@ -30,7 +30,7 @@ function JobsModal({onClose,job}){
           window.scrollTo(0, scrollY); // restore to the same spot
         };
       }, []);
-    //   console.log(job.description)
+    
      
       let jobApplyUrlId = job.listingUrl.split('/')[4]
       let jobDesHtml = stripInlineStylesBrowser(job.description)

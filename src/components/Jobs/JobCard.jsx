@@ -17,7 +17,7 @@ function JobCard({props,job,onExpand}){
                         <p className="text-[#C2C2BC] text-[12px] pb-3">
                                 {parseJobDescription(stripHTML(job.description))[1].content}
                         </p>
-                        {props?.buttonType == 'button' && (<button data-tina-field={tinaField(props,'buttonLabel')} className="bg-primary capitalize cursor-pointer px-4 h-[35px] w-auto   rounded-[8px] hover:opacity-80 text-white">{props.buttonLabel}</button>)}
+                        {props?.buttonType == 'button' && (<button data-tina-field={tinaField(props,'buttonLabel')} className="bg-primary capitalize cursor-pointer px-4 h-[35px] w-auto rounded-[8px] hover:opacity-80 text-white">{props.buttonLabel}</button>)}
                         {props?.buttonType == 'border' && (<button data-tina-field={tinaField(props,'buttonLabel')} className="px-4 capitalize h-[35px] w-auto border primary-border rounded-[8px] hover:text-white/80 transition-colors duration-300">{props.buttonLabel}</button>)}
                 </div>
              </div>

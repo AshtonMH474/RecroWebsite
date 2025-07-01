@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../Leadership/Pagination";
 import JobCard from "./JobCard";
 import { tinaField } from "tinacms/dist/react";
@@ -8,6 +8,7 @@ import { animationVariants } from "../Leadership/LeaderAnimations";
 
 
 function Jobs(props){
+    
     let jobs = props.jobs
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(0);
