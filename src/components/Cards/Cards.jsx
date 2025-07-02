@@ -8,6 +8,7 @@ import CardModal from "./CardModal";
 
 
 const Cards = forwardRef(function Cards(props, ref) {
+  
   const expertiseItems = props.cards || [];
   const sectionRef = useRef(null);
   const [sectionHeight, setSectionHeight] = useState(0);
@@ -80,6 +81,7 @@ useEffect(() => {
   return (
     <>
       <section
+        id={props.cards_id}
         ref={sectionRef}
         style={{ height: `${sectionHeight}px` }}
         className="relative "

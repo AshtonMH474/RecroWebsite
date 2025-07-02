@@ -3,7 +3,6 @@ import { LocalAuthProvider } from "tinacms";
 import { CustomAuthProvider } from "@/lib/custom_auth_provider";
 import pages from "./collections/pages/page";
 import nav from "./collections/nav/nav";
-import form from "./collections/form/form";
 import footer from "./collections/footer/footer";
 
 
@@ -43,8 +42,7 @@ export default defineConfig({
     collections: [
       pages,
       nav,
-      footer,
-      form,
+      footer
       
     ],
   },

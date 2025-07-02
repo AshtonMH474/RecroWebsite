@@ -12,6 +12,10 @@ export const cards = {
             type:'string'
         },
         {
+            name:'cards_id',
+            type:'string'
+        },
+        {
             name:'underline_width',
             type:'number'
         },

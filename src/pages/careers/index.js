@@ -6,8 +6,9 @@ import Landing from '@/components/Landing'
 import Landing2 from '@/components/Landing2'
 import Leadership from '@/components/Leadership/Leadership'
 import Learn from '@/components/Learn'
-import Nav from '@/components/Nav'
+import Nav from '@/components/Nav/Nav'
 import { useExpertise } from '@/context/ExpertiseContext'
+import { useEffect } from 'react'
 import { useTina } from 'tinacms/dist/react'
 
 
@@ -42,9 +43,28 @@ function Careers({res,navData,footerData,jobs}){
         expertiseRef.current?.scrollToHeading();
     };
 
+   useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash === "#jobs") {
+      setTimeout(() => {
+        const el = document.getElementById("jobs-section");
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 300); // wait a bit for DOM to be ready
+    }
+  }, []);
+
+  useEffect(() => {
+   
+     if (typeof window !== "undefined" && window.location.hash === `#${data.page.blocks[1].cards_id}`) {
+      setTimeout(() => {
+        const el = document.getElementById(data.page.blocks[1].cards_id);
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 300); // wait a bit for DOM to be ready
+    }
+  },[])
+
     return(
         <>
-            <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
+            <Nav  res={navContent.nav} onExpertiseClick={scrollToExpertise} />
             <BG/>
              {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){

@@ -47,6 +47,7 @@ const nav = {
             component: "select",
           },
         },
+        
       ],
     },
   ],

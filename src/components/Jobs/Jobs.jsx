@@ -31,8 +31,8 @@ function Jobs(props){
    
     return(
         <>
-            <div style={{minHeight:'100dvh'}}
-            className="bg-black overflow-hidden w-full pb-24">
+            <div style={{minHeight:'100dvh'}} id="jobs-section"
+            className="bg-black overflow-hidden w-full pb-24" >
                 <div className="flex flex-col items-center mt-32 pb-12">
                     {props.jobsHeading && (<h2 data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[36px] text-white">{props.jobsHeading}</h2>)}
                     <div className="rounded-[12px] h-1 w-80 bg-primary mt-2"></div>

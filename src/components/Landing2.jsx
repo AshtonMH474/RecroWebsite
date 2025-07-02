@@ -2,7 +2,7 @@ import { tinaField } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 
 function Landing2(props){
-    console.log(props)
+    
     return(
     <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }} className="landing flex flex-col lg:flex-row  items-center justify-center  w-full gap-x-22">
         <div className="pt-30 lg:pt-0 lg:pl-20">

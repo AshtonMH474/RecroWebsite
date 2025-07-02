@@ -1,4 +1,4 @@
-import Nav from "@/components/Nav";
+import Nav from "@/components/Nav/Nav";
 import { useTina } from "tinacms/dist/react";
 import Footer from "@/components/Footer";
 import { useExpertise } from "@/context/ExpertiseContext";

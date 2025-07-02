@@ -1,7 +1,6 @@
 
 import Landing from "../components/Landing";
 import {useTina} from 'tinacms/dist/react'
-import Nav from "../components/Nav";
 import Learn from "@/components/Learn";
 import Footer from "@/components/Footer";
 import { useExpertise } from "@/context/ExpertiseContext";
@@ -9,6 +8,8 @@ import BG from "@/components/BG";
 import Cards from "../components/Cards/Cards";
 import Leadership from "@/components/Leadership/Leadership";
 import Jobs from "@/components/Jobs/Jobs";
+import Nav from "@/components/Nav/Nav";
+
 
 
 
@@ -32,8 +33,7 @@ export async function getStaticProps(){
 
 
 export default function Home({res,navData,footerData,jobs}) {
-
- 
+  
   const {expertiseRef} = useExpertise()
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
@@ -44,10 +44,11 @@ export default function Home({res,navData,footerData,jobs}) {
     expertiseRef.current?.scrollToHeading();
   };
   
+
   return (
   
     <>
-      <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
+      <Nav res={navContent.nav}  onExpertiseClick={scrollToExpertise}/>
       <BG />
      {data.page.blocks?.map((block,i) => {
   switch(block?.__typename){
@@ -63,7 +64,7 @@ export default function Home({res,navData,footerData,jobs}) {
     case "PageBlocksLearnTeam":
       return <Learn key={i} {...block}/>;
     case "PageBlocksJobs":
-      return <Jobs key={i} jobs={jobs} {...block}/>;
+      return <Jobs key={i} ref={jobsRef} jobs={jobs} {...block}/>;
     default:
       console.warn("Unknown block type:", block?.__typename);
       return null;

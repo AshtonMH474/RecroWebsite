@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { tinaField } from "tinacms/dist/react";
 import LeaderCard from "./LeaderCard";
@@ -11,10 +11,11 @@ function Leadership(props) {
   const leaders = props.leaders || []
   const [startIndex, setStartIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isMobile,setMobile] = useState(false)
   // getting the total amount of pages needed based on how many are visbale at once
   const visibleCount = 6;
   const totalPages = Math.ceil(leaders.length / visibleCount);
-
+  
   // go to what page based off index and the direction
   const goToPage = (pageIndex) => {
     const newStartIndex = pageIndex * visibleCount;
@@ -32,11 +33,18 @@ function Leadership(props) {
   });
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
+
+
+  useEffect(() => {
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const isMobile = /android|iphone|ipad|mobile/i.test(userAgent);
+  setMobile(isMobile)
+  }, []);
   return (
-    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="bg-black  w-full  pb-24  overflow-hidden">
+    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className=" bg-black  w-full  pb-24  overflow-hidden">
         <motion.div
         style={{ opacity: contentOpacity }}
-        className=""
+        className="relative"
         >
           <div className="flex flex-col items-center mt-32 pb-12">
             <h2
@@ -60,7 +68,7 @@ function Leadership(props) {
                 className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
               >
                 {visibleCards.map((leader, i) => (
-                  <LeaderCard key={i} leader={leader} />
+                  <LeaderCard key={i} leader={leader} isMobile={isMobile}/>
                 ))}
               </motion.div>
             </AnimatePresence>

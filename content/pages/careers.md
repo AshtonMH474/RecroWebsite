@@ -20,6 +20,7 @@ blocks:
           https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/360_F_176912892_A8xCQOtoUeiOzoNgbftc2nnTxi56Pr3P%201.png
     _template: landing2
   - cards_heading: Our Benefits
+    cards_id: benefits_section
     underline_width: 80
     cards:
       - title: AMAZING 401K

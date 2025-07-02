@@ -4,7 +4,7 @@ import LeaderInfo from "./LeaderInfo";
 import LeaderBio from "./LeaderBio";
 import { useState } from "react";
 
-function LeaderCard({ leader }) {
+function LeaderCard({ leader,isMobile }) {
   // using this to show if bio should be visable or not
   const [isVisable,setVisable] = useState()
   return (
@@ -12,8 +12,10 @@ function LeaderCard({ leader }) {
       data-tina-field={tinaField(leader, "src")}
       role="img"
       aria-label={`${leader.name}, ${leader.title}`}
-      className="cursor-pointer relative group w-[300px] h-[260px] rounded-[8px] overflow-hidden shadow-md transform transition-all duration-300 hover:scale-105"
-      onClick={() => setVisable(!isVisable)}
+      className={`${isMobile ? 'cursor-pointer' : ''} relative group w-[300px] h-[260px] rounded-[8px] overflow-hidden shadow-md transform transition-all duration-300 hover:scale-105`}
+      onClick={() => {
+        if(isMobile)setVisable(!isVisable)
+      }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-300 group-hover:opacity-0"
@@ -23,7 +25,7 @@ function LeaderCard({ leader }) {
       <div className={`absolute inset-0 bg-[#1A1A1E] ${isVisable ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}  transition-opacity duration-300`}/>
 
      {!isVisable && (<LeaderInfo leader={leader} />)} 
-      <LeaderBio leader={leader} isVisable={isVisable}/>
+      <LeaderBio leader={leader} isMobile={isMobile} isVisable={isVisable}/>
     </div>
   );
 }

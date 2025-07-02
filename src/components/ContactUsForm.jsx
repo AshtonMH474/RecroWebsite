@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 function ContactUsForm() {
     const router = useRouter()
     const [isCareers,setCareers] = useState(false)
+     // checks if ur in the careers section 
     useEffect(() => {
       if(router.pathname == '/careers') setCareers(true)
     },[])
@@ -15,6 +16,7 @@ function ContactUsForm() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         let formData;
+        // based on careers certian data is sent through email for either people looking for jobs or companies
         if(isCareers){
                  formData = {
                     firstName:e.target.firstName.value,
