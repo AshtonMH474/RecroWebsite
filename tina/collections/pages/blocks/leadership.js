@@ -8,6 +8,11 @@ export const leadershipBlock = {
             label:"Leadership Heading"
         },
         {
+            name:'leadership_id',
+            type:'string',
+            label:'Leadership Id(Must be the same Id as Link Id if you want scroll affect for Section)'
+        },
+        {
             name:'leaders',
             label:'Leaders',
             type:'object',

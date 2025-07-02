@@ -3,12 +3,12 @@ import Landing from "../components/Landing";
 import {useTina} from 'tinacms/dist/react'
 import Learn from "@/components/Learn";
 import Footer from "@/components/Footer";
-import { useExpertise } from "@/context/ExpertiseContext";
 import BG from "@/components/BG";
 import Cards from "../components/Cards/Cards";
 import Leadership from "@/components/Leadership/Leadership";
 import Jobs from "@/components/Jobs/Jobs";
 import Nav from "@/components/Nav/Nav";
+import useScrollToHash from "@/hooks/useScrollToHash";
 
 
 
@@ -33,22 +33,28 @@ export async function getStaticProps(){
 
 
 export default function Home({res,navData,footerData,jobs}) {
-  
-  const {expertiseRef} = useExpertise()
+
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
   const {data:footerContent} = useTina(footerData)
 
 
-  const scrollToExpertise = () => {
-    expertiseRef.current?.scrollToHeading();
-  };
+ 
+
+  useScrollToHash(data.page.blocks, [
+          'cards_id',
+          'jobs_id',
+          'leadership_id',
+          'learn_id',
+          'landing_id',
+          'landing2_id'
+      ]);
   
 
   return (
   
     <>
-      <Nav res={navContent.nav}  onExpertiseClick={scrollToExpertise}/>
+      <Nav res={navContent.nav}  />
       <BG />
      {data.page.blocks?.map((block,i) => {
   switch(block?.__typename){
@@ -56,7 +62,7 @@ export default function Home({res,navData,footerData,jobs}) {
       return <Landing key={i} {...block}/>;
 
     case "PageBlocksCards":
-      return <Cards key={i} ref={expertiseRef} {...block}/>;
+      return <Cards key={i}  {...block}/>;
 
     case "PageBlocksLeadership":{
       return <Leadership key={i} {...block}/>
@@ -64,7 +70,7 @@ export default function Home({res,navData,footerData,jobs}) {
     case "PageBlocksLearnTeam":
       return <Learn key={i} {...block}/>;
     case "PageBlocksJobs":
-      return <Jobs key={i} ref={jobsRef} jobs={jobs} {...block}/>;
+      return <Jobs key={i}  jobs={jobs} {...block}/>;
     default:
       console.warn("Unknown block type:", block?.__typename);
       return null;

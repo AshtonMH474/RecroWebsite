@@ -28,10 +28,10 @@ function Jobs(props){
     const [expandedCardIndex, setExpandedCardIndex] = useState(null); 
     const openCard = (index) => setExpandedCardIndex(index);
     const closeCard = () => setExpandedCardIndex(null);
-   
+    
     return(
         <>
-            <div style={{minHeight:'100dvh'}} id="jobs-section"
+            <div style={{minHeight:'100dvh'}} id={props.jobs_id}
             className="bg-black overflow-hidden w-full pb-24" >
                 <div className="flex flex-col items-center mt-32 pb-12">
                     {props.jobsHeading && (<h2 data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[36px] text-white">{props.jobsHeading}</h2>)}

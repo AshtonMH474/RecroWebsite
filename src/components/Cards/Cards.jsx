@@ -1,13 +1,13 @@
 
 
-import { forwardRef, useRef, useState, useEffect, useImperativeHandle } from "react";
+import {  useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion, AnimatePresence } from "framer-motion";
 import Card from "./Card";
 import { tinaField } from "tinacms/dist/react";
 import CardModal from "./CardModal";
 
 
-const Cards = forwardRef(function Cards(props, ref) {
+function Cards(props) {
   
   const expertiseItems = props.cards || [];
   const sectionRef = useRef(null);
@@ -20,11 +20,6 @@ const Cards = forwardRef(function Cards(props, ref) {
   const openCard = (index) => setExpandedCardIndex(index);
   const closeCard = () => setExpandedCardIndex(null);
 
-  useImperativeHandle(ref, () => ({
-    scrollToHeading: () => {
-      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    },
-  }));
 
   // Initial layout setup only (no resize listener)
 useEffect(() => {
@@ -135,7 +130,7 @@ useEffect(() => {
       </AnimatePresence>
     </>
   );
-});
+};
 
 export default Cards;
 

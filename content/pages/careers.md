@@ -75,6 +75,7 @@ blocks:
         content: ''
     _template: cards
   - jobsHeading: Openings
+    jobs_id: jobs_section
     buttonLabel: View Job
     buttonType: button
     _template: jobs

@@ -13,7 +13,8 @@ export const cards = {
         },
         {
             name:'cards_id',
-            type:'string'
+            type:'string',
+            label:'Cards Id(Must be the same Id as Link Id if you want scroll affect for Section)'
         },
         {
             name:'underline_width',

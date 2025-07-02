@@ -12,11 +12,6 @@ const nav = {
       type: "image",
     },
     {
-        name:'animation',
-        label:'Animation Link Name',
-        type:'string'
-    },
-    {
       name: "links",
       label: "Links",
       type: "object",
@@ -27,6 +22,17 @@ const nav = {
         }),
       },
       fields: [
+        {
+              type:'string',
+              name:'type',
+              label:'Type of Sublink',
+              options:['link','id']
+        },
+        {
+              name:'id',
+              label:'Id(Link connected to Section must have same Id for scroll affect)',
+              type:'string',
+        },
         {
           type: "string",
           name: "link",
@@ -47,6 +53,35 @@ const nav = {
             component: "select",
           },
         },
+        {
+          type:'object',
+          name:'sublinks',
+          label:'Sublinks',
+          list:true,
+          fields:[
+            {
+              type:'string',
+              name:'type',
+              label:'Type of Sublink',
+              options:['link','id']
+            },
+            {
+              name:'id',
+              label:'Id(Link connected to Section must have same Id for scroll affect)',
+              type:'string',
+            },
+            {
+              name:'link',
+              label:'Link',
+              type:'string'
+            },
+            {
+              type:"string",
+              label:"Label",
+              name:'label'
+            }
+          ]
+        }
         
       ],
     },

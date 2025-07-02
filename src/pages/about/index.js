@@ -1,13 +1,13 @@
 import Nav from "@/components/Nav/Nav";
 import { useTina } from "tinacms/dist/react";
 import Footer from "@/components/Footer";
-import { useExpertise } from "@/context/ExpertiseContext";
 import Leadership from "@/components/Leadership/Leadership";
 import BG from "@/components/BG";
 import Landing from "@/components/Landing";
 import Cards from "@/components/Cards/Cards";
 import Learn from "@/components/Learn";
 import Jobs from "@/components/Jobs/Jobs";
+import useScrollToHash from "@/hooks/useScrollToHash";
 
 
 
@@ -30,20 +30,22 @@ export async function getStaticProps(){
 }
 
 function About({res,navData,footerData,jobs}){
-   
-    const {expertiseRef} = useExpertise()
-   
-
     const {data} = useTina(res)
     const {data:navContent} = useTina(navData)
     const {data:footerContent} = useTina(footerData)
 
-    const scrollToExpertise = () => {
-        expertiseRef.current?.scrollToHeading();
-    };
+    useScrollToHash(data.page.blocks, [
+            'cards_id',
+            'jobs_id',
+            'leadership_id',
+            'learn_id',
+            'landing_id',
+            'landing2_id'
+        ]);
+
     return (
         <>
-            <Nav res={navContent.nav} onExpertiseClick={scrollToExpertise}/>
+            <Nav res={navContent.nav} />
             <BG/>
              {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
@@ -51,7 +53,7 @@ function About({res,navData,footerData,jobs}){
                     return <Landing key={i} {...block}/>;
 
                     case "PageBlocksCards":
-                    return <Cards key={i} ref={expertiseRef} {...block}/>;
+                    return <Cards key={i}  {...block}/>;
 
                     case "PageBlocksLeadership":{
                     return <Leadership key={i} {...block}/>

@@ -4,7 +4,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text"
 function Landing2(props){
     
     return(
-    <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }} className="landing flex flex-col lg:flex-row  items-center justify-center  w-full gap-x-22">
+    <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }} className="landing  flex flex-col lg:flex-row  items-center justify-center  w-full gap-x-22">
         <div className="pt-30 lg:pt-0 lg:pl-20">
             {props.headingLanding2 && (
                 <div className='w-90 md:w-100' data-tina-field={tinaField(props,'headingLanding2')}>
@@ -30,16 +30,24 @@ function Landing2(props){
             </div>
         </div>
         <div className="flex flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8 pr-30 lg:pr-40">
-             {props.landing2Images?.map((image,i) => (
-                <img 
-                style={{zIndex: i + 1, 
-                top: i == 0 ? '100px' : '',
-                left: i === 0 || i === 2 ? '110px' : '',
-                right: i == 1 ? '20px' : '',
-                bottom: i == 2 ? '100px': ''
-                }} 
-                className="relative w-full aspect-[3/2] max-w-[450px] max-h-[300px] object-cover rounded-[12px]" key={i} src={image.src}/>
-             ))}           
+             {props.landing2Images?.map((image, i) => {
+                const style = {
+                    zIndex: i + 1,
+                    ...(i === 0 && { top: '100px' }),
+                    ...((i === 0 || i === 2) && { left: '110px' }),
+                    ...(i === 1 && { right: '20px' }),
+                    ...(i === 2 && { bottom: '100px' }),
+                };
+
+                return (
+                    <img
+                    key={i}
+                    src={image.src}
+                    style={style}
+                    className="relative w-full aspect-[3/2] max-w-[400px] max-h-[250px] object-cover rounded-[12px]"
+                    />
+                );
+                })}         
         </div>
    
     </div>

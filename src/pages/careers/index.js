@@ -7,8 +7,7 @@ import Landing2 from '@/components/Landing2'
 import Leadership from '@/components/Leadership/Leadership'
 import Learn from '@/components/Learn'
 import Nav from '@/components/Nav/Nav'
-import { useExpertise } from '@/context/ExpertiseContext'
-import { useEffect } from 'react'
+import useScrollToHash from '@/hooks/useScrollToHash'
 import { useTina } from 'tinacms/dist/react'
 
 
@@ -37,34 +36,20 @@ function Careers({res,navData,footerData,jobs}){
     const {data} = useTina(res)
     const {data:navContent} = useTina(navData)
     const {data:footerContent} = useTina(footerData)
-    const {expertiseRef} = useExpertise()
 
-     const scrollToExpertise = () => {
-        expertiseRef.current?.scrollToHeading();
-    };
+    useScrollToHash(data.page.blocks, [
+        'cards_id',
+        'jobs_id',
+        'leadership_id',
+        'learn_id',
+        'landing_id',
+        'landing2_id'
+    ]);
 
-   useEffect(() => {
-    if (typeof window !== "undefined" && window.location.hash === "#jobs") {
-      setTimeout(() => {
-        const el = document.getElementById("jobs-section");
-        el?.scrollIntoView({ behavior: "smooth", block: "center" });
-      }, 300); // wait a bit for DOM to be ready
-    }
-  }, []);
-
-  useEffect(() => {
-   
-     if (typeof window !== "undefined" && window.location.hash === `#${data.page.blocks[1].cards_id}`) {
-      setTimeout(() => {
-        const el = document.getElementById(data.page.blocks[1].cards_id);
-        el?.scrollIntoView({ behavior: "smooth", block: "center" });
-      }, 300); // wait a bit for DOM to be ready
-    }
-  },[])
 
     return(
         <>
-            <Nav  res={navContent.nav} onExpertiseClick={scrollToExpertise} />
+            <Nav  res={navContent.nav} />
             <BG/>
              {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
@@ -73,7 +58,7 @@ function Careers({res,navData,footerData,jobs}){
                     case "PageBlocksLanding2":
                         return <Landing2 key={i} {...block}/>;
                     case "PageBlocksCards":
-                    return <Cards key={i} ref={expertiseRef} {...block}/>;
+                    return <Cards key={i}  {...block}/>;
 
                     case "PageBlocksLeadership":{
                     return <Leadership key={i} {...block}/>

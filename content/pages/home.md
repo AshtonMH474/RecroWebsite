@@ -16,6 +16,7 @@ blocks:
         style: border
     _template: landing
   - cards_heading: Our Expertise
+    cards_id: expertise_section
     underline_width: 80
     cards:
       - title: Cloud
