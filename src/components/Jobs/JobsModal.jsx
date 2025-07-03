@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import {  stripInlineStylesBrowser } from "../utils/HtmlRemover";
-
+import { RiShareBoxLine } from "react-icons/ri";
 
 
 function JobsModal({onClose,job}){
@@ -30,8 +30,7 @@ function JobsModal({onClose,job}){
           window.scrollTo(0, scrollY); // restore to the same spot
         };
       }, []);
-    
-     
+         
       let jobApplyUrlId = job.listingUrl.split('/')[4]
       let jobDesHtml = stripInlineStylesBrowser(job.description)
 
@@ -55,21 +54,21 @@ function JobsModal({onClose,job}){
                     <div className="flex items-start justify-between">
                         <h3 className="text-[24px] font-bold">{job.title}</h3>
                         <button onClick={onClose} aria-label="Close Modal">
-                            <IoMdClose className="cursor-pointer text-[24px] text-white hover:text-primary transition" />
+                            <IoMdClose className="relative left-4 cursor-pointer text-[24px] text-white hover:text-primary transition" />
                         </button>
                     </div>
-                    <div className="flex gap-x-4 pb-2">
+                    <div className="flex flex-col sm:flex-row gap-x-4 pb-2 h-auto ">
                         <h4 className="text-[#C2C2BC] text-[18px]">
                             Clearance: {job.clearanceRequired}
                         </h4>
-                        <h4 className="text-[#C2C2BC] text-[18px] flex items-center gap-x-1">
-                            <IoLocationOutline />
+                        <h4 className="text-[#C2C2BC] text-[18px] flex items-center gap-x-1 ">
+                            <IoLocationOutline className="text-[#14B5B5]" />
                             {job.location}
                         </h4>
                     </div>
                     <div className="flex items-center gap-x-2 pb-3">
                         <a href={`https://ats.recro.com/jobapplication/${jobApplyUrlId}`} target="_blank">
-                        <button className="bg-primary capitalize cursor-pointer px-4 h-[35px] w-auto rounded-[8px] hover:opacity-80 text-white">Apply</button>
+                        <button className="bg-primary flex justify-center gap-x-1 items-center capitalize cursor-pointer px-4 h-[35px] w-auto rounded-[8px] hover:opacity-80 text-white">Apply <RiShareBoxLine className="text-[18px]"/></button>
                         </a>
                     </div>
                     <div style={{ maxHeight: "calc(100% - 120px)" }} className=" list-disc list-inside overflow-y-auto pt-4 flex flex-col gap-y-2 text-[#C2C2BC] text-[14px] ">

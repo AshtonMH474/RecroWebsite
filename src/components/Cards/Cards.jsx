@@ -40,24 +40,21 @@ useEffect(() => {
 
 // 2️⃣ When rows change, recalculate section height and flags
 useEffect(() => {
-  const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
-  const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
   const isShort = screenHeight <= 600;
   const isTall = screenHeight >= 1000;
 
   setShort(isShort);
   setTall(isTall);
 
-  const stickyMultiplier = cardsPerRow === 1 ? 1.5 : 1;
+
   const rowHeightPx = 0.8 * screenHeight;
   const headingHeightPx = 0.8 * screenHeight;
 
   const calculatedHeight =
     (rows * rowHeightPx + headingHeightPx) *
-    (isShort ? 2 : 1) *
-    stickyMultiplier;
+    (isShort ? 2 : 1) ;
 
   setSectionHeight(calculatedHeight);
 }, [rows]);

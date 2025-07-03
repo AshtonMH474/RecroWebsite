@@ -31,13 +31,13 @@ function Jobs(props){
     
     return(
         <>
-            <div style={{minHeight:'100dvh'}} id={props.jobs_id}
+            <div id={props.jobs_id} style={{minHeight:'100dvh'}} 
             className="bg-black overflow-hidden w-full pb-24" >
                 <div className="flex flex-col items-center mt-32 pb-12">
-                    {props.jobsHeading && (<h2 data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[36px] text-white">{props.jobsHeading}</h2>)}
-                    <div className="rounded-[12px] h-1 w-80 bg-primary mt-2"></div>
+                    {props.jobsHeading && (<h2  data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[36px] text-white">{props.jobsHeading}</h2>)}
+                    <div  className="rounded-[12px] h-1 w-80 bg-primary mt-2"></div>
                 </div>
-                   <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
+                   <div  className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
                     <AnimatePresence custom={direction} mode="wait">
                         <motion.div
                         key={startIndex} // Triggers re-render on pagination
@@ -48,6 +48,7 @@ function Jobs(props){
                         exit="exit"
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                         className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
+                        
                         >
                         {visibleCards.map((job, i) => {
                             const actualIndex = startIndex + i;
