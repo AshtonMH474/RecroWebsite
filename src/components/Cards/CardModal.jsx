@@ -47,10 +47,10 @@ function CardModal({ ex, onClose }) {
       {/* Spinning Modal Content */}
       <motion.div
         onClick={(e) => e.stopPropagation()} // Prevent backdrop click from closing
-        initial={{ opacity: 0, scale: 0.8, rotate: -180 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        exit={{ opacity: 0, scale: 0.8, rotate: 180 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -30 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className="modal-mobile-landscape relative z-[1000] border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[80%] h-[80%] sm:w-[60%] sm:h-[70%] md:h-[50%] p-4 overflow-hidden"
       >
         {/* Header with Close */}
