@@ -5,6 +5,7 @@ links:
   - linkOptions:
       type: id
       id: expertise_section
+      scrollPosition: center
     label: expertise
     link: /
     style: link
@@ -26,6 +27,7 @@ links:
       - linkOptions:
           type: id
           id: benefits_section
+          scrollPosition: center
         label: benefits
   - linkOptions:
       link: /about

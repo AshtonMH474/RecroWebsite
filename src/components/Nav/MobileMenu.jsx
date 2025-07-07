@@ -48,8 +48,9 @@ export default function MobileMenu({
       if (window.location.pathname !== link.link) {
         window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions.id}`;
       } else {
+        
         const el = document.getElementById(link.linkOptions.id);
-        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions.scrollPosition || "start" });
       }
     } else {
       window.location.href = link.link;
@@ -65,8 +66,9 @@ export default function MobileMenu({
       if (window.location.pathname !== link.link) {
         window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions.id}`;
       } else {
+        console.log(sublink)
         const el = document.getElementById(sublink.linkOptions.id);
-        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        el?.scrollIntoView({ behavior: "smooth", block: sublink.linkOptions.scrollPosition || "start" });
       }
     } else if (sublink.link) {
       window.location.href = sublink.link;

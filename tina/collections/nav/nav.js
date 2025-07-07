@@ -47,6 +47,12 @@ const nav = {
                 label: "Section ID (ID must be the same as cards Id to naviagte to section with Scroll affect when clicked)",
                 type: "string",
               },
+              {
+              name: 'scrollPosition',
+              label: 'Scroll Position',
+              type: 'string',
+              options: ['start', 'center', 'end']
+              }
             ],
         },
         {
@@ -99,6 +105,12 @@ const nav = {
                 label: "Section ID (ID must be the same as cards Id to naviagte to section with Scroll affect when clicked)",
                 type: "string",
               },
+              {
+              name: 'scrollPosition',
+              label: 'Scroll Position',
+              type: 'string',
+              options: ['start', 'center', 'end']
+              }
             ],
             },
             {
