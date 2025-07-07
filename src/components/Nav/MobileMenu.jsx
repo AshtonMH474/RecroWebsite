@@ -7,7 +7,7 @@ function PlusMinusToggle({ isOpen }) {
   return (
     <span className="relative inline-block w-5 h-5 text-white">
       <span
-        className={`absolute inset-0 flex justify-center mr-8 items-center transition-opacity duration-300 ${
+        className={`absolute inset-0 flex justify-center items-center transition-opacity duration-300 ${
           isOpen ? "opacity-0" : "opacity-100"
         }`}
         aria-hidden={isOpen}
@@ -15,7 +15,7 @@ function PlusMinusToggle({ isOpen }) {
         +
       </span>
       <span
-        className={`absolute inset-0 flex justify-center mr-8 items-center transition-opacity duration-300 ${
+        className={`absolute inset-0 flex justify-center items-center transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
         aria-hidden={!isOpen}
@@ -93,7 +93,7 @@ export default function MobileMenu({
                 toggleMenu();
                 handleTopLinkClick(link);
               }}
-              className="bg-primary ml-8 text-white px-8 py-2 rounded hover:opacity-80 capitalize w-auto text-left"
+              className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize w-auto text-left"
               data-tina-field={tinaField(link, "label")}
             >
               {link.label}
@@ -106,7 +106,7 @@ export default function MobileMenu({
             <div className="flex justify-between items-center w-full">
               <button
                 onClick={() => handleTopLinkClick(link)}
-                className="capitalize pl-8 py-2 text-white text-left"
+                className="capitalize py-2 text-white text-left"
                 data-tina-field={tinaField(link, "label")}
               >
                 {link.label}
@@ -117,7 +117,7 @@ export default function MobileMenu({
                   onClick={() => toggleDropdown(i)}
                   aria-expanded={openDropdownIndex === i}
                   aria-controls={`submenu-${i}`}
-                  className="text-white capitalize px-2 py-1 flex justify-center items-center"
+                  className="text-white px-2 py-1 flex justify-center items-center"
                 >
                   <PlusMinusToggle isOpen={openDropdownIndex === i} />
                 </button>
