@@ -1,11 +1,12 @@
+import Link from "next/link";
 import { tinaField } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 
 function Landing2(props){
     
     return(
-    <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }} className="landing  flex flex-col lg:flex-row  items-center justify-center  w-full gap-x-22 ">
-        <div className="pt-30 lg:pt-0  lg:pl-20">
+    <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }} className="landing  lg:-mt-20 flex flex-col lg:flex-row  items-center justify-center  w-full gap-x-22 ">
+        <div className="lg:pl-20">
             {props.headingLanding2 && (
                 <div className='w-90 md:w-100' data-tina-field={tinaField(props,'headingLanding2')}>
                     <TinaMarkdown content={props.headingLanding2} components={{
@@ -18,18 +19,22 @@ function Landing2(props){
             <div className="flex flex-wrap justify-center lg:justify-start">
             {props.buttons?.map((button,i) =>
                             button.style === 'border' ? (
-                                <button key={i} data-tina-field={tinaField(props.buttons[i], 'label')} className={`px-8 capitalize py-2  border primary-border rounded hover:text-white/80 transition-colors duration-300`}>
-                                {button.label}
-                                </button>
+                                <Link href={button.link}>
+                                    <button key={i} data-tina-field={tinaField(props.buttons[i], 'label')} className={`px-8 capitalize py-2  border primary-border rounded hover:text-white/80 transition-colors duration-300`}>
+                                    {button.label}
+                                    </button>
+                                </Link>
                             ) : button.style === 'button' ? (
-                                <button key={i} data-tina-field={tinaField(props.buttons[i], 'label')} className={`bg-primary capitalize cursor-pointer px-8 py-2 w-auto   rounded hover:opacity-80 text-white`}>
-                                {button.label}
-                                </button>
+                                <Link href={button.link}>
+                                    <button key={i} data-tina-field={tinaField(props.buttons[i], 'label')} className={`bg-primary capitalize cursor-pointer px-8 py-2 w-auto   rounded hover:opacity-80 text-white`}>
+                                    {button.label}
+                                    </button>
+                                </Link>
                             ) : null
                         )}
             </div>
         </div>
-        <div className="flex flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8 pr-30 lg:pr-40">
+        <div className="hidden lg:flex flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8 pr-30 lg:pr-40">
              {props.landing2Images?.map((image, i) => {
                 const style = {
                     zIndex: i + 1,
