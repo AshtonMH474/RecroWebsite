@@ -1,3 +1,4 @@
+import SubLinkSelectorField from "../../components/LinkSelectorField";
 
 
 const nav = {
@@ -22,21 +23,31 @@ const nav = {
         }),
       },
       fields: [
-        {
-              type:'string',
-              name:'type',
-              label:'Type of Sublink',
-              options:['link','id']
-        },
-        {
-              name:'id',
-              label:'Id(Link connected to Section must have same Id for scroll affect)',
-              type:'string',
-        },
-        {
-          type: "string",
-          name: "link",
-          label: "Link URL",
+          {
+            name: "linkOptions",
+            label: "Link Options",
+            type: "object",
+            ui: {
+              component: SubLinkSelectorField,
+            },
+            fields: [
+              {
+                name: "type",
+                label: "Type",
+                type: "string",
+                options: ["link", "id"],
+              },
+              {
+                name: "link",
+                label: "Link URL",
+                type: "string",
+              },
+              {
+                name: "id",
+                label: "Section ID (ID must be the same as cards Id to naviagte to section with Scroll affect when clicked)",
+                type: "string",
+              },
+            ],
         },
         {
           type: "string",
@@ -44,6 +55,11 @@ const nav = {
           label: "Link Label",
           
         },    
+        {
+        name: "link",
+        label: "Link URL",
+        type: "string",
+        },
         {
           type: "string",
           name: "style",
@@ -60,20 +76,30 @@ const nav = {
           list:true,
           fields:[
             {
-              type:'string',
-              name:'type',
-              label:'Type of Sublink',
-              options:['link','id']
+              name: "linkOptions",
+            label: "Link Options",
+            type: "object",
+            ui: {
+              component: SubLinkSelectorField,
             },
-            {
-              name:'id',
-              label:'Id(Link connected to Section must have same Id for scroll affect)',
-              type:'string',
-            },
-            {
-              name:'link',
-              label:'Link',
-              type:'string'
+            fields: [
+              {
+                name: "type",
+                label: "Type",
+                type: "string",
+                options: ["link", "id"],
+              },
+              {
+                name: "link",
+                label: "Link URL",
+                type: "string",
+              },
+              {
+                name: "id",
+                label: "Section ID (ID must be the same as cards Id to naviagte to section with Scroll affect when clicked)",
+                type: "string",
+              },
+            ],
             },
             {
               type:"string",

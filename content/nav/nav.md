@@ -2,27 +2,41 @@
 animation: expertise
 logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.png'
 links:
-  - type: id
-    id: expertise_section
-    link: /
+  - linkOptions:
+      type: id
+      id: expertise_section
     label: expertise
+    link: /
     style: link
-  - link: /solutions
+  - linkOptions:
+      link: /solutions
     label: solutions
+    link: /solutions
     style: link
-  - link: /careers
-    label: careers
+  - linkOptions:
+      link: /careers
+    label: Careers
+    link: /careers
     style: link
     sublinks:
-      - id: jobs_section
-        label: Jobs
-      - id: benefits_section
-        label: Benefits
-  - link: /about
-    label: about
+      - linkOptions:
+          type: id
+          id: jobs_section
+        label: jobs
+      - linkOptions:
+          type: id
+          id: benefits_section
+        label: benefits
+  - linkOptions:
+      link: /about
+    label: About
+    link: /about
     style: link
-  - link: /login
+  - linkOptions:
+      type: link
+      link: /login
     label: login
+    link: /login
     style: button
 ---
 

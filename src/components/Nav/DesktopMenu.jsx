@@ -25,7 +25,6 @@ export default function DesktopMenu({ links }) {
       {links?.map((link, i) => {
         if (link.style === 'link') {
           const hasSublinks = link.sublinks?.length > 0;
-
           return (
             <div
               key={i}
@@ -33,20 +32,20 @@ export default function DesktopMenu({ links }) {
               onMouseEnter={() => hasSublinks && handleMouseEnter(i)}
               onMouseLeave={() => hasSublinks && handleMouseLeave()}
             >
-             {link.link && !link.id && ( <Link
-                href={link.link}
+             {link.linkOptions.link !== null && ( <Link
+                href={link.linkOptions.link}
                 className="capitalize py-2 cursor-pointer text-white"
                 data-tina-field={tinaField(link, 'label')}
               >
                 {link.label}
               </Link>)}
-              {link.id && link.link && (
+              {link.linkOptions.type == 'id' && link.linkOptions.id && (
                 <div onClick={() => {
                 if (typeof window !== "undefined") {
                     if (window.location.pathname !== link.link) {
-                            window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.id}`;
+                            window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions.id}`;
                     } else {
-                            const el = document.getElementById(link.id);
+                            const el = document.getElementById(link.linkOptions.id);
                             el?.scrollIntoView({ behavior: "smooth", block: "center" });
                     }
                 }
@@ -65,20 +64,20 @@ export default function DesktopMenu({ links }) {
                   onMouseLeave={handleMouseLeave}          // start close timer when leaving submenu
                 >
                   {link.sublinks.map((sublink, j) =>
-                    sublink.id ? (
+                    sublink.linkOptions.type == 'id' && sublink.linkOptions.id ? (
                       <button
                         key={j}
                         onClick={() => {
                           if (typeof window !== "undefined") {
                             if (window.location.pathname !== link.link) {
-                              window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.id}`;
+                              window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions.id}`;
                             } else {
-                              const el = document.getElementById(sublink.id);
+                              const el = document.getElementById(sublink.linkOptions.id);
                               el?.scrollIntoView({ behavior: "smooth", block: "center" });
                             }
                           }
                         }}
-                        className="w-full  text-left px-4 py-2 text-sm text-white cursor-pointer"
+                        className="w-full capitalize text-left px-4 py-2 text-sm text-white cursor-pointer"
                         data-tina-field={tinaField(sublink,'label')}
                       >
                         <span className="relative inline-block">
@@ -90,8 +89,8 @@ export default function DesktopMenu({ links }) {
                     ) : (
                       <Link
                         key={j}
-                        href={sublink.link || "#"}
-                        className="w-full text-left px-4 py-2 text-sm text-white cursor-pointer"
+                        href={sublink.linkOptions.link || "#"}
+                        className="w-full capitalize text-left px-4 py-2 text-sm text-white cursor-pointer"
                         data-tina-field={tinaField(sublink,'label')}
                       >
                         <span className="relative inline-block">
