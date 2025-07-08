@@ -34,12 +34,6 @@ links:
     label: About
     link: /about
     style: link
-    sublinks:
-      - linkOptions:
-          type: id
-          id: ''
-          scrollPosition: center
-        label: Leadership
   - linkOptions:
       type: link
       link: /login
