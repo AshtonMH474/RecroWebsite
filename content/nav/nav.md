@@ -37,7 +37,7 @@ links:
     sublinks:
       - linkOptions:
           type: id
-          id: leadership
+          id: ''
           scrollPosition: center
         label: Leadership
   - linkOptions:
