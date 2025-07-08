@@ -1,5 +1,4 @@
-
-
+import SubLinkSelectorField from "../../components/LinkSelectorField";
 const nav = {
   name: "nav",
   label: "Navigation",
@@ -12,11 +11,6 @@ const nav = {
       type: "image",
     },
     {
-        name:'animation',
-        label:'Animation Link Name',
-        type:'string'
-    },
-    {
       name: "links",
       label: "Links",
       type: "object",
@@ -27,10 +21,37 @@ const nav = {
         }),
       },
       fields: [
-        {
-          type: "string",
-          name: "link",
-          label: "Link URL",
+          {
+            name: "linkOptions",
+            label: "Link Options",
+            type: "object",
+            ui: {
+              component: SubLinkSelectorField,
+            },
+            fields: [
+              {
+                name: "type",
+                label: "Type",
+                type: "string",
+                options: ["link", "id"],
+              },
+              {
+                name: "link",
+                label: "Link URL",
+                type: "string",
+              },
+              {
+                name: "id",
+                label: "Section ID (ID must be the same as cards Id to naviagte to section with Scroll affect when clicked)",
+                type: "string",
+              },
+              {
+              name: 'scrollPosition',
+              label: 'Scroll Position',
+              type: 'string',
+              options: ['start', 'center', 'end']
+              }
+            ],
         },
         {
           type: "string",
@@ -38,6 +59,11 @@ const nav = {
           label: "Link Label",
           
         },    
+        {
+        name: "link",
+        label: "Link URL",
+        type: "string",
+        },
         {
           type: "string",
           name: "style",
@@ -47,6 +73,52 @@ const nav = {
             component: "select",
           },
         },
+        {
+          type:'object',
+          name:'sublinks',
+          label:'Sublinks',
+          list:true,
+          fields:[
+            {
+              name: "linkOptions",
+            label: "Link Options",
+            type: "object",
+            ui: {
+              component: SubLinkSelectorField,
+            },
+            fields: [
+              {
+                name: "type",
+                label: "Type",
+                type: "string",
+                options: ["link", "id"],
+              },
+              {
+                name: "link",
+                label: "Link URL",
+                type: "string",
+              },
+              {
+                name: "id",
+                label: "Section ID (ID must be the same as cards Id to naviagte to section with Scroll affect when clicked)",
+                type: "string",
+              },
+              {
+              name: 'scrollPosition',
+              label: 'Scroll Position',
+              type: 'string',
+              options: ['start', 'center', 'end']
+              }
+            ],
+            },
+            {
+              type:"string",
+              label:"Label",
+              name:'label'
+            }
+          ]
+        }
+        
       ],
     },
   ],

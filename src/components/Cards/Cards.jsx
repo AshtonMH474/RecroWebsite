@@ -1,13 +1,14 @@
 
 
-import { forwardRef, useRef, useState, useEffect, useImperativeHandle } from "react";
+import {  useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion, AnimatePresence } from "framer-motion";
 import Card from "./Card";
 import { tinaField } from "tinacms/dist/react";
 import CardModal from "./CardModal";
 
 
-const Cards = forwardRef(function Cards(props, ref) {
+function Cards(props) {
+  
   const expertiseItems = props.cards || [];
   const sectionRef = useRef(null);
   const [sectionHeight, setSectionHeight] = useState(0);
@@ -19,11 +20,6 @@ const Cards = forwardRef(function Cards(props, ref) {
   const openCard = (index) => setExpandedCardIndex(index);
   const closeCard = () => setExpandedCardIndex(null);
 
-  useImperativeHandle(ref, () => ({
-    scrollToHeading: () => {
-      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    },
-  }));
 
   // Initial layout setup only (no resize listener)
 useEffect(() => {
@@ -44,24 +40,21 @@ useEffect(() => {
 
 // 2️⃣ When rows change, recalculate section height and flags
 useEffect(() => {
-  const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
-  const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
   const isShort = screenHeight <= 600;
   const isTall = screenHeight >= 1000;
 
   setShort(isShort);
   setTall(isTall);
 
-  const stickyMultiplier = cardsPerRow === 1 ? 1.5 : 1;
+
   const rowHeightPx = 0.8 * screenHeight;
   const headingHeightPx = 0.8 * screenHeight;
 
   const calculatedHeight =
     (rows * rowHeightPx + headingHeightPx) *
-    (isShort ? 2 : 1) *
-    stickyMultiplier;
+    (isShort ? 2 : 1) ;
 
   setSectionHeight(calculatedHeight);
 }, [rows]);
@@ -76,10 +69,11 @@ useEffect(() => {
   const headingOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], { clamp: true });
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
- 
+
   return (
     <>
       <section
+        id={props.cards_id}
         ref={sectionRef}
         style={{ height: `${sectionHeight}px` }}
         className="relative "
@@ -133,9 +127,10 @@ useEffect(() => {
       </AnimatePresence>
     </>
   );
-});
+};
 
 export default Cards;
+
 
 
 

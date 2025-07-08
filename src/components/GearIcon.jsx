@@ -2,11 +2,12 @@ import * as React from "react"
 import { motion } from "framer-motion"
 
 
-const GearIcon = (props) => (
+const GearIcon = ({ stroke, strokeWidth = "0.3", ...props }) => (
   <motion.svg
    xmlns="http://www.w3.org/2000/svg"
     width={200}
     height={200}
+    {...(stroke ? { stroke, strokeWidth } : {})}
     viewBox="0 0 16 16"
     {...props}
   >

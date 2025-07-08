@@ -7,6 +7,11 @@ export const learnAboutTeamBlock = {
             type:'rich-text'
         },
         {
+            name:'learn_id',
+            type:'string',
+            label:'Learn Id(Must be the same Id as Link Id if you want scroll affect for Section)'
+        },
+        {
             name: "buttons",
       label: "Buttons",
       type: "object",

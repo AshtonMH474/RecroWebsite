@@ -8,6 +8,11 @@ export const jobsBlock = {
             label:"Jobs Heading"
         },
         {
+            name:'jobs_id',
+            type:'string',
+            label:'Jobs Id(Must be the same Id as Link Id if you want scroll affect for Section)'
+        },
+        {
             name:"buttonLabel",
             label:"Button Label",
             type:"string"
