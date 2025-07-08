@@ -5,6 +5,7 @@ import { tinaField } from "tinacms/dist/react";
 import JobsModal from "./JobsModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { animationVariants } from "../Leadership/LeaderAnimations";
+import DivGears from "../DivGears";
 
 
 function Jobs(props){
@@ -14,11 +15,17 @@ function Jobs(props){
     const [direction, setDirection] = useState(0);
     const visibleCount = 6;
     const totalPages = Math.ceil(jobs.length / visibleCount);
+    const [gearRotation, setGearRotation] = useState(0);
+
 
     const goToPage = (pageIndex) => {
-    const newStartIndex = pageIndex * visibleCount;
-    setDirection(pageIndex > startIndex / visibleCount ? 1 : -1);
-    setStartIndex(newStartIndex);
+        const newStartIndex = pageIndex * visibleCount;
+        const goingForward = pageIndex > startIndex / visibleCount;
+        const rotationAmount = goingForward ? 90 : -90;
+
+        setDirection(goingForward ? 1 : -1);
+        setStartIndex(newStartIndex);
+        setGearRotation((prev) => prev + rotationAmount);
     };
 
     const visibleCards = jobs.slice(startIndex, startIndex + visibleCount);
@@ -32,7 +39,8 @@ function Jobs(props){
     return(
         <>
             <div id={props.jobs_id} style={{minHeight:'100dvh'}} 
-            className="bg-black overflow-hidden w-full pb-24" >
+            className="relative bg-black overflow-hidden w-full pb-24" >
+                <DivGears gearRotation={gearRotation}/>
                 <div className="flex flex-col items-center mt-32 pb-12">
                     {props.jobsHeading && (<h2  data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[36px] text-white">{props.jobsHeading}</h2>)}
                     <div  className="rounded-[12px] h-1 w-80 bg-primary mt-2"></div>

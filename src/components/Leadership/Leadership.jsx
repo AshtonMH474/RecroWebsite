@@ -3,8 +3,8 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { tinaField } from "tinacms/dist/react";
 import LeaderCard from "./LeaderCard";
 import Pagination from "./Pagination";
-import GearIcon from "../GearIcon";
 import { animationVariants } from "./LeaderAnimations";
+import DivGears from "../DivGears";
 
 function Leadership(props) {
   // all the cards infos
@@ -12,16 +12,23 @@ function Leadership(props) {
   const [startIndex, setStartIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isMobile,setMobile] = useState(false)
+  const [gearRotation, setGearRotation] = useState(0);
+
   // getting the total amount of pages needed based on how many are visbale at once
   const visibleCount = 6;
   const totalPages = Math.ceil(leaders.length / visibleCount);
   
   // go to what page based off index and the direction
+ 
   const goToPage = (pageIndex) => {
-    const newStartIndex = pageIndex * visibleCount;
-    setDirection(pageIndex > startIndex / visibleCount ? 1 : -1);
-    setStartIndex(newStartIndex);
-  };
+  const newStartIndex = pageIndex * visibleCount;
+  const goingForward = pageIndex > startIndex / visibleCount;
+  const rotationAmount = goingForward ? 90 : -90;
+
+  setDirection(goingForward ? 1 : -1);
+  setStartIndex(newStartIndex);
+  setGearRotation((prev) => prev + rotationAmount);
+};
   // these are the cards that are showing
   const visibleCards = leaders.slice(startIndex, startIndex + visibleCount);
 
@@ -41,7 +48,9 @@ function Leadership(props) {
   setMobile(isMobile)
   }, []);
   return (
-    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className=" bg-black  w-full  pb-24  overflow-hidden">
+    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="relative  bg-black  w-full  pb-24  overflow-hidden">
+        <DivGears  gearRotation={gearRotation}/>
+
         <motion.div
         style={{ opacity: contentOpacity }}
         className="relative"

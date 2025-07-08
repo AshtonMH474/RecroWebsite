@@ -1,6 +1,4 @@
 import SubLinkSelectorField from "../../components/LinkSelectorField";
-
-
 const nav = {
   name: "nav",
   label: "Navigation",
