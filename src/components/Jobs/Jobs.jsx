@@ -40,11 +40,13 @@ function Jobs(props){
         <>
             <div id={props.jobs_id} style={{minHeight:'100dvh'}} 
             className="relative bg-black overflow-hidden w-full pb-24" >
-                <DivGears gearRotation={gearRotation}/>
+                
                 <div className="flex flex-col items-center mt-32 pb-12">
                     {props.jobsHeading && (<h2  data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[36px] text-white">{props.jobsHeading}</h2>)}
                     <div  className="rounded-[12px] h-1 w-80 bg-primary mt-2"></div>
                 </div>
+                <div className="w-full relative">
+                    <DivGears gearRotation={gearRotation}/>
                    <div  className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
                     <AnimatePresence custom={direction} mode="wait">
                         <motion.div
@@ -73,6 +75,7 @@ function Jobs(props){
                         })}
                         </motion.div>
                     </AnimatePresence>
+                </div>
                 </div>
                 <Pagination totalPages={totalPages}
                 currentPage={startIndex / visibleCount}

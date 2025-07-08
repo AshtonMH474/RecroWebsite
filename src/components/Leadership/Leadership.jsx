@@ -48,8 +48,8 @@ function Leadership(props) {
   setMobile(isMobile)
   }, []);
   return (
-    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="relative  bg-black  w-full  pb-24  overflow-hidden">
-        <DivGears  gearRotation={gearRotation}/>
+    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="relative  bg-black  w-full pb-24 overflow-hidden">
+        
 
         <motion.div
         style={{ opacity: contentOpacity }}
@@ -64,23 +64,26 @@ function Leadership(props) {
             </h2>
             <div className="rounded-[12px] h-1 w-80 bg-primary mx-auto mt-2"></div>
           </div>
-          <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
-            <AnimatePresence custom={direction} mode="wait">
-              <motion.div
-                key={startIndex}
-                custom={direction}
-                variants={animationVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
-              >
-                {visibleCards.map((leader, i) => (
-                  <LeaderCard key={i} leader={leader} isMobile={isMobile}/>
-                ))}
-              </motion.div>
-            </AnimatePresence>
+          <div className="w-full">
+            <DivGears  gearRotation={gearRotation}/>
+                <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
+                  <AnimatePresence custom={direction} mode="wait">
+                    <motion.div
+                      key={startIndex}
+                      custom={direction}
+                      variants={animationVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
+                    >
+                      {visibleCards.map((leader, i) => (
+                        <LeaderCard key={i} leader={leader} isMobile={isMobile}/>
+                      ))}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
           </div>
 
 

@@ -3,7 +3,7 @@ import GearIcon from "./GearIcon"
 
 export default function DivGears({gearRotation = 0}){
     return (
-        <div className="hidden xl:flex justify-between items-center w-full absolute top-50 left-0 bottom-0 right-0 px-6 z-0 pointer-events-none overflow-hidden">
+        <div className=" hidden xl:flex justify-between items-center w-full absolute top-50 left-0 bottom-0 right-0 px-6 z-0 pointer-events-none ">
             <div className="flex flex-col">
                         <div className="relative right-[60px] w-30 h-30">
                                 <motion.div
