@@ -17,6 +17,7 @@ function Learn(props) {
   return (
     <>
       <div
+        id={props.learn_id}
         ref={learnRef}
         style={{ minHeight: '100dvh' }}
         className="bg-black overflow-hidden w-full mt-42 relative z-30 pb-20"

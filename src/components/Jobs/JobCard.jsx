@@ -9,7 +9,7 @@ function JobCard({props,job,onExpand}){
                 <div className="pb-2">
                         <h3 className="text-[24px] font-bold">{job.title}</h3>
                         <h4 className="text-[#C2C2BC] text-[18px] flex items-center gap-x-1">
-                            <IoLocationOutline />
+                            <IoLocationOutline className="text-[#14B5B5]" />
                             {job.location}
                         </h4>
                 </div>

@@ -48,7 +48,7 @@ function Leadership(props) {
   setMobile(isMobile)
   }, []);
   return (
-    <div ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="relative  bg-black  w-full pb-24 overflow-hidden">
+    <div id={props.leadership_id} ref={leadershipRef}  style={{ minHeight: '100dvh' }} className="relative  bg-black  w-full pb-24 overflow-hidden">
         
 
         <motion.div

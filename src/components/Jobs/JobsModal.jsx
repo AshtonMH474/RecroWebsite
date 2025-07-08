@@ -49,10 +49,10 @@ function JobsModal({onClose,job}){
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="modal-mobile-landscape relative z-[1000] border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[80%] h-[80%] sm:w-[60%] sm:h-[70%] md:h-[70%] p-4 overflow-hidden flex ">
+            className="modal-mobile-landscape relative z-[1000] border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[85%] h-[80%] sm:w-[60%] sm:h-[70%] md:h-[70%] p-4 overflow-hidden flex ">
                 <div className="pb-2 px-4">
                     <div className="flex items-start justify-between">
-                        <h3 className="text-[24px] font-bold">{job.title}</h3>
+                        <h3 className="text-[24px] font-bold ">{job.title}</h3>
                         <button onClick={onClose} aria-label="Close Modal">
                             <IoMdClose className="relative left-4 cursor-pointer text-[24px] text-white hover:text-primary transition" />
                         </button>
