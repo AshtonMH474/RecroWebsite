@@ -52,10 +52,10 @@ import "@/styles/gears.css";
 import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
-  useEffect(() => {
-    const initialVh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${initialVh}px`);
-  }, []); // Run only once on mount
+useEffect(() => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}, []);
 
   return (
     <>
