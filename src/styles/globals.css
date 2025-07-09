@@ -13,6 +13,8 @@ html,body{
   -webkit-overflow-scrolling: touch;
   /* scroll-behavior: smooth; */
   overflow-x: visible;
+  overscroll-behavior-y: contain; /* prevents bounce on top */
+  height: 100%;
   
 }
 html,
