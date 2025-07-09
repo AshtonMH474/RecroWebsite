@@ -3,7 +3,7 @@ import { tinaField } from 'tinacms/dist/react'
 
 function Landing(props){
     return(
-    <div style={{ minHeight: '100dvh', height:'calc(var(--vh, 1vh) * 100)' }} className="landing flex flex-col items-center justify-center  w-full">
+    <div style={{ minHeight: '100%' }} className="landing flex flex-col items-center justify-center  w-full">
         {props.heading && (<div className='w-90 md:w-150' data-tina-field={tinaField(props,'heading')}>
             <TinaMarkdown content={props.heading} components={{
                 h1:props => <h1 className="text-[32px] md:text-[40px] lg:text-[60px] font-bold text-center mb-4" {...props}/>,
