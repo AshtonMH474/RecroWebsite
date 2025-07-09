@@ -53,13 +53,35 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
 
-  useEffect(() => {
-  requestAnimationFrame(() => {
+useEffect(() => {
+  const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+
+  // Initial load
+  requestAnimationFrame(() => {
+    setVh();
     document.body.classList.remove('not-ready');
   });
+
+  // Optional: Refresh fix for pull-to-refresh
+  let timeout= null;
+  const handleScroll = () => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      setVh();
+    }, 500); // Delay until scroll/pull settles
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    if (timeout) clearTimeout(timeout);
+  };
 }, []);
+
 
   return (
     <>
