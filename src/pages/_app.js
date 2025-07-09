@@ -8,9 +8,22 @@ export default function App({ Component, pageProps }) {
      const [lockedHeight, setLockedHeight] = useState(null);
 
   useEffect(() => {
-    // Lock the height to initial load height
-    const height = window.innerHeight;
-    setLockedHeight(height);
+    const lockHeight = () => {
+      const height = window.innerHeight;
+      setLockedHeight(height);
+    };
+
+    lockHeight(); // Initial
+
+    const handleOrientationChange = () => {
+      setTimeout(lockHeight, 300); // allow UI to settle
+    };
+
+    window.addEventListener("orientationchange", handleOrientationChange);
+
+    return () => {
+      window.removeEventListener("orientationchange", handleOrientationChange);
+    };
   }, []);
   // 1️⃣ Initial --vh setup on mount
   // useEffect(() => {
