@@ -26,6 +26,7 @@ body {
 *, *::before, *::after {
   box-sizing: border-box;
 } 
+
 .background.Home{
   position: fixed;
   top: 0;
@@ -63,7 +64,9 @@ body {
   left: 0;
 }
 
-
+.landing{
+  height: 100dvh;
+}
 @media(max-height:450px){
   .landing{
     margin-top: 50px;
