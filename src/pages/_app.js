@@ -5,10 +5,10 @@ import { useEffect,useRef } from "react";
 
 export default function App({ Component, pageProps }) {
     const lastSize = useRef({ width: 0, height: 0 });
-    const getVh = () => (window.visualViewport?.height || window.innerHeight) * 0.01;
+    
   // 1️⃣ Initial --vh setup on mount
   useEffect(() => {
-    const initialVh =  getVh()
+    const initialVh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${initialVh}px`);
     lastSize.current = { width: window.innerWidth, height: window.innerHeight };
   }, []);
@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }) {
       const heightDiff = Math.abs(currentHeight - lastSize.current.height);
 
       if (widthDiff > 150 || heightDiff > 150) {
-        const newVh = getVh()
+        const newVh = currentHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${newVh}px`);
         lastSize.current = { width: currentWidth, height: currentHeight };
       }
