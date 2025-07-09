@@ -52,10 +52,15 @@ import "@/styles/gears.css";
 import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
-useEffect(() => {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-}, []);
+ useEffect(() => {
+    // Delay vh calculation to avoid capturing inflated viewport during refresh
+    const timeout = setTimeout(() => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }, 1000); // 300ms delay helps avoid pull-to-refresh distortion
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <>
