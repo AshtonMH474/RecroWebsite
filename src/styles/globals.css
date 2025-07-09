@@ -26,7 +26,8 @@ body,
 
 .scroll-wrapper {
   height: 100vh;
-  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  -webkit-overflow-scrolling: touch; 
+  overflow-y: auto;/* smooth scroll on iOS */
 }
 
 body {
