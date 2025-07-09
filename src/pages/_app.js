@@ -5,34 +5,33 @@ import { useEffect,useRef } from "react";
 
 export default function App({ Component, pageProps }) {
     const lastSize = useRef({ width: 0, height: 0 });
-    
-  // 1️⃣ Initial --vh setup on mount
-  useEffect(() => {
+    useEffect(() => {
   const setVh = () => {
-    const height = window.visualViewport?.height || window.innerHeight;
-    document.documentElement.style.setProperty('--vh', `${height * 0.01}px`);
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
 
-  setVh(); // initial
+  setVh(); // Initial set
 
-  const onResize = () => {
-    // Only update if the visual viewport height is truly different from last set height
-    const newHeight = window.visualViewport?.height || window.innerHeight;
-    if (Math.abs(newHeight - lastSize.current.height) > 50) {
-      document.documentElement.style.setProperty('--vh', `${newHeight * 0.01}px`);
-      lastSize.current = { width: window.innerWidth, height: newHeight };
-    }
+  let resizeTimeout;
+
+  const handleResize = () => {
+    // Debounce to wait for pull-to-refresh to end
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      setVh();
+    }, 250); // Wait for bounce to finish
   };
 
-  window.visualViewport?.addEventListener('resize', onResize);
-  window.addEventListener('resize', onResize); // fallback
+  window.addEventListener('resize', handleResize);
 
   return () => {
-    window.visualViewport?.removeEventListener('resize', onResize);
-    window.removeEventListener('resize', onResize);
+    window.removeEventListener('resize', handleResize);
+    clearTimeout(resizeTimeout);
   };
 }, []);
 
+  // 1️⃣ Initial --vh setup on mount
   // useEffect(() => {
   //   const initialVh = window.innerHeight * 0.01;
   //   document.documentElement.style.setProperty('--vh', `${initialVh}px`);
