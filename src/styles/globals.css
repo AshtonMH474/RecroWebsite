@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 html {
-  
+  overscroll-behavior: none;
   overflow-x: hidden;
 }
 
