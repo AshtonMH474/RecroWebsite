@@ -59,13 +59,14 @@
 //   );
 // }
 
+// pages/_app.js
 import Head from "next/head";
 import "@/styles/globals.css";
 import "@/styles/gears.css";
 import { useEffect, useRef } from "react";
 
 export default function App({ Component, pageProps }) {
-  const lastWidth = useRef(0);
+  const lastWidth = useRef(0); // Changed from lastSize to lastWidth
 
   // 1️⃣ Set --vh on mount
   useEffect(() => {
@@ -78,6 +79,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     const handleResize = () => {
       const currentWidth = window.innerWidth;
+      // The key change is here: only update if width changes
       if (currentWidth !== lastWidth.current) {
         const newVh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${newVh}px`);
@@ -92,6 +94,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
+        {/* Changed to simpler meta tag */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div>
