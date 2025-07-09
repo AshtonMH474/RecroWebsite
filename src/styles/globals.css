@@ -72,7 +72,11 @@ body {
   top: 0;
   left: 0;
 }
-  
+.landing{
+  height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100); /* fallback for old Safari */
+
+}
 @media(max-height:450px){
   .landing{
     margin-top: 50px;
