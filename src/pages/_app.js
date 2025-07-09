@@ -52,6 +52,13 @@ import "@/styles/gears.css";
 
 export default function App({ Component, pageProps }) {
 
+  useEffect(() => {
+  requestAnimationFrame(() => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    document.body.classList.remove('not-ready');
+  });
+}, []);
 
   return (
     <>

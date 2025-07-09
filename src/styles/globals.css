@@ -13,6 +13,9 @@ html,body{
   -webkit-overflow-scrolling: touch;
 }
 
+body.not-ready {
+  visibility: hidden;
+}
 
 body {
   background: var(--background);
