@@ -59,7 +59,11 @@ export default function Home({res,navData,footerData,jobs}) {
      {data.page.blocks?.map((block,i) => {
   switch(block?.__typename){
     case "PageBlocksLanding":
-      return <Landing key={i} {...block}/>;
+      return (
+        <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}>
+      <Landing key={i} {...block}/>;
+      </div>
+      )
 
     case "PageBlocksCards":
       return <Cards key={i}  {...block}/>;
