@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 html {
-  overscroll-behavior: none;
+  overscroll-behavior-y: contain;
   overflow-x: hidden;
 }
 
 html,body{
-  -webkit-overflow-scrolling: touch;
+  /* -webkit-overflow-scrolling: touch; */
   /* scroll-behavior: smooth; */
   overflow-x: visible;
   overscroll-behavior-y: contain; /* prevents bounce on top */
@@ -76,7 +76,7 @@ body {
   
 @media(max-height:450px){
   .landing{
-    margin-top: 50px;
+    /* margin-top: 50px; */
   }
 }
 
