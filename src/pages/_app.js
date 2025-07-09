@@ -109,18 +109,23 @@ import "@/styles/gears.css";
 import { useEffect, useRef } from "react";
 
 export default function App({ Component, pageProps }) {
-  const lastOrientation = useRef(window.screen.orientation?.angle || window.orientation || 0);
+  const lastOrientation = useRef(0); // Start with default 0
 
   // 1️⃣ Set --vh on mount
   useEffect(() => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    // Set initial orientation
+    lastOrientation.current =
+      window.screen.orientation?.angle || window.orientation || 0;
   }, []);
 
   // 2️⃣ Update --vh ONLY on orientation change
   useEffect(() => {
     const handleResize = () => {
-      const currentOrientation = window.screen.orientation?.angle || window.orientation || 0;
+      const currentOrientation =
+        window.screen.orientation?.angle || window.orientation || 0;
 
       if (currentOrientation !== lastOrientation.current) {
         const vh = window.innerHeight * 0.01;
