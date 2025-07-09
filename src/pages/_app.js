@@ -1,7 +1,7 @@
 import Head from "next/head";
 import "@/styles/globals.css";
 import "@/styles/gears.css";
-import { useEffect,useRef } from "react";
+import { useEffect,useRef, useState } from "react";
 
 export default function App({ Component, pageProps }) {
     const lastSize = useRef({ width: 0, height: 0 });
@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }) {
         <div
       style={{
         height: lockedHeight ? `${lockedHeight}px` : "100vh", // fallback
-        overflow: "hidden", // prevent bounce/pull
+        
       }}
     >
       <Component {...pageProps} />
