@@ -76,7 +76,7 @@ export default function App({ Component, pageProps }) {
       lastWidth.current = window.innerWidth;
     };
 
-    const timeout = setTimeout(setVh, 100); // Let Safari settle pull-down
+    const timeout = setTimeout(setVh, 500); // Let Safari settle pull-down
     return () => clearTimeout(timeout);
   }, []);
 
