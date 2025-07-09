@@ -5,6 +5,7 @@ import { useEffect,useRef } from "react";
 
 export default function App({ Component, pageProps }) {
     const lastSize = useRef({ width: 0, height: 0 });
+
   // 1️⃣ Initial --vh setup on mount
   useEffect(() => {
     const initialVh = window.innerHeight * 0.01;
@@ -35,12 +36,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
-        <div
-    >
-      <Component {...pageProps} />
-    </div>
+        <Component {...pageProps} />
 
       
       
