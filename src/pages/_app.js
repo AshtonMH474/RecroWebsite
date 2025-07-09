@@ -5,21 +5,32 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
+    let timeout;
+
     const setVh = () => {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     };
 
-    // Set immediately and after a short delay (iOS stabilization)
+    const handleResize = () => {
+      // Debounce: only run setVh after 100ms of no resize
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        setVh();
+      }, 100);
+    };
+
+    // Set once immediately, and again after a short delay for iOS Safari
     setVh();
     setTimeout(setVh, 100);
 
-    // Update on resize and orientation change
-    window.addEventListener('resize', setVh);
+    // Add listeners
+    window.addEventListener('resize', handleResize);
     window.addEventListener('orientationchange', setVh);
 
     return () => {
-      window.removeEventListener('resize', setVh);
+      clearTimeout(timeout);
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('orientationchange', setVh);
     };
   }, []);
@@ -36,6 +47,7 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+
 
 // // pages/_app.js
 // import Head from "next/head";
