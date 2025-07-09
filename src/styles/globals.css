@@ -65,7 +65,7 @@ body {
 }
 
 .landing{
-  height: 100dvh;
+  /* height: 100dvh; */
 }
 @media(max-height:450px){
   .landing{
