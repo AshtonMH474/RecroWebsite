@@ -77,11 +77,21 @@ body {
   height: calc(var(--vh, 1vh) * 100); /* fallback for old Safari */
 
 }
-@media (orientation: landscape) and (max-height: 450px) {
+/* @media(max-height:450px){
+  .landing{
+    margin-top: 50px;
+  }
+} */
+ @media (orientation: landscape){
   .landing {
     margin-top: 50px;
   }
 }
+ /* @media (max-aspect-ratio: 16/9) and (max-height: 450px) {
+  .landing {
+    margin-top: 50px;
+  }
+} */
 
 .test{
   z-index: 10;
