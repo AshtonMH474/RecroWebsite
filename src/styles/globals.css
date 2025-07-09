@@ -77,8 +77,8 @@ body {
   height: calc(var(--vh, 1vh) * 100); /* fallback for old Safari */
 
 }
-@media(max-height:450px){
-  .landing{
+@media (orientation: landscape) and (max-height: 450px) {
+  .landing {
     margin-top: 50px;
   }
 }
