@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
       const widthDiff = Math.abs(currentWidth - lastSize.current.width);
       const heightDiff = Math.abs(currentHeight - lastSize.current.height);
 
-      if (widthDiff > 150) {
+      if (widthDiff > 150 || heightDiff > 150) {
         const newVh = currentHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${newVh}px`);
         lastSize.current = { width: currentWidth, height: currentHeight };
@@ -38,7 +38,9 @@ export default function App({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
+      <div id='app-scroll-container'>
         <Component {...pageProps} />
+        </div>
 
       
       
