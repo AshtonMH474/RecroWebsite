@@ -14,7 +14,7 @@ html,body{
 }
 
 body.not-ready {
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 body {
