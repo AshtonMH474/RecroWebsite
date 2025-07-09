@@ -9,12 +9,12 @@ html {
 }
 
 html,body{
-  /* height: 100dvh; */
+  height: 100dvh;
   -webkit-overflow-scrolling: touch;
 }
 
 body.not-ready {
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 
 body {
