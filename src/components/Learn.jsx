@@ -19,11 +19,11 @@ function Learn(props) {
       <div
         id={props.learn_id}
         ref={learnRef}
-        style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
+        style={{ minHeight: '100dvh' }}
         className="bg-black overflow-hidden w-full mt-42 relative z-30 pb-20"
       >
         <div
-          style={{ minHeight: '100%' }}
+          style={{ minHeight: '100dvh' }}
           className="flex flex-col lg:gap-x-16  lg:flex-row pt-32 items-center justify-center "
         >
           <motion.div
