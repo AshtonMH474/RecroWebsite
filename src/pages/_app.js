@@ -66,20 +66,24 @@ import "@/styles/gears.css";
 import { useEffect, useRef } from "react";
 
 export default function App({ Component, pageProps }) {
-  const lastWidth = useRef(0); // Changed from lastSize to lastWidth
+  const lastWidth = useRef(0);
 
-  // 1️⃣ Set --vh on mount
+  // 1️⃣ Set --vh on mount (with delay to avoid Safari pull-to-refresh glitch)
   useEffect(() => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    lastWidth.current = window.innerWidth;
+    const setVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      lastWidth.current = window.innerWidth;
+    };
+
+    const timeout = setTimeout(setVh, 100); // Let Safari settle pull-down
+    return () => clearTimeout(timeout);
   }, []);
 
-  // 2️⃣ Update --vh ONLY on width change
+  // 2️⃣ Update --vh ONLY on width change (e.g. rotation)
   useEffect(() => {
     const handleResize = () => {
       const currentWidth = window.innerWidth;
-      // The key change is here: only update if width changes
       if (currentWidth !== lastWidth.current) {
         const newVh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${newVh}px`);
@@ -94,7 +98,6 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* Changed to simpler meta tag */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div>
