@@ -49,6 +49,7 @@
 import Head from "next/head";
 import "@/styles/globals.css";
 import "@/styles/gears.css";
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
 
