@@ -60,39 +60,77 @@
 // }
 
 // pages/_app.js
+// import Head from "next/head";
+// import "@/styles/globals.css";
+// import "@/styles/gears.css";
+// import { useEffect, useRef } from "react";
+
+// export default function App({ Component, pageProps }) {
+//   const lastWidth = useRef(0); // Changed from lastSize to lastWidth
+
+//   // 1️⃣ Set --vh on mount
+//   useEffect(() => {
+//     const vh = window.innerHeight * 0.01;
+//     document.documentElement.style.setProperty('--vh', `${vh}px`);
+//     lastWidth.current = window.innerWidth;
+//   }, []);
+
+//   // 2️⃣ Update --vh ONLY on width change
+//   useEffect(() => {
+//     const handleResize = () => {
+//       const currentWidth = window.innerWidth;
+//       // The key change is here: only update if width changes
+//       if (currentWidth !== lastWidth.current) {
+//         const newVh = window.innerHeight * 0.01;
+//         document.documentElement.style.setProperty('--vh', `${newVh}px`);
+//         lastWidth.current = currentWidth;
+//       }
+//     };
+
+//     window.addEventListener('resize', handleResize);
+//     return () => window.removeEventListener('resize', handleResize);
+//   }, []);
+
+//   return (
+//     <>
+//       <Head>
+//         {/* Changed to simpler meta tag */}
+//         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+//       </Head>
+//       <div>
+//         <Component {...pageProps} />
+//       </div>
+//     </>
+//   );
+// }
 import Head from "next/head";
 import "@/styles/globals.css";
 import "@/styles/gears.css";
 import { useEffect, useRef } from "react";
 
 export default function App({ Component, pageProps }) {
-  const lastWidth = useRef(0);
+  const lastOrientation = useRef(window.screen.orientation?.angle || window.orientation || 0);
 
-  // 1️⃣ Set --vh on mount (with delay to avoid Safari pull-to-refresh glitch)
+  // 1️⃣ Set --vh on mount
   useEffect(() => {
-    const setVh = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-      lastWidth.current = window.innerWidth;
-    };
-
-    const timeout = setTimeout(setVh, 500); // Let Safari settle pull-down
-    return () => clearTimeout(timeout);
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, []);
 
-  // 2️⃣ Update --vh ONLY on width change (e.g. rotation)
+  // 2️⃣ Update --vh ONLY on orientation change
   useEffect(() => {
     const handleResize = () => {
-      const currentWidth = window.innerWidth;
-      if (currentWidth !== lastWidth.current) {
-        const newVh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${newVh}px`);
-        lastWidth.current = currentWidth;
+      const currentOrientation = window.screen.orientation?.angle || window.orientation || 0;
+
+      if (currentOrientation !== lastOrientation.current) {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        lastOrientation.current = currentOrientation;
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
