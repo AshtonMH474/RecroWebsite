@@ -34,6 +34,10 @@ links:
     label: About
     link: /about
     style: link
+    sublinks:
+      - linkOptions:
+          link: /
+        label: Home
   - linkOptions:
       type: link
       link: /login

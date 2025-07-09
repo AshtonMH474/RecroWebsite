@@ -14,24 +14,24 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   // 2️⃣ Resize listener that only runs if change > 150px
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     const currentWidth = window.innerWidth;
-  //     const currentHeight = window.innerHeight;
+  useEffect(() => {
+    const handleResize = () => {
+      const currentWidth = window.innerWidth;
+      const currentHeight = window.innerHeight;
 
-  //     const widthDiff = Math.abs(currentWidth - lastSize.current.width);
-  //     const heightDiff = Math.abs(currentHeight - lastSize.current.height);
+      const widthDiff = Math.abs(currentWidth - lastSize.current.width);
+      const heightDiff = Math.abs(currentHeight - lastSize.current.height);
 
-  //     if (widthDiff > 150 || heightDiff > 150) {
-  //       const newVh = currentHeight * 0.01;
-  //       document.documentElement.style.setProperty('--vh', `${newVh}px`);
-  //       lastSize.current = { width: currentWidth, height: currentHeight };
-  //     }
-  //   };
+      if (widthDiff > 150 || heightDiff > 150) {
+        const newVh = currentHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${newVh}px`);
+        lastSize.current = { width: currentWidth, height: currentHeight };
+      }
+    };
 
-  //   window.addEventListener('resize', handleResize);
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, []);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <>
