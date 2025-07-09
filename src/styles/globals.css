@@ -64,12 +64,6 @@ body {
     top: 100px;
   }
 }
-#app-scroll-container {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: auto; /* disables momentum scroll, no bounce */
-  overscroll-behavior-y: none; /* disables pull-to-refresh */
-}
 
 .nav{
   z-index: 100;
