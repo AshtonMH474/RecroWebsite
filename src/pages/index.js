@@ -61,7 +61,7 @@ export default function Home({res,navData,footerData,jobs}) {
     case "PageBlocksLanding":
       return (
         <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}>
-      <Landing key={i} {...block}/>;
+      <Landing key={i} {...block}/>
       </div>
       )
 
