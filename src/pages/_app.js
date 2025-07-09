@@ -132,13 +132,13 @@ export default function App({ Component, pageProps }) {
       }
     };
 
-    window.addEventListener("resize", handleResize);
+    // window.addEventListener("resize", handleResize);
 
     // Also recalc --vh when window regains focus (after pull-to-refresh)
     window.addEventListener("focus", setVh);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      // window.removeEventListener("resize", handleResize);
       window.removeEventListener("focus", setVh);
     };
   }, []);

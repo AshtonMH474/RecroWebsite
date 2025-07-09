@@ -20,14 +20,8 @@ html,body{
 html,
 body,
 #__next {
-  height: 100%;
+ 
   
-}
-
-.scroll-wrapper {
-  height: 100vh;
-  -webkit-overflow-scrolling: touch; 
-  overflow-y: auto;/* smooth scroll on iOS */
 }
 
 body {
@@ -80,8 +74,8 @@ body {
 }
 
 .landing{
-   height: calc(var(--vh, 1vh) * 100);
-  max-height: 100vh; /* fallback for old Safari */
+  height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100); /* fallback for old Safari */
 
 }
 @media(max-height:450px){
