@@ -15,15 +15,24 @@ html,body{
 html,
 body,
 #__next {
-  
+    overflow-anchor: none;
   
 }
+
+.app-wrapper::before {
+  content: '';
+  display: block;
+  height: 1px;
+  pointer-events: none;
+}
+
 
 .app-wrapper{
   min-height: 100lvh;
   position: relative;
   isolation: isolate;
   backface-visibility: hidden;
+    overflow-anchor: none;
 }
 .with-transform {
   transform: translateZ(0);
