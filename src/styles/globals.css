@@ -26,6 +26,10 @@ body,
   backface-visibility: hidden;
   transform: translateZ(0);
 }
+.with-transform {
+  transform: translateZ(0);
+  /* add any other necessary GPU hack styles here */
+}
 body {
   background: var(--background);
   color: white;
