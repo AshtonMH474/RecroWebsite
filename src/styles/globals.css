@@ -124,7 +124,7 @@ body {
 .noContentDes{
   max-height: 180px;                /* Limit height */
   display: -webkit-box;             /* Enable flex truncation */
-  -webkit-line-clamp: 6;            /* Approx. number of lines for 100px */
+  -webkit-line-clamp: 7;            /* Approx. number of lines for 100px */
   -webkit-box-orient: vertical;     /* Vertical layout for box */
   overflow: hidden;                 /* Hide excess */
   text-overflow: ellipsis;          /* Ellipsis style */

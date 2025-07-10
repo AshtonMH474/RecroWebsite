@@ -4,7 +4,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text"
 import { tinaField } from "tinacms/dist/react"
 
 function SolutionCard({card,props}){
-    console.log(props)
+    
     return(
         <>
             <Link href={`/solutions/${card._sys.filename}`}>

@@ -3,6 +3,8 @@ import { client } from "../../../tina/__generated__/databaseClient";
 import Nav from "@/components/Nav/Nav";
 import Footer from "@/components/Footer";
 import BG from "@/components/BG";
+import SolutionLanding from "@/components/SolutionPage/landing";
+import SolutionCards from "@/components/SolutionPage/Cards";
 
 export async function getStaticPaths() {
   const solutionList = await client.queries.solutionConnection();
@@ -36,11 +38,20 @@ function SolutionPage({ solutionData, navData, footerData }) {
   const { data: solution } = useTina(solutionData);
   const { data: navContent } = useTina(navData);
   const { data: footerContent } = useTina(footerData);
+  
     return (
         <>
             <Nav res={navContent.nav}/>
             <BG/>
-            
+            <SolutionLanding solution={solution.solution}/>
+            {solution.solution.blocks?.map((block,i) => {
+                switch(block?.__typename){
+                    case "SolutionBlocksCards":
+                        return <SolutionCards key={i} {...block}/>
+                    default:
+                        return null
+                }
+            })}
             <Footer res={footerContent.footer}/>
         </>
     )
