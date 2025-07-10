@@ -53,51 +53,51 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
 
-// useEffect(() => {
-//   const setVh = () => {
-//     const vh = window.innerHeight * 0.01;
-//     document.documentElement.style.setProperty('--vh', `${vh}px`);
-//   };
-
-//   // Initial load
-//   requestAnimationFrame(() => {
-//     setVh();
-//     document.body.classList.remove('not-ready');
-//   });
-
-//   // Optional: Refresh fix for pull-to-refresh
-//   let timeout= null;
-//   const handleScroll = () => {
-//     if (timeout) clearTimeout(timeout);
-//     timeout = setTimeout(() => {
-//       setVh();
-//     }, 500); // Delay until scroll/pull settles
-//   };
-
-//   window.addEventListener('scroll', handleScroll, { passive: true });
-
-//   return () => {
-//     window.removeEventListener('scroll', handleScroll);
-//     if (timeout) clearTimeout(timeout);
-//   };
-// }, []);
-
-
-  useEffect(() => {
-  // Step 1: Prevent layout flicker
-  document.body.classList.add('refreshing-fix');
-
-  // Step 2: Set vh after paint
-  requestAnimationFrame(() => {
+useEffect(() => {
+  const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
 
-    // Step 3: Let Firefox settle before removing offset
-    setTimeout(() => {
-      document.body.classList.remove('refreshing-fix');
-    }, 150); // Adjust this delay if needed
+  // Initial load
+  requestAnimationFrame(() => {
+    setVh();
+    document.body.classList.remove('not-ready');
   });
+
+  // Optional: Refresh fix for pull-to-refresh
+  let timeout= null;
+  const handleScroll = () => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      setVh();
+    }, 500); // Delay until scroll/pull settles
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    if (timeout) clearTimeout(timeout);
+  };
 }, []);
+
+
+//   useEffect(() => {
+//   // Step 1: Prevent layout flicker
+//   document.body.classList.add('refreshing-fix');
+
+//   // Step 2: Set vh after paint
+//   requestAnimationFrame(() => {
+//     const vh = window.innerHeight * 0.01;
+//     document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+//     // Step 3: Let Firefox settle before removing offset
+//     setTimeout(() => {
+//       document.body.classList.remove('refreshing-fix');
+//     }, 150); // Adjust this delay if needed
+//   });
+// }, []);
 
   return (
     <>
