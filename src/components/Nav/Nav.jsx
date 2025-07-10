@@ -60,7 +60,7 @@ export default function Nav({ res, onExpertiseClick }) {
   if (!res) return null;
   return (
     <>
-      <div className="fixed top-0 left-0 w-full z-[101] bg-black flex justify-between items-center h-20 px-4 lg:px-16">
+      <div className=" top-0 left-0 w-full z-[101] bg-black flex justify-between items-center h-20 px-4 lg:px-16">
         <Logo logo={res} />
         <div className="lg:hidden">
           <MenuToggle menuOpen={menuOpen} toggleMenu={toggleMenu} buttonRef={buttonRef} />
