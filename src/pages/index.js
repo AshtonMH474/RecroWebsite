@@ -3,7 +3,6 @@ import Landing from "../components/Landing";
 import {useTina} from 'tinacms/dist/react'
 import Learn from "@/components/Learn";
 import Footer from "@/components/Footer";
-import BG from "@/components/BG";
 import Cards from "../components/Cards/Cards";
 import Leadership from "@/components/Leadership/Leadership";
 import Jobs from "@/components/Jobs/Jobs";
@@ -66,7 +65,6 @@ export default function Home({res,navData,footerData,jobs,solutions}) {
   
     <>
       <Nav res={navContent.nav}  />
-      {/* <BG /> */}
      {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":

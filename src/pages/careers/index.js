@@ -1,4 +1,3 @@
-import BG from '@/components/BG'
 import Cards from '@/components/Cards/Cards'
 import Footer from '@/components/Footer'
 import Jobs from '@/components/Jobs/Jobs'
@@ -60,7 +59,6 @@ function Careers({res,navData,footerData,jobs,solutions}){
     return(
         <>
             <Nav  res={navContent.nav} />
-            <BG/>
              {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":

@@ -2,7 +2,6 @@ import { useTina } from "tinacms/dist/react";
 import { client } from "../../../tina/__generated__/databaseClient";
 import Nav from "@/components/Nav/Nav";
 import Footer from "@/components/Footer";
-import BG from "@/components/BG";
 import SolutionLanding from "@/components/SolutionPage/Landing";
 import SolutionCards from "@/components/SolutionPage/Cards";
 
@@ -42,7 +41,6 @@ function SolutionPage({ solutionData, navData, footerData }) {
     return (
         <>
             <Nav res={navContent.nav}/>
-            <BG/>
             <SolutionLanding solution={solution.solution}/>
             {solution.solution.blocks?.map((block,i) => {
                 switch(block?.__typename){

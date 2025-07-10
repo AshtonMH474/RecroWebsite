@@ -2,7 +2,6 @@ import Nav from "@/components/Nav/Nav";
 import { useTina } from "tinacms/dist/react";
 import Footer from "@/components/Footer";
 import Leadership from "@/components/Leadership/Leadership";
-import BG from "@/components/BG";
 import Landing from "@/components/Landing";
 import Cards from "@/components/Cards/Cards";
 import Learn from "@/components/Learn";
@@ -57,7 +56,6 @@ function About({res,navData,footerData,jobs,solutions}){
     return (
         <>
             <Nav res={navContent.nav} />
-            <BG/>
              {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":
