@@ -20,9 +20,10 @@ body,
 }
 
 .app-wrapper{
-   min-height: 100lvh;
+  min-height: 200lvh;
   display: flex;
   flex-direction: column;
+
   position: relative;
 }
 body {
