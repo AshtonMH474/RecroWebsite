@@ -40,19 +40,7 @@ export default function App({ Component, pageProps }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  useEffect(() => {
-  const preventUpwardScroll = (e) => {
-    if (window.scrollY <= 0 && e.touches && e.touches[0].clientY > 5) {
-      e.preventDefault(); // prevent body from moving down
-    }
-  };
 
-  window.addEventListener("touchmove", preventUpwardScroll, { passive: false });
-
-  return () => {
-    window.removeEventListener("touchmove", preventUpwardScroll);
-  };
-}, []);
 
   return (
     <>
