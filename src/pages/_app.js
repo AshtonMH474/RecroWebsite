@@ -106,7 +106,7 @@ useEffect(() => {
   };
 
   // Add both classes initially
-  document.body.classList.add('refreshing-fix', 'not-ready');
+  document.body.classList.add('refreshing-fix');
 
   // Set --vh after paint
   requestAnimationFrame(() => {
@@ -114,7 +114,7 @@ useEffect(() => {
 
     // Remove both classes after delay so layout is stable and content visible
     setTimeout(() => {
-      document.body.classList.remove('refreshing-fix', 'not-ready');
+      document.body.classList.remove('refreshing-fix');
     }, 150); // tweak delay if needed
   });
 

@@ -13,9 +13,9 @@ html,body{
   -webkit-overflow-scrolling: touch;
 }
 
-body.not-ready {
+/* body.not-ready {
   visibility: hidden;
-}
+} */
 
 body.refreshing-fix {
   transform: translateY(8px); /* Smooths out layout reflow */
