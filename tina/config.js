@@ -4,6 +4,7 @@ import { CustomAuthProvider } from "@/lib/custom_auth_provider";
 import pages from "./collections/pages/page";
 import nav from "./collections/nav/nav";
 import footer from "./collections/footer/footer";
+import solutions from "./collections/solutions/solution";
 
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
@@ -42,7 +43,8 @@ export default defineConfig({
     collections: [
       pages,
       nav,
-      footer
+      footer,
+      solutions
       
     ],
   },
