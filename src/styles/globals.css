@@ -9,7 +9,7 @@ html {
 }
 
 html,body{
-  height: 100dvh;
+  /* height: 100dvh; */
   -webkit-overflow-scrolling: touch;
 }
 
