@@ -2,6 +2,7 @@ import Head from "next/head";
 import "@/styles/globals.css";
 import "@/styles/gears.css";
 import { useEffect,useRef } from "react";
+import BG from "@/components/BG";
 
 export default function App({ Component, pageProps }) {
     const lastSize = useRef({ width: 0, height: 0 });
@@ -45,6 +46,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
+        <BG/>
         <Component {...pageProps} />
 
       

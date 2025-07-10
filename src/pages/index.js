@@ -66,7 +66,7 @@ export default function Home({res,navData,footerData,jobs,solutions}) {
   
     <>
       <Nav res={navContent.nav}  />
-      <BG />
+      {/* <BG /> */}
      {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":
