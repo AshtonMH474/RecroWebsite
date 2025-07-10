@@ -12,7 +12,7 @@ export default function Document() {
           src="//js.hs-scripts.com/4374141.js"
         ></script>
       </Head>
-      <body>
+      <body className="not-ready">
         <Main />
         <NextScript />
       </body>

@@ -30,6 +30,10 @@ body {
   overscroll-behavior-y: none;
 }
 
+.not-ready{
+  visibility: hidden;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 } 

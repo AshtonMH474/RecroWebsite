@@ -8,9 +8,14 @@ export default function App({ Component, pageProps }) {
 
   // 1️⃣ Initial --vh setup on mount
   useEffect(() => {
-    const initialVh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${initialVh}px`);
-    lastSize.current = { width: window.innerWidth, height: window.innerHeight };
+    requestAnimationFrame(() => {
+      const initialVh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${initialVh}px`);
+      lastSize.current = { width: window.innerWidth, height: window.innerHeight };
+
+      // Remove .not-ready to reveal body after layout is stable
+      document.body.classList.remove('not-ready');
+    });
   }, []);
 
   // 2️⃣ Resize listener that only runs if change > 150px
