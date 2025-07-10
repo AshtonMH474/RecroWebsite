@@ -14,40 +14,31 @@ export default function App({ Component, pageProps }) {
       lastSize.current = { width: window.innerWidth, height: window.innerHeight };
 
       // Remove .not-ready to reveal body after layout is stable
-      document.body.classList.remove('not-ready');
+        setTimeout(() => {
+      document.body.classList.remove("not-ready");
+    }, 500); // delay for the browser to settle
     });
   }, []);
 
   // 2️⃣ Resize listener that only runs if change > 150px
   useEffect(() => {
-  const handleResize = () => {
-    const currentWidth = window.innerWidth;
-    const currentHeight = window.innerHeight;
+    const handleResize = () => {
+      const currentWidth = window.innerWidth;
+      const currentHeight = window.innerHeight;
 
-    // Safari/Firefox pull-to-refresh protection
-    const isPullToRefresh =
-      window.scrollY === 0 &&
-      currentHeight > lastSize.current.height;
+      const widthDiff = Math.abs(currentWidth - lastSize.current.width);
+      const heightDiff = Math.abs(currentHeight - lastSize.current.height);
 
-    if (isPullToRefresh) {
-      // Ignore pull-to-refresh
-      return;
-    }
+      if (widthDiff > 150 || heightDiff > 150) {
+        const newVh = currentHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${newVh}px`);
+        lastSize.current = { width: currentWidth, height: currentHeight };
+      }
+    };
 
-    const widthDiff = Math.abs(currentWidth - lastSize.current.width);
-    const heightDiff = Math.abs(currentHeight - lastSize.current.height);
-
-    if (widthDiff > 150 || heightDiff > 150) {
-      const newVh = currentHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${newVh}px`);
-      lastSize.current = { width: currentWidth, height: currentHeight };
-    }
-  };
-
-  window.addEventListener('resize', handleResize);
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
-
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <>
