@@ -20,7 +20,7 @@ body,
 }
 
 .app-wrapper{
-  min-height: 200lvh;
+  min-height: 100lvh;
   display: flex;
   flex-direction: column;
 
