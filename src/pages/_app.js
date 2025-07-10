@@ -83,21 +83,57 @@ export default function App({ Component, pageProps }) {
 // }, []);
 
 
-  useEffect(() => {
-  // Step 1: Prevent layout flicker
-  document.body.classList.add('refreshing-fix');
+//   useEffect(() => {
+//   // Step 1: Prevent layout flicker
+//   document.body.classList.add('refreshing-fix');
 
-  // Step 2: Set vh after paint
-  requestAnimationFrame(() => {
+//   // Step 2: Set vh after paint
+//   requestAnimationFrame(() => {
+//     const vh = window.innerHeight * 0.01;
+//     document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+//     // Step 3: Let Firefox settle before removing offset
+//     setTimeout(() => {
+//       document.body.classList.remove('refreshing-fix');
+//     }, 150); // Adjust this delay if needed
+//   });
+// }, []);
+
+useEffect(() => {
+  const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
 
-    // Step 3: Let Firefox settle before removing offset
+  // Add both classes initially
+  document.body.classList.add('refreshing-fix', 'not-ready');
+
+  // Set --vh after paint
+  requestAnimationFrame(() => {
+    setVh();
+
+    // Remove both classes after delay so layout is stable and content visible
     setTimeout(() => {
-      document.body.classList.remove('refreshing-fix');
-    }, 150); // Adjust this delay if needed
+      document.body.classList.remove('refreshing-fix', 'not-ready');
+    }, 150); // tweak delay if needed
   });
+
+  let timeout = null;
+  const handleScroll = () => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      setVh();
+    }, 500);
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    if (timeout) clearTimeout(timeout);
+  };
 }, []);
+ 
 
   return (
     <>
