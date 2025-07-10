@@ -14,9 +14,9 @@ export default function App({ Component, pageProps }) {
       lastSize.current = { width: window.innerWidth, height: window.innerHeight };
 
       // Remove .not-ready to reveal body after layout is stable
-        setTimeout(() => {
+        // setTimeout(() => {
       document.body.classList.remove("not-ready");
-    }, 50); // delay for the browser to settle
+    
     });
   }, []);
 
