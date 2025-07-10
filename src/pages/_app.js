@@ -53,34 +53,53 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
 
-useEffect(() => {
+  useEffect(() => {
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
 
-  // Initial load
+  // Set once on mount (after layout settles)
   requestAnimationFrame(() => {
     setVh();
     document.body.classList.remove('not-ready');
   });
 
-  // Optional: Refresh fix for pull-to-refresh
-  let timeout= null;
-  const handleScroll = () => {
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      setVh();
-    }, 500); // Delay until scroll/pull settles
-  };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  // Update only on resize (orientation change or keyboard toggle)
+  window.addEventListener('resize', setVh);
 
   return () => {
-    window.removeEventListener('scroll', handleScroll);
-    if (timeout) clearTimeout(timeout);
+    window.removeEventListener('resize', setVh);
   };
 }, []);
+// useEffect(() => {
+//   const setVh = () => {
+//     const vh = window.innerHeight * 0.01;
+//     document.documentElement.style.setProperty('--vh', `${vh}px`);
+//   };
+
+//   // Initial load
+//   requestAnimationFrame(() => {
+//     setVh();
+//     document.body.classList.remove('not-ready');
+//   });
+
+//   // Optional: Refresh fix for pull-to-refresh
+//   let timeout= null;
+//   const handleScroll = () => {
+//     if (timeout) clearTimeout(timeout);
+//     timeout = setTimeout(() => {
+//       setVh();
+//     }, 500); // Delay until scroll/pull settles
+//   };
+
+//   window.addEventListener('scroll', handleScroll, { passive: true });
+
+//   return () => {
+//     window.removeEventListener('scroll', handleScroll);
+//     if (timeout) clearTimeout(timeout);
+//   };
+// }, []);
 
 
   return (
@@ -88,7 +107,7 @@ useEffect(() => {
       <Head>
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="width=device-width, initial-scale=1.0"
         />
       </Head>
       <Component {...pageProps} />
