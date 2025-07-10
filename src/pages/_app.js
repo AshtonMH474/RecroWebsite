@@ -53,34 +53,34 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
 
-// useEffect(() => {
-//   const setVh = () => {
-//     const vh = window.innerHeight * 0.01;
-//     document.documentElement.style.setProperty('--vh', `${vh}px`);
-//   };
+useEffect(() => {
+  const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
 
-//   // Initial load
-//   requestAnimationFrame(() => {
-//     setVh();
-//     document.body.classList.remove('not-ready');
-//   });
+  // Initial load
+  requestAnimationFrame(() => {
+    setVh();
+    document.body.classList.remove('not-ready');
+  });
 
-//   // Optional: Refresh fix for pull-to-refresh
-//   let timeout= null;
-//   const handleScroll = () => {
-//     if (timeout) clearTimeout(timeout);
-//     timeout = setTimeout(() => {
-//       setVh();
-//     }, 500); // Delay until scroll/pull settles
-//   };
+  // Optional: Refresh fix for pull-to-refresh
+  let timeout= null;
+  const handleScroll = () => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      setVh();
+    }, 500); // Delay until scroll/pull settles
+  };
 
-//   window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('scroll', handleScroll, { passive: true });
 
-//   return () => {
-//     window.removeEventListener('scroll', handleScroll);
-//     if (timeout) clearTimeout(timeout);
-//   };
-// }, []);
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    if (timeout) clearTimeout(timeout);
+  };
+}, []);
 
 
 //   useEffect(() => {
@@ -99,40 +99,40 @@ export default function App({ Component, pageProps }) {
 //   });
 // }, []);
 
-useEffect(() => {
-  const setVh = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  };
+// useEffect(() => {
+//   const setVh = () => {
+//     const vh = window.innerHeight * 0.01;
+//     document.documentElement.style.setProperty('--vh', `${vh}px`);
+//   };
 
-  // Add both classes initially
-  document.body.classList.add('refreshing-fix');
+//   // Add both classes initially
+//   document.body.classList.add('refreshing-fix');
 
-  // Set --vh after paint
-  requestAnimationFrame(() => {
-    setVh();
+//   // Set --vh after paint
+//   requestAnimationFrame(() => {
+//     setVh();
 
-    // Remove both classes after delay so layout is stable and content visible
-    setTimeout(() => {
-      document.body.classList.remove('refreshing-fix');
-    }, 150); // tweak delay if needed
-  });
+//     // Remove both classes after delay so layout is stable and content visible
+//     setTimeout(() => {
+//       document.body.classList.remove('refreshing-fix');
+//     }, 150); // tweak delay if needed
+//   });
 
-  let timeout = null;
-  const handleScroll = () => {
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      setVh();
-    }, 500);
-  };
+//   let timeout = null;
+//   const handleScroll = () => {
+//     if (timeout) clearTimeout(timeout);
+//     timeout = setTimeout(() => {
+//       setVh();
+//     }, 500);
+//   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+//   window.addEventListener('scroll', handleScroll, { passive: true });
 
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-    if (timeout) clearTimeout(timeout);
-  };
-}, []);
+//   return () => {
+//     window.removeEventListener('scroll', handleScroll);
+//     if (timeout) clearTimeout(timeout);
+//   };
+// }, []);
  
 
   return (
