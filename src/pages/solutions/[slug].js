@@ -1,9 +1,9 @@
-import { useTina, tinaField } from "tinacms/dist/react";
+import { useTina } from "tinacms/dist/react";
 import { client } from "../../../tina/__generated__/databaseClient";
 import Nav from "@/components/Nav/Nav";
 import Footer from "@/components/Footer";
 import BG from "@/components/BG";
-import SolutionLanding from "@/components/SolutionPage/landing";
+import SolutionLanding from "@/components/SolutionPage/Landing";
 import SolutionCards from "@/components/SolutionPage/Cards";
 
 export async function getStaticPaths() {
