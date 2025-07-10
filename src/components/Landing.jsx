@@ -4,8 +4,8 @@ import { tinaField } from 'tinacms/dist/react'
 function Landing(props){
     return(
     <div style={{
-    // minHeight: '100dvh',
-    minHeight: 'calc(var(--vh, 1vh) * 100)', // Fallback for old Safari
+    minHeight: '100dvh',
+
   }} className="landing flex  flex-col items-center justify-center  w-full overflow-hidden">
         {props.heading && (<div className='w-90 md:w-150' data-tina-field={tinaField(props,'heading')}>
             <TinaMarkdown content={props.heading} components={{

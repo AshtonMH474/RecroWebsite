@@ -13,8 +13,14 @@ html,body{
   -webkit-overflow-scrolling: touch;
 }
 
-body.not-ready {
+/* body.not-ready {
   visibility: hidden;
+} */
+
+body.refreshing-fix {
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 body {
