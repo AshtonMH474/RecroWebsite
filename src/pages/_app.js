@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
       // Remove .not-ready to reveal body after layout is stable
         setTimeout(() => {
       document.body.classList.remove("not-ready");
-    }, 150); // delay for the browser to settle
+    }, 50); // delay for the browser to settle
     });
   }, []);
 
