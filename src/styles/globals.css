@@ -24,7 +24,7 @@ body,
   position: relative;
   isolation: isolate;
   backface-visibility: hidden;
-  transform: translateZ(0);
+  /* transform: translateZ(0); */
 }
 body {
   background: var(--background);
