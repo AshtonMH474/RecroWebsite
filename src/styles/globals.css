@@ -10,7 +10,8 @@ html {
 
 html,body{
   overflow-x: visible;
-  
+  overscroll-behavior-y: contain;
+
 }
 html,
 body,
@@ -42,7 +43,6 @@ body {
 } 
 .background.Home{
   position: fixed;
-  transform: translate3d(0, 0, 0);
   top: 0;
   left: 0;
   z-index: -20;
