@@ -30,6 +30,7 @@ body {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
+    touch-action: pan-x
   
 }
 
@@ -52,6 +53,7 @@ body {
   background: black;
   background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 85%);
 }
+
 
 @media(max-width: 1150px){
   .background.Home{
