@@ -20,12 +20,7 @@ body,
   
 }
 
-.app-wrapper{
-  min-height: 100lvh;
-  position: relative;
-  isolation: isolate;
-  backface-visibility: hidden;
-}
+
 body {
   background: var(--background);
   color: white;
