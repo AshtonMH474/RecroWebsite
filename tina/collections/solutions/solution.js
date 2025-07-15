@@ -1,6 +1,7 @@
 import * as FaIcons from "react-icons/fa";
 import { IconPickerField } from "../../components/IconPicker";
 import { cards } from "./blocks/cards";
+import { statements } from "./blocks/statements";
 const iconNames = Object.keys(FaIcons);
 
 
@@ -37,7 +38,7 @@ const solutions = {
             label:"Blocks",
             type:'object',
             list:true,
-            templates:[cards]
+            templates:[cards,statements]
         }
     ]
 }

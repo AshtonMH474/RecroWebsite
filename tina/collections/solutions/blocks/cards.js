@@ -33,6 +33,7 @@ export const cards = {
             name:'description',
             type:'rich-text'
             },
+           
             ]
         },
 
