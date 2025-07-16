@@ -44,13 +44,13 @@ export default function MobileMenu({
 
     toggleMenu(); // Always close the menu after clicking
 
-    if (link.linkOptions.id) {
+    if (link.linkOptions?.id) {
       if (window.location.pathname !== link.link) {
-        window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions.id}`;
+        window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions?.id}`;
       } else {
         
-        const el = document.getElementById(link.linkOptions.id);
-        el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions.scrollPosition || "start" });
+        const el = document.getElementById(link.linkOptions?.id);
+        el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions?.scrollPosition || "start" });
       }
     } else {
       window.location.href = link.link;
@@ -62,13 +62,12 @@ export default function MobileMenu({
 
     toggleMenu(); // Close mobile menu on click
 
-    if (sublink.linkOptions.id) {
+    if (sublink.linkOptions?.id) {
       if (window.location.pathname !== link.link) {
-        window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions.id}`;
+        window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions?.id}`;
       } else {
-        console.log(sublink)
-        const el = document.getElementById(sublink.linkOptions.id);
-        el?.scrollIntoView({ behavior: "smooth", block: sublink.linkOptions.scrollPosition || "start" });
+        const el = document.getElementById(sublink.linkOptions?.id);
+        el?.scrollIntoView({ behavior: "smooth", block: sublink.linkOptions?.scrollPosition || "start" });
       }
     } else if (sublink.link) {
       window.location.href = sublink.link;
@@ -129,7 +128,7 @@ export default function MobileMenu({
             {hasSublinks && openDropdownIndex === i && (
               <div id={`submenu-${i}`} className="ml-4 flex flex-col">
                 {link.sublinks.map((sublink, j) =>
-                  sublink.linkOptions.id && sublink.linkOptions.type == 'id' ? (
+                  sublink.linkOptions?.id && sublink.linkOptions?.type == 'id' ? (
                     <button
                       key={j}
                       onClick={() => handleSublinkClick(link, sublink)}
@@ -141,7 +140,7 @@ export default function MobileMenu({
                   ) : (
                     <Link
                       key={j}
-                      href={sublink.linkOptions.link || "#"}
+                      href={sublink.linkOptions?.link || "#"}
                       onClick={toggleMenu}
                       className="block capitalize px-4 py-2 text-sm text-white hover:bg-primary transition-colors"
                       data-tina-field={tinaField(sublink,'label')}

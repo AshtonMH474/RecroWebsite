@@ -76,7 +76,7 @@ useEffect(() => {
         id={props.cards_id}
         ref={sectionRef}
         style={{ height: `${sectionHeight}px` }}
-        className="relative "
+        className="relative pb-16"
       >
         <div
           className=" overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md"

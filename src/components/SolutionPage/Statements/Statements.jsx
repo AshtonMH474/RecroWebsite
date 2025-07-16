@@ -5,10 +5,10 @@ import StatementCard from "./StatementCard";
 import Pagination from "@/components/Leadership/Pagination";
 import { AnimatePresence,motion } from "framer-motion";
 import { animationVariants } from "@/components/Leadership/LeaderAnimations";
+import StatementForm from "./StatementForm";
 
 
 function Statements(props){
-    console.log(props)
     const statements = props.statements || []
     const visibleCount = 6;
     const totalPages = Math.ceil(statements.length / visibleCount);
@@ -28,6 +28,11 @@ function Statements(props){
     };
 
     const visbaleStatments = statements.slice(startIndex, startIndex + visibleCount);
+
+    const [expandedStatementIndex, setExpandedStatementIndex] = useState(null); 
+    const openStatement = (index) => setExpandedStatementIndex(index);
+    const closeStatement = () => setExpandedStatementIndex(null);
+
     return (
         <>
             <div style={{minHeight:'100dvh'}}
@@ -49,9 +54,10 @@ function Statements(props){
                             exit="exit"
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                             className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12">
-                                {visbaleStatments.map((statement,i) => (
-                                    <StatementCard key={i} statement={statement}/>
-                                ))}
+                                {visbaleStatments.map((statement,i) => {
+                                    const actualIndex = startIndex + i
+                                    return (<StatementCard key={actualIndex} statement={statement} onExpand={() => openStatement(actualIndex)}/>)
+                                })}
                             </motion.div>
                         </AnimatePresence>
                     </div>
@@ -60,6 +66,9 @@ function Statements(props){
                 currentPage={startIndex / visibleCount}
                 goToPage={goToPage}/>
             </div>
+            {expandedStatementIndex !== null && (
+                <StatementForm statement={statements[expandedStatementIndex]} onClose={closeStatement}/>
+            )}
         </>
     )
 }

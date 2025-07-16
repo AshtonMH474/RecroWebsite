@@ -17,6 +17,7 @@ const pages = {
       if (props.document._sys.relativePath === "about.md") return "/about";
       if (props.document._sys.relativePath === "careers.md") return "/careers";
       if(props.document._sys.relativePath === 'solutions.md') return "/solutions"
+      if(props.document._sys.relativePath === 'vehicles.md') return "/about/vehicles"
     },
   },
   fields: [

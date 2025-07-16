@@ -10,6 +10,11 @@ links:
     link: /
     style: link
   - linkOptions:
+      link: /portal
+    label: Partners
+    link: /portal
+    style: link
+  - linkOptions:
       link: /solutions
     label: solutions
     link: /solutions
@@ -34,6 +39,10 @@ links:
     label: About
     link: /about
     style: link
+    sublinks:
+      - linkOptions:
+          link: /about/vehicles
+        label: Contract Vehicles
   - linkOptions:
       type: link
       link: /login
