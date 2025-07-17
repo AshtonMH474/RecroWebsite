@@ -6,28 +6,31 @@
 
 html {
   
-  overflow-x: hidden;
 }
 
 html,body{
-  -webkit-overflow-scrolling: touch;
-  /* scroll-behavior: smooth; */
   overflow-x: visible;
-  
+  overscroll-behavior-y: contain;
+
 }
 html,
 body,
 #__next {
- 
+  
   
 }
+
 
 body {
   background: var(--background);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
-  overscroll-behavior-y: none;
+  
+}
+
+.not-ready{
+  visibility: hidden;
 }
 
 *, *::before, *::after {
@@ -45,6 +48,7 @@ body {
   background: black;
   background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 85%);
 }
+
 
 @media(max-width: 1150px){
   .background.Home{
@@ -124,7 +128,7 @@ body {
 .noContentDes{
   max-height: 180px;                /* Limit height */
   display: -webkit-box;             /* Enable flex truncation */
-  -webkit-line-clamp: 6;            /* Approx. number of lines for 100px */
+  -webkit-line-clamp: 7;            /* Approx. number of lines for 100px */
   -webkit-box-orient: vertical;     /* Vertical layout for box */
   overflow: hidden;                 /* Hide excess */
   text-overflow: ellipsis;          /* Ellipsis style */

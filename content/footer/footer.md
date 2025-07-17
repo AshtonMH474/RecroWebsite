@@ -5,7 +5,7 @@ buttons:
     style: border
 links:
   - link: /portal
-    label: Portal
+    label: Partners
   - link: /solutions
     label: 'Solutions '
   - link: /careers

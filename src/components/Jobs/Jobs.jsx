@@ -10,7 +10,7 @@ import DivGears from "../DivGears";
 
 function Jobs(props){
     
-    let jobs = props.jobs
+    let jobs = props.jobs || []
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const visibleCount = 6;

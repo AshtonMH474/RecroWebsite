@@ -1,24 +1,23 @@
-import Cards from '@/components/Cards/Cards'
-import Footer from '@/components/Footer'
-import Jobs from '@/components/Jobs/Jobs'
-import Landing from '@/components/Landing'
-import Landing2 from '@/components/Landing2'
-import Leadership from '@/components/Leadership/Leadership'
-import Learn from '@/components/Learn'
-import Nav from '@/components/Nav/Nav'
-import SolutionsGrid from '@/components/SolutionsGrid/SolutionsGrid'
-import useScrollToHash from '@/hooks/useScrollToHash'
-import { useTina } from 'tinacms/dist/react'
-
+import Nav from "@/components/Nav/Nav";
+import { useTina } from "tinacms/dist/react";
+import Footer from "@/components/Footer";
+import Leadership from "@/components/Leadership/Leadership";
+import Landing from "@/components/Landing";
+import Cards from "@/components/Cards/Cards";
+import Learn from "@/components/Learn";
+import Jobs from "@/components/Jobs/Jobs";
+import useScrollToHash from "@/hooks/useScrollToHash";
+import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
+import Landing2 from "@/components/Landing2";
 
 
 
 export async function getStaticProps() {
-  const { client } = await import("../../../tina/__generated__/databaseClient");
+  const { client } = await import("../../../../tina/__generated__/databaseClient");
 
   // Run TinaCMS queries in parallel
   const [pageData, navData, footerData, solutionData, jobRes] = await Promise.all([
-    client.queries.page({ relativePath: "careers.md" }),
+    client.queries.page({ relativePath: "vehicles.md" }),
     client.queries.nav({ relativePath: "nav.md" }),
     client.queries.footer({ relativePath: "footer.md" }),
     client.queries.solutionConnection(),
@@ -41,24 +40,23 @@ export async function getStaticProps() {
 }
 
 
-function Careers({res,navData,footerData,jobs,solutions}){
+function Vehicles({res,navData,footerData,jobs,solutions}){
     const {data} = useTina(res)
     const {data:navContent} = useTina(navData)
     const {data:footerContent} = useTina(footerData)
 
     useScrollToHash(data.page.blocks, [
-        'cards_id',
-        'jobs_id',
-        'leadership_id',
-        'learn_id',
-        'landing_id',
-        'landing2_id'
-    ]);
+            'cards_id',
+            'jobs_id',
+            'leadership_id',
+            'learn_id',
+            'landing_id',
+            'landing2_id'
+        ]);
 
-
-    return(
+    return (
         <>
-            <Nav  res={navContent.nav} />
+            <Nav res={navContent.nav} />
              {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":
@@ -82,9 +80,12 @@ function Careers({res,navData,footerData,jobs,solutions}){
                     return null;
                 }
                 })}
-                <Footer res={footerContent.footer}/>
+
+            
+            
+            <Footer res={footerContent.footer}/>
         </>
     )
 }
 
-export default Careers
+export default Vehicles

@@ -19,11 +19,11 @@ function Learn(props) {
       <div
         id={props.learn_id}
         ref={learnRef}
-        style={{ minHeight: '100dvh' }}
+        style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
         className="bg-black overflow-hidden w-full mt-42 relative z-30 pb-20"
       >
         <div
-          style={{ minHeight: '100%' }}
+          style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
           className="flex flex-col lg:gap-x-16  lg:flex-row pt-32 items-center justify-center "
         >
           <motion.div
@@ -72,7 +72,9 @@ function Learn(props) {
             className="flex flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8"
           >
             {props?.learnTeamImages?.map((image, i) => (
-              <div key={image.id || image.src || i}   style={{
+              <div key={image.id || image.src || i} 
+              data-tina-field={tinaField(image, "src")}  
+              style={{
                   top: image?.top ?? "auto",
                   left: image?.left ?? "auto",
                   right: image?.right ?? "auto",
@@ -83,7 +85,7 @@ function Learn(props) {
                 src={image.src}
                 alt={image.alt || `team image ${i + 1}`}
                 className=" object-cover"
-                data-tina-field={tinaField(image, "src")}
+                
                 style={{
                   top: image?.top ?? "auto",
                   left: image?.left ?? "auto",
