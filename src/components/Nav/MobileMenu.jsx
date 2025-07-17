@@ -126,13 +126,13 @@ export default function MobileMenu({
             </div>
 
             {hasSublinks && openDropdownIndex === i && (
-              <div id={`submenu-${i}`} className="ml-4 flex flex-col">
+              <div id={`submenu-${i}`} className="ml-1 flex flex-col">
                 {link.sublinks.map((sublink, j) =>
                   sublink.linkOptions?.id && sublink.linkOptions?.type == 'id' ? (
                     <button
                       key={j}
                       onClick={() => handleSublinkClick(link, sublink)}
-                      className="w-full capitalize text-left px-4 py-2 text-sm text-white hover:bg-primary transition-colors"
+                      className="w-full capitalize text-left  py-2 text-sm text-white hover:bg-primary transition-colors"
                       data-tina-field={tinaField(sublink,'label')}
                     >
                       {sublink.label}
@@ -142,7 +142,7 @@ export default function MobileMenu({
                       key={j}
                       href={sublink.linkOptions?.link || "#"}
                       onClick={toggleMenu}
-                      className="block capitalize px-4 py-2 text-sm text-white hover:bg-primary transition-colors"
+                      className=" capitalize  py-2 text-sm text-white hover:bg-primary transition-colors"
                       data-tina-field={tinaField(sublink,'label')}
                     >
                       {sublink.label}
