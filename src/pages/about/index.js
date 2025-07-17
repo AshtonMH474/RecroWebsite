@@ -8,6 +8,7 @@ import Learn from "@/components/Learn";
 import Jobs from "@/components/Jobs/Jobs";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
+import Landing2 from "@/components/Landing2";
 
 
 
@@ -60,6 +61,8 @@ function About({res,navData,footerData,jobs,solutions}){
                 switch(block?.__typename){
                     case "PageBlocksLanding":
                     return <Landing key={i} {...block}/>;
+                    case "PageBlocksLanding2":
+                        return <Landing2 key={i} {...block}/>;
 
                     case "PageBlocksCards":
                     return <Cards key={i}  {...block}/>;

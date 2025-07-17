@@ -87,10 +87,11 @@ export default function DesktopMenu({ links }) {
                         </span>
                       </button>
                     ) : (
+                      <div className="py-2">
                       <Link
                         key={j}
                         href={sublink.linkOptions?.link || "#"}
-                        className="w-full capitalize text-left px-4 py-2 text-sm text-white cursor-pointer"
+                        className="w-full capitalize  text-left px-4 py-2 text-sm text-white cursor-pointer"
                         data-tina-field={tinaField(sublink,'label')}
                       >
                         <span className="relative inline-block">
@@ -99,6 +100,7 @@ export default function DesktopMenu({ links }) {
                             </span>
                         </span>
                       </Link>
+                      </div>
                     )
                   )}
                 </div>

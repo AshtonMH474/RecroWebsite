@@ -26,6 +26,9 @@ links:
     style: link
     sublinks:
       - linkOptions:
+          link: /careers/values
+        label: Vaules
+      - linkOptions:
           type: id
           id: jobs_section
         label: jobs

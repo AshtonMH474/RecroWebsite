@@ -5,6 +5,7 @@ import { landing2Block } from "./blocks/landing2";
 import { leadershipBlock } from "./blocks/leadership";
 import { learnAboutTeamBlock } from "./blocks/learn";
 import { solutionsBlock } from "./blocks/solutions";
+import { testimonials } from "./blocks/testimonials";
 
 const pages = {
   name: "page",
@@ -18,6 +19,7 @@ const pages = {
       if (props.document._sys.relativePath === "careers.md") return "/careers";
       if(props.document._sys.relativePath === 'solutions.md') return "/solutions"
       if(props.document._sys.relativePath === 'vehicles.md') return "/about/vehicles"
+      if(props.document._sys.relativePath === 'values.md') return "/careers/values"
     },
   },
   fields: [
@@ -30,7 +32,7 @@ const pages = {
       label: "Blocks",
       type: "object",
       list: true,
-      templates: [landingBlock,landing2Block,cards,learnAboutTeamBlock,leadershipBlock,jobsBlock,solutionsBlock],
+      templates: [landingBlock,landing2Block,cards,learnAboutTeamBlock,leadershipBlock,jobsBlock,solutionsBlock,testimonials],
     },
   ],
 };

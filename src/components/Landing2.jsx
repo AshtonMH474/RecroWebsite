@@ -8,7 +8,7 @@ function Landing2(props){
     <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }} className="landing  lg:-mt-20 flex flex-col lg:flex-row  items-center justify-center  w-full gap-x-22 ">
         <div className="lg:pl-20">
             {props.headingLanding2 && (
-                <div className='w-90 md:w-100' data-tina-field={tinaField(props,'headingLanding2')}>
+                <div className='w-90 md:w-120 ' data-tina-field={tinaField(props,'headingLanding2')}>
                     <TinaMarkdown content={props.headingLanding2} components={{
                         h1:props => <h1 className="text-[40px] lg:text-[60px] text-center lg:text-left font-bold mb-4" {...props}/>,
                         bold:props => <span className="primary-color" {...props} />,
@@ -46,6 +46,7 @@ function Landing2(props){
 
                 return (
                     <img
+                    data-tina-field={tinaField(image,'src')}
                     key={i}
                     src={image.src}
                     style={style}
