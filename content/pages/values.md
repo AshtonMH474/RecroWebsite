@@ -65,7 +65,7 @@ blocks:
           malesuada lorem pulvinar a. Integer id sem nisi.
         content: ''
     _template: cards
-  - testimonialsHeading: Testimonials
+  - testimonialsHeading: Testimonies
     testimonials:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
