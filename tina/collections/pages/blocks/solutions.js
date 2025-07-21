@@ -16,6 +16,11 @@ export const solutionsBlock = {
             type:'string'
         },
         {
+            name:'underline_width',
+            type:'number',
+            label:'Underline Width(in pixles)'
+        },
+        {
             name:'link_icon',
             label:'Link Icon',
             type:'string',

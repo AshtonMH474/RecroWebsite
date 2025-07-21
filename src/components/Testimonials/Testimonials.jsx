@@ -7,7 +7,6 @@ import TestimonialCard from "./TestimonialCard";
 import Pagination from "../Leadership/Pagination";
 
 function Testimonials(props){
-    console.log(props)
     const tests = props.testimonials || []
     const [gearRotation, setGearRotation] = useState(0);
     const [startIndex, setStartIndex] = useState(0);
@@ -33,7 +32,7 @@ function Testimonials(props){
            >
                 <div className="flex flex-col items-center mt-32 pb-12">
                     {props.testimonialsHeading && (<h2 data-tina-field={tinaField(props,'testimonialsHeading')} className="font-bold text-[36px] text-white">{props.testimonialsHeading}</h2>)}
-                    <div  className="rounded-[12px] h-1 w-80 bg-primary mt-2"></div>
+                    <div data-tina-field={tinaField(props,'underline_width')} style={{width:props.underline_width}} className="rounded-[12px] h-1  bg-primary mt-2"></div>
                 </div>
                 <div className="w-full relative">
                     <DivGears gearRotation={gearRotation}/>

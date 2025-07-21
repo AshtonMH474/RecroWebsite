@@ -17,7 +17,7 @@ blocks:
     _template: landing
   - cards_heading: Our Expertise
     cards_id: expertise_section
-    underline_width: 80
+    underline_width: 300
     cards:
       - title: Cloud
         icon: FaCloud

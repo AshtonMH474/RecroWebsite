@@ -21,7 +21,7 @@ blocks:
     _template: landing2
   - cards_heading: Our Benefits
     cards_id: benefits_section
-    underline_width: 80
+    underline_width: 300
     cards:
       - title: AMAZING 401K
         icon: FaChartBar
@@ -76,6 +76,7 @@ blocks:
     _template: cards
   - jobsHeading: Openings
     jobs_id: jobs_section
+    underline_width: 300
     buttonLabel: View Job
     buttonType: button
     _template: jobs

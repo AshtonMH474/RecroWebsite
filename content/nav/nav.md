@@ -21,8 +21,7 @@ links:
     style: link
     sublinks:
       - linkOptions:
-          type: link
-          link: /solutions/solution1
+          type: id
         label: Solution1
       - linkOptions:
           link: /solutions/solution2
@@ -51,6 +50,7 @@ links:
       - linkOptions:
           type: id
           id: jobs_section
+          scrollPosition: start
         label: jobs
       - linkOptions:
           type: id

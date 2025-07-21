@@ -22,7 +22,7 @@ blocks:
     _template: landing2
   - cards_heading: Our Values
     cards_id: ''
-    underline_width: 80
+    underline_width: 300
     cards:
       - title: Value
         icon: FaQuestionCircle
@@ -66,6 +66,7 @@ blocks:
         content: ''
     _template: cards
   - testimonialsHeading: Testimonies
+    underline_width: 300
     testimonials:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg

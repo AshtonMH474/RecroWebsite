@@ -13,6 +13,11 @@ export const testimonials ={
             label:'Testimonials Id(Must be the same Id as Link Id if you want scroll affect for Section)'
         },
         {
+            name:'underline_width',
+            type:'number',
+            label:'Underline Width(in pixles)'
+        },
+        {
             name:'testimonials',
             label:'Testimonials',
             type:'object',

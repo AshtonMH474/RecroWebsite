@@ -12,6 +12,11 @@ export const statements = {
             label:'heading'
         },
         {
+            name:'underline_width',
+            type:'number',
+            label:'Underline Width(in pixles)'
+        },
+        {
             name:'statements',
             label:'Statements',
             type:'object',

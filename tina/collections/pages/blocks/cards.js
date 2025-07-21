@@ -9,7 +9,8 @@ export const cards = {
     fields:[
         {
             name:"cards_heading",
-            type:'string'
+            type:'string',
+            label:'Heading'
         },
         {
             name:'cards_id',
@@ -18,7 +19,8 @@ export const cards = {
         },
         {
             name:'underline_width',
-            type:'number'
+            type:'number',
+            label:'Underline Width(in pixles)'
         },
         {
             name:'cards',
@@ -28,7 +30,8 @@ export const cards = {
             fields:[
                 {
                     name:'title',
-                    type:'string'
+                    type:'string',
+                    label:'Title'
                 },
                 {
                     name:'icon',
@@ -40,11 +43,13 @@ export const cards = {
                 },
                 {
                     name:'description',
-                    type:'rich-text'
+                    type:'rich-text',
+                    label:'Description'
                 },
                 {
                     name:'allContentLink',
-                    type:'string'
+                    type:'string',
+                    label:'Open Card Link'
                 },
                 {
                     name:'contentIcon',
@@ -56,7 +61,8 @@ export const cards = {
                 },
                 {
                     name:'content',
-                    type:'rich-text'
+                    type:'rich-text',
+                    label:'Content'
                 }
             ]
         }

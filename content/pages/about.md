@@ -14,7 +14,7 @@ blocks:
       egestas.
     _template: landing
   - cards_heading: Our Approach to Success
-    underline_width: 80
+    underline_width: 300
     cards:
       - title: Title
         icon: FaRegChartBar

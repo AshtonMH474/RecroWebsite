@@ -13,6 +13,11 @@ export const jobsBlock = {
             label:'Jobs Id(Must be the same Id as Link Id if you want scroll affect for Section)'
         },
         {
+            name:'underline_width',
+            type:'number',
+            label:'Underline Width(in pixles)'
+        },
+        {
             name:"buttonLabel",
             label:"Button Label",
             type:"string"
