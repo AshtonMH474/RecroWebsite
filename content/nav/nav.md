@@ -19,6 +19,26 @@ links:
     label: solutions
     link: /solutions
     style: link
+    sublinks:
+      - linkOptions:
+          type: link
+          link: /solutions/solution1
+        label: Solution1
+      - linkOptions:
+          link: /solutions/solution2
+        label: Solution2
+      - linkOptions:
+          link: /solutions/solution3
+        label: Solution3
+      - linkOptions:
+          link: /solutions/solution4
+        label: Solution4
+      - linkOptions:
+          link: /solutions/solution5
+        label: Solution5
+      - linkOptions:
+          link: /solutions/solution6
+        label: Solution6
   - linkOptions:
       link: /careers
     label: Careers

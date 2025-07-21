@@ -1,6 +1,6 @@
 .gear1{
     position: relative;
-    top: 30px;
+    top: 20px;
     left: 100px;
     z-index: -1;
     mix-blend-mode: soft-light;
@@ -36,7 +36,7 @@
 .gear5{
     position: relative;
     z-index: -4;
-    bottom: 530px;
+    bottom: 505px;
     left: 120px;
     mix-blend-mode: soft-light;
 }
