@@ -17,6 +17,12 @@ export const cards = {
             type:'string',
             label:'Cards Id(Must be the same Id as Link Id if you want scroll affect for Section)'
         },
+         {
+            name:'scroll',
+            type:'string',
+            label:'Scroll Position(Must be same as sublinks or links scroll position)',
+            options: ['start', 'center', 'end']
+        },
         {
             name:'underline_width',
             type:'number',

@@ -21,6 +21,7 @@ blocks:
     _template: landing2
   - cards_heading: Our Benefits
     cards_id: benefits_section
+    scroll: center
     underline_width: 300
     cards:
       - title: AMAZING 401K
@@ -76,6 +77,7 @@ blocks:
     _template: cards
   - jobsHeading: Openings
     jobs_id: jobs_section
+    scroll: start
     underline_width: 300
     buttonLabel: View Job
     buttonType: button

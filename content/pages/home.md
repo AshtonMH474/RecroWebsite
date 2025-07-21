@@ -2,7 +2,7 @@
 title: Home
 blocks:
   - heading: >
-      # Reinventing How We Move Forward
+      # **Reinventing** How We Move Forward
 
 
       ### Get in touch with Recro. We're here to answer your questions and
@@ -17,6 +17,7 @@ blocks:
     _template: landing
   - cards_heading: Our Expertise
     cards_id: expertise_section
+    scroll: center
     underline_width: 300
     cards:
       - title: Cloud

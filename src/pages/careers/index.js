@@ -20,7 +20,7 @@ export async function getStaticProps() {
   const [pageData, navData, footerData, solutionData, jobRes] = await Promise.all([
     client.queries.page({ relativePath: "careers.md" }),
     client.queries.nav({ relativePath: "nav.md" }),
-    client.queries.footer({ relativePath: "footer.md" }),
+    client.queries.footer({ relativePath: "footerCareers.md" }),
     client.queries.solutionConnection(),
     fetch("https://ats.recro.com/api/joblistings"),
   ]);

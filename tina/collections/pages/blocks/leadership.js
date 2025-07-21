@@ -13,6 +13,12 @@ export const leadershipBlock = {
             label:'Leadership Id(Must be the same Id as Link Id if you want scroll affect for Section)'
         },
         {
+            name:'scroll',
+            type:'string',
+            label:'Scroll Position(Must be same as sublinks or links scroll position)',
+            options: ['start', 'center', 'end']
+        },
+        {
             name:'leaders',
             label:'Leaders',
             type:'object',
