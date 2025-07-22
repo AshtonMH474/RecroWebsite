@@ -9,7 +9,7 @@ import Jobs from "@/components/Jobs/Jobs";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import Landing2 from '@/components/Landing2'
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
-import Testimonials from "@/components/Testimonials/Testimonials";
+import Testimonies from "@/components/Testimonies/Testimonies";
 
 
 export async function getStaticProps() {
@@ -50,7 +50,9 @@ function Values({res,navData,footerData,jobs,solutions}){
                 'leadership_id',
                 'learn_id',
                 'landing_id',
-                'landing2_id'
+                'landing2_id',
+                'testimonies_id',
+                'solutions_id'
     ]);
     return(
         <>
@@ -73,8 +75,8 @@ function Values({res,navData,footerData,jobs,solutions}){
                       return <Jobs key={i} jobs={jobs} {...block}/>;
                     case "PageBlocksSolutions":
                         return <SolutionsGrid key={i} {...block} solutions={solutions}/>
-                    case "PageBlocksTestimonials":
-                        return <Testimonials key={i} {...block}/>
+                    case "PageBlocksTestimonies":
+                        return <Testimonies key={i} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

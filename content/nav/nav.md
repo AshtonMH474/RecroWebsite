@@ -3,13 +3,6 @@ animation: expertise
 logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.png'
 links:
   - linkOptions:
-      type: id
-      id: expertise_section
-      scrollPosition: center
-    label: expertise
-    link: /
-    style: link
-  - linkOptions:
       link: /portal
     label: Partners
     link: /portal
@@ -72,9 +65,9 @@ links:
         label: Contract Vehicles
   - linkOptions:
       type: link
-      link: /login
+      link: /admin
     label: login
-    link: /login
+    link: /admin
     style: button
 ---
 

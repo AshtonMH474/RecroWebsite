@@ -65,9 +65,9 @@ blocks:
           malesuada lorem pulvinar a. Integer id sem nisi.
         content: ''
     _template: cards
-  - testimonialsHeading: Testimonies
+  - testimoniesHeading: Testimonies
     underline_width: 300
-    testimonials:
+    testimonies:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
@@ -158,6 +158,6 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
-    _template: testimonials
+    _template: testimonies
 ---
 

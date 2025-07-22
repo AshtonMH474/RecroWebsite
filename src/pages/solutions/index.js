@@ -7,6 +7,7 @@ import Leadership from "@/components/Leadership/Leadership";
 import Learn from "@/components/Learn";
 import Nav from "@/components/Nav/Nav";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
+import Testimonies from "@/components/Testimonies/Testimonies";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import { useTina } from "tinacms/dist/react";
 
@@ -51,7 +52,9 @@ function Solutions({res,navData,footerData,jobs,solutions}){
               'leadership_id',
               'learn_id',
               'landing_id',
-              'landing2_id'
+              'landing2_id',
+              'testimonies_id',
+              'solutions_id'
           ]);
     
     
@@ -75,6 +78,8 @@ function Solutions({res,navData,footerData,jobs,solutions}){
                       return <Jobs key={i} jobs={jobs} {...block} />;
                     case "PageBlocksSolutions":
                         return <SolutionsGrid key={i} {...block} solutions={solutions}/>
+                    case "PageBlocksTestimonies":
+                        return <Testimonies key={i} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

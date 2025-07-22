@@ -121,13 +121,15 @@ export default function DesktopMenu({ links }) {
 
         if (link.style === "button") {
           return (
+            <Link href={link.link}>
             <button
               key={`button-${i}`}
               data-tina-field={tinaField(link, "label")}
-              className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize"
+              className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
             >
               {link.label}
             </button>
+            </Link>
           );
         }
 

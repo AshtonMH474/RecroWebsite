@@ -9,6 +9,7 @@ import Jobs from "@/components/Jobs/Jobs";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import Landing2 from "@/components/Landing2";
+import Testimonies from "@/components/Testimonies/Testimonies";
 
 
 
@@ -51,7 +52,9 @@ function Vehicles({res,navData,footerData,jobs,solutions}){
             'leadership_id',
             'learn_id',
             'landing_id',
-            'landing2_id'
+            'landing2_id',
+            'testimonies_id',
+            'solutions_id'
         ]);
 
     return (
@@ -75,6 +78,8 @@ function Vehicles({res,navData,footerData,jobs,solutions}){
                       return <Jobs key={i} jobs={jobs} {...block}/>;
                     case "PageBlocksSolutions":
                         return <SolutionsGrid key={i} {...block} solutions={solutions}/>
+                    case "PageBlocksTestimonies":
+                        return <Testimonies key={i} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

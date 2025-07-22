@@ -5,7 +5,7 @@ import { landing2Block } from "./blocks/landing2";
 import { leadershipBlock } from "./blocks/leadership";
 import { learnAboutTeamBlock } from "./blocks/learn";
 import { solutionsBlock } from "./blocks/solutions";
-import { testimonials } from "./blocks/testimonials";
+import { testimonies } from "./blocks/testimonies";
 
 const pages = {
   name: "page",
@@ -32,7 +32,7 @@ const pages = {
       label: "Blocks",
       type: "object",
       list: true,
-      templates: [landingBlock,landing2Block,cards,learnAboutTeamBlock,leadershipBlock,jobsBlock,solutionsBlock,testimonials],
+      templates: [landingBlock,landing2Block,cards,learnAboutTeamBlock,leadershipBlock,jobsBlock,solutionsBlock,testimonies],
     },
   ],
 };

@@ -58,7 +58,7 @@ function SolutionsGrid(props){
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
     return (
         <>
-            <section ref={sectionRef}
+            <section id={props.solutions_id} ref={sectionRef}
             style={{ height: `${sectionHeight}px` }}
             className="pb-16 relative" >
                 <div style={{
