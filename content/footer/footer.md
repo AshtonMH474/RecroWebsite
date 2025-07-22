@@ -4,7 +4,7 @@ buttons:
   - label: Contact Us
     style: border
 links:
-  - link: /portal
+  - link: /partners
     label: Partners
   - link: /solutions
     label: 'Solutions '

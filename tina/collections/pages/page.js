@@ -20,6 +20,7 @@ const pages = {
       if(props.document._sys.relativePath === 'solutions.md') return "/solutions"
       if(props.document._sys.relativePath === 'vehicles.md') return "/about/vehicles"
       if(props.document._sys.relativePath === 'values.md') return "/careers/values"
+      if(props.document._sys.relativePath === 'partners.md') return '/partners'
     },
   },
   fields: [

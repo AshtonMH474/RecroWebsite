@@ -3,9 +3,9 @@ animation: expertise
 logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.png'
 links:
   - linkOptions:
-      link: /portal
+      link: /partners
     label: Partners
-    link: /portal
+    link: /partners
     style: link
   - linkOptions:
       link: /solutions
