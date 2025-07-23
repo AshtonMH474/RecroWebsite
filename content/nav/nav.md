@@ -14,7 +14,8 @@ links:
     style: link
     sublinks:
       - linkOptions:
-          type: id
+          type: link
+          link: /solutions/solution1
         label: Solution1
       - linkOptions:
           link: /solutions/solution2
