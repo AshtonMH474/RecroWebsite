@@ -58,7 +58,7 @@ function SolutionsGrid(props){
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
     return (
         <>
-            <section ref={sectionRef}
+            <section id={props.solutions_id} ref={sectionRef}
             style={{ height: `${sectionHeight}px` }}
             className="pb-16 relative" >
                 <div style={{
@@ -69,8 +69,8 @@ function SolutionsGrid(props){
                         <motion.h2 style={{ opacity: headingOpacity }} data-tina-field={tinaField(props,'solutions_heading')} className="font-bold text-[36px] text-white text-center">
                             {props.solutions_heading}
                         </motion.h2>
-                        <motion.div style={{ opacity: headingOpacity }}
-                        className={`rounded-[12px] h-1 w-80 bg-primary mx-auto mt-2`}
+                        <motion.div data-tina-field={tinaField(props,'underline_width')} style={{ opacity: headingOpacity,width:props.underline_width }}
+                        className={`rounded-[12px] h-1  bg-primary mx-auto mt-2`}
                         />
                         <motion.div style={{ opacity: cardsOpacity, scale: cardsScale }} className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
                             {solutions.map((card,i) => (

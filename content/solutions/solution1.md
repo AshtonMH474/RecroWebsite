@@ -10,6 +10,7 @@ description: >
   et netus et malesuada fames ac turpis egestas.
 blocks:
   - cards_heading: 'What We Do '
+    underline_width: 300
     cards:
       - title: Title
         icon: FaAmbulance
@@ -34,6 +35,7 @@ blocks:
           luctus tortor, vitae tincidunt orci enim id nulla.
     _template: cards
   - statement_heading: 'Capability Statements '
+    underline_width: 300
     statements:
       - title: Title
         icon: FaAndroid

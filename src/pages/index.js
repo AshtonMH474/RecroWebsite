@@ -10,6 +10,8 @@ import Nav from "@/components/Nav/Nav";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import Landing2 from "@/components/Landing2";
+import Testimonies from "@/components/Testimonies/Testimonies";
+import Agencies from "@/components/Agencies";
 
 
 
@@ -58,15 +60,18 @@ export default function Home({res,navData,footerData,jobs,solutions}) {
           'leadership_id',
           'learn_id',
           'landing_id',
-          'landing2_id'
-      ]);
-  
+          'landing2_id',
+          'testimonies_id',
+          'solutions_id'
 
+      ]);
+      console.log(data)
+      
   return (
   
     <>
       <Nav res={navContent.nav}  />
-    
+
      {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":
@@ -84,6 +89,10 @@ export default function Home({res,navData,footerData,jobs,solutions}) {
                       return <Jobs key={i} jobs={jobs} {...block} />;
                     case "PageBlocksSolutions":
                         return <SolutionsGrid key={i} {...block} solutions={solutions}/>
+                    case "PageBlocksTestimonies":
+                        return <Testimonies key={i} {...block}/>
+                    case "PageBlocksAgencies":
+                      return <Agencies key={i} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

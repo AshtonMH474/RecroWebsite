@@ -9,7 +9,7 @@ function LeaderBio({ leader,isVisable }) {
       data-tina-field={tinaField(leader, "bio")}
       className={`absolute inset-0 z-20 
       ${isVisable ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition-opacity duration-300 
-      flex items-start justify-center px-4 pt-6 text-center overflow-auto`}
+      flex items-start md:items-center justify-center px-4 pt-6 text-center overflow-auto`}
     >
       <TinaMarkdown
         content={leader.bio}

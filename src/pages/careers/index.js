@@ -1,3 +1,4 @@
+import Agencies from '@/components/Agencies'
 import Cards from '@/components/Cards/Cards'
 import Footer from '@/components/Footer'
 import Jobs from '@/components/Jobs/Jobs'
@@ -7,6 +8,7 @@ import Leadership from '@/components/Leadership/Leadership'
 import Learn from '@/components/Learn'
 import Nav from '@/components/Nav/Nav'
 import SolutionsGrid from '@/components/SolutionsGrid/SolutionsGrid'
+import Testimonies from '@/components/Testimonies/Testimonies'
 import useScrollToHash from '@/hooks/useScrollToHash'
 import { useTina } from 'tinacms/dist/react'
 
@@ -20,7 +22,7 @@ export async function getStaticProps() {
   const [pageData, navData, footerData, solutionData, jobRes] = await Promise.all([
     client.queries.page({ relativePath: "careers.md" }),
     client.queries.nav({ relativePath: "nav.md" }),
-    client.queries.footer({ relativePath: "footer.md" }),
+    client.queries.footer({ relativePath: "footerCareers.md" }),
     client.queries.solutionConnection(),
     fetch("https://ats.recro.com/api/joblistings"),
   ]);
@@ -52,7 +54,9 @@ function Careers({res,navData,footerData,jobs,solutions}){
         'leadership_id',
         'learn_id',
         'landing_id',
-        'landing2_id'
+        'landing2_id',
+        'testimonies_id',
+        'solutions_id'
     ]);
 
 
@@ -77,6 +81,10 @@ function Careers({res,navData,footerData,jobs,solutions}){
                       return <Jobs key={i} jobs={jobs} {...block}/>;
                     case "PageBlocksSolutions":
                         return <SolutionsGrid key={i} {...block} solutions={solutions}/>
+                      case "PageBlocksTestimonies":
+                        return <Testimonies key={i} {...block}/>
+                      case "PageBlocksAgencies":
+                            return <Agencies key={i} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

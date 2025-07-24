@@ -9,16 +9,24 @@ export const cards = {
     fields:[
         {
             name:"cards_heading",
-            type:'string'
+            type:'string',
+            label:'Heading'
         },
         {
             name:'cards_id',
             type:'string',
             label:'Cards Id(Must be the same Id as Link Id if you want scroll affect for Section)'
         },
+         {
+            name:'scroll',
+            type:'string',
+            label:'Scroll Position(Must be same as sublinks or links scroll position)',
+            options: ['start', 'center', 'end']
+        },
         {
             name:'underline_width',
-            type:'number'
+            type:'number',
+            label:'Underline Width(in pixles)'
         },
         {
             name:'cards',
@@ -28,7 +36,8 @@ export const cards = {
             fields:[
                 {
                     name:'title',
-                    type:'string'
+                    type:'string',
+                    label:'Title'
                 },
                 {
                     name:'icon',
@@ -40,11 +49,13 @@ export const cards = {
                 },
                 {
                     name:'description',
-                    type:'rich-text'
+                    type:'rich-text',
+                    label:'Description'
                 },
                 {
                     name:'allContentLink',
-                    type:'string'
+                    type:'string',
+                    label:'Open Card Link'
                 },
                 {
                     name:'contentIcon',
@@ -56,7 +67,8 @@ export const cards = {
                 },
                 {
                     name:'content',
-                    type:'rich-text'
+                    type:'rich-text',
+                    label:'Content'
                 }
             ]
         }

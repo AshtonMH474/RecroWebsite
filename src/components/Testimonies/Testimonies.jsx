@@ -3,12 +3,12 @@ import DivGears from "../DivGears"
 import { useState } from "react";
 import { AnimatePresence,motion } from "framer-motion";
 import { animationVariants } from "../Leadership/LeaderAnimations";
-import TestimonialCard from "./TestimonialCard";
+import TestimonyCard from "./TestimonyCard";
 import Pagination from "../Leadership/Pagination";
 
-function Testimonials(props){
-    console.log(props)
-    const tests = props.testimonials || []
+function Testimonies(props){
+
+    const tests = props.testimonies || []
     const [gearRotation, setGearRotation] = useState(0);
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(0);
@@ -30,10 +30,11 @@ function Testimonials(props){
         <>
            <div style={{minHeight:'100dvh'}}
            className="relative bg-black overflow-hidden w-full pb-24"
+           id={props.testimonies_id}
            >
                 <div className="flex flex-col items-center mt-32 pb-12">
-                    {props.testimonialsHeading && (<h2 data-tina-field={tinaField(props,'testimonialsHeading')} className="font-bold text-[36px] text-white">{props.testimonialsHeading}</h2>)}
-                    <div  className="rounded-[12px] h-1 w-80 bg-primary mt-2"></div>
+                    {props.testimoniesHeading && (<h2 data-tina-field={tinaField(props,'testimoniesHeading')} className="font-bold text-[36px] text-white">{props.testimoniesHeading}</h2>)}
+                    <div data-tina-field={tinaField(props,'underline_width')} style={{width:props.underline_width}} className="rounded-[12px] h-1  bg-primary mt-2"></div>
                 </div>
                 <div className="w-full relative">
                     <DivGears gearRotation={gearRotation}/>
@@ -50,7 +51,7 @@ function Testimonials(props){
                             className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12">
                                 {visableTests.map((test,i) => {
                                     const actualIndex = startIndex + i
-                                    return (<TestimonialCard key={actualIndex} test={test}/>)
+                                    return (<TestimonyCard key={actualIndex} test={test}/>)
                                 })}
                             </motion.div>
                         </AnimatePresence>
@@ -64,4 +65,4 @@ function Testimonials(props){
     )
 }
 
-export default Testimonials
+export default Testimonies

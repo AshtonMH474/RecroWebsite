@@ -22,10 +22,12 @@ function SolutionCards(props) {
         </motion.h2>
 
         <motion.div
+          style={{width:props.underline_width}}
+          data-tina-field={tinaField(props,'underline_width')}
           initial={{ scaleX: 0 }}
           animate={headingInView ? { scaleX: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-          className="rounded-[12px] h-1 w-80 bg-primary mx-auto mt-2 origin-left"
+          className="rounded-[12px] h-1  bg-primary mx-auto mt-2 origin-left"
         />
 
         <div className="pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">

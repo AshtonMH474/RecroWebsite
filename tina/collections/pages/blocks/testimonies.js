@@ -1,20 +1,31 @@
-export const testimonials ={
-    name:"testimonials",
-    label:"Testimonials",
+export const testimonies ={
+    name:"testimonies",
+    label:"Testimonies",
     fields:[
         {
-        name:'testimonialsHeading',
+        name:'testimoniesHeading',
         type:'string',
         label:'Heading'
         },
         {
-            name:"testimonials_id",
+            name:"testimonies_id",
             type:"string",
-            label:'Testimonials Id(Must be the same Id as Link Id if you want scroll affect for Section)'
+            label:'Testimonies Id(Must be the same Id as Link Id if you want scroll affect for Section)'
         },
         {
-            name:'testimonials',
-            label:'Testimonials',
+            name:'scroll',
+            type:'string',
+            label:'Scroll Position(Must be same as sublinks or links scroll position)',
+            options: ['start', 'center', 'end']
+        },
+        {
+            name:'underline_width',
+            type:'number',
+            label:'Underline Width(in pixles)'
+        },
+        {
+            name:'testimonies',
+            label:'Testimonies',
             type:'object',
             list:true,
             fields:[

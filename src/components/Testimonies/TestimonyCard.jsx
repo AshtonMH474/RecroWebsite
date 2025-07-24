@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 
-function TestimonialCard({test}){
+function TestimonyCard({test}){
     return(
         <div className="border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[265px] px-4 py-6">
             <div className="flex items-center mb-3 gap-x-3">
@@ -53,4 +53,4 @@ function TestimonialCard({test}){
     )
 }
 
-export default TestimonialCard
+export default TestimonyCard

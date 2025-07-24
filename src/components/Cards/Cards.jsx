@@ -95,8 +95,9 @@ useEffect(() => {
           </motion.h2>
 
           <motion.div
-            className={`rounded-[12px] h-1 w-${props.underline_width} bg-primary mx-auto mt-2`}
-            style={{ opacity: headingOpacity }}
+            className={`rounded-[12px] h-1 bg-primary mx-auto mt-2`}
+            data-tina-field={tinaField(props,"underline_width")}
+            style={{ opacity: headingOpacity,width:props.underline_width }}
           />
 
           <motion.div

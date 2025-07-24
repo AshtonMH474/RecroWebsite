@@ -1,7 +1,7 @@
 ---
 title: vehicles
 blocks:
-  - heading: >+
+  - heading: >
       # How to Work with Us
 
 
@@ -12,11 +12,9 @@ blocks:
       Nullam sit amet purus non turpis malesuada convallis. Pellentesque
       habitant morbi tristique senectus et netus et malesuada fames ac turpis
       egestas.
-
-
     _template: landing
   - cards_heading: Our Contract Vehicles
-    underline_width: 80
+    underline_width: 300
     cards:
       - title: Title
         icon: FaAccessibleIcon
@@ -25,6 +23,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
       - title: Title
         icon: FaAdn
         description: >
@@ -32,6 +31,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
       - title: Title
         icon: FaAirFreshener
         description: >
@@ -39,6 +39,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
       - title: Title
         icon: FaAlignCenter
         description: >
@@ -46,6 +47,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
       - title: Title
         icon: FaAngleDoubleLeft
         description: >
@@ -53,6 +55,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
     _template: cards
 ---
 

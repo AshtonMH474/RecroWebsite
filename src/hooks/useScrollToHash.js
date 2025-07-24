@@ -11,22 +11,19 @@ export default function useScrollToHash(blocks = [], idFields = [], delay = 1000
       idFields.some((key) => block?.[key] === hash)
     );
     if (matchingBlock) {
+      
       requestAnimationFrame(() => {
         setTimeout(() => {
-            
           const el = document.getElementById(hash);
+          
+          
           if (el) {
-            if(matchingBlock.__typename == "PageBlocksJobs"){
-                el.scrollIntoView({ behavior: "smooth", block: "start" });
+          
+                el.scrollIntoView({ behavior: "smooth", block: matchingBlock.scroll });
                 if (window.history.replaceState) {
                 window.history.replaceState(null, "", window.location.pathname + window.location.search);
                 }
-            }else{
-                el.scrollIntoView({ behavior: "smooth", block: "center" });
-                if (window.history.replaceState) {
-                window.history.replaceState(null, "", window.location.pathname + window.location.search);
-                }
-            }
+          
             
           }
         }, delay);

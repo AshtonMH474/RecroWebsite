@@ -12,6 +12,12 @@ export const learnAboutTeamBlock = {
             label:'Learn Id(Must be the same Id as Link Id if you want scroll affect for Section)'
         },
         {
+            name:'scroll',
+            type:'string',
+            label:'Scroll Position(Must be same as sublinks or links scroll position)',
+            options: ['start', 'center', 'end']
+        },
+        {
             name: "buttons",
       label: "Buttons",
       type: "object",

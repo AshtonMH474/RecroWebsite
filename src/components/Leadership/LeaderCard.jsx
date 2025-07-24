@@ -12,7 +12,7 @@ function LeaderCard({ leader,isMobile }) {
       data-tina-field={tinaField(leader, "src")}
       role="img"
       aria-label={`${leader.name}, ${leader.title}`}
-      className={`${isMobile ? 'cursor-pointer' : ''} relative group w-[300px] h-[260px] rounded-[8px] overflow-hidden shadow-md transform transition-all duration-300 hover:scale-105`}
+      className={`${isMobile ? 'cursor-pointer' : ''} relative group w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] md:h-[500px]  rounded-[8px] overflow-hidden shadow-md transform transition-all duration-300 hover:scale-105`}
       onClick={() => {
         if(isMobile)setVisable(!isVisable)
       }}
@@ -31,3 +31,4 @@ function LeaderCard({ leader,isMobile }) {
 }
 
 export default LeaderCard;
+

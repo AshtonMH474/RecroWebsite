@@ -15,7 +15,7 @@ function Leadership(props) {
   const [gearRotation, setGearRotation] = useState(0);
 
   // getting the total amount of pages needed based on how many are visbale at once
-  const visibleCount = 6;
+  const visibleCount = 2;
   const totalPages = Math.ceil(leaders.length / visibleCount);
   
   // go to what page based off index and the direction
@@ -66,7 +66,7 @@ function Leadership(props) {
           </div>
           <div className="w-full">
             <DivGears  gearRotation={gearRotation}/>
-                <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
+                <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[500px]">
                   <AnimatePresence custom={direction} mode="wait">
                     <motion.div
                       key={startIndex}

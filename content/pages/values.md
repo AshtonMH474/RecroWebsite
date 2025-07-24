@@ -22,7 +22,7 @@ blocks:
     _template: landing2
   - cards_heading: Our Values
     cards_id: ''
-    underline_width: 80
+    underline_width: 300
     cards:
       - title: Value
         icon: FaQuestionCircle
@@ -65,8 +65,9 @@ blocks:
           malesuada lorem pulvinar a. Integer id sem nisi.
         content: ''
     _template: cards
-  - testimonialsHeading: Testimonies
-    testimonials:
+  - testimoniesHeading: Testimonies
+    underline_width: 300
+    testimonies:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Name
@@ -157,6 +158,6 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
-    _template: testimonials
+    _template: testimonies
 ---
 
