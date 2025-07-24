@@ -15,6 +15,8 @@ blocks:
       - agency: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/department-of-the-navy-1-logo-black-and-white
           2.png
+      - agency: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/05-F-ZZ999-009%202.png
     _template: agencies
   - heading: >
       # **Reinventing** How We Move Forward
