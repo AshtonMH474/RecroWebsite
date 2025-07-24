@@ -60,11 +60,6 @@ const downloadPDF = () => {
   }
 };
 
-    function skipDownload(){
-        downloadPDF()
-        onClose()
-    }
-
 
   return (
     <div className="fixed inset-0 z-[1000] flex justify-center items-center" onClick={onClose}>
