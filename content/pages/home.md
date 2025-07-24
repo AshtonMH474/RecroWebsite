@@ -1,20 +1,6 @@
 ---
 title: Home
 blocks:
-  - heading: >
-      # **Reinventing** How We Move Forward
-
-
-      ### Get in touch with Recro. We're here to answer your questions and
-      discuss how we can help grow your career.
-    buttons:
-      - link: /signup
-        label: Sign Up
-        style: button
-      - link: /about
-        label: about
-        style: border
-    _template: landing
   - agencies_heading: Our Partners
     agencies_id: partners
     scroll: start
@@ -30,6 +16,20 @@ blocks:
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/department-of-the-navy-1-logo-black-and-white
           2.png
     _template: agencies
+  - heading: >
+      # **Reinventing** How We Move Forward
+
+
+      ### Get in touch with Recro. We're here to answer your questions and
+      discuss how we can help grow your career.
+    buttons:
+      - link: /signup
+        label: Sign Up
+        style: button
+      - link: /about
+        label: about
+        style: border
+    _template: landing
   - solutions_heading: Solutions
     link_heading: Learn More
     underline_width: 300

@@ -60,7 +60,7 @@ export default function Agencies(props) {
 
   return (
     <section className="w-full bg-black py-12 overflow-hidden">
-      <div className="text-center">
+      {/* <div className="text-center">
         <h2
           data-tina-field={tinaField(props, "agencies_heading")}
           className="text-white font-bold text-[36px]"
@@ -68,7 +68,7 @@ export default function Agencies(props) {
           {props.agencies_heading}
         </h2>
         <div className="bg-primary h-1 w-32 md:w-80 mx-auto mt-3 rounded-xl" />
-      </div>
+      </div> */}
 
       <div
         ref={containerRef}
@@ -86,7 +86,7 @@ export default function Agencies(props) {
               src={partner.agency}
               onLoad={() => window.dispatchEvent(new Event('resize'))}
               alt="agency logo"
-              className="h-[120px] w-auto object-contain drop-shadow-lg"
+              className="h-[80px] w-auto object-contain drop-shadow-lg"
             />
           ))}
         </motion.div>

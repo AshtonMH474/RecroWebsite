@@ -89,7 +89,7 @@ const downloadPDF = () => {
         {/* Header */}
         <div className="flex justify-end  mb-8">
           <button onClick={onClose} aria-label="Close Modal">
-            <IoMdClose className="text-white text-[24px] hover:text-primary transition" />
+            <IoMdClose className="cursor-pointer text-white text-[24px] hover:text-primary transition" />
           </button>
         </div>
 
@@ -114,12 +114,10 @@ const downloadPDF = () => {
 
           <textarea name="message" placeholder="Message" rows={4}
             className="w-full p-2 rounded bg-[#2A2A2E] text-white placeholder-white/70 resize-none" />
-            <div onClick={skipDownload} className="flex justify-center cursor-pointer">
-                Skip to Download
-            </div>
+            
           <button type="submit"
-            className="w-full py-2 rounded bg-primary text-white hover:bg-primary/80 transition">
-            Submit
+            className="cursor-pointer w-full py-2 rounded bg-primary text-white hover:bg-primary/80 transition">
+            Download
           </button>
         </form>
       </motion.div>

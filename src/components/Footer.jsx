@@ -23,7 +23,7 @@ function Footer({res}) {
                         onClick={toggleForm}
                         key={i}
                         data-tina-field={tinaField(res.buttons[i], 'label')}
-                        className="px-4 capitalize py-2 border border-white rounded hover:text-white/80 transition-colors duration-300"
+                        className="cursor-pointer px-4 capitalize py-2 border border-white rounded hover:text-white/80 transition-colors duration-300"
                     >
                         {button.label}
                     </button>
@@ -34,7 +34,7 @@ function Footer({res}) {
                         onClick={toggleForm}
                         key={i}
                         data-tina-field={tinaField(res.buttons[i], 'label')}
-                        className="bg-[#3F3F38] capitalize cursor-pointer px-4 py-2 w-auto rounded hover:opacity-80 text-white"
+                        className="cursor-pointer bg-[#3F3F38] capitalize cursor-pointer px-4 py-2 w-auto rounded hover:opacity-80 text-white"
                     >
                         {button.label}
                     </button>
