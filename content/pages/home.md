@@ -33,7 +33,7 @@ blocks:
         style: border
     _template: landing
   - solutions_heading: Solutions
-    link_heading: Learn More yay
+    link_heading: Learn More
     underline_width: 300
     solutions_id: solutions
     scroll: center
