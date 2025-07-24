@@ -1,3 +1,4 @@
+import { agencies } from "./blocks/agencies";
 import { cards } from "./blocks/cards";
 import { jobsBlock } from "./blocks/jobs";
 import { landingBlock } from "./blocks/landing";
@@ -33,7 +34,7 @@ const pages = {
       label: "Blocks",
       type: "object",
       list: true,
-      templates: [landingBlock,landing2Block,cards,learnAboutTeamBlock,leadershipBlock,jobsBlock,solutionsBlock,testimonies],
+      templates: [landingBlock,landing2Block,cards,learnAboutTeamBlock,leadershipBlock,jobsBlock,solutionsBlock,testimonies,agencies],
     },
   ],
 };
