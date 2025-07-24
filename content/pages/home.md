@@ -1,6 +1,20 @@
 ---
 title: Home
 blocks:
+  - heading: >
+      # **Reinventing** How We Move Forward
+
+
+      ### Get in touch with Recro. We're here to answer your questions and
+      discuss how we can help grow your career.
+    buttons:
+      - link: /signup
+        label: Sign Up
+        style: button
+      - link: /about
+        label: about
+        style: border
+    _template: landing
   - agencies_heading: Our Partners
     agencies_id: partners
     scroll: start
@@ -18,20 +32,6 @@ blocks:
       - agency: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/05-F-ZZ999-009%202.png
     _template: agencies
-  - heading: >
-      # **Reinventing** How We Move Forward
-
-
-      ### Get in touch with Recro. We're here to answer your questions and
-      discuss how we can help grow your career.
-    buttons:
-      - link: /signup
-        label: Sign Up
-        style: button
-      - link: /about
-        label: about
-        style: border
-    _template: landing
   - solutions_heading: Solutions
     link_heading: Learn More
     underline_width: 300
