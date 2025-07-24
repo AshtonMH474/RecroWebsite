@@ -1,3 +1,4 @@
+import Agencies from '@/components/Agencies'
 import Cards from '@/components/Cards/Cards'
 import Footer from '@/components/Footer'
 import Jobs from '@/components/Jobs/Jobs'
@@ -82,6 +83,8 @@ function Careers({res,navData,footerData,jobs,solutions}){
                         return <SolutionsGrid key={i} {...block} solutions={solutions}/>
                       case "PageBlocksTestimonies":
                         return <Testimonies key={i} {...block}/>
+                      case "PageBlocksAgencies":
+                            return <Agencies key={i} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

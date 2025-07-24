@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { tinaField } from "tinacms/dist/react";
 
@@ -7,52 +7,56 @@ export default function Agencies(props) {
   const containerRef = useRef(null);
   const controls = useAnimation();
 
- useEffect(() => {
-  let previousWidth = window.innerWidth;
+  const startMarquee = (track, container) => {
+    const distance = track + container;
+    const duration = distance / 100;
 
-  const init = () => {
-    if (trackRef.current && containerRef.current) {
-      const track = trackRef.current.scrollWidth;
-      const container = containerRef.current.offsetWidth;
-      controls.stop();
-      startMarquee(track, container);
-    }
+    const animateLoop = async () => {
+      while (true) {
+        await controls.start({
+          x: [container, -track],
+          transition: {
+            duration,
+            ease: "linear",
+          },
+        });
+        // Wait one tick to ensure the DOM is mounted before resetting
+        requestAnimationFrame(() => {
+          controls.set({ x: container });
+        });
+      }
+    };
+
+    animateLoop();
   };
 
-  // Run on mount
-  init();
+  useEffect(() => {
+    let previousWidth = window.innerWidth;
 
-  const handleResize = () => {
-    const currentWidth = window.innerWidth;
-    const widthDiff = Math.abs(currentWidth - previousWidth);
+    const init = () => {
+      if (trackRef.current && containerRef.current) {
+        const track = trackRef.current.scrollWidth;
+        const container = containerRef.current.offsetWidth;
+        controls.stop();
+        startMarquee(track, container);
+      }
+    };
 
-    if (widthDiff >= 150) {
-      previousWidth = currentWidth;
-      init(); // Only recalc if width changed significantly
-    }
-  };
+    init();
 
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, [props.partners]);
+    const handleResize = () => {
+      const currentWidth = window.innerWidth;
+      const widthDiff = Math.abs(currentWidth - previousWidth);
 
+      if (widthDiff >= 150) {
+        previousWidth = currentWidth;
+        init(); // only if width changed significantly
+      }
+    };
 
-
-  const startMarquee = async (track, container) => {
-    const distance = track + container; // from far right to far left
-    const duration = distance / 100; // speed control
-
-    while (true) {
-      await controls.start({
-        x: [container, -track],
-        transition: {
-          duration,
-          ease: "linear",
-        },
-      });
-      controls.set({ x: container }); // reset instantly to far right again
-    }
-  };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [props.partners]);
 
   return (
     <section className="w-full bg-black py-12 overflow-hidden">
@@ -80,6 +84,7 @@ export default function Agencies(props) {
             <img
               key={i}
               src={partner.agency}
+              onLoad={() => window.dispatchEvent(new Event('resize'))}
               alt="agency logo"
               className="h-[120px] w-auto object-contain drop-shadow-lg"
             />
@@ -93,5 +98,6 @@ export default function Agencies(props) {
     </section>
   );
 }
+
 
 
