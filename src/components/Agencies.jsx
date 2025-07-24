@@ -6,36 +6,36 @@ export default function Agencies(props) {
   const trackRef = useRef(null);
   const containerRef = useRef(null);
   const controls = useAnimation();
-  const [trackWidth, setTrackWidth] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
 
  useEffect(() => {
+  let previousWidth = window.innerWidth;
+
   const init = () => {
     if (trackRef.current && containerRef.current) {
       const track = trackRef.current.scrollWidth;
       const container = containerRef.current.offsetWidth;
-      setTrackWidth(track);
-      setContainerWidth(container);
       controls.stop();
       startMarquee(track, container);
     }
   };
 
-  // Run immediately on mount
+  // Run on mount
   init();
 
-  // Debounced resize listener
-  let resizeTimeout;
   const handleResize = () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      init(); // re-run with updated dimensions
-    }, 150);
+    const currentWidth = window.innerWidth;
+    const widthDiff = Math.abs(currentWidth - previousWidth);
+
+    if (widthDiff >= 150) {
+      previousWidth = currentWidth;
+      init(); // Only recalc if width changed significantly
+    }
   };
 
   window.addEventListener("resize", handleResize);
   return () => window.removeEventListener("resize", handleResize);
 }, [props.partners]);
+
 
 
   const startMarquee = async (track, container) => {
