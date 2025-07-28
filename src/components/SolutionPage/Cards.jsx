@@ -16,7 +16,7 @@ function SolutionCards(props) {
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
           data-tina-field={tinaField(props, "cards_heading")}
-          className="font-bold text-[36px] text-white text-center"
+          className="font-bold text-[32px] md:text-[40px] text-white text-center"
         >
           {props.cards_heading}
         </motion.h2>

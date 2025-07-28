@@ -1,4 +1,4 @@
-import Agencies from "@/components/Agencies";
+import Agencies from "@/components/Agency/Agencies";
 import Cards from "@/components/Cards/Cards";
 import Footer from "@/components/Footer";
 import Jobs from "@/components/Jobs/Jobs";

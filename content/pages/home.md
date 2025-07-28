@@ -1,21 +1,6 @@
 ---
 title: Home
 blocks:
-  - agencies_heading: Our Partners
-    agencies_id: partners
-    scroll: start
-    underline_width: 300
-    partners:
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/05-F-ZZ999-009
-          2.png
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/DoD-Logo-Light-Stacked-1-Color
-          2.png
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/department-of-the-navy-1-logo-black-and-white
-          2.png
-    _template: agencies
   - heading: >
       # **Reinventing** How We Move Forward
 
@@ -30,6 +15,43 @@ blocks:
         label: about
         style: border
     _template: landing
+  - agencies_heading: Our Partners
+    agencies_id: partners
+    scroll: start
+    underline_width: 300
+    partners:
+      - agency: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/05-F-ZZ999-009
+          2.png
+        title: Title
+        description: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst.
+      - agency: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/DoD-Logo-Light-Stacked-1-Color
+          2.png
+        title: Title
+        description: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst.
+      - agency: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/department-of-the-navy-1-logo-black-and-white
+          2.png
+        title: Title
+        description: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst.
+    subPartners:
+      - agency: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/05-F-ZZ999-009%202.png
+      - agency: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/DoD-Logo-Light-Stacked-1-Color%202.png
+      - agency: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/department-of-the-navy-1-logo-black-and-white%202.png
+    _template: agencies
   - solutions_heading: Solutions
     link_heading: Learn More
     underline_width: 300
