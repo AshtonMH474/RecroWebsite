@@ -33,6 +33,29 @@ export const agencies = {
                     name:'agency',
                     label:'Partner Image',
                     type:'image'
+                },
+                {
+                    name:'title',
+                    label:'Title',
+                    type:'string'
+                },
+                {
+                    name:'description',
+                    label:'Description',
+                    type:'rich-text'
+                }
+            ]
+        },
+        {
+            name:'subPartners',
+            label:'Sub Partners',
+            type:'object',
+            list:true,
+            fields:[
+                {
+                    name:'agency',
+                    label:'Partner Image',
+                    type:'image'
                 }
             ]
         }

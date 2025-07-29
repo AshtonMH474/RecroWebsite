@@ -88,7 +88,7 @@ useEffect(() => {
         >
           <motion.h2
             data-tina-field={tinaField(props, "cards_heading")}
-            className="font-bold text-[36px] text-white text-center"
+            className="font-bold text-[32px] md:text-[40px] text-white text-center"
             style={{ opacity: headingOpacity }}
           >
             {props.cards_heading}

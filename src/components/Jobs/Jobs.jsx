@@ -41,7 +41,7 @@ function Jobs(props){
             className="relative bg-black overflow-hidden w-full pb-24" >
                 
                 <div className="flex flex-col items-center mt-32 pb-12">
-                    {props.jobsHeading && (<h2  data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[36px] text-white">{props.jobsHeading}</h2>)}
+                    {props.jobsHeading && (<h2  data-tina-field={tinaField(props,'jobsHeading')} className="font-bold text-[32px] md:text-[40px] text-white">{props.jobsHeading}</h2>)}
                     <div data-tina-field={tinaField(props,'underline_width')} style={{width:props.underline_width}}  className="rounded-[12px] h-1  bg-primary mt-2"></div>
                 </div>
                 <div className="w-full relative">
