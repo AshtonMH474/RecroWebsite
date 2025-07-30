@@ -27,7 +27,7 @@ blocks:
       - title: Value
         icon: FaQuestionCircle
         description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+          aLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
           vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
           sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
           malesuada lorem pulvinar a. Integer id sem nisi.
