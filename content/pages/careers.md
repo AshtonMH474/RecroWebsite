@@ -31,7 +31,6 @@ blocks:
           that immediately vests in addition to an end of year profit sharing
           401k bonus of 15-18% historically.
         allContentLink: ''
-        contentIcon: FaArrowRight
         content: ''
       - title: 'PREMIERE MEDICAL, DENTAL, AND VISION'
         icon: FaHeart
