@@ -4,7 +4,7 @@ logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.p
 links:
   - linkOptions:
       link: /partners
-    label: Partners
+    label: Portal
     link: /partners
     style: link
   - linkOptions:
