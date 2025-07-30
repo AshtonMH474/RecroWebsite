@@ -69,7 +69,7 @@ useEffect(() => {
   const headingOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], { clamp: true });
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
-
+  console.log(props)
   return (
     <>
       <section
@@ -119,7 +119,7 @@ useEffect(() => {
       </section>
 
       <AnimatePresence>
-        {expandedCardIndex !== null && expertiseItems[expandedCardIndex].content.children.length && (
+        {expandedCardIndex !== null && expertiseItems[expandedCardIndex].content.children.length && expertiseItems[expandedCardIndex].allContentLink && expertiseItems[expandedCardIndex].contentIcon && (
           <CardModal
             ex={expertiseItems[expandedCardIndex]}
             onClose={closeCard}

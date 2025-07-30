@@ -1,6 +1,6 @@
 // components/IconPickerField.tsx
 import { useState } from "react";
-import * as FaIcons from "react-icons/fa"; // Or combine multiple sets
+import * as FaIcons from "react-icons/fa";
 import React from "react";
 
 export const iconOptions = Object.entries(FaIcons).map(([name, Icon]) => ({
@@ -14,6 +14,15 @@ export const IconPickerField = ({ input }) => {
   const filtered = iconOptions.filter(opt =>
     opt.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleIconClick = (name) => {
+    // If the icon clicked is already selected, unselect it
+    if (input.value === name) {
+      input.onChange(""); // Clear selection
+    } else {
+      input.onChange(name);
+    }
+  };
 
   return (
     <div className="space-y-2">
@@ -31,12 +40,23 @@ export const IconPickerField = ({ input }) => {
             className={`p-2 border rounded cursor-pointer ${
               input.value === name ? "bg-primary text-white" : ""
             }`}
-            onClick={() => input.onChange(name)}
+            onClick={() => handleIconClick(name)}
           >
             <Icon size={24} />
           </div>
         ))}
       </div>
+
+      {/* Optional: clear button */}
+      {input.value && (
+        <button
+          type="button"
+          className="mt-2 text-sm text-red-500 hover:underline"
+          onClick={() => input.onChange("")}
+        >
+          Clear Icon
+        </button>
+      )}
     </div>
   );
 };

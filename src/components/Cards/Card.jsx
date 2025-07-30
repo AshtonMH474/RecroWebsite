@@ -7,10 +7,11 @@ import IconRenderer from "@/components/utils/IconRenderer";
 
 
 const Card = ({ ex, onExpand }) => {
+  console.log(ex.allContentLink)
   return (
     <>
       <div
-        className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 ${ex.content?.children?.length ? "cursor-pointer" : ""}`}
+        className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 ${ex.content?.children?.length && ex.allContentLink && ex.contentIcon  ? "cursor-pointer" : ""}`}
         onClick={onExpand}
       >
         <div className="flex items-center mb-3 gap-x-3">
@@ -32,12 +33,25 @@ const Card = ({ ex, onExpand }) => {
           )}
         </div>
 
-       {ex.description && ( <div data-tina-field={tinaField(ex, "description")}>
+       {ex.description && (ex.allContentLink && ex.contentIcon)  && ( <div data-tina-field={tinaField(ex, "description")}>
           <TinaMarkdown
             content={ex.description}
             components={{
               p: ({ children }) => (
-                <p className={`text-[#C2C2BC] ${ex.allContentLink && ex.contentIcon ? "expertiseDes text-ellipsis" : `noContentDes text-ellipsis`} text-[16px]`}>
+                <p className={`text-[#C2C2BC] expertiseDes text-ellipsis text-[16px]`}>
+                  {children}
+                </p>
+              ),
+            }}
+          />
+        </div>)}
+
+        {ex.description && (ex.allContentLink == null || ex.contentIcon == null)  && ( <div data-tina-field={tinaField(ex, "description")}>
+          <TinaMarkdown
+            content={ex.description}
+            components={{
+              p: ({ children }) => (
+                <p className={`text-[#C2C2BC] noContentDes text-ellipsis text-[16px]`}>
                   {children}
                 </p>
               ),

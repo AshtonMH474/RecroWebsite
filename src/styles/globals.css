@@ -136,6 +136,8 @@ body {
   word-break: break-word;           /* Break long words */
 }
 
+
+
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
 }

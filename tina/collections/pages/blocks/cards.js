@@ -55,7 +55,7 @@ export const cards = {
                 {
                     name:'allContentLink',
                     type:'string',
-                    label:'Open Card Link'
+                    label:'Open Card Link(if you want a modal with more content fill out the icon below, the link here , and the content'
                 },
                 {
                     name:'contentIcon',
