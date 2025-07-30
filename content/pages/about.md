@@ -66,8 +66,8 @@ blocks:
         content: ''
     _template: cards
   - leadershipHeading: Our Leadership
-    leadership_id: ''
-    scroll: ''
+    leadership_id: leadership
+    scroll: start
     leaders:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/placeholder_leadership2.jpg
