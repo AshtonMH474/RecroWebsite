@@ -28,7 +28,7 @@ function Learn(props) {
         >
           <motion.div
             style={{ opacity: contentOpacity }}
-            className="px-8 mt-16 w-[95%] max-w-[700px] mb-32 "
+            className="px-8 mt-16 w-[95%] max-w-[700px] mb-32 pt-30"
             data-tina-field={tinaField(props, "headingLearnTeam")}
           >
             <TinaMarkdown
@@ -69,7 +69,7 @@ function Learn(props) {
 
           <motion.div
             style={{ opacity: contentOpacity }}
-            className="flex flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8"
+            className="flex  flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8 lg:pr-30"
           >
             {props?.learnTeamImages?.map((image, i) => (
               <div key={image.id || image.src || i} 
@@ -79,7 +79,7 @@ function Learn(props) {
                   left: image?.left ?? "auto",
                   right: image?.right ?? "auto",
                   bottom: image?.bottom ?? "auto",
-                  zIndex: image?.zIndex ?? "auto"}} className="aspect-[16/9] w-full md:max-w-[425px] md:relative  overflow-hidden rounded-[20px]">
+                  zIndex: image?.zIndex ?? "auto"}} className="aspect-[16/9] w-full md:max-w-[425px] md:relative  overflow-hidden rounded-[20px] ">
               <img
                
                 src={image.src}
