@@ -254,15 +254,25 @@ export default function SubPartners({ subs }) {
     // Create 3 full sets of logos for looping
     for (let i = 0; i < 5; i++) {
       subs.forEach((sub, index) => {
-        const img = document.createElement("img");
-        img.src = sub.agency;
-        img.alt = `partner-${index}`;
-        img.className =
-          "h-[120px] w-auto object-contain flex-shrink-0 transition-transform duration-300 mx-8";
-        img.setAttribute("data-tina-field", tinaField(sub, "agency"));
-        container.appendChild(img);
-        allImages.push(img);
-      });
+  // Create wrapper div
+  const wrapper = document.createElement("div");
+  wrapper.className =
+    "border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] flex items-center justify-center mx-8";
+
+  // Create image
+  const img = document.createElement("img");
+  img.src = sub.agency;
+  img.alt = `partner-${index}`;
+  img.className =
+    "h-[120px] w-auto object-contain flex-shrink-0 transition-transform duration-300";
+  img.setAttribute("data-tina-field", tinaField(sub, "agency"));
+
+  // Append image to wrapper, then wrapper to container
+  wrapper.appendChild(img);
+  container.appendChild(wrapper);
+
+  allImages.push(img);
+});
     }
 
     // Wait for DOM layout to calculate width
@@ -312,7 +322,7 @@ export default function SubPartners({ subs }) {
 
   return (
     <div
-      className="w-full h-[200px] overflow-hidden relative pt-16"
+      className="w-full h-[400px] overflow-hidden relative pt-16"
       ref={wrapperRef}
     >
       <div

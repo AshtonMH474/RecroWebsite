@@ -56,6 +56,11 @@ export const agencies = {
                     name:'agency',
                     label:'Partner Image',
                     type:'image'
+                },
+                {
+                    name:'title',
+                    label:'title',
+                    type:'string'
                 }
             ]
         }

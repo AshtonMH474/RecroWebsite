@@ -47,10 +47,13 @@ blocks:
     subPartners:
       - agency: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/05-F-ZZ999-009%202.png
+        title: title
       - agency: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/DoD-Logo-Light-Stacked-1-Color%202.png
+        title: title
       - agency: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/department-of-the-navy-1-logo-black-and-white%202.png
+        title: title
     _template: agencies
   - solutions_heading: Solutions
     link_heading: Learn More
