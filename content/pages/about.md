@@ -66,7 +66,7 @@ blocks:
         content: ''
     _template: cards
   - leadershipHeading: Our Leadership
-    leadership_id: leadership
+    leadership_id: ''
     scroll: start
     leaders:
       - src: >-
