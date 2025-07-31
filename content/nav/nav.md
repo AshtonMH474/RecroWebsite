@@ -4,7 +4,7 @@ logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.p
 links:
   - linkOptions:
       link: /partners
-    label: Partners
+    label: Part
     link: /partners
     style: link
   - linkOptions:
@@ -57,6 +57,10 @@ links:
     link: /about
     style: link
     sublinks:
+      - linkOptions:
+          type: id
+          id: leadership
+        label: Leadership
       - linkOptions:
           link: /about/vehicles
         label: Contract Vehicles
