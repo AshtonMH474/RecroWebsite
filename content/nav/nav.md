@@ -40,7 +40,7 @@ links:
     sublinks:
       - linkOptions:
           link: /careers/values
-        label: Vaules
+        label: Values
       - linkOptions:
           type: id
           id: jobs_section
