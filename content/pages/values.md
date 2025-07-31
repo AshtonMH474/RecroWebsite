@@ -28,9 +28,8 @@ blocks:
         icon: FaQuestionCircle
         description: >
           We see possibilities where others see limitations. We embrace
-          creativity and innovation to envision new possibilities and solutions.
-          We work to challenge the status quo, transform traditional approaches,
-          and continuously seek ways to improve and evolve.
+          creativity and innovation to envision new possibilities and
+          solutions. 
         allContentLink: learn more
         content: ''
       - title: Value
