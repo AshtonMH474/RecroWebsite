@@ -37,11 +37,17 @@ blocks:
       excellence, building trust, and providing impactful solutions that advance
       their missions.
 
+      \
+
+      \
 
       We also believe in making a difference through the journey itself -
       celebrating successes, enjoying the process, and nurturing meaningful
       relationships with teammates and collaborators.
 
+      \
+
+      \
 
       At Recro, our passion, innovation, and adaptability are more than values;
       they are the foundation of how we consistently "Make a Difference" for
