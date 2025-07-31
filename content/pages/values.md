@@ -24,7 +24,7 @@ blocks:
     cards_id: ''
     underline_width: 300
     cards:
-      - title: Value
+      - title: Reimagine
         icon: FaQuestionCircle
         description: >
           aLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
