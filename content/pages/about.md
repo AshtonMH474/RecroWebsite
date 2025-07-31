@@ -5,13 +5,47 @@ blocks:
       # **Our** Mission
 
 
-      ### Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-      eget sapien at risus varius facilisis. In hac habitasse platea dictumst.
-      Praesent tincidunt, purus at pulvinar fermentum, nulla massa luctus
-      tortor, vitae tincidunt orci enim id nulla. Integer ut malesuada odio.
-      Nullam sit amet purus non turpis malesuada convallis. Pellentesque
-      habitant morbi tristique senectus et netus et malesuada fames ac turpis
-      egestas.
+      Recro's mission is simple yet profound: to "Make a Difference." This
+      commitment drives every decision we make for our employees, customers, and
+      partners, shaping how we approach challenges and deliver solutions
+
+      \
+
+      \
+
+      We strive to make a difference by leveraging leading-edge technologies to
+      address complex problems. From on-premises to cloud and edge environments
+      - especially in secure and classified settings—we empower mission
+      capabilities with innovative solutions. Our end-to-end expertise includes
+      advisory, rapid prototyping, deployment, scaling, and operations, ensuring
+      mission success in even the most demanding environments.
+
+      \
+
+      \
+
+      For our employees, making a difference means fostering a culture where
+      innovation flourishes and personal and professional growth is supported.
+      We are deeply invested in our team's success, knowing that their
+      development fuels our ability to excel.
+
+      \
+
+      \
+
+      For our customers and partners, making a difference means delivering
+      excellence, building trust, and providing impactful solutions that advance
+      their missions.
+
+
+      We also believe in making a difference through the journey itself -
+      celebrating successes, enjoying the process, and nurturing meaningful
+      relationships with teammates and collaborators.
+
+
+      At Recro, our passion, innovation, and adaptability are more than values;
+      they are the foundation of how we consistently "Make a Difference" for
+      those we serve.
     _template: landing
   - cards_heading: Our Approach to Success
     underline_width: 300
