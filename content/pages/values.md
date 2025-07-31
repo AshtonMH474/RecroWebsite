@@ -27,10 +27,10 @@ blocks:
       - title: Reimagine
         icon: FaQuestionCircle
         description: >
-          aLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a. Integer id sem nisi.
+          We see possibilities where others see limitations. We embrace
+          creativity and innovation to envision new possibilities and solutions.
+          We work to challenge the status quo, transform traditional approaches,
+          and continuously seek ways to improve and evolve.
         allContentLink: learn more
         content: ''
       - title: Value
