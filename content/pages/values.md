@@ -32,38 +32,36 @@ blocks:
           solutions. 
         allContentLink: learn more
         content: ''
-      - title: Value
+      - title: Empower
         icon: FaQuestionCircle
         description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a. Integer id sem nisi.
+          We uplift our people, partners, and communities. We work to foster an
+          environment where individuals are encouraged to be bold, take
+          initiative and embrace failure as an opportunity to grow and improve.
         allContentLink: ''
         content: ''
-      - title: Value
+      - title: Collaborate
         icon: FaQuestionCircle
         description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a. Integer id sem nisi.
+          We believe in the power of teamwork and diverse perspectives. By
+          fostering an inclusive culture, we harness our collective strengths to
+          deliver exceptional results.
         content: ''
-      - title: Value
+      - title: Results
         icon: FaQuestionCircle
         description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a. Integer id sem nisi.
+          We take responsibility for building a better future - both within
+          Recro and for the communities we serve. We uphold our commitments to
+          clients, employees, and stakeholders, always striving to make a
+          difference.
         content: ''
-      - title: Value
+      - title: Ownership
         icon: FaQuestionCircle
         description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a. Integer id sem nisi.
+          We take responsibility for our decisions and outcomes, leading with
+          integrity and passion to ensure lasting impact. This involves being
+          accountable, upholding high ethical standards and dedicating ourselves
+          to delivering for our clients.
         content: ''
     _template: cards
   - testimoniesHeading: Testimonies
