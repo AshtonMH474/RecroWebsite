@@ -4,7 +4,13 @@ export const landingBlock = {
   fields: [
     {
       name: "heading",
+      label:'Heading',
       type: "rich-text",
+    },
+    {
+      name:'width',
+      label:'Width(percentage) for Heading for Desktop',
+      type:'number'
     },
     {
       name: "buttons",

@@ -7,6 +7,7 @@ blocks:
 
       ### Get in touch with Recro. We're here to answer your questions and
       discuss how we can help grow your career.
+    width: 45
     buttons:
       - link: /signup
         label: Sign Up
@@ -36,14 +37,10 @@ blocks:
     learnTeamImages:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team2.png
-        width: 420
-        height: 219
         top: 50
         left: 108
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/LearnAboutTeam/team1.png
-        width: 420
-        height: 219
         right: 80
         bottom: 50
         zIndex: 10

@@ -52,6 +52,7 @@ blocks:
       At Recro, our passion, innovation, and adaptability are more than values;
       they are the foundation of how we consistently "Make a Difference" for
       those we serve.
+    width: 60
     _template: landing
   - cards_heading: Our Approach to Success
     underline_width: 300
