@@ -44,7 +44,7 @@ function Values({res,navData,footerData,jobs,solutions}){
     const {data} = useTina(res)
     const {data:navContent} = useTina(navData)
     const {data:footerContent} = useTina(footerData)
-    console.log(data)
+    
     useScrollToHash(data.page.blocks, [
                 'cards_id',
                 'jobs_id',
