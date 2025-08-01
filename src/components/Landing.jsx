@@ -8,6 +8,17 @@ function Landing(props) {
   const subTextRef = useRef(null)
   const [hasPadding, setHasPadding] = useState(false)
 
+
+  const [inlineWidth, setInlineWidth] = useState(undefined);
+
+  useEffect(() => {
+    if (window.innerWidth >= 1024) {
+      setInlineWidth(`${props.width}%`);
+    } else{
+        setInlineWidth(undefined)
+    }
+  }, [props.width]);
+
   useEffect(() => {
     const checkPadding = () => {
       if (!wrapperRef.current || !subTextRef.current) return
@@ -17,12 +28,18 @@ function Landing(props) {
 
       // If subtext is tall enough to start eating into the top half of wrapper
       setHasPadding(subTextHeight > wrapperHeight * 0.4)
+
+      if (window.innerWidth >= 1024) {
+      setInlineWidth(`${props.width}%`);
+    } else{
+        setInlineWidth(undefined)
+    }
     }
 
     checkPadding()
     window.addEventListener('resize', checkPadding)
     return () => window.removeEventListener('resize', checkPadding)
-  }, [props.heading])
+  }, [props.heading,props.width])
 
   return (
     <div
@@ -33,7 +50,10 @@ function Landing(props) {
       ref={wrapperRef}
     >
       {/* === H1 Always Centered === */}
-      <div className="w-auto md:w-150 lg:w-[50%] px-4">
+     <div
+        className="w-auto md:w-150 lg:w-auto px-4"
+        style={{ width: inlineWidth }}
+        >
         {props.heading && (
           <div data-tina-field={tinaField(props, 'heading')}>
             <TinaMarkdown
