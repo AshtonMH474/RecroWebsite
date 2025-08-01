@@ -4,79 +4,80 @@ import { tinaField } from 'tinacms/dist/react'
 import Link from 'next/link'
 
 function Landing(props) {
-const subTextRef = useRef(null)
-const [hasPadding, setHasPadding] = useState(false)
+  const wrapperRef = useRef(null)
+  const subTextRef = useRef(null)
+  const [hasPadding, setHasPadding] = useState(false)
 
-useEffect(() => {
-  const checkHeight = () => {
-    if (subTextRef.current) {
-      const height = subTextRef.current.offsetHeight
-      setHasPadding(height > 500)
-      console.log('Subtext height:', height)
+  useEffect(() => {
+    const checkPadding = () => {
+      if (!wrapperRef.current || !subTextRef.current) return
+
+      const wrapperHeight = wrapperRef.current.offsetHeight
+      const subTextHeight = subTextRef.current.offsetHeight
+
+      // If subtext is tall enough to start eating into the top half of wrapper
+      setHasPadding(subTextHeight > wrapperHeight * 0.4)
     }
-  }
 
-  // Run on mount and when heading changes
-  checkHeight()
-
-  // Run on resize
-  window.addEventListener('resize', checkHeight)
-  
-  // Cleanup on unmount
-  return () => window.removeEventListener('resize', checkHeight)
-}, [props.heading])
+    checkPadding()
+    window.addEventListener('resize', checkPadding)
+    return () => window.removeEventListener('resize', checkPadding)
+  }, [props.heading])
 
   return (
     <div
       style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
-      className={`landing flex flex-col items-center justify-center w-full ${ 
-      
-        hasPadding ? 'pt-60' : ''
-      }`
-    }
+      className={`landing flex flex-col items-center justify-center w-full ${
+        hasPadding ? 'pt-40' : ''
+      }`}
+      ref={wrapperRef}
     >
-    <div className="w-90 md:w-150  lg:w-[50%] px-4" >
-      {props.heading && (
-        <div data-tina-field={tinaField(props, 'heading')}>
-          <TinaMarkdown
-            content={props.heading}
-            components={{
-              bold: (props) => <span className="primary-color" {...props} />,
-              h1: (props) => (
-                <h1
-                  className="text-[32px] md:text-[40px] lg:text-[60px] font-bold text-center mb-4"
-                  {...props}
-                />
-              ),
-              // Hide p and h3 here — we'll render separately to measure height
-              p: () => null,
-              h3: () => null,
-            }}
-          />
-        </div>
-      )}
+      {/* === H1 Always Centered === */}
+      <div className="w-auto md:w-150 lg:w-[50%] px-4">
+        {props.heading && (
+          <div data-tina-field={tinaField(props, 'heading')}>
+            <TinaMarkdown
+              content={props.heading}
+              components={{
+                bold: (p) => <span className="primary-color" {...p} />,
+                h1: (p) => (
+                  <h1
+                    className="text-[32px] md:text-[40px] lg:text-[60px] font-bold text-center mb-4"
+                    {...p}
+                  />
+                ),
+                h3: () => null,
+                p: () => null,
+              }}
+            />
+          </div>
+        )}
 
-      {/* Subtext to measure */}
-      {props.heading && (
-        <div
-          ref={subTextRef}
-          className=" text-center"
-          data-tina-field={tinaField(props, 'heading')}
-        >
-          <TinaMarkdown
-            content={props.heading}
-            components={{
-              bold: (props) => <span className="primary-color" {...props} />,
-              h1: () => null, // hide h1 here to avoid duplicates
-              h3: (props) => <h3 className="text-[16px] secondary-text mb-6" {...props} />,
-              p: (props) => <p className="text-[16px] color-white mb-6" {...props} />,
-            }}
-          />
-        </div>
-      )}
+        {/* === Subtext === */}
+        {props.heading && (
+          <div
+            ref={subTextRef}
+            className="text-center"
+            data-tina-field={tinaField(props, 'heading')}
+          >
+            <TinaMarkdown
+              content={props.heading}
+              components={{
+                bold: (p) => <span className="primary-color" {...p} />,
+                h1: () => null,
+                h3: (p) => (
+                  <h3 className="text-[16px] secondary-text mb-6" {...p} />
+                ),
+                p: (p) => (
+                  <p className="text-[16px] color-white mb-6" {...p} />
+                ),
+              }}
+            />
+          </div>
+        )}
       </div>
 
-      {/* Buttons */}
+      {/* === Buttons === */}
       <div className="flex gap-x-8 ">
         {props.buttons?.map((button, i) =>
           button.style === 'border' ? (
