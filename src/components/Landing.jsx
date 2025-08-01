@@ -28,7 +28,7 @@ function Landing(props) {
     <div
       style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
       className={`landing flex flex-col items-center justify-center w-full ${
-        hasPadding ? 'pt-40' : ''
+        hasPadding ? 'pt-20' : ''
       }`}
       ref={wrapperRef}
     >
