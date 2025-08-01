@@ -69,7 +69,7 @@ useEffect(() => {
   const headingOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], { clamp: true });
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
-  console.log(props)
+  
   return (
     <>
       <section

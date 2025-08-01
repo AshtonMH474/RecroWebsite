@@ -7,7 +7,7 @@ import IconRenderer from "@/components/utils/IconRenderer";
 
 
 const Card = ({ ex, onExpand }) => {
-  console.log(ex.allContentLink)
+  
   return (
     <>
       <div

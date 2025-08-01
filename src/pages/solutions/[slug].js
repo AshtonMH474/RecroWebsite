@@ -38,7 +38,7 @@ function SolutionPage({ solutionData, navData, footerData }) {
   const { data: solution } = useTina(solutionData);
   const { data: navContent } = useTina(navData);
   const { data: footerContent } = useTina(footerData);
-  console.log(solution)
+  
     return (
         <>
             <Nav res={navContent.nav}/>

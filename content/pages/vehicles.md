@@ -12,6 +12,7 @@ blocks:
       Nullam sit amet purus non turpis malesuada convallis. Pellentesque
       habitant morbi tristique senectus et netus et malesuada fames ac turpis
       egestas.
+    width: 60
     _template: landing
   - cards_heading: Our Contract Vehicles
     underline_width: 300

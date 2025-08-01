@@ -8,6 +8,7 @@ blocks:
       ### Empowering defense, intelligence, and civil organizations with
       innovative, secure solutions that drive success in a rapidly evolving
       world.
+    width: 50
     buttons:
       - link: /solutions
         label: Solutions
@@ -28,6 +29,7 @@ blocks:
           vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
           sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
           malesuada lorem pulvinar a.
+        content: ''
       - title: Title
         icon: FaAtom
         description: >
@@ -35,6 +37,7 @@ blocks:
           vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
           sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
           malesuada lorem pulvinar a.
+        content: ''
       - title: Title
         icon: FaAllergies
         description: >
@@ -42,6 +45,7 @@ blocks:
           vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
           sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
           malesuada lorem pulvinar a.
+        content: ''
       - title: Title
         icon: FaAnchor
         description: >
@@ -49,6 +53,7 @@ blocks:
           vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
           sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
           malesuada lorem pulvinar a.
+        content: ''
       - title: Title
         icon: FaAdjust
         description: >
@@ -56,6 +61,7 @@ blocks:
           vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
           sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
           malesuada lorem pulvinar a.
+        content: ''
     _template: cards
 ---
 

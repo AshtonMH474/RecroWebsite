@@ -15,14 +15,15 @@ const pages = {
   format: "md",
   ui: {
     router: (props) => {
-      if (props.document._sys.relativePath === "home.md") return "/";
-      if (props.document._sys.relativePath === "about.md") return "/about";
-      if (props.document._sys.relativePath === "careers.md") return "/careers";
-      if(props.document._sys.relativePath === 'solutions.md') return "/solutions"
-      if(props.document._sys.relativePath === 'vehicles.md') return "/about/vehicles"
-      if(props.document._sys.relativePath === 'values.md') return "/careers/values"
-      if(props.document._sys.relativePath === 'partners.md') return '/partners'
-    },
+  // Remove the file extension
+  const slug = props.document._sys.relativePath.replace(/\.md$/, "");
+
+  // If it's `home.md`, route to root
+  if (slug === "home") return "/";
+
+  // Otherwise, convert folder paths like `careers/values` → `/careers/values`
+  return `/${slug}`;
+}
   },
   fields: [
     {

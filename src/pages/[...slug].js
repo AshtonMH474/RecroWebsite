@@ -12,20 +12,37 @@ import Testimonies from "@/components/Testimonies/Testimonies";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import { useTina } from "tinacms/dist/react";
 
-export async function getStaticProps() {
-  const { client } = await import("../../../tina/__generated__/databaseClient");
+export async function getStaticPaths() {
+  const { client } = await import("../../tina/__generated__/databaseClient");
 
-  // Run TinaCMS queries in parallel
+  // Fetch all pages
+  const pages = await client.queries.pageConnection();
+
+  const paths = pages.data.pageConnection.edges.map(({ node }) => ({
+    params: { slug: [node._sys.filename] }, // ["expertise"]
+  }));
+
+  return {
+    paths,
+    fallback: false, // show 404 for pages not in CMS
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const { client } = await import("../../tina/__generated__/databaseClient");
+
+  // For single slug, params.slug = ["expertise"]
+  const filename = params.slug[0] + ".md";
+  const isTrue = filename == "careers.md"
   const [pageData, navData, footerData, solutionData, jobRes] = await Promise.all([
-    client.queries.page({ relativePath: "solutions.md" }),
+    client.queries.page({ relativePath: filename }),
     client.queries.nav({ relativePath: "nav.md" }),
-    client.queries.footer({ relativePath: "footer.md" }),
+    isTrue ? client.queries.footer({ relativePath: "footerCareers.md" }) : client.queries.footer({ relativePath: "footer.md" }) ,
     client.queries.solutionConnection(),
     fetch("https://ats.recro.com/api/joblistings"),
   ]);
 
   const jobs = await jobRes.json();
-
   const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
 
   return {
@@ -39,30 +56,32 @@ export async function getStaticProps() {
   };
 }
 
-
-
-function Solutions({res,navData,footerData,jobs,solutions}){
-    const {data} = useTina(res)
+export default function Slug({ res,navData,footerData,jobs,solutions }) {
+  const {data} = useTina(res)
     const {data:navContent} = useTina(navData)
     const {data:footerContent} = useTina(footerData)
-    
+  
+  
+   
+  
+    useScrollToHash(data.page.blocks, [
+            'cards_id',
+            'jobs_id',
+            'leadership_id',
+            'learn_id',
+            'landing_id',
+            'landing2_id',
+            'testimonies_id',
+            'solutions_id'
+  
+        ]);
+ 
+  return (
+  
+    <>
+      <Nav res={navContent.nav}  />
 
-    useScrollToHash(data.page?.blocks, [
-              'cards_id',
-              'jobs_id',
-              'leadership_id',
-              'learn_id',
-              'landing_id',
-              'landing2_id',
-              'testimonies_id',
-              'solutions_id'
-          ]);
-    
-    
-          return (
-            <>
-            <Nav res={navContent.nav}  />
-            {data.page.blocks?.map((block,i) => {
+     {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":
                     return <Landing key={i} {...block}/>;
@@ -82,18 +101,17 @@ function Solutions({res,navData,footerData,jobs,solutions}){
                     case "PageBlocksTestimonies":
                         return <Testimonies key={i} {...block}/>
                     case "PageBlocksAgencies":
-                          return <Agencies key={i} {...block}/>
+                      return <Agencies key={i} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;
                 }
-                })}
-            <Footer res={footerContent.footer}/>
-            </>
-          )
+        })}
+      <Footer res={footerContent.footer}/>
+      
 
-
+  
+   
+    </>
+  );
 }
-
-
-export default Solutions
