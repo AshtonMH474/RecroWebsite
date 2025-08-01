@@ -1,6 +1,7 @@
 ---
 animation: expertise
 logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.png'
+height: 100
 links:
   - linkOptions:
       link: /partners
@@ -39,7 +40,7 @@ links:
     style: link
     sublinks:
       - linkOptions:
-          link: /careers/values
+          link: /values
         label: Values
       - linkOptions:
           type: id
@@ -62,7 +63,7 @@ links:
           id: leadership
         label: Leadership
       - linkOptions:
-          link: /about/vehicles
+          link: /vehicles
         label: Contract Vehicles
   - linkOptions:
       type: link

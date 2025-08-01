@@ -8,6 +8,7 @@ blocks:
       ### Empowering defense, intelligence, and civil organizations with
       innovative, secure solutions that drive success in a rapidly evolving
       world.
+    width: 45
     _template: landing
   - solutions_heading: Solutions
     link_heading: Learn More

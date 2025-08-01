@@ -11,6 +11,11 @@ const nav = {
       type: "image",
     },
     {
+      name:'height',
+      label:'Logo Height(px)',
+      type:'number',
+    },
+    {
       name: "links",
       label: "Links",
       type: "object",
