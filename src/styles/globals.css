@@ -220,5 +220,14 @@ body {
   }
 }
 
-
-
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;       /* Max number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.4;            /* Ensure consistent height per line */
+  max-height: calc(1.4em * 2); 
+  
+}
