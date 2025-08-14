@@ -9,7 +9,17 @@ import DivGears from "../DivGears";
 
 
 function Jobs(props){
-    let jobs = props.jobs || []
+    const [jobs,setJobs] = useState([])
+    useEffect(()=> {
+        const handleJobs = async()=> {
+            const res = await fetch('/api/jobs')
+            const allJobs = await res.json()
+            await setJobs(allJobs)
+        }
+        handleJobs()
+    },[])
+
+    // let jobs = props.jobs || []
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const visibleCount = 6;

@@ -20,15 +20,15 @@ export async function getStaticProps() {
   const { client } = await import("../../tina/__generated__/databaseClient");
 
   // Run TinaCMS queries in parallel
-  const [pageData, navData, footerData, solutionData, jobRes] = await Promise.all([
+  const [pageData, navData, footerData, solutionData] = await Promise.all([
     client.queries.page({ relativePath: "home.md" }),
     client.queries.nav({ relativePath: "nav.md" }),
     client.queries.footer({ relativePath: "footer.md" }),
     client.queries.solutionConnection(),
-    fetch("https://ats.recro.com/api/joblistings"),
+    
   ]);
 
-  const jobs = await jobRes.json();
+  
 
   const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
 
@@ -37,7 +37,6 @@ export async function getStaticProps() {
       res: pageData,
       navData,
       footerData,
-      jobs,
       solutions,
     },
   };
@@ -45,7 +44,7 @@ export async function getStaticProps() {
 
 
 
-export default function Home({res,navData,footerData,jobs,solutions}) {
+export default function Home({res,navData,footerData,solutions}) {
 
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
@@ -86,7 +85,7 @@ export default function Home({res,navData,footerData,jobs,solutions}) {
                     case "PageBlocksLearnTeam":
                     return <Learn key={i} {...block}/>;
                     case "PageBlocksJobs":
-                      return <Jobs key={i} jobs={jobs} {...block} />;
+                      return <Jobs key={i} {...block} />;
                     case "PageBlocksSolutions":
                         return <SolutionsGrid key={i} {...block} solutions={solutions}/>
                     case "PageBlocksTestimonies":
