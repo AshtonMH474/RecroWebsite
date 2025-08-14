@@ -21,15 +21,15 @@ blocks:
           https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/360_F_1215488674_DAIsG2K7r3B4EaZmtOs1F50LvyQcMJOp%202.png
     _template: landing2
   - cards_heading: Our Values
-    cards_id: ''
+    cards_id: values
+    scroll: start
     underline_width: 300
     cards:
       - title: Reimagine
         icon: FaQuestionCircle
         description: >
           We see possibilities where others see limitations. We embrace
-          creativity and innovation to envision new possibilities and
-          solutions. 
+          creativity and innovation to envision new possibilities and solutions.
         allContentLink: learn more
         content: ''
       - title: Empower

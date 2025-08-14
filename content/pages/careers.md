@@ -80,6 +80,8 @@ blocks:
     underline_width: 300
     buttonLabel: View Job
     buttonType: button
+    buttonLabelAll: View All Jobs
+    buttonTypeAll: border
     _template: jobs
 ---
 

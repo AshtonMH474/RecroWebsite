@@ -57,7 +57,7 @@ function JobsModal({onClose,job}){
                             <IoMdClose className="relative left-4 cursor-pointer text-[24px] text-white hover:text-primary transition" />
                         </button>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-x-4 pb-2 h-auto ">
+                    <div className="flex flex-col lg:flex-row gap-x-4 pb-2 h-auto ">
                         <h4 className="text-[#C2C2BC] text-[18px]">
                             Clearance: {job.clearanceRequired}
                         </h4>

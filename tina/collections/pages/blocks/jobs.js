@@ -25,12 +25,23 @@ export const jobsBlock = {
         },
         {
             name:"buttonLabel",
-            label:"Button Label",
+            label:"Button Label For Job Cards",
             type:"string"
         },
         {
             name:"buttonType",
-            label:"Button Type",
+            label:"Button Type For Job Cards",
+            type:"string",
+            options:["border", "button"]
+        },
+        {
+            name:"buttonLabelAll",
+            label:"Button Label For All Jobs",
+            type:"string"
+        },
+        {
+            name:"buttonTypeAll",
+            label:"Button Type For All Jobs",
             type:"string",
             options:["border", "button"]
         }
