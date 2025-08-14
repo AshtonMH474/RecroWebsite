@@ -34,15 +34,14 @@ export async function getStaticProps({ params }) {
   // For single slug, params.slug = ["expertise"]
   const filename = params.slug[0] + ".md";
   const isTrue = filename == "careers.md"
-  const [pageData, navData, footerData, solutionData, jobRes] = await Promise.all([
+  const [pageData, navData, footerData, solutionData] = await Promise.all([
     client.queries.page({ relativePath: filename }),
     client.queries.nav({ relativePath: "nav.md" }),
     isTrue ? client.queries.footer({ relativePath: "footerCareers.md" }) : client.queries.footer({ relativePath: "footer.md" }) ,
     client.queries.solutionConnection(),
-    fetch("https://ats.recro.com/api/joblistings"),
   ]);
 
-  const jobs = await jobRes.json();
+  
   const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
 
   return {
@@ -50,16 +49,15 @@ export async function getStaticProps({ params }) {
       res: pageData,
       navData,
       footerData,
-      jobs,
       solutions,
     },
   };
 }
 
-export default function Slug({ res,navData,footerData,jobs,solutions }) {
+export default function Slug({ res,navData,footerData,solutions }) {
   const {data} = useTina(res)
-    const {data:navContent} = useTina(navData)
-    const {data:footerContent} = useTina(footerData)
+  const {data:navContent} = useTina(navData)
+  const {data:footerContent} = useTina(footerData)
   
   
    
@@ -95,7 +93,7 @@ export default function Slug({ res,navData,footerData,jobs,solutions }) {
                     case "PageBlocksLearnTeam":
                     return <Learn key={i} {...block}/>;
                     case "PageBlocksJobs":
-                      return <Jobs key={i} jobs={jobs} {...block} />;
+                      return <Jobs key={i} {...block} />;
                     case "PageBlocksSolutions":
                         return <SolutionsGrid key={i} {...block} solutions={solutions}/>
                     case "PageBlocksTestimonies":
