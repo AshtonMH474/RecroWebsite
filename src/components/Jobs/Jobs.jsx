@@ -15,7 +15,6 @@ function Jobs(props){
             const res = await fetch('/api/jobs')
             const allJobs = await res.json()
             const priortyJobs = allJobs.filter((job)=> job.priorityLevel == 'Critical' || job.priorityLevel == 'High' )
-            console.log(priortyJobs)
             await setJobs(priortyJobs)
         }
         handleJobs()
@@ -96,23 +95,23 @@ function Jobs(props){
                 <div className="flex flex-col items-center">
                     <a target="_blank" href="https://ats.recro.com/jobboard">
                         {props?.buttonTypeAll === "button" && (
-          <button
-            
-            data-tina-field={tinaField(props, "buttonLabelAll")}
-            className="bg-primary capitalize cursor-pointer px-4 h-[35px] w-auto rounded-[8px] hover:opacity-80 text-white"
-          >
-            {props.buttonLabelAll}
-          </button>
-        )}
-        {props?.buttonTypeAll === "border" && (
-          <button
-            
-            data-tina-field={tinaField(props, "buttonLabelAll")}
-            className="px-4 capitalize h-[35px] w-auto border primary-border rounded-[8px] hover:text-white/80 transition-colors duration-300"
-          >
-            {props.buttonLabelAll}
-          </button>
-        )}
+                        <button
+                            
+                            data-tina-field={tinaField(props, "buttonLabelAll")}
+                            className="bg-primary capitalize cursor-pointer px-4 h-[35px] w-auto rounded-[8px] hover:opacity-80 text-white"
+                        >
+                            {props.buttonLabelAll}
+                        </button>
+                        )}
+                        {props?.buttonTypeAll === "border" && (
+                        <button
+                            
+                            data-tina-field={tinaField(props, "buttonLabelAll")}
+                            className="px-4 capitalize h-[35px] w-auto border primary-border rounded-[8px] hover:text-white/80 transition-colors duration-300"
+                        >
+                            {props.buttonLabelAll}
+                        </button>
+                        )}
                     </a>
                 </div>
                 
