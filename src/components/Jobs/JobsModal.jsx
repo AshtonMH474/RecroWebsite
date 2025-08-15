@@ -65,6 +65,13 @@ function JobsModal({onClose,job}){
                             <IoLocationOutline className="text-[#14B5B5]" />
                             {job.location}
                         </h4>
+                        {job.salaryRangeMax > 0 && job.salaryRangeMin > 0 && (
+                            <h4 className="text-[#C2C2BC] text-[18px]">
+                                <span className="text-[#27AE60]">$</span>
+                                {job.salaryRangeMin} - <span className="text-[#27AE60]">$</span>
+                                {job.salaryRangeMax}
+                            </h4>
+                        )}
                     </div>
                     <div className="flex items-center gap-x-2 pb-3">
                         <a href={`https://ats.recro.com/jobapplication/${jobApplyUrlId}`} target="_blank">

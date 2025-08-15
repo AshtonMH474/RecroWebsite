@@ -39,7 +39,7 @@ function JobCard({ props, job, onExpand }) {
       </div>
       <div>
         <div className={` ${
-                shouldTruncate ? "pb-2" : ""
+                shouldTruncate ? "pb-3" : ""
             }`}>
             <p
             className={`text-[#C2C2BC] text-[12px] pb-3 ${
