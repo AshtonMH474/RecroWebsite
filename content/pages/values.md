@@ -20,6 +20,10 @@ blocks:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/360_F_1215488674_DAIsG2K7r3B4EaZmtOs1F50LvyQcMJOp%202.png
     _template: landing2
+  - heading: |
+      # **R.E.C.R.O.** – Reimagine. Empower. Collaborate. Results. Ownership
+    width: 75
+    _template: landing
   - cards_heading: Our Values
     cards_id: values
     scroll: start
