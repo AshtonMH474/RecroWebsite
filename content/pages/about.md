@@ -16,18 +16,28 @@ blocks:
       empower mission capabilities with innovative solutions. Our end-to-end
       expertise includes advisory, rapid prototyping, deployment, scaling, and
       operations, ensuring mission success in even the most demanding
-      environments.   &#xA;  For our employees, making a difference means
-      fostering a culture where innovation flourishes and personal and
-      professional growth is supported. We are deeply invested in our team's
-      success, knowing that their development fuels our ability to excel. 
-      &#xA;  For our customers and partners, making a difference means
+      environments.   
+
+
+      ### &#xA;  For our employees, making a difference means fostering a
+      culture where innovation flourishes and personal and professional growth
+      is supported. We are deeply invested in our team's success, knowing that
+      their development fuels our ability to excel.  
+
+
+      ### &#xA;  For our customers and partners, making a difference means
       delivering excellence, building trust, and providing impactful solutions
-      that advance their missions.  &#xA;  We also believe in making a
-      difference through the journey itself - celebrating successes, enjoying
-      the process, and nurturing meaningful relationships with teammates and
-      collaborators.   &#xA;  At Recro, our passion, innovation, and
-      adaptability are more than values; they are the foundation of how we
-      consistently "Make a Difference" for those we serve.
+      that advance their missions.  
+
+
+      ### &#xA;  We also believe in making a difference through the journey
+      itself - celebrating successes, enjoying the process, and nurturing
+      meaningful relationships with teammates and collaborators.
+
+
+      ### &#xA;  At Recro, our passion, innovation, and adaptability are more
+      than values; they are the foundation of how we consistently "Make a
+      Difference" for those we serve.
     width: 60
     _template: landing
   - cards_heading: Our Approach to Success
