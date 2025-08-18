@@ -5,53 +5,26 @@ blocks:
       # **Our** Mission
 
 
-      Recro's mission is simple yet profound: to "Make a Difference." This
+      ### Recro's mission is simple yet profound: to "Make a Difference." This
       commitment drives every decision we make for our employees, customers, and
-      partners, shaping how we approach challenges and deliver solutions
-
-      \
-
-      \
-
+      partners, shaping how we approach challenges and deliver solutions&#xA; 
       We strive to make a difference by leveraging leading-edge technologies to
       address complex problems. From on-premises to cloud and edge environments
       - especially in secure and classified settings—we empower mission
       capabilities with innovative solutions. Our end-to-end expertise includes
       advisory, rapid prototyping, deployment, scaling, and operations, ensuring
-      mission success in even the most demanding environments.
-
-      \
-
-      \
-
-      For our employees, making a difference means fostering a culture where
-      innovation flourishes and personal and professional growth is supported.
-      We are deeply invested in our team's success, knowing that their
-      development fuels our ability to excel.
-
-      \
-
-      \
-
-      For our customers and partners, making a difference means delivering
-      excellence, building trust, and providing impactful solutions that advance
-      their missions.
-
-      \
-
-      \
-
-      We also believe in making a difference through the journey itself -
-      celebrating successes, enjoying the process, and nurturing meaningful
-      relationships with teammates and collaborators.
-
-      \
-
-      \
-
-      At Recro, our passion, innovation, and adaptability are more than values;
-      they are the foundation of how we consistently "Make a Difference" for
-      those we serve.
+      mission success in even the most demanding environments.&#xA;  For our
+      employees, making a difference means fostering a culture where innovation
+      flourishes and personal and professional growth is supported. We are
+      deeply invested in our team's success, knowing that their development
+      fuels our ability to excel.&#xA;  For our customers and partners, making a
+      difference means delivering excellence, building trust, and providing
+      impactful solutions that advance their missions.&#xA;  We also believe in
+      making a difference through the journey itself - celebrating successes,
+      enjoying the process, and nurturing meaningful relationships with
+      teammates and collaborators.&#xA;  At Recro, our passion, innovation, and
+      adaptability are more than values; they are the foundation of how we
+      consistently "Make a Difference" for those we serve.
     width: 60
     _template: landing
   - cards_heading: Our Approach to Success
