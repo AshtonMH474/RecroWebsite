@@ -88,10 +88,13 @@ function Jobs(props){
                 </div>
                 </div>
                 <div className="pb-6">
-                    <Pagination totalPages={totalPages}
-                    currentPage={startIndex / visibleCount}
-                    goToPage={goToPage}/>
+                    {totalPages > 1 && (
+                        <Pagination totalPages={totalPages}
+                        currentPage={startIndex / visibleCount}
+                        goToPage={goToPage}/>
+                    )}
                 </div>
+                
                 <div className="flex flex-col items-center">
                     <a target="_blank" href="https://ats.recro.com/jobboard">
                         {props?.buttonTypeAll === "button" && (

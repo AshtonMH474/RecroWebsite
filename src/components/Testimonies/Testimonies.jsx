@@ -57,9 +57,12 @@ function Testimonies(props){
                         </AnimatePresence>
                     </div>
                 </div>
-                <Pagination totalPages={totalPages}
-                currentPage={startIndex / visibleCount}
-                goToPage={goToPage}/>
+                {totalPages > 1 && (
+                    <Pagination totalPages={totalPages}
+                    currentPage={startIndex / visibleCount}
+                    goToPage={goToPage}/>
+                )}
+                
            </div>
         </>
     )
