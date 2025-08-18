@@ -15,7 +15,7 @@ function Leadership(props) {
   const [gearRotation, setGearRotation] = useState(0);
 
   // getting the total amount of pages needed based on how many are visbale at once
-  const visibleCount = 2;
+  const visibleCount = 3;
   const totalPages = Math.ceil(leaders.length / visibleCount);
   
   // go to what page based off index and the direction
@@ -86,12 +86,14 @@ function Leadership(props) {
                 </div>
           </div>
 
-
-          <Pagination
+          {totalPages > 1 && (
+            <Pagination
             totalPages={totalPages}
             currentPage={startIndex / visibleCount}
             goToPage={goToPage}
           />
+          )}
+          
         </motion.div>
     </div>
   );

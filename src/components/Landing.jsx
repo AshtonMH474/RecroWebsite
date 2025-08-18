@@ -66,6 +66,7 @@ function Landing(props) {
                     {...p}
                   />
                 ),
+                h2: () => null,
                 h3: () => null,
                 p: () => null,
               }}
@@ -85,11 +86,12 @@ function Landing(props) {
               components={{
                 bold: (p) => <span className="primary-color" {...p} />,
                 h1: () => null,
+                h2:(p) =><h2 className="text-[26px] md:text-[32px] lg:text-[45px]  text-center mb-6" {...p}/> ,
                 h3: (p) => (
                   <h3 className="text-[16px] secondary-text mb-6" {...p} />
                 ),
                 p: (p) => (
-                  <p className="text-[16px] color-white mb-6" {...p} />
+                  <p className="text-[16px] secondary-text mb-6" {...p} />
                 ),
               }}
             />
