@@ -1,7 +1,7 @@
 ---
 animation: expertise
 logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.png'
-height: 100
+height: 80
 links:
   - linkOptions:
       link: /partners
