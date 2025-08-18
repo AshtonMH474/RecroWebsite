@@ -70,7 +70,9 @@ export default function Slug({ res,navData,footerData,solutions }) {
             'landing_id',
             'landing2_id',
             'testimonies_id',
-            'solutions_id'
+            'solutions_id',
+            "agencies_id"
+
   
         ]);
  
