@@ -6,7 +6,7 @@ import AgencyModal from "./AgencyModal";
 import SubPartners from "./SubPartners";
 
 export default function Agencies(props) {
-  console.log(props)
+  
   const agencies = props.partners || [];
   const subs = props.subPartners || []
 
