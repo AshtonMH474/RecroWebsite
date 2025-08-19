@@ -20,26 +20,20 @@ blocks:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/JoinTheTeam/360_F_1215488674_DAIsG2K7r3B4EaZmtOs1F50LvyQcMJOp%202.png
     _template: landing2
-  - heading: |
-      # **R.E.C.R.O.**
-
-      ## Reimagine. Empower. Collaborate. Results. Ownership.
-    width: 50
-    _template: landing
-  - cards_heading: Our Values
+  - cards_heading: RECRO
     cards_id: values
     scroll: start
     underline_width: 300
     cards:
       - title: Reimagine
-        icon: FaQuestionCircle
+        icon: TbCircleLetterR
         description: >
           We see possibilities where others see limitations. We embrace
           creativity and innovation to envision new possibilities and solutions.
         allContentLink: learn more
         content: ''
       - title: Empower
-        icon: FaQuestionCircle
+        icon: TbCircleLetterE
         description: >
           We uplift our people, partners, and communities. We work to foster an
           environment where individuals are encouraged to be bold, take
@@ -47,14 +41,14 @@ blocks:
         allContentLink: ''
         content: ''
       - title: Collaborate
-        icon: FaQuestionCircle
+        icon: TbCircleLetterC
         description: >
           We believe in the power of teamwork and diverse perspectives. By
           fostering an inclusive culture, we harness our collective strengths to
           deliver exceptional results.
         content: ''
       - title: Results
-        icon: FaQuestionCircle
+        icon: TbCircleLetterR
         description: >
           We take responsibility for building a better future - both within
           Recro and for the communities we serve. We uphold our commitments to
@@ -62,7 +56,7 @@ blocks:
           difference.
         content: ''
       - title: Ownership
-        icon: FaQuestionCircle
+        icon: TbCircleLetterO
         description: >
           We take responsibility for our decisions and outcomes, leading with
           integrity and passion to ensure lasting impact. This involves being
