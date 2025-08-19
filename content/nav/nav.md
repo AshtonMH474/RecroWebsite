@@ -4,11 +4,6 @@ logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/RecroDarkModeLogo.p
 height: 80
 links:
   - linkOptions:
-      link: /partners
-    label: Partners
-    link: /partners
-    style: link
-  - linkOptions:
       link: /solutions
     label: solutions
     link: /solutions
@@ -33,6 +28,11 @@ links:
       - linkOptions:
           link: /solutions/solution6
         label: Solution6
+  - linkOptions:
+      link: /partners
+    label: Partners
+    link: /partners
+    style: link
   - linkOptions:
       link: /careers
     label: Careers
