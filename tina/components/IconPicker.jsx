@@ -1,12 +1,22 @@
 // components/IconPickerField.tsx
 import { useState } from "react";
 import * as FaIcons from "react-icons/fa";
+import * as TbIcons from "react-icons/tb"; // Tabler letters
 import React from "react";
 
-export const iconOptions = Object.entries(FaIcons).map(([name, Icon]) => ({
+const faOptions = Object.entries(FaIcons).map(([name, Icon]) => ({
   name,
-  Icon: Icon,
+  Icon,
 }));
+
+const tbOptions = Object.entries(TbIcons)
+  .filter(([name]) => name.startsWith("TbCircleLetter")) // only letters
+  .map(([name, Icon]) => ({
+    name,
+    Icon,
+}));
+
+export const iconOptions = [...faOptions, ...tbOptions];
 
 export const IconPickerField = ({ input }) => {
   const [search, setSearch] = useState("");
