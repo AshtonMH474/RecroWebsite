@@ -16,18 +16,18 @@ blocks:
       empower mission capabilities with innovative solutions. Our end-to-end
       expertise includes advisory, rapid prototyping, deployment, scaling, and
       operations, ensuring mission success in even the most demanding
-      environments.   
+      environments.
 
 
       ### &#xA;  For our employees, making a difference means fostering a
       culture where innovation flourishes and personal and professional growth
       is supported. We are deeply invested in our team's success, knowing that
-      their development fuels our ability to excel.  
+      their development fuels our ability to excel.
 
 
       ### &#xA;  For our customers and partners, making a difference means
       delivering excellence, building trust, and providing impactful solutions
-      that advance their missions.  
+      that advance their missions.
 
 
       ### &#xA;  We also believe in making a difference through the journey
