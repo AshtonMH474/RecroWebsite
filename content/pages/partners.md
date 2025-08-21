@@ -1,67 +1,23 @@
 ---
-title: partners
+title: Partners
 blocks:
   - heading: >
-      # **Try** our Partner Portal
+      # **Trusted** Partners in Innovation and Mission Success
 
 
-      ### Empowering defense, intelligence, and civil organizations with
-      innovative, secure solutions that drive success in a rapidly evolving
-      world.
-    width: 50
-    buttons:
-      - link: /solutions
-        label: Solutions
-        style: button
-      - link: /portal
-        label: Partner Portal
-        style: border
+      ### At Recro, we place trust at the center of every partnership. By
+      listening, collaborating, and delivering with integrity, we ensure our
+      partners can rely on us to achieve mission success together.
+    width: 60
     _template: landing
-  - cards_heading: About our Portal
-    cards_id: aboutPartners
-    scroll: center
+  - partners_heading: 'Our Partner Ecosystem '
+    partners_id: ''
     underline_width: 300
-    cards:
-      - title: Title
-        icon: FaAddressBook
-        description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a.
-        content: ''
-      - title: Title
-        icon: FaAtom
-        description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a.
-        content: ''
-      - title: Title
-        icon: FaAllergies
-        description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a.
-        content: ''
-      - title: Title
-        icon: FaAnchor
-        description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a.
-        content: ''
-      - title: Title
-        icon: FaAdjust
-        description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          vel lorem ut magna tincidunt efficitur. Curabitur \[text block here]
-          sed facilisis justo. Vivamus blandit \[img placeholder] ligula, eget
-          malesuada lorem pulvinar a.
-        content: ''
-    _template: cards
+    partners_list:
+      - partner: content/partners/dracoForce.md
+      - partner: content/partners/ecs.md
+      - partner: content/partners/govsmart.md
+      - partner: content/partners/mixmode.md
+    _template: partners
 ---
 

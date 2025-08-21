@@ -33,6 +33,10 @@ links:
     label: Partners
     link: /partners
     style: link
+    sublinks:
+      - linkOptions:
+          link: /portal-info
+        label: Portal
   - linkOptions:
       link: /careers
     label: Careers

@@ -3,8 +3,8 @@ import SolutionCard from "./SolutionCard"
 import { useEffect, useRef, useState } from "react";
 import { useScroll,motion, useTransform } from "framer-motion";
 
-function SolutionsGrid(props){
-    const solutions = props.solutions || [];
+function SolutionsGrid({solutionRes,...block}){
+    const solutions = solutionRes.solutionConnection.edges.map(e => e.node);
     const sectionRef = useRef(null);
     const [sectionHeight, setSectionHeight] = useState(0);
     const [rows, setRows] = useState(1);
@@ -58,7 +58,7 @@ function SolutionsGrid(props){
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
     return (
         <>
-            <section id={props.solutions_id} ref={sectionRef}
+            <section id={block.solutions_id} ref={sectionRef}
             style={{ height: `${sectionHeight}px` }}
             className="pb-16 relative" >
                 <div style={{
@@ -66,15 +66,15 @@ function SolutionsGrid(props){
                     paddingTop: short ? "5rem" : "3rem",
                     top: tall ? "200px" : "80px",
                 }} className=" overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md">
-                        <motion.h2 style={{ opacity: headingOpacity }} data-tina-field={tinaField(props,'solutions_heading')} className="font-bold text-[32px] md:text-[40px] text-white text-center">
-                            {props.solutions_heading}
+                        <motion.h2 style={{ opacity: headingOpacity }} data-tina-field={tinaField(block,'solutions_heading')} className="font-bold text-[32px] md:text-[40px] text-white text-center">
+                            {block.solutions_heading}
                         </motion.h2>
-                        <motion.div data-tina-field={tinaField(props,'underline_width')} style={{ opacity: headingOpacity,width:props.underline_width }}
+                        <motion.div data-tina-field={tinaField(block,'underline_width')} style={{ opacity: headingOpacity,width:block.underline_width }}
                         className={`rounded-[12px] h-1  bg-primary mx-auto mt-2`}
                         />
                         <motion.div style={{ opacity: cardsOpacity, scale: cardsScale }} className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
                             {solutions.map((card,i) => (
-                                <SolutionCard card={card} key={i} props={props} />
+                                <SolutionCard card={card} key={i} props={block} />
                             ))}
                         </motion.div>
                 </div>

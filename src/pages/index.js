@@ -30,28 +30,27 @@ export async function getStaticProps() {
 
   
 
-  const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
+  // const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
 
   return {
     props: {
       res: pageData,
       navData,
       footerData,
-      solutions,
+      solutionData,
     },
   };
 }
 
 
 
-export default function Home({res,navData,footerData,solutions}) {
+export default function Home({res,navData,footerData,solutionData}) {
 
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
   const {data:footerContent} = useTina(footerData)
+  const { data: solutionContent } = useTina(solutionData);
 
-
- 
 
   useScrollToHash(data.page.blocks, [
           'cards_id',
@@ -89,7 +88,7 @@ export default function Home({res,navData,footerData,solutions}) {
                     case "PageBlocksJobs":
                       return <Jobs key={i} {...block} />;
                     case "PageBlocksSolutions":
-                        return <SolutionsGrid key={i} {...block} solutions={solutions}/>
+                        return <SolutionsGrid key={i} {...block} solutionRes={solutionContent}/>
                     case "PageBlocksTestimonies":
                         return <Testimonies key={i} {...block}/>
                     case "PageBlocksAgencies":

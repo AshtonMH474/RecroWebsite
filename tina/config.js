@@ -5,6 +5,7 @@ import pages from "./collections/pages/page";
 import nav from "./collections/nav/nav";
 import footer from "./collections/footer/footer";
 import solutions from "./collections/solutions/solution";
+import { partners } from "./collections/partners/partners";
 
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
@@ -44,7 +45,8 @@ export default defineConfig({
       pages,
       nav,
       footer,
-      solutions
+      solutions,
+      partners
       
     ],
   },

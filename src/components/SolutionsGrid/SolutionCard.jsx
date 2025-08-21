@@ -12,6 +12,7 @@ function SolutionCard({card,props}){
                     <div className="flex items-center mb-3 gap-x-3">
                         {card.icon && (
                             <div
+                            data-tina-field={tinaField(card,'icon')}
                             className="bg-primary rounded-[10px] h-16 w-16 flex-shrink-0 flex items-center justify-center"
                             >
                                 <IconRenderer size="50px" color="#FAF3E0" iconName={card.icon} />
@@ -19,6 +20,7 @@ function SolutionCard({card,props}){
                         )}
                         {card.title && (
                             <h3
+                            data-tina-field={tinaField(card,'title')}
                             className="text-[20px] font-bold text-white leading-tight flex-1"
                             >
                                 {card.title}
@@ -27,7 +29,7 @@ function SolutionCard({card,props}){
                     </div>
 
                     {card.description && (
-                        <div>
+                        <div data-tina-field={tinaField(card,'description')}>
                          <TinaMarkdown
                         content={card.description}
                         components={{
