@@ -19,7 +19,7 @@ function PartnersGrid({partnersRes,...block}){
                                 <div
                                 key={i}
                                 className="flex items-center justify-center gap-x-2 border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[100px] px-4 py-6"
-                                data-tina-field={tinaField(partner, "title")}
+                                data-tina-field={tinaField(partner, "logo")}
                                 >
                                     <img
                                         className="h-20 object-contain"

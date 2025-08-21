@@ -5,6 +5,7 @@ import { landingBlock } from "./blocks/landing";
 import { landing2Block } from "./blocks/landing2";
 import { leadershipBlock } from "./blocks/leadership";
 import { learnAboutTeamBlock } from "./blocks/learn";
+import { priorityPartners } from "./blocks/priorityPartners";
 import { solutionsBlock } from "./blocks/solutions";
 import { testimonies } from "./blocks/testimonies";
 
@@ -35,7 +36,7 @@ const pages = {
       label: "Blocks",
       type: "object",
       list: true,
-      templates: [landingBlock,landing2Block,cards,learnAboutTeamBlock,leadershipBlock,jobsBlock,solutionsBlock,testimonies,allPartners],
+      templates: [landingBlock,landing2Block,cards,learnAboutTeamBlock,leadershipBlock,jobsBlock,solutionsBlock,testimonies,allPartners,priorityPartners],
     },
   ],
 };

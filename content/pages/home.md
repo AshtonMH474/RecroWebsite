@@ -16,6 +16,13 @@ blocks:
         label: about
         style: border
     _template: landing
+  - partners_heading: Trusted Partners
+    underline_width: 300
+    buttons:
+      - link: /partners
+        label: 'View All Partners '
+        style: border
+    _template: priorityPartners
   - solutions_heading: Solutions
     link_heading: Learn More
     underline_width: 300

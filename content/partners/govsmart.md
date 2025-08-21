@@ -2,7 +2,7 @@
 title: GovSmart
 logo: >-
   https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/govsmartlogo.svg
-priorty: true
+priority: true
 link: 'https://govsmart.com/'
 ---
 

@@ -20,8 +20,8 @@ export const partners = {
             type:'boolean'
         },
         {
-            name:'priorty',
-            label:'Is Partner a Priorty?',
+            name:'priority',
+            label:'Is Partner a Priority?',
             type:'boolean'
         },
         {
