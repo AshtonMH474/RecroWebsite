@@ -8,7 +8,6 @@ import { animationVariants } from "../Leadership/LeaderAnimations";
 function PriorityPartners({ partnersRes, ...block }) {
   const partners = partnersRes.partnerConnection.edges.map((e) => e.node);
   const priority = partners.filter((partner) => partner.priority === true);
-    console.log(block)
   const itemsPerPage = 3;
   const totalPages = Math.ceil(priority.length / itemsPerPage);
 
@@ -16,18 +15,15 @@ function PriorityPartners({ partnersRes, ...block }) {
   const [direction, setDirection] = useState(0);
 
   const handlePrev = () => {
-    if (page > 0) {
-      setDirection(-1);
-      setPage((prev) => prev - 1);
-    }
-  };
+    setDirection(-1);
+    setPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+    };
 
-  const handleNext = () => {
-    if (page < totalPages - 1) {
-      setDirection(1);
-      setPage((prev) => prev + 1);
-    }
-  };
+    const handleNext = () => {
+    setDirection(1);
+    setPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
+    };
+
 
   const visiblePartners = priority.slice(
     page * itemsPerPage,
@@ -53,67 +49,73 @@ function PriorityPartners({ partnersRes, ...block }) {
         />
       </div>
 
-      {/* Carousel with Arrows */}
-      <div className="relative w-full max-w-[1000px] mx-auto flex items-center">
-        {/* Left arrow */}
-        <button
-          onClick={handlePrev}
-          disabled={page === 0}
-          className="absolute -left-12 md:-left-16 text-white/70 hover:text-white disabled:opacity-30 z-10"
-        >
-          <ChevronLeft size={36} />
-        </button>
-
-        {/* Animated cards */}
-        <div className="overflow-hidden w-full min-h-[120px]">
-          <AnimatePresence custom={direction} mode="wait">
+    <div className="relative w-full flex justify-center">
+        <div className="relative w-full max-w-6xl overflow-hidden">
+            {/* AnimatePresence + motion.div for sliding animation */}
+            <AnimatePresence custom={direction} mode="wait">
             <motion.div
-              key={page} // 🔑 important for triggering exit/enter
-              custom={direction}
-              variants={animationVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="flex justify-center gap-x-6"
+                key={page}
+                custom={direction}
+                variants={animationVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="flex flex-wrap justify-center gap-6"
             >
-              {visiblePartners.map((partner, i) => (
-                <div key={i} className="flex-shrink-0 w-[300px] flex justify-center">
-                  <a target="_blank" href={partner.link}>
+                {visiblePartners.map((partner, i) => (
+                <a
+                    key={i}
+                    target="_blank"
+                    href={partner.link}
+                    className="flex-1 min-w-[250px] sm:basis-[45%] lg:basis-[30%] max-w-[300px]"
+                >
                     <div
-                      className="flex items-center justify-center gap-x-2 border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[100px] px-4 py-6"
-                      data-tina-field={tinaField(partner, "logo")}
+                    className="flex items-center justify-center gap-x-2 border border-white/15 
+                                rounded-[8px] bg-[#1A1A1E] w-full h-[120px] px-4 py-6"
+                    data-tina-field={tinaField(partner, "logo")}
                     >
-                      <img
-                        className="h-20 object-contain"
+                    <img
+                        className="object-contain h-auto max-h-[100px] w-auto"
                         src={partner.logo}
                         alt={partner.title || "partner"}
-                      />
-                      {partner.needsTitle && partner.title && (
-                        <h1 className="font-bold text-[clamp(14px,2vw,26px)] text-center text-white">
-                          {partner.title}
+                    />
+                    {partner.needsTitle && partner.title && (
+                        <h1 className="font-bold text-[clamp(12px,1.5vw,20px)] text-center text-white">
+                        {partner.title}
                         </h1>
-                      )}
+                    )}
                     </div>
-                  </a>
-                </div>
-              ))}
+                </a>
+                ))}
             </motion.div>
-          </AnimatePresence>
-        </div>
+            </AnimatePresence>
 
-        {/* Right arrow */}
-        <button
-          onClick={handleNext}
-          disabled={page === totalPages - 1}
-          className="absolute -right-12 md:-right-16 text-white/70 hover:text-white disabled:opacity-30 z-10"
-        >
-          <ChevronRight size={36} />
-        </button>
-      </div>
+            {/* Arrows inside grid area */}
+            <button
+            onClick={handlePrev}
+            className="absolute left-2 top-1/2 -translate-y-1/2
+                        bg-black/50 rounded-full p-2 text-white/70 
+                        hover:text-white disabled:opacity-30 z-10"
+            >
+            <ChevronLeft size={28} />
+            </button>
+
+            <button
+            onClick={handleNext}
+            className="absolute right-2 top-1/2 -translate-y-1/2
+                        bg-black/50 rounded-full p-2 text-white/70 
+                        hover:text-white disabled:opacity-30 z-10"
+            >
+            <ChevronRight size={28} />
+            </button>
+        </div>
+    </div>
+
+
+
       {/* === Buttons === */}
-      {/* === Buttons === */}
-<div className="flex justify-center gap-x-8 mt-2">
+<div className="flex justify-center gap-x-8 mt-6">
   {block.buttons?.map((button, i) =>
     button.style === "border" ? (
       <Link href={button.link} key={i}>

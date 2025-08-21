@@ -15,14 +15,14 @@ function PartnersGrid({partnersRes,...block}){
                 <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[600px]">
                     <div className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12">
                         {partners.map((partner,i)=> (
-                            <a target="_blank" href={partner.link} key={i}>
+                            <a  className="flex-1 min-w-[250px] sm:basis-[45%] lg:basis-[30%] max-w-[300px]" target="_blank" href={partner.link} key={i}>
                                 <div
                                 key={i}
-                                className="flex items-center justify-center gap-x-2 border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[100px] px-4 py-6"
+                                className="flex items-center justify-center gap-x-2 border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[120px] px-4 py-6"
                                 data-tina-field={tinaField(partner, "logo")}
                                 >
                                     <img
-                                        className="h-20 object-contain"
+                                        className="h-auto max-h-[100px] object-contain"
                                         src={partner.logo}
                                         alt="partner"
                                     />
