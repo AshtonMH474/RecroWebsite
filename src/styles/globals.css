@@ -231,3 +231,33 @@ body {
   max-height: calc(1.4em * 2); 
   
 }
+
+.priority{
+  height: auto;
+}
+@media (max-width: 947px) {
+  .priority {
+    height: 490px;
+  }
+}
+
+@media (max-width: 523px) {
+  .priority {
+    height: 622px;
+  }
+}
+
+.priority2{
+  height: auto;
+}
+@media (max-width: 947px) {
+  .priority2 {
+    height: 264px;
+  }
+}
+
+@media (max-width: 523px) {
+  .priority2 {
+    height: 408px;
+  }
+}

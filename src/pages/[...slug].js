@@ -11,7 +11,7 @@ import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import Testimonies from "@/components/Testimonies/Testimonies";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import { useTina } from "tinacms/dist/react";
-import { partners } from "../../tina/collections/partners/partners";
+
 
 export async function getStaticPaths() {
   const { client } = await import("../../tina/__generated__/databaseClient");

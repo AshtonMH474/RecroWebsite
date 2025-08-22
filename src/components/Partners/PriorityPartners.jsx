@@ -31,7 +31,7 @@ function PriorityPartners({ partnersRes, ...block }) {
   );
 
   return (
-    <div className="relative bg-black overflow-hidden w-full pb-8">
+    <div className="relative priority  bg-black overflow-hidden w-full pb-8">
       {/* Heading */}
       <div className="flex flex-col items-center mt-10 pb-4">
         {block.partners_heading && (
@@ -50,7 +50,7 @@ function PriorityPartners({ partnersRes, ...block }) {
       </div>
 
     <div className="relative w-full flex justify-center">
-        <div className="relative w-full max-w-6xl overflow-hidden">
+        <div className="relative w-full max-w-6xl overflow-hidden priority2 flex items-center justify-center">
             {/* AnimatePresence + motion.div for sliding animation */}
             <AnimatePresence custom={direction} mode="wait">
             <motion.div
@@ -81,7 +81,7 @@ function PriorityPartners({ partnersRes, ...block }) {
                         alt={partner.title || "partner"}
                     />
                     {partner.needsTitle && partner.title && (
-                        <h1 className="font-bold text-[clamp(12px,1.5vw,20px)] text-center text-white">
+                        <h1 className="font-bold text-[26px] text-center text-white">
                         {partner.title}
                         </h1>
                     )}

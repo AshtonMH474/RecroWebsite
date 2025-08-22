@@ -29,7 +29,7 @@ function Testimonies(props){
     return (
         <>
            <div style={{minHeight:'100dvh'}}
-           className="relative bg-black overflow-hidden w-full pb-24"
+           className="relative bg-black overflow-hidden w-full pb-24 "
            id={props.testimonies_id}
            >
                 <div className="flex flex-col items-center mt-32 pb-12">
