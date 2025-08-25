@@ -42,17 +42,13 @@ export default function PdfModal({ solution, onClose }) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="bg-white w-[70%] h-[70%] rounded-lg shadow-xl relative flex flex-col"
+          className="bg-white w-[80%] h-[70%] rounded-lg shadow-xl relative flex flex-col mt-30"
           onClick={(e) => e.stopPropagation()} // stop closing when clicking inside
         >
          
 
           {/* PDF iframe */}
-          <iframe
-            src={pdfUrl}
-            className="w-full bg-black flex-1 rounded-b-lg"
-            title="Solution PDF"
-          />
+          <embed src={pdfUrl} type="application/pdf" className="w-full flex-1" />
 
             
         
