@@ -3,12 +3,11 @@ import IconRenderer from "../utils/IconRenderer"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 import { tinaField } from "tinacms/dist/react"
 
-function SolutionCard({card,props}){
-    
+function SolutionCard({card,props,onExpand}){
     return(
         <>
-            <Link href={`/solutions/${card._sys.filename}`}>
-                <div className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 cursor-pointer`}>
+            {/* <Link href={`/solutions/${card._sys.filename}`}> */}
+                <div  className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6`}>
                     <div className="flex items-center mb-3 gap-x-3">
                         {card.icon && (
                             <div
@@ -42,19 +41,36 @@ function SolutionCard({card,props}){
                         />
                         </div>
                     )}
+                    <div className="flex mt-3 gap-x-2">
+                        {/* Button */}
+                        <button
+                            data-tina-field={tinaField(props,'pdf_heading')}
+                            onClick={onExpand}
+                            className="px-4 text-[14px] capitalize py-1 bg-primary  rounded hover:opacity-80 transition-colors duration-300 cursor-pointer"
+                        >
+                            {props.pdf_heading}
+                        </button>
+                            <Link href={`/solutions/${card._sys.filename}`}>
+                                <button className="px-4 py-1 text-[14px]  flex items-center gap-x-1 border primary-border rounded hover:text-white/80">
+                                                    <div data-tina-field={tinaField(props,'link_heading')}>
+                                    {props.link_heading}
+                                    </div>
+                                    <div data-tina-field={tinaField(props,'link_icon')}>
+                                    <IconRenderer color={"#B55914"} size={'12px'} iconName={props.link_icon}/>
+                                    </div>
+                                </button>
+                            </Link>
 
-                    <div className="mt-3 primary-color flex items-center gap-x-1 text-[14px]">
-                        <div data-tina-field={tinaField(props,'link_heading')}>
-                            {props.link_heading}
-                        </div>
-                        <div data-tina-field={tinaField(props,'link_icon')}>
-                            <IconRenderer color={"#B55914"} size={'14px'} iconName={props.link_icon}/>
-                        </div>
+                    
                     </div>
+
                 </div>
-            </Link>
+            
         </>
     )
 }
 
 export default SolutionCard
+
+
+

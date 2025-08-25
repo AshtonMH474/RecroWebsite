@@ -25,6 +25,7 @@ blocks:
     _template: priorityPartners
   - solutions_heading: Solutions
     link_heading: Learn More
+    pdf_heading: View
     underline_width: 300
     solutions_id: solutions
     scroll: center

@@ -101,6 +101,9 @@ body {
 .secondary-text{
   color:#C2C2BC;
 }
+.bg-secondary{
+  background-color: #3F3F38;
+}
 .block{
   border: 1px white solid;
   flex-direction: column;

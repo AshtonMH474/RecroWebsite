@@ -34,6 +34,11 @@ const solutions = {
             type:'rich-text'
         },
         {
+            name:'mainPdf',
+            label:'Main Pdf',
+            type:'image'
+        },
+        {
             name:'blocks',
             label:"Blocks",
             type:'object',

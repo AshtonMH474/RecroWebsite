@@ -1,7 +1,11 @@
+
+
+
 import { tinaField } from "tinacms/dist/react"
 import SolutionCard from "./SolutionCard"
 import { useEffect, useRef, useState } from "react";
-import { useScroll,motion, useTransform } from "framer-motion";
+import { useScroll,motion, useTransform, AnimatePresence } from "framer-motion";
+import PdfModal from "./SolutionModal";
 
 function SolutionsGrid({solutionRes,...block}){
     const solutions = solutionRes.solutionConnection.edges.map(e => e.node);
@@ -10,6 +14,11 @@ function SolutionsGrid({solutionRes,...block}){
     const [rows, setRows] = useState(1);
     const [short, setShort] = useState(false);
     const [tall, setTall] = useState(false);
+
+
+    const [expandedCardIndex, setExpandedCardIndex] = useState(null);
+    const openCard = (index) => setExpandedCardIndex(index);
+    const closeCard = () => setExpandedCardIndex(null);
 
     useEffect(() => {
       const updateRows = () => {
@@ -56,6 +65,7 @@ function SolutionsGrid({solutionRes,...block}){
   const headingOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], { clamp: true });
   const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
+  
     return (
         <>
             <section id={block.solutions_id} ref={sectionRef}
@@ -74,11 +84,20 @@ function SolutionsGrid({solutionRes,...block}){
                         />
                         <motion.div style={{ opacity: cardsOpacity, scale: cardsScale }} className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
                             {solutions.map((card,i) => (
-                                <SolutionCard card={card} key={i} props={block} />
+                                <SolutionCard card={card} onExpand={() => openCard(i)} key={i} props={block} />
                             ))}
                         </motion.div>
                 </div>
             </section>
+
+            <AnimatePresence>
+              {expandedCardIndex !== null && (
+              <PdfModal
+                solution={solutions[expandedCardIndex]}
+                onClose={closeCard}
+              />
+            )}
+            </AnimatePresence>
         </>
     )
 }
