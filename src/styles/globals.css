@@ -95,11 +95,18 @@ body {
   background-color: #B55914;
 }
 
+.bg-primary2:hover {
+  background-color: rgba(181, 89, 20, 0.6);
+}
+
 .primary-color{
   color:#B55914
 }
 .secondary-text{
   color:#C2C2BC;
+}
+.bg-secondary{
+  background-color: #3F3F38;
 }
 .block{
   border: 1px white solid;
@@ -230,4 +237,34 @@ body {
   line-height: 1.4;            /* Ensure consistent height per line */
   max-height: calc(1.4em * 2); 
   
+}
+
+.priority{
+  height: auto;
+}
+@media (max-width: 947px) {
+  .priority {
+    height: 490px;
+  }
+}
+
+@media (max-width: 523px) {
+  .priority {
+    height: 622px;
+  }
+}
+
+.priority2{
+  height: auto;
+}
+@media (max-width: 947px) {
+  .priority2 {
+    height: 264px;
+  }
+}
+
+@media (max-width: 523px) {
+  .priority2 {
+    height: 408px;
+  }
 }

@@ -1,4 +1,3 @@
-import Agencies from "@/components/Agency/Agencies";
 import Cards from "@/components/Cards/Cards";
 import Footer from "@/components/Footer";
 import Jobs from "@/components/Jobs/Jobs";
@@ -7,10 +6,12 @@ import Landing2 from "@/components/Landing2";
 import Leadership from "@/components/Leadership/Leadership";
 import Learn from "@/components/Learn";
 import Nav from "@/components/Nav/Nav";
+import PartnersGrid from "@/components/Partners/PartnersGrid";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import Testimonies from "@/components/Testimonies/Testimonies";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import { useTina } from "tinacms/dist/react";
+
 
 export async function getStaticPaths() {
   const { client } = await import("../../tina/__generated__/databaseClient");
@@ -34,31 +35,34 @@ export async function getStaticProps({ params }) {
   // For single slug, params.slug = ["expertise"]
   const filename = params.slug[0] + ".md";
   const isTrue = filename == "careers.md"
-  const [pageData, navData, footerData, solutionData] = await Promise.all([
+  const [pageData, navData, footerData, solutionData,partnerData] = await Promise.all([
     client.queries.page({ relativePath: filename }),
     client.queries.nav({ relativePath: "nav.md" }),
     isTrue ? client.queries.footer({ relativePath: "footerCareers.md" }) : client.queries.footer({ relativePath: "footer.md" }) ,
     client.queries.solutionConnection(),
+    client.queries.partnerConnection()
   ]);
 
   
-  const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
-
+  // const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
+  // const partners = partnerData.data.partnerConnection.edges.map(({ node }) => node);
   return {
     props: {
       res: pageData,
       navData,
       footerData,
-      solutions,
+      solutionData,
+      partnerData
     },
   };
 }
 
-export default function Slug({ res,navData,footerData,solutions }) {
+export default function Slug({ res,navData,footerData,solutionData,partnerData }) {
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
   const {data:footerContent} = useTina(footerData)
-  
+  const { data: partnersContent } = useTina(partnerData);
+  const { data: solutionContent } = useTina(solutionData);
   
    
   
@@ -71,7 +75,7 @@ export default function Slug({ res,navData,footerData,solutions }) {
             'landing2_id',
             'testimonies_id',
             'solutions_id',
-            "agencies_id"
+            "partners_id"
 
   
         ]);
@@ -97,11 +101,11 @@ export default function Slug({ res,navData,footerData,solutions }) {
                     case "PageBlocksJobs":
                       return <Jobs key={i} {...block} />;
                     case "PageBlocksSolutions":
-                        return <SolutionsGrid key={i} {...block} solutions={solutions}/>
+                        return <SolutionsGrid key={i} {...block} solutionRes={solutionContent}/>
                     case "PageBlocksTestimonies":
                         return <Testimonies key={i} {...block}/>
-                    case "PageBlocksAgencies":
-                      return <Agencies key={i} {...block}/>
+                    case "PageBlocksPartners":
+                      return <PartnersGrid key={i} partnersRes={partnersContent} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

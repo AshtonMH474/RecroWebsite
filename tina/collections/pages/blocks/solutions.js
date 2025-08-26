@@ -16,6 +16,11 @@ export const solutionsBlock = {
             type:'string'
         },
         {
+            name:'pdf_heading',
+            label:'PDF Heading',
+            type:'string'
+        },
+        {
             name:'underline_width',
             type:'number',
             label:'Underline Width(in pixles)'

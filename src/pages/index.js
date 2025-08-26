@@ -11,7 +11,8 @@ import useScrollToHash from "@/hooks/useScrollToHash";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import Landing2 from "@/components/Landing2";
 import Testimonies from "@/components/Testimonies/Testimonies";
-import Agencies from "@/components/Agency/Agencies";
+import PartnersGrid from "@/components/Partners/PartnersGrid";
+import PriorityPartners from "@/components/Partners/PriorityPartners";
 
 
 
@@ -20,38 +21,36 @@ export async function getStaticProps() {
   const { client } = await import("../../tina/__generated__/databaseClient");
 
   // Run TinaCMS queries in parallel
-  const [pageData, navData, footerData, solutionData] = await Promise.all([
+  const [pageData, navData, footerData, solutionData,partnerData] = await Promise.all([
     client.queries.page({ relativePath: "home.md" }),
     client.queries.nav({ relativePath: "nav.md" }),
     client.queries.footer({ relativePath: "footer.md" }),
     client.queries.solutionConnection(),
+    client.queries.partnerConnection()
     
   ]);
 
-  
-
-  const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
 
   return {
     props: {
       res: pageData,
       navData,
       footerData,
-      solutions,
+      solutionData,
+      partnerData
     },
   };
 }
 
 
 
-export default function Home({res,navData,footerData,solutions}) {
+export default function Home({res,navData,footerData,solutionData,partnerData}) {
 
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
   const {data:footerContent} = useTina(footerData)
-
-
- 
+  const { data: solutionContent } = useTina(solutionData);
+  const { data: partnersContent } = useTina(partnerData);
 
   useScrollToHash(data.page.blocks, [
           'cards_id',
@@ -62,7 +61,7 @@ export default function Home({res,navData,footerData,solutions}) {
           'landing2_id',
           'testimonies_id',
           'solutions_id',
-          "agencies_id"
+          "partners_id"
 
 
       ]);
@@ -89,11 +88,13 @@ export default function Home({res,navData,footerData,solutions}) {
                     case "PageBlocksJobs":
                       return <Jobs key={i} {...block} />;
                     case "PageBlocksSolutions":
-                        return <SolutionsGrid key={i} {...block} solutions={solutions}/>
+                        return <SolutionsGrid key={i} {...block} solutionRes={solutionContent}/>
                     case "PageBlocksTestimonies":
                         return <Testimonies key={i} {...block}/>
-                    case "PageBlocksAgencies":
-                      return <Agencies key={i} {...block}/>
+                    case "PageBlocksPartners":
+                      return <PartnersGrid key={i} partnersRes={partnersContent} {...block}/>
+                    case "PageBlocksPriorityPartners":
+                      return <PriorityPartners key={i} partnersRes={partnersContent} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

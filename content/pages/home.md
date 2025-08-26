@@ -16,40 +16,16 @@ blocks:
         label: about
         style: border
     _template: landing
-  - agencies_heading: Our Partners
+  - partners_heading: Trusted Partners
     underline_width: 300
-    partners:
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/05-F-ZZ999-009%202.png
-        title: Title
-        description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst.
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/DoD-Logo-Light-Stacked-1-Color%202.png
-        title: Title
-        description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst.
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/department-of-the-navy-1-logo-black-and-white%202.png
-        title: Title
-        description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst.
-    subPartners:
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/05-F-ZZ999-009%202.png
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/DoD-Logo-Light-Stacked-1-Color%202.png
-      - agency: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/department-of-the-navy-1-logo-black-and-white%202.png
-    _template: agencies
+    buttons:
+      - link: /partners
+        label: 'View All Partners '
+        style: border
+    _template: priorityPartners
   - solutions_heading: Solutions
     link_heading: Learn More
+    pdf_heading: View
     underline_width: 300
     solutions_id: solutions
     scroll: center
