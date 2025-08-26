@@ -25,6 +25,12 @@ export const partners = {
             type:'boolean'
         },
         {
+            name: "category",
+            label: "Category",
+            type: "reference",
+            collections: ["category"], 
+        },
+        {
             name:'link',
             label:'Partners Link',
             type:'string'

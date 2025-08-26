@@ -8,6 +8,12 @@ export const allPartners = {
             label: 'Heading'
         },
         {
+           name: "category",
+            label: "Category",
+            type: "reference",
+            collections: ["category"],  
+        },
+        {
             name:'partners_id',
             type:'string',
             label:'Partners Id(Must be the same Id as Link Id if you want scroll affect for Section)'

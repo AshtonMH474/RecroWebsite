@@ -11,13 +11,9 @@ blocks:
     width: 60
     _template: landing
   - partners_heading: 'Our Partner Ecosystem '
+    category: content/categories/all.md
     partners_id: ''
     underline_width: 300
-    partners_list:
-      - partner: content/partners/dracoForce.md
-      - partner: content/partners/ecs.md
-      - partner: content/partners/govsmart.md
-      - partner: content/partners/mixmode.md
     _template: partners
 ---
 
