@@ -12,7 +12,7 @@ import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import Landing2 from "@/components/Landing2";
 import Testimonies from "@/components/Testimonies/Testimonies";
 import PartnersGrid from "@/components/Partners/PartnersGrid";
-import PriorityPartners from "@/components/Partners/PriorityPartners";
+import PriorityPartners from "@/components/Partners/PriorityPartners/PriorityPartners";
 
 
 
