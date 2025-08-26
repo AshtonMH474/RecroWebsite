@@ -6,6 +6,20 @@ export default function PdfModal({ solution, onClose }) {
   const pdfUrl = solution.mainPdf;
 
   useEffect(() => {
+
+    const isMobile =
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      window.innerWidth < 768;
+
+    if (isMobile) {
+      // Open in a new tab on mobile
+      window.open(pdfUrl, "_blank");
+      // Immediately close the modal since we don’t need it
+      onClose();
+      return;
+    }
+
+
     const scrollY = window.scrollY;
 
     // Lock scroll and preserve current position
@@ -17,6 +31,7 @@ export default function PdfModal({ solution, onClose }) {
     document.body.style.width = "100%";
 
     return () => {
+        
       // Restore scroll position
       document.body.style.position = "";
       document.body.style.top = "";
@@ -27,6 +42,14 @@ export default function PdfModal({ solution, onClose }) {
       window.scrollTo(0, scrollY); // restore to the same spot
     };
   }, []);
+
+
+  if (
+    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+    window.innerWidth < 768
+  ) {
+    return null;
+  }
 
   return (
     <AnimatePresence>
@@ -42,7 +65,7 @@ export default function PdfModal({ solution, onClose }) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="bg-white w-[80%] h-[70%] rounded-lg shadow-xl relative flex flex-col mt-30"
+          className="bg-white w-[80%] h-[70%] rounded-lg shadow-xl relative flex flex-col "
           onClick={(e) => e.stopPropagation()} // stop closing when clicking inside
         >
          
