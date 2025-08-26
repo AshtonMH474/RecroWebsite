@@ -2,7 +2,7 @@
 title: Partners
 blocks:
   - heading: >
-      # **nnnnnnTrusted** Partners in Innovation and Mission Success
+      # **Trusted** Partners in Innovation and Mission Success
 
 
       ### At Recro, we place trust at the center of every partnership. By
