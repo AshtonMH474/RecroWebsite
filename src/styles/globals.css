@@ -95,6 +95,10 @@ body {
   background-color: #B55914;
 }
 
+.bg-primary2:hover {
+  background-color: rgba(181, 89, 20, 0.6);
+}
+
 .primary-color{
   color:#B55914
 }
