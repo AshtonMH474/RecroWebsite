@@ -33,7 +33,7 @@ function Testimonies(props){
            id={props.testimonies_id}
            >
                 <div className="flex flex-col items-center mt-32 pb-12">
-                    {props.testimoniesHeading && (<h2 data-tina-field={tinaField(props,'testimoniesHeading')} className="font-bold text-[32px] md:text-[40px] text-white">{props.testimoniesHeading}</h2>)}
+                    {props.testimoniesHeading && (<h2 data-tina-field={tinaField(props,'testimoniesHeading')} className="font-bold text-[32px] md:text-[40px] text-white text-center px-4">{props.testimoniesHeading}</h2>)}
                     <div data-tina-field={tinaField(props,'underline_width')} style={{width:props.underline_width}} className="rounded-[12px] h-1  bg-primary mt-2"></div>
                 </div>
                 <div className="w-full relative">

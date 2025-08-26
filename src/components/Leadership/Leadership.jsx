@@ -58,7 +58,7 @@ function Leadership(props) {
           <div className="flex flex-col items-center mt-32 pb-12">
             <h2
               data-tina-field={tinaField(props, "leadershipHeading")}
-              className="font-bold text-[32px] md:text-[40px] text-white text-center"
+              className="font-bold text-[32px] md:text-[40px] text-white text-center px-4"
             >
               {props.leadershipHeading}
             </h2>

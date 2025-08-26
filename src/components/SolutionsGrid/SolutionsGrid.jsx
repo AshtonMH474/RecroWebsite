@@ -76,7 +76,7 @@ function SolutionsGrid({solutionRes,...block}){
                     paddingTop: short ? "5rem" : "3rem",
                     top: tall ? "200px" : "80px",
                 }} className=" overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md">
-                        <motion.h2 style={{ opacity: headingOpacity }} data-tina-field={tinaField(block,'solutions_heading')} className="font-bold text-[32px] md:text-[40px] text-white text-center">
+                        <motion.h2 style={{ opacity: headingOpacity }} data-tina-field={tinaField(block,'solutions_heading')} className="font-bold px-4 text-[32px] md:text-[40px] text-white text-center">
                             {block.solutions_heading}
                         </motion.h2>
                         <motion.div data-tina-field={tinaField(block,'underline_width')} style={{ opacity: headingOpacity,width:block.underline_width }}

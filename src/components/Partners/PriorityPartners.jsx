@@ -37,7 +37,7 @@ function PriorityPartners({ partnersRes, ...block }) {
         {block.partners_heading && (
           <h2
             data-tina-field={tinaField(block, "partners_heading")}
-            className="font-bold text-[32px] md:text-[40px] text-white"
+            className="font-bold text-[32px] md:text-[40px] text-white text-center px-4"
           >
             {block.partners_heading}
           </h2>

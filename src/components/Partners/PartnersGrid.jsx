@@ -19,7 +19,7 @@ function PartnersGrid({partnersRes,...block}){
             <div id={block.partners_id} 
             className="relative bg-black overflow-hidden w-full pb-24" >
                 <div className="flex flex-col text-center items-center mt-32 pb-12">
-                    {block.partners_heading && (<h2  data-tina-field={tinaField(block,'partners_heading')} className="font-bold text-[32px] md:text-[40px] text-white">{block.partners_heading}</h2>)}
+                    {block.partners_heading && (<h2  data-tina-field={tinaField(block,'partners_heading')} className="font-bold text-[32px] md:text-[40px] text-white text-center px-4">{block.partners_heading}</h2>)}
                     <div data-tina-field={tinaField(block,'underline_width')} style={{width:block.underline_width}}  className="rounded-[12px] h-1  bg-primary mt-2"></div>
                 </div>
                 <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden">
