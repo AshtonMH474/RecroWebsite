@@ -11,7 +11,7 @@ blocks:
     width: 60
     _template: landing
   - partners_heading: 'Our Partner Ecosystem '
-    category: content/categories/tech.md
+    category: content/categories/all.md
     partners_id: ''
     underline_width: 300
     _template: partners
