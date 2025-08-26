@@ -102,7 +102,7 @@ function Landing(props) {
       {/* === Buttons === */}
       <div className="flex gap-x-8 ">
         {props.buttons?.map((button, i) =>
-          button.style === 'border' ? (
+          button.style === 'border' && button.link ? (
             <Link href={button.link} key={i}>
               <button
                 data-tina-field={tinaField(props.buttons[i], 'label')}
@@ -111,7 +111,7 @@ function Landing(props) {
                 {button.label}
               </button>
             </Link>
-          ) : button.style === 'button' ? (
+          ) : button.style === 'button' && button.link ? (
             <Link href={button.link} key={i}>
               <button
                 data-tina-field={tinaField(props.buttons[i], 'label')}

@@ -16,15 +16,15 @@ function Landing2(props){
                     }}/>
                 </div>
             )}
-            <div className="flex flex-wrap justify-center lg:justify-start">
+            <div className="flex flex-wrap gap-x-4 justify-center lg:justify-start">
             {props.buttons?.map((button,i) =>
-                            button.style === 'border' ? (
+                            button.style === 'border' && button.link ? (
                                 <Link href={button.link} key={i}>
                                     <button  data-tina-field={tinaField(props.buttons[i], 'label')} className={`px-8 capitalize py-2  border primary-border rounded hover:text-white/80 transition-colors duration-300`}>
                                     {button.label}
                                     </button>
                                 </Link>
-                            ) : button.style === 'button' ? (
+                            ) : button.style === 'button' && button.link ? (
                                 <Link href={button.link} key={i}>
                                     <button  data-tina-field={tinaField(props.buttons[i], 'label')} className={`bg-primary capitalize cursor-pointer px-8 py-2 w-auto   rounded hover:opacity-80 text-white`}>
                                     {button.label}
