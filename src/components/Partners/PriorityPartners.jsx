@@ -117,7 +117,7 @@ function PriorityPartners({ partnersRes, ...block }) {
       {/* === Buttons === */}
 <div className="flex justify-center gap-x-8 mt-6">
   {block.buttons?.map((button, i) =>
-    button.style === "border" ? (
+    button.style === "border" && button.link ? (
       <Link href={button.link} key={i}>
         <button
           data-tina-field={tinaField(block.buttons[i], "label")}
@@ -126,7 +126,7 @@ function PriorityPartners({ partnersRes, ...block }) {
           {button.label}
         </button>
       </Link>
-    ) : button.style === "button" ? (
+    ) : button.style === "button" && button.link? (
       <Link href={button.link} key={i}>
         <button
           data-tina-field={tinaField(block.buttons[i], "label")}
