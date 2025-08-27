@@ -4,6 +4,6 @@ logo: >-
   https://recro-landing-site.s3.us-east-1.amazonaws.com/Partners/MixMode-R-White-and-Orange-RGB-768x168.png
 priority: false
 category: content/categories/tech.md
-link: 'https://mixmode.ai/'
+link: ''
 ---
 
