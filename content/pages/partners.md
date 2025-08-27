@@ -10,8 +10,8 @@ blocks:
       partners can rely on us to achieve mission success together.
     width: 60
     _template: landing
-  - partners_heading: 'Our Partner Ecosystem '
-    category: content/categories/all.md
+  - partners_heading: Technology Partners
+    category: content/categories/tech.md
     partners_id: ''
     underline_width: 300
     _template: partners
