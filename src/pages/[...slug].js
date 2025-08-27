@@ -12,7 +12,6 @@ import Testimonies from "@/components/Testimonies/Testimonies";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import { useTina } from "tinacms/dist/react";
 
-
 export async function getStaticPaths() {
   const { client } = await import("../../tina/__generated__/databaseClient");
 
@@ -40,20 +39,17 @@ export async function getStaticProps({ params }) {
     client.queries.nav({ relativePath: "nav.md" }),
     isTrue ? client.queries.footer({ relativePath: "footerCareers.md" }) : client.queries.footer({ relativePath: "footer.md" }) ,
     client.queries.solutionConnection(),
-    client.queries.partnerConnection()
+    client.queries.partnerConnection({first:100})
   ]);
 
-  
-  // const solutions = solutionData.data.solutionConnection.edges.map(({ node }) => node);
-  // const partners = partnerData.data.partnerConnection.edges.map(({ node }) => node);
-  return {
-    props: {
-      res: pageData,
-      navData,
-      footerData,
-      solutionData,
-      partnerData
-    },
+return {
+  props: {
+    res: pageData,
+    navData,
+    footerData,
+    solutionData,
+    partnerData, // array of pages with edges/node
+  },
   };
 }
 
@@ -64,7 +60,6 @@ export default function Slug({ res,navData,footerData,solutionData,partnerData }
   const { data: partnersContent } = useTina(partnerData);
   const { data: solutionContent } = useTina(solutionData);
   
-   
   
     useScrollToHash(data.page.blocks, [
             'cards_id',

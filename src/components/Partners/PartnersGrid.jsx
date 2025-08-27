@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { tinaField } from "tinacms/dist/react"
 
 
 
 function PartnersGrid({partnersRes,...block}){
-    const [partners,setPartners] = useState([])
-
-    useEffect(() => {
-        const allPartners = partnersRes.partnerConnection.edges.map(e => e.node);
-
-        if(block.category?.category && block.category.category != 'All'){
-            setPartners(allPartners.filter((partner) => partner.category.category == block.category.category))
-        }else setPartners(allPartners)
-    },[block.category?.category])
     
+      const allPartners = partnersRes?.partnerConnection?.edges.map((e) => e.node) || [];
+
+  // Apply filtering but don't break Tina editing
+  const filtered = useMemo(() => {
+    if (block.category?.category && block.category.category !== "All") {
+      return allPartners.filter(
+        (partner) => partner?.category?.category === block.category.category
+      );
+    }
+    return allPartners;
+  }, [allPartners, block.category?.category]);
     return(
         <>
             <div id={block.partners_id} 
@@ -24,7 +26,7 @@ function PartnersGrid({partnersRes,...block}){
                 </div>
                 <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden">
                     <div className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12 px-4">
-                        {partners.map((partner,i)=> (
+                        {filtered.map((partner,i)=> (
                             <a  className="flex-1 min-w-[250px] sm:basis-[45%] lg:basis-[30%] max-w-[300px]" target="_blank" href={partner.link} key={i}>
                                 <div
                                 key={i}
