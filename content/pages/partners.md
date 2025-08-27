@@ -12,7 +12,20 @@ blocks:
     _template: landing
   - partners_heading: Technology Partners
     category: content/categories/tech.md
-    partners_id: ''
+    partners_id: tech
+    scroll: start
+    underline_width: 300
+    _template: partners
+  - partners_heading: Integrators
+    category: content/categories/integrators.md
+    partners_id: integrators
+    scroll: start
+    underline_width: 300
+    _template: partners
+  - partners_heading: Fulfillment/Channel
+    category: content/categories/channel.md
+    partners_id: channel
+    scroll: start
     underline_width: 300
     _template: partners
 ---
