@@ -5,6 +5,6 @@ logo: >-
 needsTitle: true
 priority: true
 category: content/categories/integrators.md
-link: 'https://www.mantech.com/'
+link: ''
 ---
 
