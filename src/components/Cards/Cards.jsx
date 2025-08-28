@@ -102,7 +102,7 @@ useEffect(() => {
 
           <motion.div
             id="target"
-            className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
+            className="contain-paint contain-layout transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
             style={{ opacity: cardsOpacity, scale: cardsScale }}
           >
             {expertiseItems.map((ex, i) => (

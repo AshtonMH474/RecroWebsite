@@ -1,6 +1,6 @@
 export const allPartners = {
     name: "partners",
-    label: 'All Partners',
+    label: 'Partners',
     fields:[
         {
             name:"partners_heading",
