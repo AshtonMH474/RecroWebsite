@@ -58,6 +58,13 @@ body {
   backface-visibility: hidden;
 }
 
+.contain-paint {
+  contain: paint;
+}
+.contain-layout {
+  contain: layout;
+}
+
 @media(max-width: 1150px){
   .background.Home{
     background: radial-gradient(circle at 120% 185%, #B55A14 15%, #000000 85%);
