@@ -5,8 +5,8 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
-
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
+        
         <script
           type="text/javascript"
           id="hs-script-loader"
