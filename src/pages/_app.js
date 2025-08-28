@@ -10,47 +10,34 @@ export default function App({ Component, pageProps }) {
 
   // 1️⃣ Initial --vh setup on mount
   useEffect(() => {
-  const setVh = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-    lastSize.current = { width: window.innerWidth, height: window.innerHeight };
-  };
+    requestAnimationFrame(() => {
+      const initialVh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${initialVh}px`);
+      lastSize.current = { width: window.innerWidth, height: window.innerHeight };
 
-  // First attempt after 300ms
-  const timeout1 = setTimeout(setVh, 300);
+      
+    
+    });
+  }, []);
 
-  // Second attempt after 800ms (to catch iOS bounce/pull-down)
-  const timeout2 = setTimeout(setVh, 800);
-
-  return () => {
-    clearTimeout(timeout1);
-    clearTimeout(timeout2);
-  };
-}, []);
-
-
-  // 2️⃣ Debounced resize listener
+  // 2️⃣ Resize listener that only runs if change > 150px
   useEffect(() => {
     const handleResize = () => {
-      clearTimeout(resizeTimeout.current);
-      resizeTimeout.current = setTimeout(() => {
-        const currentWidth = window.innerWidth;
-        const currentHeight = window.innerHeight;
+      const currentWidth = window.innerWidth;
+      const currentHeight = window.innerHeight;
 
-        const widthDiff = Math.abs(currentWidth - lastSize.current.width);
-        const heightDiff = Math.abs(currentHeight - lastSize.current.height);
+      const widthDiff = Math.abs(currentWidth - lastSize.current.width);
+      const heightDiff = Math.abs(currentHeight - lastSize.current.height);
 
-        // Only update if significant change
-        if (widthDiff > 150) {
-          const newVh = currentHeight * 0.01;
-          document.documentElement.style.setProperty("--vh", `${newVh}px`);
-          lastSize.current = { width: currentWidth, height: currentHeight };
-        }
-      }, 150); // debounce 150ms
+      if (widthDiff > 150 || heightDiff > 250 ) {
+        const newVh = currentHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${newVh}px`);
+        lastSize.current = { width: currentWidth, height: currentHeight };
+      }
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
 
