@@ -52,6 +52,11 @@ body {
   background: radial-gradient(circle at 120% 250%, #B55A14 15%, #000000 85%);
 }
 
+.will-change-transform {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
 
 @media(max-width: 1150px){
   .background.Home{
