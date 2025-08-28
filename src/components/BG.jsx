@@ -12,7 +12,7 @@ import { useRef } from "react"
     return(
         <div
         ref={ref}
-        style={{height:'100dvh', minHeight:'100dvh'}}
+        style={{height:'100dvh', minHeight:'100dvh' }}
         className="background Home  overflow-hidden bg-fixed bg-center bg-cover  bg-contain flex flex-col items-end"
          >
         

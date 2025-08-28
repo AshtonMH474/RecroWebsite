@@ -13,10 +13,13 @@ html,body{
   overscroll-behavior-y: contain;
 
 }
+
+
+
 html,
 body,
 #__next {
-  
+    height: 100%; 
   
 }
 

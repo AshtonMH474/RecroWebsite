@@ -28,7 +28,7 @@ function Testimonies(props){
     const visableTests = tests.slice(startIndex, startIndex + visibleCount);
     return (
         <>
-           <div style={{minHeight:'100dvh'}}
+           <div style={{minHeight:'100%'}}
            className="relative bg-black overflow-hidden w-full pb-24 "
            id={props.testimonies_id}
            >

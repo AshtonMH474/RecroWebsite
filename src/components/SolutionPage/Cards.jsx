@@ -8,7 +8,7 @@ function SolutionCards(props) {
   const headingInView = useInView(headingRef, { once: true, margin: "-100px" });
 
   return (
-    <section style={{minHeight:"100dvh"}} className="pb-16 flex justify-center items-center">
+    <section style={{minHeight:"100%"}} className="pb-16 flex justify-center items-center">
       <div className="overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md">
         <motion.h2
           ref={headingRef}

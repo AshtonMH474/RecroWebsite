@@ -48,7 +48,7 @@ function Jobs(props){
     
     return(
         <>
-            <div id={props.jobs_id} style={{minHeight:'100dvh'}} 
+            <div id={props.jobs_id} style={{minHeight:'100%'}} 
             className="relative bg-black overflow-hidden w-full pb-24" >
                 
                 <div className="flex flex-col items-center mt-32 pb-12">

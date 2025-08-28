@@ -5,7 +5,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text"
 function Landing2(props){
     
     return(
-    <div style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }} className="landing  lg:-mt-20 flex flex-col lg:flex-row  items-center justify-center  w-full gap-x-22 ">
+    <div style={{ minHeight: '100%' }} className="landing  lg:-mt-20 flex flex-col lg:flex-row  items-center justify-center  w-full gap-x-22 ">
         <div className="lg:pl-20">
             {props.headingLanding2 && (
                 <div className='w-90 md:w-120 ' data-tina-field={tinaField(props,'headingLanding2')}>
