@@ -35,7 +35,7 @@ function Statements(props){
 
     return (
         <>
-            <div style={{minHeight:'100dvh'}}
+            <div style={{minHeight:'100%'}}
             className="relative bg-black overflow-hidden w-full pb-24">
                 <div className="flex flex-col items-center mt-32 pb-12">
                     {props.statement_heading && (<h2 data-tina-field={tinaField(props,'statement_heading')} className="font-bold text-[32px] md:text-[40px] text-white">{props.statement_heading}</h2>)}
