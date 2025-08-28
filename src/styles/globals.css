@@ -10,7 +10,7 @@ html {
 
 html,body{
   overflow-x: visible;
-  overscroll-behavior-y: contain;
+  overscroll-behavior-y: none;
 
 }
 html,
