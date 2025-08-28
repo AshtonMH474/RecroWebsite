@@ -26,7 +26,7 @@ export async function getStaticProps() {
     client.queries.nav({ relativePath: "nav.md" }),
     client.queries.footer({ relativePath: "footer.md" }),
     client.queries.solutionConnection(),
-    client.queries.partnerConnection()
+    client.queries.partnerConnection({first:100})
     
   ]);
 

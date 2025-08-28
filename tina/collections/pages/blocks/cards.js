@@ -1,6 +1,7 @@
 
 import * as FaIcons from "react-icons/fa";
 import { IconPickerField } from "../../../components/IconPicker";
+import ScrollCard from "../../../components/ScrollCard";
 const iconNames = Object.keys(FaIcons);
 
 export const cards = {
@@ -46,6 +47,26 @@ export const cards = {
                     ui:{
                         component:IconPickerField
                     }
+                },
+                {
+                    name: 'scrollToSection',
+                    label: "If Clicked do you want it to Scroll to that Section?",
+                    type:"object",
+                    ui:{
+                        component: ScrollCard
+                    },
+                    fields:[
+                        {
+                            name:'scroll',
+                            label:'You want it to Scroll?',
+                            type:'boolean'
+                        },
+                        {
+                            name:'id',
+                            label:'Id of Card(Must be the same as the section)',
+                            type:'string'
+                        }
+                    ]
                 },
                 {
                     name:'description',
