@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }) {
       const widthDiff = Math.abs(currentWidth - lastSize.current.width);
       const heightDiff = Math.abs(currentHeight - lastSize.current.height);
 
-      if (widthDiff > 150 || heightDiff > 150 ) {
+      if (widthDiff > 150 || heightDiff > 250 ) {
         const newVh = currentHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${newVh}px`);
         lastSize.current = { width: currentWidth, height: currentHeight };
