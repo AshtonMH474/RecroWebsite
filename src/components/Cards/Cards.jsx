@@ -148,7 +148,7 @@ function Cards(props) {
   const [short, setShort] = useState(false);
   const [tall, setTall] = useState(false);
 
-  const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(null);
+  const [expandedCardIndex, setExpandedCardIndex] = useState(null);
   const openCard = (index) => setExpandedCardIndex(index);
   const closeCard = () => setExpandedCardIndex(null);
 
