@@ -68,7 +68,7 @@ useEffect(() => {
 
   const headingOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], { clamp: true });
-  const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
+  const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.7, 1], { clamp: true });
   
   return (
     <>
@@ -79,7 +79,7 @@ useEffect(() => {
         className="relative pb-16"
       >
         <div
-          className=" overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md"
+          className=" z-30 py-12 max-w-[1000px] mx-auto rounded-md"
           style={{
             position: "sticky",
             paddingTop: short ? "5rem" : "3rem",
