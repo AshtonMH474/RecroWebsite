@@ -26,22 +26,32 @@ function PartnersGrid({partnersRes,...block}){
                 </div>
                 <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden">
                     <div className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12 px-4">
-                        {filtered.map((partner,i)=> (
-                            <a  className="flex-1 min-w-[250px] sm:basis-[45%] lg:basis-[30%] max-w-[300px]" target="_blank" href={partner.link} key={i}>
-                                <div
+                        {filtered.map((partner, i) => {
+                            const Wrapper = partner.link ? "a" : "div";
+
+                            return (
+                                <Wrapper
                                 key={i}
-                                className="flex items-center justify-center gap-x-2 border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[120px] px-4 py-6"
-                                data-tina-field={tinaField(partner, "logo")}
+                                className="flex-1 min-w-[250px] sm:basis-[45%] lg:basis-[30%] max-w-[300px]"
+                                {...(partner.link ? { href: partner.link, target: "_blank" } : {})}
+                                >
+                                <div
+                                    className="flex items-center justify-center gap-x-2 border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[120px] px-4 py-6"
+                                    data-tina-field={tinaField(partner, "logo")}
                                 >
                                     <img
-                                        className="h-auto max-h-[100px] object-contain"
-                                        src={partner.logo}
-                                        alt="partner"
+                                    className="h-auto max-h-[100px] object-contain"
+                                    src={partner.logo}
+                                    alt="partner"
                                     />
-                                    {partner.needsTitle && partner.title && (<h1 className="font-bold text-[26px] text-center">{partner.title}</h1>)}
+                                    {partner.needsTitle && partner.title && (
+                                    <h1 className="font-bold text-[26px] text-center">{partner.title}</h1>
+                                    )}
                                 </div>
-                            </a>
-                        ))}
+                                </Wrapper>
+                            );
+                        })}
+
                     </div>
 
                 </div>

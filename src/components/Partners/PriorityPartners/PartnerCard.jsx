@@ -1,10 +1,10 @@
 import { tinaField } from "tinacms/dist/react";
 
 export default function PartnerCard({ partner }) {
+    const Wrapper = partner.link ? "a" : "div";
   return (
-    <a
-      target="_blank"
-      href={partner.link}
+    <Wrapper
+      {...(partner.link ? { href: partner.link, target: "_blank" } : {})}
       className="flex-1 sm:basis-[45%] lg:basis-[30%] w-[300px] min-w-[300px] max-w-[300px]"
     >
       <div
@@ -23,6 +23,6 @@ export default function PartnerCard({ partner }) {
           </h1>
         )}
       </div>
-    </a>
+    </Wrapper>
   );
 }
