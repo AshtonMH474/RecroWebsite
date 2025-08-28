@@ -82,7 +82,7 @@ function SolutionsGrid({solutionRes,...block}){
                         <motion.div data-tina-field={tinaField(block,'underline_width')} style={{ opacity: headingOpacity,width:block.underline_width }}
                         className={`rounded-[12px] h-1  bg-primary mx-auto mt-2`}
                         />
-                        <motion.div style={{ opacity: cardsOpacity, scale: cardsScale }} className="will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
+                        <motion.div style={{ opacity: cardsOpacity, scale: cardsScale }} className=" contain-paint contain-layout will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
                             {solutions.map((card,i) => (
                                 <SolutionCard card={card} onExpand={() => openCard(i)} key={i} props={block} />
                             ))}
