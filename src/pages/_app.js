@@ -9,16 +9,25 @@ export default function App({ Component, pageProps }) {
     const lastSize = useRef({ width: 0, height: 0 });
 
   // 1️⃣ Initial --vh setup on mount
-   useEffect(() => {
-    const setVh = () => {
-      const initialVh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${initialVh}px`);
-      lastSize.current = { width: window.innerWidth, height: window.innerHeight };
-    };
+  useEffect(() => {
+  const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+    lastSize.current = { width: window.innerWidth, height: window.innerHeight };
+  };
 
-    const timeout = setTimeout(setVh, 300); // wait 300ms to stabilize innerHeight
-    return () => clearTimeout(timeout);
-  }, []);
+  // First attempt after 300ms
+  const timeout1 = setTimeout(setVh, 300);
+
+  // Second attempt after 800ms (to catch iOS bounce/pull-down)
+  const timeout2 = setTimeout(setVh, 800);
+
+  return () => {
+    clearTimeout(timeout1);
+    clearTimeout(timeout2);
+  };
+}, []);
+
 
   // 2️⃣ Debounced resize listener
   useEffect(() => {
