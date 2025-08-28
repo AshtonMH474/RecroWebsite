@@ -4,14 +4,12 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png"/> */}
-
-        {/* <link rel="icon" href="/favicon.ico" type="image/x-icon" /> */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png"/>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
         
 
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png?v=2"/>
-<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png?v=2"/>
+
         <script
           type="text/javascript"
           id="hs-script-loader"
