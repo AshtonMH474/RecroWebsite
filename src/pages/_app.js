@@ -15,9 +15,7 @@ export default function App({ Component, pageProps }) {
       document.documentElement.style.setProperty('--vh', `${initialVh}px`);
       lastSize.current = { width: window.innerWidth, height: window.innerHeight };
 
-      // Remove .not-ready to reveal body after layout is stable
-        // setTimeout(() => {
-      document.body.classList.remove("not-ready");
+      
     
     });
   }, []);
