@@ -24,7 +24,7 @@ links:
         label: Logic Engineering
       - linkOptions:
           link: /solutions/solution5
-        label: Solution5
+        label: IT-as-a-Service
       - linkOptions:
           link: /solutions/solution6
         label: Solution6
