@@ -5,9 +5,14 @@ blocks:
       # **Trusted** Partners in Innovation and Mission Success
 
 
-      ### At Recro, we place trust at the center of every partnership. By
-      listening, collaborating, and delivering with integrity, we ensure our
-      partners can rely on us to achieve mission success together.
+      ### Recro: The trusted bridge between government and industry to deliver
+      secure mission outcomes
+
+
+      We build lasting trust at every level of partnership—whether with our
+      government customers, prime contractors, subcontractor allies, or
+      ecosystem technology partners. By listening, collaborating, and delivering
+      with integrity, we ensure every mission succeeds together.
     width: 60
     _template: landing
   - cards_heading: Our Partner Ecosystem
