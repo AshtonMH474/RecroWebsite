@@ -26,7 +26,7 @@ links:
           link: /solutions/itaas
         label: IT-as-a-Service
       - linkOptions:
-          link: /solutions/solution6
+          link: /solutions/ecosystem
         label: Emerging Technologies
   - linkOptions:
       link: /partners
