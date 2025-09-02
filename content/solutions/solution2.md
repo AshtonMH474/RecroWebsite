@@ -1,6 +1,6 @@
 ---
-title: Title2
-icon: FaAirbnb
+title: AI Infrastructure
+icon: FaRobot
 description: >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget sapien
   at risus varius facilisis. In hac habitasse platea dictumst. Praesent
