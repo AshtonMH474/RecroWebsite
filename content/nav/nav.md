@@ -20,7 +20,7 @@ links:
           link: /solutions/cyber
         label: CyberSecurity
       - linkOptions:
-          link: /solutions/solution4
+          link: /solutions/logic-eng
         label: Logic Engineering
       - linkOptions:
           link: /solutions/solution5
