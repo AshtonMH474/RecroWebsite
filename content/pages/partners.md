@@ -19,16 +19,14 @@ blocks:
     cards_id: ''
     underline_width: 300
     cards:
-      - title: Technology Partners
-        icon: FaChromecast
+      - title: Technology
+        icon: FaAssistiveListeningSystems
         scrollToSection:
           scroll: true
           id: tech
         description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor, vitae tincidunt orci enim id nulla..
+          We adapt and operationalize cutting-edge platforms into secure,
+          compliant mission environments
         allContentLink: ''
         content: ''
       - title: Integrators
