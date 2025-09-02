@@ -2,12 +2,12 @@
 title: solutions
 blocks:
   - heading: >
-      # **Transforming** Solutions
+      # **Center of Excellence** 
 
 
-      ### Empowering defense, intelligence, and civil organizations with
-      innovative, secure solutions that drive success in a rapidly evolving
-      world.
+      Cognitio - where expertise & experience meets innoncation to advance
+      defense, intelligence, and civilian missions through secure, innovative
+      solutions that thrive in a dynamic ever-changing world.
     width: 45
     _template: landing
   - solutions_heading: Solutions
