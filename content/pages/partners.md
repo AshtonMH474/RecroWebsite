@@ -36,10 +36,10 @@ blocks:
           scroll: true
           id: integrators
         description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor, vitae tincidunt orci enim id nulla..
+          We partner with integrators to strengthen solutions and accelerate
+          capture & delivery. We provide cleared expertise, surge capacity, and
+          specialized engineering that win bids and deliver resilient mission
+          outcomes
         content: ''
       - title: Fulfillment/Channel
         icon: FaRegMap
