@@ -1,6 +1,6 @@
 ---
-title: Title5
-icon: FaAmazon
+title: IT-as-a-Service
+icon: FaUsersCog
 description: >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget sapien
   at risus varius facilisis. In hac habitasse platea dictumst. Praesent
