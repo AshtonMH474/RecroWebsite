@@ -27,7 +27,7 @@ links:
         label: IT-as-a-Service
       - linkOptions:
           link: /solutions/solution6
-        label: Solution6
+        label: Emerging Technologies
   - linkOptions:
       link: /partners
     label: Partners
