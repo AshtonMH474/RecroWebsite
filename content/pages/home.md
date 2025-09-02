@@ -16,13 +16,6 @@ blocks:
         label: about
         style: border
     _template: landing
-  - partners_heading: Trusted Partners
-    underline_width: 300
-    buttons:
-      - link: /partners
-        label: 'View All Partners '
-        style: border
-    _template: priorityPartners
   - solutions_heading: Center of Excellence
     link_heading: Learn More
     pdf_heading: View
@@ -31,6 +24,13 @@ blocks:
     scroll: center
     link_icon: FaArrowRight
     _template: solutions
+  - partners_heading: Trusted Partners
+    underline_width: 300
+    buttons:
+      - link: /partners
+        label: 'View All Partners '
+        style: border
+    _template: priorityPartners
   - headingLearnTeam: >
       # Learn about the **Team**
 
