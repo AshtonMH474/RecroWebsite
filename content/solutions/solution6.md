@@ -1,6 +1,6 @@
 ---
-title: Title6
-icon: FaAnchor
+title: Emerging Tech
+icon: FaRegLightbulb
 description: >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget sapien
   at risus varius facilisis. In hac habitasse platea dictumst. Praesent
