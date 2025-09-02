@@ -107,8 +107,8 @@ blocks:
           luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/johnAmericaProPic.png
-        name: Name
-        title: Title
+        name: Johnathan America
+        title: Founder & President
         bio: >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
           eget sapien at risus varius facilisis. In hac habitasse platea
