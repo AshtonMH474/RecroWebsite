@@ -18,7 +18,7 @@ links:
         label: AI Infrastructure
       - linkOptions:
           link: /solutions/solution3
-        label: Solution3
+        label: CyberSecurity
       - linkOptions:
           link: /solutions/solution4
         label: Solution4
