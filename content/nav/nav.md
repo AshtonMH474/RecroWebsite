@@ -12,7 +12,7 @@ links:
       - linkOptions:
           type: link
           link: /solutions/solution1
-        label: Solution1
+        label: Cloud
       - linkOptions:
           link: /solutions/solution2
         label: Solution2
