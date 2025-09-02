@@ -58,5 +58,37 @@ blocks:
           luctus tortor,
         content: ''
     _template: cards
+  - cards_heading: Marketplace
+    underline_width: 300
+    cards:
+      - title: Title
+        icon: FaAdversal
+        description: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor,
+      - title: Title
+        icon: FaAlipay
+        description: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor,
+      - title: Title
+        icon: FaAlignJustify
+        description: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor,
+      - title: Title
+        icon: FaArchive
+        description: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          eget sapien at risus varius facilisis. In hac habitasse platea
+          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
+          luctus tortor,
+    _template: cards
 ---
 
