@@ -23,7 +23,7 @@ blocks:
         label: 'View All Partners '
         style: border
     _template: priorityPartners
-  - solutions_heading: Solutions
+  - solutions_heading: Center of Excellence
     link_heading: Learn More
     pdf_heading: View
     underline_width: 300
