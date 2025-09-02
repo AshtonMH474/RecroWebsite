@@ -116,8 +116,8 @@ blocks:
           luctus tortor, vitae tincidunt orci enim id nulla..
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        title: Title
+        name: Lyndsay Hawkins
+        title: COO
         bio: >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
           eget sapien at risus varius facilisis. In hac habitasse platea
