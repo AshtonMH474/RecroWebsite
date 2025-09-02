@@ -11,7 +11,7 @@ links:
     sublinks:
       - linkOptions:
           type: link
-          link: /solutions/solution1
+          link: /solutions/cloud
         label: Cloud
       - linkOptions:
           link: /solutions/solution2
