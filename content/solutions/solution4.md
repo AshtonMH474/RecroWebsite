@@ -1,6 +1,6 @@
 ---
-title: Title4
-icon: Fa500Px
+title: Logic Engineering
+icon: FaCodeBranch
 description: >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget sapien
   at risus varius facilisis. In hac habitasse platea dictumst. Praesent
