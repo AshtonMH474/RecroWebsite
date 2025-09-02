@@ -98,8 +98,8 @@ blocks:
     leaders:
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/placeholder_leadership2.jpg
-        name: Name
-        title: Title
+        name: Robert Lataille
+        title: Founder & CEO
         bio: >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
           eget sapien at risus varius facilisis. In hac habitasse platea
