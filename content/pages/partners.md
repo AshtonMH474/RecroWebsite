@@ -25,8 +25,9 @@ blocks:
           scroll: true
           id: tech
         description: >
-          We adapt and operationalize cutting-edge platforms into secure,
-          compliant mission environments
+          We help technology partners operationalize their platforms in complex
+          government environments. By adapting cutting-edge technologies. We
+          ensure that new capabilities deliver measurable mission value.
         allContentLink: ''
         content: ''
       - title: Integrators
