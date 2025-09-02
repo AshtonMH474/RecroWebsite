@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function DesktopMenu({ links }) {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const closeTimeout = useRef(null);
-  console.log(links)
+ 
 
   const handleMouseEnter = (i) => {
     if (closeTimeout.current) {

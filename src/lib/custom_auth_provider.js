@@ -16,7 +16,7 @@ export class CustomAuthProvider extends AbstractAuthProvider {
     const res = await fetch('/api/auth/session');
 
     if (!res.ok) {
-      await this._handleExpiredSession(); // logout and redirect
+      // await this._handleExpiredSession(); // logout and redirect
       return null;
     }
 
@@ -30,7 +30,7 @@ export class CustomAuthProvider extends AbstractAuthProvider {
     const res = await fetch('/api/auth/session');
 
   if (!res.ok) {
-    await this._handleExpiredSession();
+    // await this._handleExpiredSession();
     return null;
   }
 
@@ -38,7 +38,7 @@ export class CustomAuthProvider extends AbstractAuthProvider {
   const token = session?.id_token;
 
   if (!token) {
-    await this._handleExpiredSession();
+    // await this._handleExpiredSession();
     return null;
   }
 
@@ -48,12 +48,12 @@ export class CustomAuthProvider extends AbstractAuthProvider {
 
     if (decoded.exp && decoded.exp < now) {
       console.warn('[Auth] Token expired');
-      await this._handleExpiredSession();
+      // await this._handleExpiredSession();
       return null;
     }
   } catch (err) {
     console.error('[Auth] Failed to decode token:', err);
-    await this._handleExpiredSession();
+    // await this._handleExpiredSession();
     return null;
   }
 
@@ -68,16 +68,16 @@ export class CustomAuthProvider extends AbstractAuthProvider {
     const res = await fetch("/api/auth/session");
 
     if (!res.ok) {
-      await this._handleExpiredSession();
+      // await this._handleExpiredSession();
       return false;
     }
 
     const session = await res.json();
     const authorized = !!session?.user;
 
-    if (!authorized) {
-      await this._handleExpiredSession();
-    }
+    // if (!authorized) {
+    //   await this._handleExpiredSession();
+    // }
     
     return authorized;
   }
