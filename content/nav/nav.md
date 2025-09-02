@@ -37,6 +37,18 @@ links:
       - linkOptions:
           link: /portal-info
         label: Portal
+      - linkOptions:
+          type: id
+          id: tech
+        label: Technology
+      - linkOptions:
+          type: id
+          id: integrators
+        label: Integrators
+      - linkOptions:
+          type: id
+          id: channel
+        label: Fulfillment/Channel
   - linkOptions:
       link: /careers
     label: Careers
