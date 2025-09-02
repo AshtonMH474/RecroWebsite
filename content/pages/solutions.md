@@ -2,7 +2,7 @@
 title: solutions
 blocks:
   - heading: >
-      # **Center of Excellence** 
+      # **Center of Excellence**
 
 
       Cognitio - where expertise & experience meets innoncation to advance
@@ -20,7 +20,7 @@ blocks:
       mission-driven solutions across cloud, edge, and classified environments.
     width: 45
     _template: landing
-  - solutions_heading: Solutions
+  - solutions_heading: Centers of Excellence
     link_heading: Learn More
     pdf_heading: view
     underline_width: 300
