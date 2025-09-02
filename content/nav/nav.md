@@ -40,6 +40,7 @@ links:
       - linkOptions:
           type: id
           id: tech
+          scrollPosition: start
         label: Technology
       - linkOptions:
           type: id

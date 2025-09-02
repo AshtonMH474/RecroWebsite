@@ -3,9 +3,10 @@ import { useState, useRef } from "react";
 import { tinaField } from "tinacms/dist/react";
 import Link from "next/link";
 
-export default function DesktopMenu({ links, partners }) {
+export default function DesktopMenu({ links }) {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const closeTimeout = useRef(null);
+  console.log(links)
 
   const handleMouseEnter = (i) => {
     if (closeTimeout.current) {
@@ -53,7 +54,7 @@ export default function DesktopMenu({ links, partners }) {
                         window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions?.id}`;
                       } else {
                         const el = document.getElementById(link.linkOptions?.id);
-                        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                        el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions?.scrollPosition || "start" });
                       }
                     }
                   }}
@@ -86,7 +87,7 @@ export default function DesktopMenu({ links, partners }) {
                                 window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions.id}`;
                               } else {
                                 const el = document.getElementById(sublink.linkOptions?.id);
-                                el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                                el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions?.scrollPosition || "start" });
                               }
                             }
                           }}

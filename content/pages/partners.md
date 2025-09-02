@@ -55,7 +55,7 @@ blocks:
   - partners_heading: Technology
     category: content/categories/tech.md
     partners_id: tech
-    scroll: start
+    scroll: center
     underline_width: 300
     _template: partners
   - partners_heading: Integrators
