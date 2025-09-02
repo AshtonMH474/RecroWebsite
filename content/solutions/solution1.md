@@ -1,6 +1,6 @@
 ---
-title: Title1
-icon: FaCogs
+title: Cloud
+icon: FaCloudMeatball
 description: >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget sapien
   at risus varius facilisis. In hac habitasse platea dictumst. Praesent
