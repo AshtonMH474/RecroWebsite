@@ -54,7 +54,7 @@ blocks:
           luctus tortor, vitae tincidunt orci enim id nulla..
         content: ''
     _template: cards
-  - partners_heading: Technology Partners
+  - partners_heading: Technology
     category: content/categories/tech.md
     partners_id: tech
     scroll: start
