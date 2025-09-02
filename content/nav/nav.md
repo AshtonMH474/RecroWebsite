@@ -14,7 +14,7 @@ links:
           link: /solutions/cloud
         label: Cloud
       - linkOptions:
-          link: /solutions/solution2
+          link: /solutions/ai-infra
         label: AI Infrastructure
       - linkOptions:
           link: /solutions/solution3
