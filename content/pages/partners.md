@@ -47,10 +47,9 @@ blocks:
           scroll: true
           id: channel
         description: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor, vitae tincidunt orci enim id nulla..
+          We work hand-in-hand with our. partners to extend the reach of
+          innovative technologies into government programs by transforming
+          channel transactions into sustainable, long-term mission success.
         content: ''
     _template: cards
   - partners_heading: Technology
