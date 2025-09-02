@@ -21,7 +21,7 @@ links:
         label: CyberSecurity
       - linkOptions:
           link: /solutions/solution4
-        label: Solution4
+        label: Logic Engineering
       - linkOptions:
           link: /solutions/solution5
         label: Solution5
