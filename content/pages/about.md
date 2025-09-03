@@ -127,7 +127,6 @@ blocks:
 
           \
 
-
           Over more than a decade in government contracting, Lyndsay has worn
           many hats — from technical recruiter to executive search leader to
           recruitment manager — always with the same throughline: a passion for
@@ -136,7 +135,6 @@ blocks:
           with empathy, and help others shine.\
 
           \
-
 
           Today, as COO, Lyndsay brings all of those lessons forward. She blends
           operational know-how with a people-first mindset, building an
