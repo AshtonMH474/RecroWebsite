@@ -40,46 +40,59 @@
 
 
 //  export default BG
-import { useRef, useEffect, useState } from "react";
+
+import { useRef, useEffect } from "react";
 import GearIcon from "./GearIcon";
 
 function BG() {
+  // Reference to the container div (not strictly needed here but useful if you extend functionality)
   const containerRef = useRef(null);
+
+  // Array of references to each gear div so we can update their rotation directly
   const gearsRef = useRef([]);
-  const [shouldRotate, setShouldRotate] = useState(true);
 
   useEffect(() => {
-    // Detect low-power mode / prefers reduced motion
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const deviceMemory = navigator.deviceMemory || 4; // fallback
+    // Guard clause: if the container hasn't mounted, do nothing
+    if (!containerRef.current) return;
 
-    if (mediaQuery.matches || deviceMemory <= 2) {
-      setShouldRotate(false); // disable rotation for low-power devices
-      return;
-    }
+    // Pull the current list of gear elements
+    const gears = gearsRef.current;
 
+    // lastScrollY tracks the last scroll position
     let lastScrollY = window.scrollY;
+
+    // ticking prevents multiple requestAnimationFrame calls from stacking
     let ticking = false;
 
+    // The function that actually applies rotation to each gear
     const update = () => {
       const scrollY = lastScrollY;
-      const rotate = scrollY * 0.12; // rotation factor
-      gearsRef.current.forEach((gear) => {
+      const rotate = scrollY * 0.12; // rotation factor, controls speed of gear rotation
+
+      // Rotate each gear based on scroll position
+      gears.forEach((gear) => {
         if (gear) gear.style.transform = `rotate(${rotate}deg)`;
       });
+
+      // Reset ticking so another frame can be scheduled
       ticking = false;
     };
 
+    // Event listener for scroll events
     const onScroll = () => {
       lastScrollY = window.scrollY;
+
+      // Only schedule one animation frame at a time
       if (!ticking) {
         requestAnimationFrame(update);
         ticking = true;
       }
     };
 
+    // Add scroll listener, passive:true for better scroll performance
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    // Cleanup function removes the scroll listener on unmount
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
@@ -87,19 +100,16 @@ function BG() {
 
   return (
     <div
-      ref={containerRef}
-      style={{ height: "100dvh", minHeight: "100dvh" }}
-      className="background Home overflow-hidden bg-fixed bg-center bg-cover bg-contain flex flex-col items-end"
+      ref={containerRef} // container reference
+      style={{ height: "100dvh", minHeight: "100dvh" }} // make container full viewport height
+      className="background Home overflow-hidden bg-fixed bg-center bg-cover bg-contain flex flex-col items-end" // Tailwind classes
     >
       {[1, 2, 3, 4, 5].map((n, i) => (
         <div
-          key={n}
-          ref={(el) => (gearsRef.current[i] = el)}
-          className={`mr-10 gear${n}`}
-          style={{
-            transformOrigin: "center center",
-            transition: shouldRotate ? "none" : "transform 0.3s ease",
-          }}
+          key={n} // key for React list rendering
+          ref={(el) => (gearsRef.current[i] = el)} // store reference to this gear div
+          className={`mr-10 gear${n}`} // margin-right and gear-specific class
+          style={{ transformOrigin: "center center" }} // rotate around the center
         >
           <GearIcon
             className={
@@ -112,7 +122,7 @@ function BG() {
                 : n === 4
                 ? "h-80 w-80"
                 : "h-105 w-105 text-black"
-            }
+            } // size & color for each gear
           />
         </div>
       ))}
@@ -121,4 +131,3 @@ function BG() {
 }
 
 export default BG;
-
