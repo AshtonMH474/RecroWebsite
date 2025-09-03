@@ -12,8 +12,8 @@ import Learn from "@/components/Learn";
 import Testimonies from "@/components/Testimonies/Testimonies";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import PartnersGrid from "@/components/Partners/PartnersGrid";
-const PriorityPartners = dynamic(() => import("@/components/Partners/PriorityPartners/PriorityPartners"), { ssr: false });
-const PerformanceGrid = dynamic(() => import("@/components/PerformanceGrid/PerformanceGrid"), { ssr: false });
+const PriorityPartners = dynamic(() => import("@/components/Partners/PriorityPartners/PriorityPartners"), { ssr: true });
+const PerformanceGrid = dynamic(() => import("@/components/PerformanceGrid/PerformanceGrid"), { ssr: true });
 
 export async function getStaticPaths() {
   const { client } = await import("../../tina/__generated__/databaseClient");
