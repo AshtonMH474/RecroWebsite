@@ -39,7 +39,7 @@ export const CustomBackendAuth = () => {
           jwt.verify(token, getKey, { algorithms: ["RS256"] }, async (err, decoded) => {
             if (err) {
               console.error("[Auth] JWT verification failed:", err);
-              console.log(token)
+              
               reject(err);
             } else {
               resolve(decoded);
@@ -47,7 +47,7 @@ export const CustomBackendAuth = () => {
           });
         });
 
-        console.log("[Auth] User authenticated:", decoded);
+    
 
         // Optional: restrict by domain/email here if needed
         return {

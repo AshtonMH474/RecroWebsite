@@ -1,21 +1,12 @@
 import * as FaIcons from "react-icons/fa";
 import { IconPickerField } from "../../components/IconPicker";
-import { cards } from "./blocks/cards";
-import { statements } from "./blocks/statements";
-import { performancesSolution } from "./blocks/performance";
 const iconNames = Object.keys(FaIcons);
 
-
-const solutions = {
-    name:'solution',
-    label: "Solution",
-    path: "content/solutions",
-    format: "md",
-    ui: {
-        router: ({ document }) => {
-        return `/solutions/${document._sys.filename}`;
-        },
-    },
+export const performances = {
+    name: 'performance',
+    label:'Past Performance',
+    path:'content/performance',
+    format:'md',
     fields:[
         {
             name:'title',
@@ -36,17 +27,14 @@ const solutions = {
         },
         {
             name:'mainPdf',
-            label:'Main Pdf',
+            label:'Main PDF',
             type:'image'
         },
         {
-            name:'blocks',
-            label:"Blocks",
-            type:'object',
-            list:true,
-            templates:[cards,statements,performancesSolution]
+            name:'category',
+            label:"Category",
+            type:'reference',
+            collections:["category"]
         }
     ]
 }
-
-export default solutions

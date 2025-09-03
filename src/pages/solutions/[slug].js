@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SolutionLanding from "@/components/SolutionPage/Landing";
 import SolutionCards from "@/components/SolutionPage/Cards";
 import Statements from "@/components/SolutionPage/Statements/Statements";
+import SolutionPerformances from "@/components/SolutionPage/Performances/Performances";
 
 export async function getStaticPaths() {
   const solutionList = await client.queries.solutionConnection();
@@ -49,6 +50,8 @@ function SolutionPage({ solutionData, navData, footerData }) {
                         return <SolutionCards key={i} {...block}/>
                     case "SolutionBlocksStatements":
                         return <Statements key={i} {...block}/>
+                    case "SolutionBlocksPerformances" :
+                      return <SolutionPerformances key={i} {...block}/>
                     default:
                         return null
                 }

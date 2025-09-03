@@ -82,6 +82,9 @@ links:
       - linkOptions:
           link: /vehicles
         label: Contract Vehicles
+      - linkOptions:
+          link: /performances
+        label: Past Performances
   - linkOptions:
       type: link
       link: /admin

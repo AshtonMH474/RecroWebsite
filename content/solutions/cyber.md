@@ -1,5 +1,5 @@
 ---
-title: CyberSecurity
+title: Cyber Security
 icon: FaShieldAlt
 description: >
   Zero Trust, policy-as-code, and compliance automation to harden workloads,
@@ -7,5 +7,4 @@ description: >
 mainPdf: >-
   https://recro-landing-site.s3.us-east-1.amazonaws.com/CapabilityStatements/capability-pdf.pdf
 ---
-
 
