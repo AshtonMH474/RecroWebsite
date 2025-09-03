@@ -2,16 +2,16 @@ import Link from "next/link";
 import { tinaField } from "tinacms/dist/react";
 import {Pause,Play} from "lucide-react";
 
-export default function Buttons({ buttons, paused,togglePause }) {
+export default function Buttons({ buttons }) {
   return (
     <>
         <div className="flex justify-center items-center mt-4">
-        <button
+        {/* <button
           onClick={togglePause}
           className="cursor-pointer bg-black/50 rounded-full p-2 text-white/70 hover:text-white"
         >
           {paused ? <Play size={20} /> : <Pause size={20} />}
-        </button>
+        </button> */}
       </div>
         <div className="flex justify-center gap-x-8 mt-6">
         {buttons?.map((button, i) =>
