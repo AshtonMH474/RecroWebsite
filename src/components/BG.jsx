@@ -40,18 +40,23 @@
 
 
 //  export default BG
-
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import GearIcon from "./GearIcon";
 
 function BG() {
   const containerRef = useRef(null);
   const gearsRef = useRef([]);
+  const [shouldRotate, setShouldRotate] = useState(true);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    // Detect low-power mode / prefers reduced motion
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const deviceMemory = navigator.deviceMemory || 4; // fallback
 
-    const gears = gearsRef.current;
+    if (mediaQuery.matches || deviceMemory <= 2) {
+      setShouldRotate(false); // disable rotation for low-power devices
+      return;
+    }
 
     let lastScrollY = window.scrollY;
     let ticking = false;
@@ -59,7 +64,7 @@ function BG() {
     const update = () => {
       const scrollY = lastScrollY;
       const rotate = scrollY * 0.12; // rotation factor
-      gears.forEach((gear) => {
+      gearsRef.current.forEach((gear) => {
         if (gear) gear.style.transform = `rotate(${rotate}deg)`;
       });
       ticking = false;
@@ -91,7 +96,10 @@ function BG() {
           key={n}
           ref={(el) => (gearsRef.current[i] = el)}
           className={`mr-10 gear${n}`}
-          style={{ transformOrigin: "center center" }}
+          style={{
+            transformOrigin: "center center",
+            transition: shouldRotate ? "none" : "transform 0.3s ease",
+          }}
         >
           <GearIcon
             className={
@@ -113,3 +121,4 @@ function BG() {
 }
 
 export default BG;
+
