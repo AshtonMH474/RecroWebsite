@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export default function PdfModal({ solution, onClose }) {
   const pdfUrl = solution.mainPdf;
-  console.log(solution)
+  
 
   useEffect(() => {
 
