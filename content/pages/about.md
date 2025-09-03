@@ -119,6 +119,7 @@ blocks:
         name: Lyndsay Hawkins
         title: COO
         bio: >
+
           Lyndsay is often described as empath who has always been fascinated by
           people — what drives them, how they grow, and how they connect. She
           started her career in recruiting, where she quickly learned that
@@ -140,6 +141,7 @@ blocks:
           operational know-how with a people-first mindset, building an
           organization where relationships come first and both individuals and
           the company thrive.
+
     _template: leadership
 ---
 
