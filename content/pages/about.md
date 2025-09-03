@@ -119,10 +119,29 @@ blocks:
         name: Lyndsay Hawkins
         title: COO
         bio: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor, vitae tincidunt orci enim id nulla..
+          Lyndsay is often described as empath who has always been fascinated by
+          people — what drives them, how they grow, and how they connect. She
+          started her career in recruiting, where she quickly learned that
+          finding the right match wasn’t just about skills on a résumé, but
+          about building trust and relationships that last.\
+
+          \
+
+
+          Over more than a decade in government contracting, Lyndsay has worn
+          many hats — from technical recruiter to executive search leader to
+          recruitment manager — always with the same throughline: a passion for
+          people and their success. Along the way, she’s been influenced by
+          incredible leaders who showed her what it means to listen deeply, lead
+          with empathy, and help others shine.\
+
+          \
+
+
+          Today, as COO, Lyndsay brings all of those lessons forward. She blends
+          operational know-how with a people-first mindset, building an
+          organization where relationships come first and both individuals and
+          the company thrive.
     _template: leadership
 ---
 
