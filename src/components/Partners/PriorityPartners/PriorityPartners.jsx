@@ -86,10 +86,10 @@ export default function PriorityPartners({ partnersRes, ...block }) {
   <Heading block={block} />
 
   {/* Fade overlay on left */}
-  <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-black to-transparent pointer-events-none z-10" />
+  <div className="absolute left-0 top-0 h-full w-10 sm:w-24 bg-gradient-to-r from-black to-transparent pointer-events-none z-10" />
 
   {/* Fade overlay on right */}
-  <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
+  <div className="absolute right-0 top-0 h-full w-10 sm:w-24  bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
 
   <div className="relative w-full flex items-center overflow-hidden">
     <div className="marquee flex gap-6">
