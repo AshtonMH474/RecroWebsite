@@ -37,7 +37,7 @@ export default function PriorityPartners({ partnersRes, ...block }) {
   );
 
   return (
-    <div className="relative bg-black overflow-hidden w-full pb-8 h-[400px] ">
+    <div className="relative bg-black overflow-hidden w-full mb-16 mt-16 h-[400px] ">
       <Heading block={block} />
 
       <div className="relative w-full flex justify-center">

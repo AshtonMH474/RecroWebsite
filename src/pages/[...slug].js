@@ -7,6 +7,8 @@ import Leadership from "@/components/Leadership/Leadership";
 import Learn from "@/components/Learn";
 import Nav from "@/components/Nav/Nav";
 import PartnersGrid from "@/components/Partners/PartnersGrid";
+import PriorityPartners from "@/components/Partners/PriorityPartners/PriorityPartners";
+import PerformanceGrid from "@/components/PerformanceGrid/PerformanceGrid";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import Testimonies from "@/components/Testimonies/Testimonies";
 import useScrollToHash from "@/hooks/useScrollToHash";
@@ -34,12 +36,13 @@ export async function getStaticProps({ params }) {
   // For single slug, params.slug = ["expertise"]
   const filename = params.slug[0] + ".md";
   const isTrue = filename == "careers.md"
-  const [pageData, navData, footerData, solutionData,partnerData] = await Promise.all([
+  const [pageData, navData, footerData, solutionData,partnerData,performanceData] = await Promise.all([
     client.queries.page({ relativePath: filename }),
     client.queries.nav({ relativePath: "nav.md" }),
     isTrue ? client.queries.footer({ relativePath: "footerCareers.md" }) : client.queries.footer({ relativePath: "footer.md" }) ,
     client.queries.solutionConnection(),
-    client.queries.partnerConnection({first:100})
+    client.queries.partnerConnection({first:100}),
+    client.queries.performanceConnection()
   ]);
 
 return {
@@ -48,17 +51,20 @@ return {
     navData,
     footerData,
     solutionData,
-    partnerData, // array of pages with edges/node
+    partnerData, 
+    performanceData
   },
   };
 }
 
-export default function Slug({ res,navData,footerData,solutionData,partnerData }) {
+export default function Slug({ res,navData,footerData,solutionData,partnerData,performanceData }) {
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
   const {data:footerContent} = useTina(footerData)
   const { data: partnersContent } = useTina(partnerData);
   const { data: solutionContent } = useTina(solutionData);
+  const {data: performanceContent} = useTina(performanceData)
+  
   
   
     useScrollToHash(data.page.blocks, [
@@ -70,7 +76,8 @@ export default function Slug({ res,navData,footerData,solutionData,partnerData }
             'landing2_id',
             'testimonies_id',
             'solutions_id',
-            "partners_id"
+            "partners_id",
+            "performance_id"
 
   
         ]);
@@ -101,6 +108,10 @@ export default function Slug({ res,navData,footerData,solutionData,partnerData }
                         return <Testimonies key={i} {...block}/>
                     case "PageBlocksPartners":
                       return <PartnersGrid key={i} partnersRes={partnersContent} {...block}/>
+                    case "PageBlocksPriorityPartners":
+                          return <PriorityPartners key={i} partnersRes={partnersContent} {...block}/>
+                    case "PageBlocksPerformances":
+                      return <PerformanceGrid key={i} performanceRes={performanceContent} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;

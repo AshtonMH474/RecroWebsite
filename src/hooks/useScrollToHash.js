@@ -19,7 +19,7 @@ export default function useScrollToHash(blocks = [], idFields = [], delay = 1000
           
           if (el) {
           
-                el.scrollIntoView({ behavior: "smooth", block: matchingBlock.scroll });
+                el?.scrollIntoView({ behavior: "smooth", block: matchingBlock.scroll });
                 if (window.history.replaceState) {
                 window.history.replaceState(null, "", window.location.pathname + window.location.search);
                 }

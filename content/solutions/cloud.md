@@ -156,6 +156,12 @@ blocks:
         file: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/CapabilityStatements/capability-pdf.pdf
     _template: statements
+  - performance_heading: Past Performances
+    underline_width: 300
+    performances:
+      - performance: content/performance/cloud1.md
+      - performance: content/performance/cloud2.md
+      - performance: content/performance/cloud3.md
+    _template: performances
 ---
-
 

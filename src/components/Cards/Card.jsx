@@ -10,7 +10,7 @@ const Card = ({ ex, onExpand }) => {
 function scrollToSection(id){
   const el = document.getElementById(id);
   if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
 

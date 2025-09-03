@@ -9,6 +9,7 @@ import Jobs from "@/components/Jobs/Jobs";
 import Nav from "@/components/Nav/Nav";
 import useScrollToHash from "@/hooks/useScrollToHash";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
+import PerformanceGrid from "@/components/PerformanceGrid/PerformanceGrid";
 import Landing2 from "@/components/Landing2";
 import Testimonies from "@/components/Testimonies/Testimonies";
 import PartnersGrid from "@/components/Partners/PartnersGrid";
@@ -21,12 +22,13 @@ export async function getStaticProps() {
   const { client } = await import("../../tina/__generated__/databaseClient");
 
   // Run TinaCMS queries in parallel
-  const [pageData, navData, footerData, solutionData,partnerData] = await Promise.all([
+  const [pageData, navData, footerData, solutionData,partnerData,performanceData] = await Promise.all([
     client.queries.page({ relativePath: "home.md" }),
     client.queries.nav({ relativePath: "nav.md" }),
     client.queries.footer({ relativePath: "footer.md" }),
     client.queries.solutionConnection(),
-    client.queries.partnerConnection({first:100})
+    client.queries.partnerConnection({first:100}),
+    client.queries.performanceConnection(),
     
   ]);
 
@@ -37,20 +39,22 @@ export async function getStaticProps() {
       navData,
       footerData,
       solutionData,
-      partnerData
+      partnerData,
+      performanceData
     },
   };
 }
 
 
 
-export default function Home({res,navData,footerData,solutionData,partnerData}) {
+export default function Home({res,navData,footerData,solutionData,partnerData,performanceData}) {
 
   const {data} = useTina(res)
   const {data:navContent} = useTina(navData)
   const {data:footerContent} = useTina(footerData)
   const { data: solutionContent } = useTina(solutionData);
   const { data: partnersContent } = useTina(partnerData);
+  const {data: performanceContent} = useTina(performanceData)
 
   useScrollToHash(data.page.blocks, [
           'cards_id',
@@ -61,7 +65,8 @@ export default function Home({res,navData,footerData,solutionData,partnerData}) 
           'landing2_id',
           'testimonies_id',
           'solutions_id',
-          "partners_id"
+          "partners_id",
+          "performance_id"
 
 
       ]);
@@ -95,6 +100,8 @@ export default function Home({res,navData,footerData,solutionData,partnerData}) 
                       return <PartnersGrid key={i} partnersRes={partnersContent} {...block}/>
                     case "PageBlocksPriorityPartners":
                       return <PriorityPartners key={i} partnersRes={partnersContent} {...block}/>
+                    case "PageBlocksPerformances":
+                      return <PerformanceGrid key={i} performanceRes={performanceContent} {...block}/>
                     default:
                     console.warn("Unknown block type:", block?.__typename);
                     return null;
