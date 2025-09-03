@@ -24,6 +24,13 @@ blocks:
     scroll: center
     link_icon: FaArrowRight
     _template: solutions
+  - partners_heading: Trusted Partners
+    underline_width: 300
+    buttons:
+      - link: /partners
+        label: 'View All Partners '
+        style: border
+    _template: priorityPartners
   - headingLearnTeam: >
       # Learn about the **Team**
 
@@ -46,12 +53,5 @@ blocks:
         bottom: 50
         zIndex: 10
     _template: learnTeam
-  - partners_heading: Trusted Partners
-    underline_width: 300
-    buttons:
-      - link: /partners
-        label: 'View All Partners '
-        style: border
-    _template: priorityPartners
 ---
 
