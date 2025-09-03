@@ -2,7 +2,7 @@ import { tinaField } from "tinacms/dist/react";
 
 export default function Heading({ block }) {
   return (
-    <div className="flex flex-col items-center mt-10 pb-4">
+    <div className="flex flex-col items-center mt-12 pb-8">
       {block.partners_heading && (
         <h2
           data-tina-field={tinaField(block, "partners_heading")}

@@ -140,6 +140,7 @@ blocks:
           operational know-how with a people-first mindset, building an
           organization where relationships come first and both individuals and
           the company thrive.
+
     _template: leadership
 ---
 
