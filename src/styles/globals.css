@@ -191,6 +191,10 @@ body {
 }
 
 
+
+
+
+
 .truncate-multiline {
   display: -webkit-box;
   -webkit-line-clamp: 2;       /* Max number of lines */

@@ -98,3 +98,9 @@ export default function PriorityPartners({ partnersRes, ...block }) {
   );
 }
 
+
+
+
+
+
+
