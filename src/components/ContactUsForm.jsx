@@ -9,7 +9,8 @@ function ContactUsForm() {
     const [isCareers,setCareers] = useState(false)
      // checks if ur in the careers section 
     useEffect(() => {
-      if(router.pathname == '/careers') setCareers(true)
+      console.log(router)
+      if(router.asPath == '/careers') setCareers(true)
     },[])
     
     
