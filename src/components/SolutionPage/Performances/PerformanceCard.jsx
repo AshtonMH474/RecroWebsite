@@ -21,21 +21,21 @@ function PerformanceCard({performance,onExpand}){
       onClick={onExpand}
     >
         <div className="flex items-center mb-3 gap-x-3">
-                {performanceData.icon && (
+                {performanceData?.icon && (
                   <div data-tina-field={tinaField(performanceData,'icon')} className="bg-primary rounded-[10px] h-16 w-16 flex-shrink-0 flex items-center justify-center">
-                    <IconRenderer size="50px" color="#FAF3E0" iconName={performanceData.icon} />
+                    <IconRenderer size="50px" color="#FAF3E0" iconName={performanceData?.icon} />
                   </div>
                 )}
-                {performanceData.title && (
+                {performanceData?.title && (
                   <h3 data-tina-field={tinaField(performanceData,'title')} className="text-[20px] font-bold text-white leading-tight flex-1">
-                    {performanceData.title}
+                    {performanceData?.title}
                   </h3>
                 )}
         </div>
-        {performanceData.description && (
+        {performanceData?.description && (
                 <div data-tina-field={tinaField(performanceData,'description')}>
                   <TinaMarkdown
-                    content={performanceData.description}
+                    content={performanceData?.description}
                     components={{
                       p: ({ children }) => (
                         <p className="text-[#C2C2BC] expertiseDes text-ellipsis text-[16px]">
