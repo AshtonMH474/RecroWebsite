@@ -35,12 +35,21 @@ export default defineConfig({
     outputFolder: "admin",
     publicFolder: "public",
   },
+  // media: {
+  //   loadCustomStore:async () => {
+  //       const pack = await import("next-tinacms-s3");
+  //       return pack.TinaCloudS3MediaStore;
+  //   }
+  // },
   media: {
-    loadCustomStore:async () => {
-        const pack = await import("next-tinacms-s3");
-        return pack.TinaCloudS3MediaStore;
-    }
+  loadCustomStore: async () => {
+    const pack = await import("next-tinacms-s3");
+    return new pack.TinaCloudS3MediaStore({
+      allowDelete: true,
+    });
   },
+},
+
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
     collections: [
