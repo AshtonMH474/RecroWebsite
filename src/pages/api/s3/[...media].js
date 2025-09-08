@@ -19,6 +19,7 @@ import {
       region: process.env.S3_REGION,
     },
     bucket: process.env.S3_BUCKET || '',
+    allowDelete: true,
     authorized: async (req, _res) => {
       if (process.env.TINA_PUBLIC_IS_LOCAL=== 'true') {
         console.log("✅ Local mode: always authorized");
