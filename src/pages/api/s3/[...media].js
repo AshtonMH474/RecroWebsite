@@ -21,9 +21,12 @@ import {
     bucket: process.env.S3_BUCKET || '',
     authorized: async (req, _res) => {
       if (process.env.TINA_PUBLIC_IS_LOCAL=== 'true') {
+        console.log("✅ Local mode: always authorized");
         return true;
       }
-      return await isAuthorized(req)
+      const ok = await isAuthorized(req);
+    console.log("🔑 Authorized check:", req.method, ok);
+    return ok;
     },
   });
 
