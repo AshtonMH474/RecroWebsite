@@ -19,22 +19,15 @@ import {
       region: process.env.S3_REGION,
     },
     bucket: process.env.S3_BUCKET || '',
-    allowDelete: true,
     authorized: async (req, _res) => {
-  if (process.env.TINA_PUBLIC_IS_LOCAL === 'true') {
-    console.log("✅ Local mode: always authorized");
-    return true;
-  }
-  const ok = await isAuthorized(req);
-
-  // Normalize key for delete requests
-  if (req.method === 'DELETE' && req.query?.key) {
-    req.query.key = req.query.key.split('?')[0]; // remove clientID or any other query params
-  }
-
-  console.log("🔑 Authorized check:", req.method, ok);
-  return ok;
-},
+      if (process.env.TINA_PUBLIC_IS_LOCAL=== 'true') {
+        console.log("✅ Local mode: always authorized");
+        return true;
+      }
+      const ok = await isAuthorized(req);
+    console.log("🔑 Authorized check:", req.method, ok);
+    return ok;
+    },
   });
 
 

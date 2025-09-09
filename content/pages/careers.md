@@ -74,14 +74,14 @@ blocks:
           activities such as proposals.
         content: ''
     _template: cards
-  - jobsHeading: Openings
+  - jobsHeading: Highlighted Roles
     jobs_id: jobs_section
     scroll: start
     underline_width: 300
     buttonLabel: View Job
-    buttonType: button
-    buttonLabelAll: View All Jobs
-    buttonTypeAll: border
+    buttonType: border
+    buttonLabelAll: View All Open Positions
+    buttonTypeAll: button
     _template: jobs
 ---
 

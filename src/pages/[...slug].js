@@ -18,7 +18,7 @@ const PerformanceGrid = dynamic(() => import("@/components/PerformanceGrid/Perfo
 export async function getStaticPaths() {
   const { client } = await import("../../tina/__generated__/databaseClient");
   const pages = await client.queries.pageConnection();
-  const paths = pages.data.pageConnection.edges.map(({ node }) => ({
+  const paths = pages?.data?.pageConnection?.edges.map(({ node }) => ({
     params: { slug: [node._sys.filename] },
   }));
   return { paths, fallback: false };
