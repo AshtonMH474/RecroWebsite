@@ -28,8 +28,8 @@ blocks:
         icon: FaChartBar
         description: >
           Recro wants you to retire worry-free. We offer 401k matching up to 6%
-          that immediately vests in addition to an end of year profit sharing
-          401k bonus of 15-18% historically.
+          that immediately vests, in addition to an end-of-year profit-sharing
+          401k bonus.
         allContentLink: ''
         content: ''
       - title: 'PREMIERE MEDICAL, DENTAL, AND VISION'
