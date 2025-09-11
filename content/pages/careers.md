@@ -56,7 +56,7 @@ blocks:
           and will invest in your career growth, including corporate
           subscriptions to A Cloud Guru.
         content: ''
-      - title: REACROACTIVE
+      - title: RECROACTIVE
         icon: FaHeart
         description: >
           Recro recognizes the benefits that physical fitness brings to personal
