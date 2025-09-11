@@ -43,10 +43,10 @@ blocks:
       - title: FLEXIBLE PAID LEAVE
         icon: FaCalendar
         description: >
-          Recro recognizes that mental health is as important as physical
-          health. Recroans have 11 paid federal holidays (5 that are flexible
-          and 6 core holidays) and 3 weeks of paid leave each year, as well as
-          generous/flexible policies for Bereavement and Parental Leave.
+          Recro recognizes mental health is as important as physical health.
+          Recroans have 11 paid federal holidays (5 flexible, 6 core) and 3
+          weeks of paid leave each year, plus generous/flexible Bereavement and
+          Parental Leave policies.
         content: ''
       - title: RECRO ACCELERATE
         icon: FaBook
