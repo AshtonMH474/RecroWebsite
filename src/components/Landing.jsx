@@ -2,14 +2,24 @@ import { useRef, useState, useEffect } from 'react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import { tinaField } from 'tinacms/dist/react'
 import Link from 'next/link'
+import { useAuth } from '@/context/auth'
 
 function Landing(props) {
+  const {openModal} = useAuth()
   const wrapperRef = useRef(null)
   const subTextRef = useRef(null)
   const [hasPadding, setHasPadding] = useState(false)
+ 
 
 
   const [inlineWidth, setInlineWidth] = useState(undefined);
+
+  const handleLogin = () => {
+    openModal('login')
+  }
+  const handleRegister = () => {
+    openModal('register')
+  }
 
   useEffect(() => {
     if (window.innerWidth >= 1024) {
@@ -101,27 +111,50 @@ function Landing(props) {
 
       {/* === Buttons === */}
       <div className="flex gap-x-8 ">
-        {props.buttons?.map((button, i) =>
-          button.style === 'border' && button.link ? (
-            <Link href={button.link} key={i}>
-              <button
-                data-tina-field={tinaField(props.buttons[i], 'label')}
-                className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-              >
-                {button.label}
-              </button>
-            </Link>
-          ) : button.style === 'button' && button.link ? (
-            <Link href={button.link} key={i}>
-              <button
-                data-tina-field={tinaField(props.buttons[i], 'label')}
-                className="bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white"
-              >
-                {button.label}
-              </button>
-            </Link>
-          ) : null
-        )}
+   {props.buttons?.map((button, i) => {
+  const commonProps = {
+    key: i,
+    "data-tina-field": tinaField(props.buttons[i], "label"),
+    className:
+      button.style === "border"
+        ? "px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
+        : "bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white",
+  };
+
+  // LINK buttons
+  if (button?.type === "link" && button.link) {
+    return (
+      <Link href={button.link} key={i}>
+        <button {...commonProps}>{button.label}</button>
+      </Link>
+    );
+  }
+
+  // REGISTER button
+  if (button?.type === "register") {
+    return (
+      <button {...commonProps} onClick={handleRegister}>
+        {button.label}
+      </button>
+    );
+  }
+
+  // LOGIN button
+  if (button?.type === "login") {
+    return (
+      <button {...commonProps} onClick={handleLogin}>
+        {button.label}
+      </button>
+    );
+  }
+
+  return null;
+})}
+
+
+      {/* {button?.type = 'register' && (
+
+      )} */}
       </div>
     </div>
   )

@@ -27,6 +27,12 @@ export const landingBlock = {
           name: "label",
         },
         {
+          type:'string',
+          label:'Link,Register,Login?',
+          options:['link','register','login'],
+          name:'type'
+        },
+        {
           type: "string",
           name: "style",
           options: ["border", "button"],
