@@ -35,10 +35,10 @@ blocks:
       - title: 'PREMIERE MEDICAL, DENTAL, AND VISION'
         icon: FaHeart
         description: >
-          In an effort to keep you healthy, Recro provides 100% paid for health,
-          dental, and vision insurance for employees with no medical deductible
-          or coinsurance. For families, we offer a low deductible medical plan
-          that is also paid for 100% by Recro.
+          Recro is committed to your health. We provide highly subsidized
+          health, dental, and vision coverage for employees, eliminating medical
+          deductibles. For families, we offer a low-deductible medical plan that
+          is largely employer-funded.
         content: ''
       - title: FLEXIBLE PAID LEAVE
         icon: FaCalendar
