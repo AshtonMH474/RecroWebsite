@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   const db = client.db("mydb");
 
   const existing = await db.collection("users").findOne({ email });
-  if (existing) return res.status(400).json({ error: "User already exists" });
+  if (existing) return res.status(400).json({ error: "User already exists" ,verified:existing.verified});
 
   const passwordHash = await bcrypt.hash(password, 10);
   const verificationToken = crypto.randomBytes(32).toString("hex");
@@ -49,7 +49,8 @@ export default async function handler(req, res) {
     },
   });
 
-  const verificationUrl = `${process.env.NEXTAUTH_URL}/api/session/verify?token=${verificationToken}`;
+  // const verificationUrl = `${process.env.NEXTAUTH_URL}/api/session/verify?token=${verificationToken}`;
+  const verificationUrl = `${process.env.NEXTAUTH_URL}/#verify?token=${verificationToken}`;
 
   await transporter.sendMail({
     from: `"Recro" <${process.env.SMTP_FROM}>`,

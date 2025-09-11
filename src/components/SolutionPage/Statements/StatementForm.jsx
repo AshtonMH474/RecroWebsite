@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
+import { useAuth } from "@/context/auth";
 
-function StatementForm({ statement, onClose, setRegisterModal }) {
+function StatementForm({ statement, onClose }) {
+  const {  openModal } = useAuth();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -60,7 +62,7 @@ function StatementForm({ statement, onClose, setRegisterModal }) {
 
     if (res.ok) {
       e.target.reset();
-      alert("Submitted successfully!");
+      
 
       downloadPDF(); // 👈 trigger download
       onClose();     // 👈 close modal after download
@@ -69,10 +71,10 @@ function StatementForm({ statement, onClose, setRegisterModal }) {
     }
   };
 
-  const handleRegister = async (e) => {
-    await onClose()
-    await setRegisterModal(true)
-  }
+  const handleRegister = () => {
+    onClose();
+    openModal("register");
+  };
 
   return (
     <div
@@ -161,13 +163,7 @@ function StatementForm({ statement, onClose, setRegisterModal }) {
             rows={4}
             className="w-full p-2 rounded bg-[#2A2A2E] text-white placeholder-white/70 resize-none"
           />
-          <button
-            type="button"
-            className={"w-full py-2 rounded text-white hover:text-white/80 border primary-border  bg-[#1A1A1E] hover:opacity-80 cursor-pointer transition-colors duration-300"}
-            onClick={handleRegister}
-          >
-            Register
-          </button>
+          
           <button
             type="submit"
             disabled={!allFilled}
@@ -178,6 +174,14 @@ function StatementForm({ statement, onClose, setRegisterModal }) {
             }`}
           >
             Download
+          </button>
+            <div className="flex justify-center">or</div>
+          <button
+            type="button"
+            className={"w-full py-2 rounded text-white hover:text-white/80 border primary-border  bg-[#1A1A1E] hover:opacity-80 cursor-pointer transition-colors duration-300"}
+            onClick={handleRegister}
+          >
+            Register
           </button>
         </form>
       </motion.div>

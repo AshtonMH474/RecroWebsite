@@ -2,8 +2,9 @@ const { useState, useEffect } = require("react");
 import { IoMdClose } from "react-icons/io";
 import { motion } from "framer-motion";
 import { handleSignup } from "@/lib/auth_functions";
-function Register({onClose,setShowLoginModal}){
-
+import { useAuth } from "@/context/auth";
+function Register({onClose}){
+    const { openModal } = useAuth();
     const [errors,setErrors] = useState({})
     const [formData, setFormData] = useState({
     email: "",
@@ -66,6 +67,9 @@ function Register({onClose,setShowLoginModal}){
     }
     try{
         let res = await handleSignup(formData)
+        if(res.verified == false){
+            setVerified(true)
+        }
         if(res.error){
             obj.error = res.error
             setErrors(obj)
@@ -80,8 +84,8 @@ function Register({onClose,setShowLoginModal}){
   }
 
   const handleLoginModal = async() => {
-    await onClose()
-    await setShowLoginModal(true)
+    onClose()
+    openModal("login")
   }
   const allFilled = Object.values(formData).every((val) => val.trim() !== "");
 
@@ -172,7 +176,7 @@ function Register({onClose,setShowLoginModal}){
           {errors?.password && <div className="text-red-600">{errors.password}</div>}
           {errors?.pass && <div className="text-red-600">{errors.pass}</div>}
           {errors?.error && <div className="text-red-600">{errors.error}</div>}
-          {(verified || errors?.error == 'User already exists') && (
+          {(verified ) && (
   <div className="text-green-400 space-y-2">
     <p>Check your email to verify and then login</p>
     <button
