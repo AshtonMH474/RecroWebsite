@@ -52,9 +52,9 @@ blocks:
         icon: FaBook
         description: >
           Recro offers a competitive training/education reimbursement program to
-          employees with a soft limit of $10,000 per year. We want our team to
-          feel empowered and will invest in your personal career growth,
-          including corporate subscriptions to A Cloud Guru.
+          employees up to $10,000 per year. We want our team to feel empowered
+          and will invest in your career growth, including corporate
+          subscriptions to A Cloud Guru.
         content: ''
       - title: REACROACTIVE
         icon: FaHeart
