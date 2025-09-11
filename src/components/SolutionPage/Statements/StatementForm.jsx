@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
 
-function StatementForm({ statement, onClose }) {
+function StatementForm({ statement, onClose, setRegisterModal }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -68,6 +68,11 @@ function StatementForm({ statement, onClose }) {
       alert("Failed to submit.");
     }
   };
+
+  const handleRegister = async (e) => {
+    await onClose()
+    await setRegisterModal(true)
+  }
 
   return (
     <div
@@ -156,7 +161,13 @@ function StatementForm({ statement, onClose }) {
             rows={4}
             className="w-full p-2 rounded bg-[#2A2A2E] text-white placeholder-white/70 resize-none"
           />
-
+          <button
+            type="button"
+            className={"w-full py-2 rounded text-white hover:text-white/80 border primary-border  bg-[#1A1A1E] hover:opacity-80 cursor-pointer transition-colors duration-300"}
+            onClick={handleRegister}
+          >
+            Register
+          </button>
           <button
             type="submit"
             disabled={!allFilled}

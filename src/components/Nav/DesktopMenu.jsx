@@ -2,11 +2,12 @@
 import { useState, useRef } from "react";
 import { tinaField } from "tinacms/dist/react";
 import Link from "next/link";
+import { handleLogin, handleSignout } from "@/lib/auth_functions";
 
-export default function DesktopMenu({ links }) {
+export default function DesktopMenu({ links,res,user,setShowLoginModal,setUser }) {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const closeTimeout = useRef(null);
- 
+  
 
   const handleMouseEnter = (i) => {
     if (closeTimeout.current) {
@@ -140,6 +141,18 @@ export default function DesktopMenu({ links }) {
 
         return null;
       })}
+      {res?.authStyle == 'button' && !user && (
+        <button onClick={() => setShowLoginModal(true)} data-tina-field={tinaField(res,'authLabelLogin')} className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer">{res.authLabelLogin}</button>
+      )}
+      {res?.authStyle == 'border' && !user && (
+        <button onClick={() => setShowLoginModal(true)} data-tina-field={tinaField(res,'authLabelLogin')} className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300">{res.authLabelLogin}</button>
+      )}
+       {res?.authStyle == 'button' && user && (
+        <button onClick={() => handleSignout(setUser)} data-tina-field={tinaField(res,'authLabelSignout')} className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer">{res.authLabelSignout}</button>
+      )}
+      {res?.authStyle == 'border' && user && (
+        <button onClick={() => handleSignout(setUser)} data-tina-field={tinaField(res,'authLabelSignout')} className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300">{res.authLabelSignout}</button>
+      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { tinaField } from "tinacms/dist/react";
+import { handleLogin, handleSignout } from "@/lib/auth_functions";
 
 // Small component for fading + / − toggle
 function PlusMinusToggle({ isOpen }) {
@@ -32,6 +33,9 @@ export default function MobileMenu({
   menuRef,
   links,
   toggleMenu,
+  setUser,
+  user,
+  res
 }) {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
 
@@ -154,6 +158,18 @@ export default function MobileMenu({
           </div>
         );
       })}
+      {res?.authStyle == 'button' && !user && (
+              <button onClick={() => handleLogin(setUser)} data-tina-field={tinaField(res,'authLabelLogin')} className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer">{res.authLabelLogin}</button>
+      )}
+      {res?.authStyle == 'border' && !user && (
+              <button onClick={() => handleLogin(setUser)} data-tina-field={tinaField(res,'authLabelLogin')} className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300">{res.authLabelLogin}</button>
+      )}
+      {res?.authStyle == 'button' && user && (
+              <button onClick={() => handleSignout(setUser)} data-tina-field={tinaField(res,'authLabelSignout')} className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer">{res.authLabelSignout}</button>
+      )}
+      {res?.authStyle == 'border' && user && (
+              <button onClick={() => handleSignout(setUser)} data-tina-field={tinaField(res,'authLabelSignout')} className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300">{res.authLabelSignout}</button>
+      )}
     </div>
   );
 }

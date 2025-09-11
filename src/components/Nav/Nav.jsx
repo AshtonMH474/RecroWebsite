@@ -4,15 +4,52 @@ import Logo from './Logo';
 import MenuToggle from './MenuToggle';
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
+import Login from '../Login';
+import Register from '../Register';
+import NewPasswordModal from '../New-Password';
+import ChangePassword from '../ChangePassword';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/context/auth';
 
 
 export default function Nav({ res }) {
-  
-
+  const { user, setUser, showLoginModal,setShowLoginModal,showRegisterModal,setRegisterModal,showNewPassword,setNewPassword  } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+
+  const [showResetPassword,setResetPassword] = useState(false)
+  const [token,setToken] = useState('')
+  const router = useRouter(); 
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    if (router.asPath.includes("#resetpassword")) {
+      const hash = router.asPath.split("#")[1]; // "resetpassword?token=abcd"
+      let t= null;
+
+      if (hash) {
+        const params = new URLSearchParams(hash.split("?")[1]);
+        t = params.get("token");
+      }
+
+      if (t) {
+        setToken(t);
+        setResetPassword(true);
+
+        // ✅ Replace the URL inside Next.js router too
+        router.replace("/", undefined, { shallow: true });
+      }
+    }
+  }, [router.isReady]);
+
+
+
+
+
+ 
 
   const toggleMenu = () => {
     if (menuOpen) {
@@ -44,6 +81,7 @@ export default function Nav({ res }) {
   
 
   if (!res) return null;
+  
   return (
     <>
       <div className=" fixed top-0 left-0 w-full z-[101] bg-black flex justify-between items-center h-20 px-4 lg:px-16">
@@ -54,19 +92,40 @@ export default function Nav({ res }) {
         <div className="lg:hidden">
           <MenuToggle menuOpen={menuOpen} toggleMenu={toggleMenu} buttonRef={buttonRef} />
         </div>
-        <DesktopMenu links={res.links} partners={res.agencies}   />
+        <DesktopMenu links={res.links} res={res} user={user} setShowLoginModal={setShowLoginModal} setUser={setUser}  />
       </div>
       <MobileMenu
         isVisible={isVisible}
         menuOpen={menuOpen}
         menuRef={menuRef}
         links={res.links}
-        
+        res={res}
         toggleMenu={toggleMenu}
-        
+        setUser={setUser}
+        user={user}
        
       />
       <div className="h-10" />
+      {showLoginModal && (
+          <Login 
+            onClose={() => setShowLoginModal(false)} 
+            setUser={setUser}
+            setRegisterModal={setRegisterModal}
+            setNewPassword={setNewPassword}
+          />
+        )}
+
+
+        {showRegisterModal && (
+          <Register onClose={() => setRegisterModal(false)} setShowLoginModal={setShowLoginModal} />
+        )}
+        {showNewPassword && (
+          <NewPasswordModal onClose={() => setNewPassword(false)}  setShowLoginModal={setShowLoginModal}/>
+        )}
+        {showResetPassword && (
+          <ChangePassword token={token} onClose={() => setResetPassword(false)}/>
+        )}
+
     </>
   );
 }

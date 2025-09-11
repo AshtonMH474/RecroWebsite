@@ -8,7 +8,7 @@ const blockedDomains = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
-  const { email, password, name } = req.body;
+  const { email, password, firstName,lastName,organization } = req.body;
 
   // Block free email domains
   const domain = email.split("@")[1].toLowerCase();
@@ -28,7 +28,9 @@ export default async function handler(req, res) {
   await db.collection("users").insertOne({
     email,
     passwordHash,
-    name,
+    firstName,
+    lastName,
+    organization,
     verified: false,
     verificationToken,
     verificationExpires: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes in ms
@@ -36,6 +38,7 @@ export default async function handler(req, res) {
   });
 
   // Send verification email
+
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT),
@@ -49,10 +52,10 @@ export default async function handler(req, res) {
   const verificationUrl = `${process.env.NEXTAUTH_URL}/api/session/verify?token=${verificationToken}`;
 
   await transporter.sendMail({
-    from: `"Your App" <${process.env.SMTP_FROM}>`,
+    from: `"Recro" <${process.env.SMTP_FROM}>`,
     to: email,
     subject: "Verify your email",
-    html: `<p>Hi ${name},</p>
+    html: `<p>Hi ${firstName} ${lastName},</p>
            <p>Click <a href="${verificationUrl}">here</a> to verify your email. This link expires in 10 minutes.</p>`,
   });
 

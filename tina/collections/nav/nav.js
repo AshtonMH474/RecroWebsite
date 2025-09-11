@@ -16,6 +16,22 @@ const nav = {
       type:'number',
     },
     {
+      name:'authLabelLogin',
+      label:'Login Label',
+      type:'string'
+    },
+    {
+      name:'authLabelSignout',
+      label:'Sign Out Label',
+      type:'string'
+    },
+    {
+      name:'authStyle',
+      label:'Style of Authentication Button',
+      type:'string',
+      options:['border','button']
+    },
+    {
       name: "links",
       label: "Links",
       type: "object",
