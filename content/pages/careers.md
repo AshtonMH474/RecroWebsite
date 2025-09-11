@@ -64,7 +64,7 @@ blocks:
           LifeTime Fitness or up to $270 per month for your own fitness
           directive.
         content: ''
-      - title: UNIQUE COMPENSATION MODELS
+      - title: Employee Equity Program
         icon: FaQuestionCircle
         description: >
           Recro offers a unique approach to compensation beyond traditional
@@ -73,6 +73,11 @@ blocks:
           opportunities to get involved (and paid for your time) in corporate
           activities such as proposals.
         content: ''
+      - title: Referral Program
+        icon: FaAddressBook
+        description: >
+          Refer your friends and get them hired? Be entered in our Referral
+          Raffle to win a trip for 2 to the location of your choosing! 
     _template: cards
   - jobsHeading: Highlighted Roles
     jobs_id: jobs_section
