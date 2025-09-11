@@ -57,7 +57,7 @@ blocks:
           subscriptions to A Cloud Guru.
         content: ''
       - title: RECROACTIVE
-        icon: FaHeart
+        icon: FaDumbbell
         description: >
           Recro recognizes the benefits that physical fitness brings to personal
           and work life, so we subsidize membership to premium gyms like
@@ -65,13 +65,12 @@ blocks:
           directive.
         content: ''
       - title: Employee Equity Program
-        icon: FaQuestionCircle
+        icon: FaHandsHelping
         description: >
-          Recro offers a unique approach to compensation beyond traditional
-          means, ranging from competition BBQ grills to corporate leased Teslas
-          to a 1 week trip to London for two. Additionally, we offer many
-          opportunities to get involved (and paid for your time) in corporate
-          activities such as proposals.
+          At Recro, we believe in shared success. Every team member receives
+          equity, giving you ownership in the work we’re building. As an
+          employee-owned company, your contributions shape our growth—and you
+          share in the rewards of success.
         content: ''
       - title: Referral Program
         icon: FaAddressBook
