@@ -6,6 +6,8 @@ description: >
   solutions that scale securely from enterprise to mission edge
 mainPdf: >-
   https://recro-landing-site.s3.us-east-1.amazonaws.com/CapabilityStatements/capability-pdf.pdf
+width: 50
+arrow: true
 blocks:
   - cards_heading: 'What We Do '
     underline_width: 300

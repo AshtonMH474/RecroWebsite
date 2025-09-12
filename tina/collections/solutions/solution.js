@@ -40,6 +40,16 @@ const solutions = {
             type:'image'
         },
         {
+            name:'width',
+            type:'number',
+            label:"Width(percentage) For Desktop on this specifc page"
+        },
+        {
+            name:'arrow',
+            label:'Do you want an arrow pointing down?',
+            type:'boolean'
+        },
+        {
             name:'blocks',
             label:"Blocks",
             type:'object',
