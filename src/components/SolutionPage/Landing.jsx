@@ -15,6 +15,8 @@ function SolutionLanding({ solution }) {
             setInlineWidth(undefined)
         }
       }, [solution.width]);
+
+      console.log(solution)
   return (
     <div
       style={{ minHeight: "100%" }}
@@ -43,18 +45,30 @@ function SolutionLanding({ solution }) {
 
       {/* 👇 Scroll Down Arrow */}
       {solution.arrow && (
-      <motion.div 
-        initial={{ scale: 1 }}
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="mt-8"
-      >
-        <ChevronDown className="w-15 h-15 primary-color font-bold" />
-      </motion.div>
+      <motion.div
+  initial={{ scale: 1, color: "#B55914" }}
+  animate={{
+    scale: [1, 1.2, 1],
+    color: ["#B55914", "#FFA500", "#B55914"], // cycles colors
+  }}
+  transition={{
+    duration: 1.5,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+  className="mt-8"
+>
+  <ChevronDown
+  onClick={() => {
+      if (solution?.blocks && solution?.blocks?.length > 0) {
+        window.scrollBy({
+          top: window.innerHeight, // scroll down one viewport height
+          behavior: "smooth",
+        });
+      }
+    }}
+  className={`w-15 h-15 font-bold ${solution?.blocks && solution?.blocks?.length > 0 ? 'cursor-pointer' : ''}`} />
+</motion.div>
          )}
     </div>
  

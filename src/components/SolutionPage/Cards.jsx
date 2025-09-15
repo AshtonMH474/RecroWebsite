@@ -31,7 +31,7 @@ function SolutionCards(props) {
         />
 
         <div className="pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
-          {props.cards.map((card, i) => (
+          {props?.cards?.map((card, i) => (
             <SolutionCard card={card} key={i} />
           ))}
         </div>
