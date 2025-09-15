@@ -2,8 +2,9 @@ import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
+import { isFreeEmail } from 'free-email-domains-list';
 
-const blockedDomains = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "live.com"];
+
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -11,8 +12,7 @@ export default async function handler(req, res) {
   const { email, password, firstName,lastName,organization } = req.body;
 
   // Block free email domains
-  const domain = email.split("@")[1].toLowerCase();
-  if (blockedDomains.includes(domain)) {
+  if (isFreeEmail(email)) {
     return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
   }
 
