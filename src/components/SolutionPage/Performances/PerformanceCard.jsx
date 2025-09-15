@@ -1,4 +1,5 @@
 import IconRenderer from "@/components/utils/IconRenderer";
+import { useAuth } from "@/context/auth";
 import { motion,useInView } from "framer-motion";
 import { useRef } from "react";
 import { tinaField } from "tinacms/dist/react";
@@ -6,6 +7,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 function PerformanceCard({performance,onExpand}){
     const performanceData =performance
+    const {openModal,user} = useAuth() 
     
 
     const ref = useRef(null);
@@ -18,7 +20,10 @@ function PerformanceCard({performance,onExpand}){
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 cursor-pointer`}
-      onClick={onExpand}
+      onClick={() => {
+        if(!user) openModal("register")
+        else onExpand()
+        }}
     >
         <div className="flex items-center mb-3 gap-x-3">
                 {performanceData?.icon && (

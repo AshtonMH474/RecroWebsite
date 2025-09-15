@@ -6,6 +6,7 @@ import { useAuth } from "@/context/auth";
 function Register({onClose}){
     const { openModal } = useAuth();
     const [errors,setErrors] = useState({})
+    const [loading,setLoading] = useState(false)
     const [formData, setFormData] = useState({
     email: "",
     password:'',
@@ -65,21 +66,25 @@ function Register({onClose}){
         setErrors(obj)
         return
     }
-    try{
-        let res = await handleSignup(formData)
-        if(res.verified == false){
-            setVerified(true)
-        }
-        if(res.error){
-            obj.error = res.error
-            setErrors(obj)
-            return
-        }
-       
-        await setVerified(true)
-        await setErrors({})
-    }catch{
-        alert("Failed to submit.");
+    try {
+      setLoading(true); // <-- show "Sending..."
+      let res = await handleSignup(formData);
+
+      if (res.verified === false) {
+        setVerified(true);
+      }
+      if (res.error) {
+        obj.error = res.error;
+        setErrors(obj);
+        return;
+      }
+
+      setVerified(true);
+      setErrors({});
+    } catch {
+      alert("Failed to submit.");
+    } finally {
+      setLoading(false); // <-- reset back
     }
   }
 
@@ -206,16 +211,17 @@ function Register({onClose}){
 
         <div className="flex gap-4">
             <button
-                type="submit"
-                disabled={!allFilled}
-                className={` w-full py-2 rounded text-white transition ${
-                allFilled
-                    ? "bg-primary2  bg-primary cursor-pointer"
-                    : "bg-[#B55914]/60 cursor-not-allowed"
-                }`}
-            >
-                Register
-            </button>
+  type="submit"
+  disabled={!allFilled || loading}
+  className={`w-full py-2 rounded text-white transition ${
+    allFilled && !loading
+      ? "bg-primary2 bg-primary cursor-pointer"
+      : "bg-[#B55914]/60 cursor-not-allowed"
+  }`}
+>
+  {loading ? "Sending..." : "Register"}
+</button>
+
             <button type="button" onClick={handleLoginModal} className="w-full py-2 rounded text-white hover:text-white/80 border primary-border  bg-[#1A1A1E] hover:opacity-80 cursor-pointer transition-colors duration-300">
                 Login
             </button>

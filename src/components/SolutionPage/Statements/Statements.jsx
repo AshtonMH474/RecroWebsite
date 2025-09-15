@@ -11,10 +11,11 @@ import { useAuth } from "@/context/auth";
 import Register from "@/components/Register";
 import Login from "@/components/Login";
 import NewPasswordModal from "@/components/New-Password";
+import PdfModal from "@/components/SolutionsGrid/SolutionModal";
 
 
 function Statements(props){
-    const { user, setUser, showLoginModal,setShowLoginModal,showRegisterModal,setRegisterModal,showNewPassword,setNewPassword  } = useAuth();
+    const { user } = useAuth();
     const statements = props.statements || []
     const visibleCount = 6;
     const totalPages = Math.ceil(statements.length / visibleCount);
@@ -22,8 +23,10 @@ function Statements(props){
     const [direction, setDirection] = useState(0);
     const [gearRotation, setGearRotation] = useState(0);
     
-
-
+    const [expandedCardIndex, setExpandedCardIndex] = useState(null);
+    const openCard = (index) => setExpandedCardIndex(index);
+    const closeCard = () => setExpandedCardIndex(null);
+      
    
 
     const goToPage = (pageIndex) => {
@@ -38,9 +41,7 @@ function Statements(props){
 
     const visbaleStatments = statements.slice(startIndex, startIndex + visibleCount);
 
-    const [expandedStatementIndex, setExpandedStatementIndex] = useState(null); 
-    const openStatement = (index) => setExpandedStatementIndex(index);
-    const closeStatement = () => setExpandedStatementIndex(null);
+ 
     
     return (
         <>
@@ -65,7 +66,7 @@ function Statements(props){
                             className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12">
                                 {visbaleStatments.map((statement,i) => {
                                     const actualIndex = startIndex + i
-                                    return (<StatementCard key={actualIndex} statement={statement} onExpand={() => openStatement(actualIndex)} user={user}/>)
+                                    return (<StatementCard key={actualIndex} onExpand={() => openCard(i)} statement={statement} user={user}/>)
                                 })}
                             </motion.div>
                         </AnimatePresence>
@@ -75,27 +76,16 @@ function Statements(props){
                 currentPage={startIndex / visibleCount}
                 goToPage={goToPage}/>
             </div>
-            {expandedStatementIndex !== null && !user && (
-                <StatementForm setRegisterModal={setRegisterModal} statement={statements[expandedStatementIndex]} onClose={closeStatement}/>
-            )}
+            
 
-            {showLoginModal && (
-          <Login 
-            onClose={() => setShowLoginModal(false)} 
-            setUser={setUser}
-            setRegisterModal={setRegisterModal}
-            setNewPassword={setNewPassword}
-          />
-        )}
-
-
-        {showRegisterModal && (
-          <Register onClose={() => setRegisterModal(false)} setShowLoginModal={setShowLoginModal} />
-        )}
-        {showNewPassword && (
-          <NewPasswordModal onClose={() => setNewPassword(false)}  setShowLoginModal={setShowLoginModal}/>
-        )}
-        
+            <AnimatePresence>
+                        {expandedCardIndex !== null && (
+                        <PdfModal
+                        solution={visbaleStatments[expandedCardIndex]}
+                        onClose={closeCard}
+                        />
+                        )}
+            </AnimatePresence>
             
         </>
     )
