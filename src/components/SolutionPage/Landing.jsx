@@ -45,21 +45,18 @@ function SolutionLanding({ solution }) {
 
       {/* 👇 Scroll Down Arrow */}
       {solution.arrow && (
-      <motion.div
-  initial={{ scale: 1, color: "#B55914" }}
-  animate={{
-    scale: [1, 1.2, 1],
-    color: ["#B55914", "#FFA500", "#B55914"], // cycles colors
-  }}
+   <motion.div
+  initial={{ y: 0 }}
+  animate={{ y: [0, 10, 0] }} // bounce up and down
   transition={{
-    duration: 1.5,
+    duration: 1.2,
     repeat: Infinity,
     ease: "easeInOut",
   }}
   className="mt-8"
 >
   <ChevronDown
-  onClick={() => {
+    onClick={() => {
       if (solution?.blocks && solution?.blocks?.length > 0) {
         window.scrollBy({
           top: window.innerHeight, // scroll down one viewport height
@@ -67,7 +64,9 @@ function SolutionLanding({ solution }) {
         });
       }
     }}
-  className={`w-15 h-15 font-bold ${solution?.blocks && solution?.blocks?.length > 0 ? 'cursor-pointer' : ''}`} />
+    className={`w-15 h-15 font-bold cursor-pointer`}
+    style={{ color: "#B55914" }} // keep your primary color
+  />
 </motion.div>
          )}
     </div>

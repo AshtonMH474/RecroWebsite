@@ -101,25 +101,75 @@ blocks:
         name: Robert Lataille
         title: Founder & CEO
         bio: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor, vitae tincidunt orci enim id nulla..
+          Robert Lataille is often described as a straight-talking builder who’s
+          always been fascinated by how organizations turn messy signals into
+          decisive action. Early in his career as a consultant within the
+          intelligence community, he saw a persistent gap in how cybersecurity
+          data was being leveraged—and leaned into big-data analytics to turn
+          complexity into clarity.
+
+
+
+
+
+          Over more than a decade serving national-security missions, Robert has
+          worn many hats—from mission consultant to program lead to
+          data-strategy advisor—always with the same throughline: telling the
+          truth plainly, building high-trust teams, and translating cyber
+          telemetry into mission outcomes. With a business foundation from
+          Georgetown University, he pairs commercial rigor with an operator’s
+          urgency, pushing for solutions that work in the real world.
+
+
+
+
+
+          Today, as CEO, Robert brings that bias for candor and outcomes to
+          Recro. He sets the vision, cultivates a culture of accountability, and
+          focuses the company on two things: deploying elite technical experts
+          against the government’s hardest problems, and helping cutting-edge
+          startups enter the federal space with the guidance, support, and
+          services they need to deliver successfully.
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/johnAmericaProPic.png
         name: Johnathan America
         title: Founder & President
-        bio: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor, vitae tincidunt orci enim id nulla..
+        bio: >+
+          John America is often described as a calm, technical leader who makes
+          complex ideas feel simple. As a consultant inside the intelligence
+          community, he saw the same gap in cybersecurity—vast data, underused
+          insight—and built analytics approaches that surfaced what mattered.
+          He’s known for translating depth into clarity and ensuring the message
+          lands.
+
+
+
+
+
+          Across more than a decade, John has moved through roles spanning
+          systems engineering, solutions architecture, and growth leadership.
+          The throughline is steady: listen deeply, design scalable platforms,
+          earn trust by delivering. With a master’s from George Mason
+          University, he bridges engineers and executives, connecting technical
+          truth to mission need.
+
+
+
+
+
+          Today, as Chief Growth Officer, John brings a builder’s mindset to
+          growth. He forges partnerships, shapes solutions that fit the mission,
+          and ensures customers hear both the “why” and the “how.” At Recro, he
+          champions two priorities: placing world-class experts on the
+          government’s toughest problems, and guiding innovative startups into
+          the federal market with the support and services required to succeed.
+
+
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
         name: Lyndsay Hawkins
         title: COO
         bio: >
-
           Lyndsay is often described as empath who has always been fascinated by
           people — what drives them, how they grow, and how they connect. She
           started her career in recruiting, where she quickly learned that
@@ -141,7 +191,6 @@ blocks:
           operational know-how with a people-first mindset, building an
           organization where relationships come first and both individuals and
           the company thrive.
-
     _template: leadership
 ---
 

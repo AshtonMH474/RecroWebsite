@@ -1,19 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { tinaField } from "tinacms/dist/react";
 import LeaderCard from "./LeaderCard";
 import Pagination from "./Pagination";
 import { animationVariants } from "./LeaderAnimations";
 import DivGears from "../DivGears";
+import LeaderModal from "./LeaderModal";
 
 function Leadership(props) {
   // all the cards infos
   const leaders = props.leaders || []
   const [startIndex, setStartIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [isMobile,setMobile] = useState(false)
-  const [gearRotation, setGearRotation] = useState(0);
 
+  const [gearRotation, setGearRotation] = useState(0);
+  const [expandedCardIndex, setExpandedCardIndex] = useState(null);
+  const openCard = (index) => setExpandedCardIndex(index);
+  const closeCard = () => setExpandedCardIndex(null);
   // getting the total amount of pages needed based on how many are visbale at once
   const visibleCount = 3;
   const totalPages = Math.ceil(leaders.length / visibleCount);
@@ -41,13 +44,8 @@ function Leadership(props) {
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
 
-
-  useEffect(() => {
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  const isMobile = /android|iphone|ipad|mobile/i.test(userAgent);
-  setMobile(isMobile)
-  }, []);
   return (
+    <>
     <div id={props.leadership_id} ref={leadershipRef}  style={{ minHeight: '100%' }} className="relative  bg-black  w-full pb-24  overflow-hidden">
         
 
@@ -79,7 +77,9 @@ function Leadership(props) {
                       className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
                     >
                       {visibleCards.map((leader, i) => (
-                        <LeaderCard key={i} leader={leader} isMobile={isMobile}/>
+                        <LeaderCard key={i} leader={leader} isExpanded={expandedCardIndex === i}
+                        onExpand={() => openCard(i)}
+                        onClose={closeCard} />
                       ))}
                     </motion.div>
                   </AnimatePresence>
@@ -96,6 +96,15 @@ function Leadership(props) {
           
         </motion.div>
     </div>
+      <AnimatePresence>
+        {expandedCardIndex !== null && (
+          <LeaderModal
+            leader={visibleCards[expandedCardIndex]}
+            onClose={closeCard}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
