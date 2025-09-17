@@ -19,7 +19,7 @@ export default isLocal
        databaseAdapter:new MongodbLevel({
             collectionName: `content-${process.env.GITHUB_BRANCH}`,
             dbName: 'tina',
-            mongoUri: process.env.MONGODB_URI2,
+            mongoUri: process.env.MONGODB_URI,
         }),
     
       // other configurations here...

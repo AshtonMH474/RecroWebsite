@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   if (isFreeEmail(email)) {
     return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
   }
-
+  
   const client = await clientPromise;
   const db = client.db("mydb");
 
