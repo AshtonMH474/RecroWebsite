@@ -1,10 +1,7 @@
 import { MongoClient } from "mongodb";
 import path from "path";
 
-<<<<<<< HEAD
-const uri = process.env.MONGODB_URI;
-const options = {};
-=======
+
 
 const uri = process.env.MONGODB_URI;
 
@@ -15,7 +12,6 @@ const options = {
   tlsCAFile: path.join(process.cwd(), 'certs', 'ca.pem'),
   tlsCertificateKeyFile: path.join(process.cwd(), 'certs', 'mongo.pem'),
 };
->>>>>>> aec87a9bb0c4bd355d92fb5ea3f7773bf6b3d0c3
 
 let client;
 let clientPromise;
