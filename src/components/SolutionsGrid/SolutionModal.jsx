@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 
 export default function PdfModal({ solution, onClose }) {
-  const pdfUrl = solution.mainPdf;
+  const pdfUrl = solution?.mainPdf || solution?.file;
   
 
   useEffect(() => {

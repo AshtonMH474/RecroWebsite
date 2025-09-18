@@ -3,6 +3,7 @@ import Head from "next/head";
 import "@/styles/globals.css";
 import "@/styles/gears.css";
 import BG from "@/components/BG";
+import { AuthProvider } from "@/context/auth";
 
 export default function App({ Component, pageProps }) {
 
@@ -12,7 +13,9 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
       <BG/>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </>
   );
 }

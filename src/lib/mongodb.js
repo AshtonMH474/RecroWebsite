@@ -1,7 +1,21 @@
 import { MongoClient } from "mongodb";
+import path from "path";
 
+<<<<<<< HEAD
 const uri = process.env.MONGODB_URI;
 const options = {};
+=======
+
+const uri = process.env.MONGODB_URI;
+
+
+
+const options = {
+  tls: true,
+  tlsCAFile: path.join(process.cwd(), 'certs', 'ca.pem'),
+  tlsCertificateKeyFile: path.join(process.cwd(), 'certs', 'mongo.pem'),
+};
+>>>>>>> aec87a9bb0c4bd355d92fb5ea3f7773bf6b3d0c3
 
 let client;
 let clientPromise;
@@ -11,7 +25,6 @@ if (!process.env.MONGODB_URI) {
 }
 
 if (process.env.NODE_ENV === "development") {
-  // Reuse connection during hot reloads in dev
   if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options);
     global._mongoClientPromise = client.connect();

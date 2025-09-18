@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
+import { useAuth } from "@/context/auth";
 
 function StatementForm({ statement, onClose }) {
+  const {  openModal } = useAuth();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -60,13 +62,18 @@ function StatementForm({ statement, onClose }) {
 
     if (res.ok) {
       e.target.reset();
-      alert("Submitted successfully!");
+      
 
       downloadPDF(); // 👈 trigger download
       onClose();     // 👈 close modal after download
     } else {
       alert("Failed to submit.");
     }
+  };
+
+  const handleRegister = () => {
+    onClose();
+    openModal("register");
   };
 
   return (
@@ -156,7 +163,7 @@ function StatementForm({ statement, onClose }) {
             rows={4}
             className="w-full p-2 rounded bg-[#2A2A2E] text-white placeholder-white/70 resize-none"
           />
-
+          
           <button
             type="submit"
             disabled={!allFilled}
@@ -167,6 +174,14 @@ function StatementForm({ statement, onClose }) {
             }`}
           >
             Download
+          </button>
+            <div className="flex justify-center">or</div>
+          <button
+            type="button"
+            className={"w-full py-2 rounded text-white hover:text-white/80 border primary-border  bg-[#1A1A1E] hover:opacity-80 cursor-pointer transition-colors duration-300"}
+            onClick={handleRegister}
+          >
+            Register
           </button>
         </form>
       </motion.div>

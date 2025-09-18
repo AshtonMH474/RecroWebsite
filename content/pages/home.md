@@ -10,10 +10,12 @@ blocks:
     width: 45
     buttons:
       - link: /signup
-        label: Sign Up
+        label: Register
+        type: register
         style: button
       - link: /about
         label: about
+        type: link
         style: border
     _template: landing
   - solutions_heading: Center of Excellence
