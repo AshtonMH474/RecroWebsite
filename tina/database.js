@@ -1,18 +1,30 @@
 import { GitHubProvider } from "tinacms-gitprovider-github";
 import { MongodbLevel } from "mongodb-level";
-import { createLocalDatabase,createDatabase } from "@tinacms/datalayer";
+import { createLocalDatabase, createDatabase } from "@tinacms/datalayer";
+import fs from "fs";
+import os from "os";
 import path from "path";
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
-const ca = path.join(process.cwd(), "certs", "ca.pem");
-const key = path.join(process.cwd(), "certs", "mongo.pem");
+function buildMongoUrl() {
+  const tmpDir = os.tmpdir();
+  const caPath = path.join(tmpDir, "ca.pem");
+  const keyPath = path.join(tmpDir, "mongo.pem");
 
-let tinaMongoUrl = `${process.env.MONGODB_URI}&tls=true&tlsCAFile=${ca}&tlsCertificateKeyFile=${key}`
+  // Decode base64 environment variables into temp files
+  const ca = Buffer.from(process.env.MONGODB_CA_B64, "base64").toString("utf-8");
+  fs.writeFileSync(caPath, ca);
+
+  const key = Buffer.from(process.env.MONGODB_KEY_B64, "base64").toString("utf-8");
+  fs.writeFileSync(keyPath, key);
+
+  return `${process.env.MONGODB_URI}&tls=true&tlsCAFile=${caPath}&tlsCertificateKeyFile=${keyPath}`;
+}
+
+const tinaMongoUrl = buildMongoUrl();
 
 export default isLocal
-// if local just use noraml dtaabse in content folder 
-// if in production fetches from self hosted mongo atlas
   ? createLocalDatabase()
   : createDatabase({
       gitProvider: new GitHubProvider({
@@ -21,11 +33,10 @@ export default isLocal
         repo: process.env.GITHUB_REPO,
         token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
       }),
-       databaseAdapter:new MongodbLevel({
-            collectionName: `content-${process.env.GITHUB_BRANCH}`,
-            dbName: 'tina',
-            mongoUri: tinaMongoUrl,
-        }),
-    
-      // other configurations here...
+      databaseAdapter: new MongodbLevel({
+        collectionName: `content-${process.env.GITHUB_BRANCH}`,
+        dbName: 'tina',
+        mongoUri: tinaMongoUrl,
+      }),
+      // other TinaCMS config here...
     });
