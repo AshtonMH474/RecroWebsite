@@ -10,6 +10,7 @@ function buildOptions() {
   const caPath = path.join(tmpDir, "ca.pem");
   const keyPath = path.join(tmpDir, "mongo.pem");
 
+
   // Write decoded files to temp
   const ca = Buffer.from(process.env.MONGODB_CA_B64, "base64").toString("utf-8");
   fs.writeFileSync(caPath, ca);
