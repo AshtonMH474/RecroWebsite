@@ -8,6 +8,8 @@ blocks:
       ### Get in touch with Recro. We're here to answer your questions and
       discuss how we can help grow your career.
     width: 45
+    arrow: true
+    isSection: true
     buttons:
       - link: /signup
         label: Sign Up

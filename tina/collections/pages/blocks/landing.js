@@ -13,6 +13,16 @@ export const landingBlock = {
       type:'number'
     },
     {
+            name:'arrow',
+            label:'Do you want an arrow pointing down?',
+            type:'boolean'
+    },
+    {
+      name:'isSection',
+      label:'Is the next area solutions or cards?',
+      type:'boolean'
+    },
+    {
       name: "buttons",
       label: "Buttons",
       type: "object",

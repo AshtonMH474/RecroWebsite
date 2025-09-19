@@ -70,7 +70,7 @@ function SolutionsGrid({solutionRes,...block}){
         <>
             <section id={block.solutions_id} ref={sectionRef}
             style={{ height: `${sectionHeight}px` }}
-            className="pb-16 relative" >
+            className="scrollCenter pb-16 relative" >
                 <div style={{
                     position: "sticky",
                     paddingTop: short ? "5rem" : "3rem",

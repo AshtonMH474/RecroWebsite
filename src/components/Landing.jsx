@@ -1,12 +1,15 @@
 import { useRef, useState, useEffect } from 'react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import { tinaField } from 'tinacms/dist/react'
+import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react"; // nice arrow icon
 import Link from 'next/link'
 
 function Landing(props) {
   const wrapperRef = useRef(null)
   const subTextRef = useRef(null)
   const [hasPadding, setHasPadding] = useState(false)
+  
 
 
   const [inlineWidth, setInlineWidth] = useState(undefined);
@@ -123,6 +126,35 @@ function Landing(props) {
           ) : null
         )}
       </div>
+      {props.arrow && (
+   <motion.div
+  initial={{ y: 0 }}
+  animate={{ y: [0, 10, 0] }} // bounce up and down
+  transition={{
+    duration: 1.2,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+  className="mt-8"
+>
+  <ChevronDown
+     onClick={() => {
+  if (props.isSection) {
+    // find the first section
+    const firstSection = document.querySelector("section");
+    if (firstSection) {
+      firstSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  } else {
+    // fallback: scroll one viewport height
+    window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+  }
+}}
+    className={`w-15 h-15 font-bold cursor-pointer`}
+    style={{ color: "#B55914" }} // keep your primary color
+  />
+</motion.div>
+         )}
     </div>
   )
 }

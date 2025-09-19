@@ -80,7 +80,7 @@ export default function Home({res,navData,footerData,solutionData,partnerData,pe
      {data.page.blocks?.map((block,i) => {
                 switch(block?.__typename){
                     case "PageBlocksLanding":
-                    return <Landing key={i} {...block}/>;
+                    return <Landing key={i}  {...block}/>;
                     case "PageBlocksLanding2":
                         return <Landing2 key={i} {...block}/>;
                     case "PageBlocksCards":
