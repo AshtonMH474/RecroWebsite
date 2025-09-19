@@ -18,7 +18,9 @@ blocks:
       Built on Recro’s Cognition™ -  a Shared Digital Service Oriented Platform
       (SDSOP) reference architecture, Cognitio delivers secure, scalable, and
       mission-driven solutions across cloud, edge, and classified environments.
-    width: 45
+    width: 65
+    arrow: true
+    isSection: true
     _template: landing
   - solutions_heading: Centers of Excellence
     link_heading: Learn More
