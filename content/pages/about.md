@@ -152,7 +152,7 @@ blocks:
           government’s toughest problems, and guiding innovative startups into
           the federal market with the support and services required to succeed.
       - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/IMG_6034.jpeg
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/lyndsay4.png
         name: Lyndsay Hawkins
         title: COO
         bio: >
