@@ -6,7 +6,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { IoMdClose } from "react-icons/io";
 
 function CardModal({ ex, onClose }) {
-  console.log('i')
+ 
   useEffect(() => {
     const scrollY = window.scrollY;
 
