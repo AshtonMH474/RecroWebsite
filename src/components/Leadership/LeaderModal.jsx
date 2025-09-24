@@ -2,8 +2,33 @@ import { motion } from "framer-motion"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 import { IoMdClose } from "react-icons/io";
 import { tinaField } from "tinacms/dist/react";
+import { useEffect } from "react";
 
 function LeaderModal({ leader, onClose }) {
+
+  useEffect(() => {
+      const scrollY = window.scrollY;
+  
+      // Lock scroll and preserve current position
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.overflow = 'hidden';
+      document.body.style.width = '100%';
+  
+      return () => {
+        // Restore scroll position
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.overflow = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY); // restore to the same spot
+      };
+    }, []);
+  
   
   return (
     <div
@@ -30,7 +55,7 @@ function LeaderModal({ leader, onClose }) {
           relative z-[1000] 
           border border-white/15 rounded-[12px] bg-[#1A1A1E] 
           w-[90%] sm:w-[70%] md:w-[50%] 
-          max-h-[90vh] 
+          max-h-[80vh] 
           p-6 md:p-8 
           overflow-y-auto
           flex flex-col

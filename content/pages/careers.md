@@ -7,6 +7,8 @@ blocks:
 
       ### Recro is always seeking passionate individuals to join our team. If
       you're ready to challenge the status quo and make an impact, apply today!
+    arrow: true
+    isSection: true
     buttons:
       - link: /careers#jobs_section
         label: View Open Positions
@@ -76,7 +78,8 @@ blocks:
         icon: FaAddressBook
         description: >
           Refer your friends and get them hired? Be entered in our Referral
-          Raffle to win a trip for 2 to the location of your choosing! 
+          Raffle to win a trip for 2 to the location of your choosing!
+        content: ''
     _template: cards
   - jobsHeading: Highlighted Roles
     jobs_id: jobs_section

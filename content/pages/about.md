@@ -109,9 +109,6 @@ blocks:
           complexity into clarity.
 
 
-
-
-
           Over more than a decade serving national-security missions, Robert has
           worn many hats—from mission consultant to program lead to
           data-strategy advisor—always with the same throughline: telling the
@@ -119,9 +116,6 @@ blocks:
           telemetry into mission outcomes. With a business foundation from
           Georgetown University, he pairs commercial rigor with an operator’s
           urgency, pushing for solutions that work in the real world.
-
-
-
 
 
           Today, as CEO, Robert brings that bias for candor and outcomes to
@@ -134,16 +128,13 @@ blocks:
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/johnAmericaProPic.png
         name: Johnathan America
         title: Founder & President
-        bio: >+
+        bio: >
           John America is often described as a calm, technical leader who makes
           complex ideas feel simple. As a consultant inside the intelligence
           community, he saw the same gap in cybersecurity—vast data, underused
           insight—and built analytics approaches that surfaced what mattered.
           He’s known for translating depth into clarity and ensuring the message
           lands.
-
-
-
 
 
           Across more than a decade, John has moved through roles spanning
@@ -154,19 +145,14 @@ blocks:
           truth to mission need.
 
 
-
-
-
           Today, as Chief Growth Officer, John brings a builder’s mindset to
           growth. He forges partnerships, shapes solutions that fit the mission,
           and ensures customers hear both the “why” and the “how.” At Recro, he
           champions two priorities: placing world-class experts on the
           government’s toughest problems, and guiding innovative startups into
           the federal market with the support and services required to succeed.
-
-
       - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/lyndsay4.png
         name: Lyndsay Hawkins
         title: COO
         bio: >

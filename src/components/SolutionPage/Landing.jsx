@@ -16,7 +16,7 @@ function SolutionLanding({ solution }) {
         }
       }, [solution.width]);
 
-      console.log(solution)
+      
   return (
     <div
       style={{ minHeight: "100%" }}
