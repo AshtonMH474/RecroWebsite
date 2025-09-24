@@ -12,7 +12,7 @@ function Testimonies(props){
     const [gearRotation, setGearRotation] = useState(0);
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(0);
-    const visibleCount = 6;
+    const visibleCount = 3;
     const totalPages = Math.ceil(tests.length / visibleCount);
 
     const goToPage = (pageIndex) => {
@@ -38,7 +38,7 @@ function Testimonies(props){
                 </div>
                 <div className="w-full relative">
                     <DivGears gearRotation={gearRotation}/>
-                     <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[550px]">
+                     <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden ">
                         <AnimatePresence custom={direction} mode="wait">
                             <motion.div
                             key={startIndex} // Triggers re-render on pagination

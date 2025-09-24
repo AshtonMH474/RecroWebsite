@@ -67,96 +67,79 @@ blocks:
   - testimoniesHeading: Testimonies
     underline_width: 300
     testimonies:
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
+      - src: ''
+        name: 'Cameron F. '
+        job: ''
         quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
+          Everywhere I've ever worked, I've tried to always give my best and
+          make the job better. Since working here I've seen a side of the
+          workforce that I've never seen before - one where your supervisor
+          values your voice, opinion, and work ethic, which in turn, makes this
+          job (and going to work) a lot better. Seeing a company actually care
+          about its employees and team members is something I've never
+          experienced. Since being with Recro, I've transitioned from entry
+          level Enterprise IT Support, to the Assistant Lead of the IT Support
+          Desk Division. On top of that, Recro saw promise in me and asked me to
+          be a Team Lead overseeing the personnel on my contract, which has made
+          my connection with this company and team even stronger. This is an
+          environment where you feel backed to the fullest. There is never a
+          time where you are not heard and opinions and thoughts are not valued.
+          At Recro, you are not just a number and there is an immense amount of
+          effort made to feel like you are a part of a greater team. You become
+          a valued team member. Recro recognizes their employees for helping the
+          company grow and last year I was the Referral Raffle winner. Recro
+          sent me and my family to Cancun for a full week to the Nickelodeon
+          Resort - all expenses paid. They gave my family and I a memory we will
+          always cherish. Recro takes care of its people. Recro also recognizes
+          the need for not only personal but professional growth as well and I
+          am taking the next steps in that growth, with their support to become
+          a Salesforce Developer. Recro has a great job advancement process and
+          are constantly encouraging us to strive for new and better heights in
+          our careers. Once you join the team you will never want to be on
+          another team again.
+      - src: ''
+        name: 'Emily H. '
+        job: ''
         quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
+          Working with Recro has been a rewarding experience. In the world of
+          contract work, it’s rare to feel like a true member of a team but
+          Recro has built exactly that kind of environment. The company fosters
+          connection across all levels, encouraging open communication,
+          teamwork, and genuine camaraderie. One of the most unique
+          opportunities I’ve had here is meeting regularly with a mentor who
+          helps me align my long-term goals with the strides I’m making today.
+          These conversations have guided me in exploring new areas of
+          cybersecurity and gaining insight from someone with years of valuable
+          experience. At Recro, I’ve been empowered to pursue professional
+          development, explore new technologies, and deepen my understanding of
+          space systems. It’s a place where growth is encouraged, collaboration
+          is natural, and you’re truly supported in building your career.
+      - src: ''
+        name: 'Alex A. '
+        job: ''
         quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
+          Jenna Patton reached out to me about this job. I was hesitant at
+          first, but now I am glad I accepted the job offer. It has been nothing
+          but a wonderful experience since I joined Recro. I feel like I am part
+          of a big family. My first day was a little rough but, they made sure I
+          had everything I needed for a smooth start. This is the first contract
+          I’ve ever been on that I have had the opportunity of interacting with
+          the Executives and that is because they care about my well being. All
+          I can say is I am glad to be here and I look forward to bigger and
+          better opportunities ahead as I grow and evolve with Recro.
+      - src: ''
+        name: 'Nadeem A. '
+        job: ''
         quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
-        quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
-        quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
-        quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
-        quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
-        quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
-      - src: >-
-          https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/palceholder_leadership.jpg
-        name: Name
-        job: job title
-        quote: >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          eget sapien at risus varius facilisis. In hac habitasse platea
-          dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
-          luctus tortor,
+          Since starting my new role nearly four months ago with Recro, my
+          experience has been very positive. The transition into this position
+          has been smooth, and I’ve felt well-supported by both leadership and
+          my team. I’ve been able to contribute effectively while also learning
+          new skills that continue to expand my professional growth. The work
+          environment is collaborative, structured, and motivating, which has
+          allowed me to adapt quickly and stay engaged. Overall, I have no
+          complaints and I look forward to continuing to grow and add value in
+          this role.
     _template: testimonies
 ---
 
