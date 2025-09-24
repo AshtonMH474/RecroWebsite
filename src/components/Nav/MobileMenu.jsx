@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { tinaField } from "tinacms/dist/react";
+import { handleSignout } from "@/lib/auth_functions";
+import { useAuth } from "@/context/auth";
 
 // Small component for fading + / − toggle
 function PlusMinusToggle({ isOpen }) {
@@ -32,8 +34,11 @@ export default function MobileMenu({
   menuRef,
   links,
   toggleMenu,
+  res,
+  user,
 }) {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
+  const { openModal, setUser } = useAuth();
 
   const toggleDropdown = (i) => {
     setOpenDropdownIndex((prev) => (prev === i ? null : i));
@@ -41,14 +46,12 @@ export default function MobileMenu({
 
   const handleTopLinkClick = (link) => {
     if (typeof window === "undefined") return;
-
-    toggleMenu(); // Always close the menu after clicking
+    toggleMenu();
 
     if (link.linkOptions?.id) {
       if (window.location.pathname !== link.link) {
         window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions?.id}`;
       } else {
-        
         const el = document.getElementById(link.linkOptions?.id);
         el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions?.scrollPosition || "start" });
       }
@@ -59,8 +62,7 @@ export default function MobileMenu({
 
   const handleSublinkClick = (link, sublink) => {
     if (typeof window === "undefined") return;
-
-    toggleMenu(); // Close mobile menu on click
+    toggleMenu();
 
     if (sublink.linkOptions?.id) {
       if (window.location.pathname !== link.link) {
@@ -128,12 +130,12 @@ export default function MobileMenu({
             {hasSublinks && openDropdownIndex === i && (
               <div id={`submenu-${i}`} className="ml-1 flex flex-col">
                 {link.sublinks.map((sublink, j) =>
-                  sublink.linkOptions?.id && sublink.linkOptions?.type == 'id' ? (
+                  sublink.linkOptions?.id && sublink.linkOptions?.type === "id" ? (
                     <button
                       key={j}
                       onClick={() => handleSublinkClick(link, sublink)}
-                      className="w-full capitalize text-left  py-2 text-sm text-white hover:bg-primary transition-colors"
-                      data-tina-field={tinaField(sublink,'label')}
+                      className="w-full capitalize text-left py-2 text-sm text-white hover:bg-primary transition-colors"
+                      data-tina-field={tinaField(sublink, "label")}
                     >
                       {sublink.label}
                     </button>
@@ -142,8 +144,8 @@ export default function MobileMenu({
                       key={j}
                       href={sublink.linkOptions?.link || "#"}
                       onClick={toggleMenu}
-                      className=" capitalize  py-2 text-sm text-white hover:bg-primary transition-colors"
-                      data-tina-field={tinaField(sublink,'label')}
+                      className="capitalize py-2 text-sm text-white hover:bg-primary transition-colors"
+                      data-tina-field={tinaField(sublink, "label")}
                     >
                       {sublink.label}
                     </Link>
@@ -154,6 +156,58 @@ export default function MobileMenu({
           </div>
         );
       })}
+
+      {/* Auth buttons match DesktopMenu */}
+      {res?.authStyle === "button" && !user && (
+        <button
+          onClick={() => {
+            toggleMenu();
+            openModal("login");
+          }}
+          data-tina-field={tinaField(res, "authLabelLogin")}
+          className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
+        >
+          {res.authLabelLogin}
+        </button>
+      )}
+      {res?.authStyle === "border" && !user && (
+        <button
+          onClick={() => {
+            toggleMenu();
+            openModal("login");
+          }}
+          data-tina-field={tinaField(res, "authLabelLogin")}
+          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
+        >
+          {res.authLabelLogin}
+        </button>
+      )}
+
+      {res?.authStyle === "button" && user && (
+        <button
+          onClick={() => {
+            toggleMenu();
+            handleSignout(setUser);
+          }}
+          data-tina-field={tinaField(res, "authLabelSignout")}
+          className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
+        >
+          {res.authLabelSignout}
+        </button>
+      )}
+      {res?.authStyle === "border" && user && (
+        <button
+          onClick={() => {
+            toggleMenu();
+            handleSignout(setUser);
+          }}
+          data-tina-field={tinaField(res, "authLabelSignout")}
+          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
+        >
+          {res.authLabelSignout}
+        </button>
+      )}
     </div>
   );
 }
+

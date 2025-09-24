@@ -1,7 +1,31 @@
 import { MongoClient } from "mongodb";
+import fs from "fs";
+import os from "os";
+import path from "path";
 
 const uri = process.env.MONGODB_URI;
-const options = {};
+
+function buildOptions() {
+  const tmpDir = os.tmpdir(); // cross-platform temp directory
+  const caPath = path.join(tmpDir, "ca.pem");
+  const keyPath = path.join(tmpDir, "mongo.pem");
+
+
+  // Write decoded files to temp
+  const ca = Buffer.from(process.env.MONGODB_CA_B64, "base64").toString("utf-8");
+  fs.writeFileSync(caPath, ca);
+
+  const key = Buffer.from(process.env.MONGODB_KEY_B64, "base64").toString("utf-8");
+  fs.writeFileSync(keyPath, key);
+
+  return {
+    tls: true,
+    tlsCAFile: caPath,
+    tlsCertificateKeyFile: keyPath,
+  };
+}
+
+const options = buildOptions();
 
 let client;
 let clientPromise;
@@ -11,7 +35,6 @@ if (!process.env.MONGODB_URI) {
 }
 
 if (process.env.NODE_ENV === "development") {
-  // Reuse connection during hot reloads in dev
   if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options);
     global._mongoClientPromise = client.connect();
@@ -23,3 +46,5 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export default clientPromise;
+
+
