@@ -1,16 +1,10 @@
-import { AnimatePresence, motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import {  motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { tinaField } from "tinacms/dist/react";
 import PerformanceCard from "./PerformanceCard";
-import PdfModal from "@/components/SolutionsGrid/SolutionModal";
 
 function SolutionPerformances(props){
     
-
-const [expandedCardIndex, setExpandedCardIndex] = useState(null);
-const openCard = (index) => setExpandedCardIndex(index);
-const closeCard = () => setExpandedCardIndex(null);
-
 
 const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true, margin: "-100px" });
@@ -39,20 +33,13 @@ const headingRef = useRef(null);
 
                 <div className="pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
                     {props?.performances?.map((performance,i) => (
-                        <PerformanceCard performance={performance.performance} onExpand={() => openCard(i)} key={i}/>
+                        <PerformanceCard performance={performance.performance}  key={i}/>
                     ))}
                 </div>
             </div>
         </section>
 
-        <AnimatePresence>
-              {expandedCardIndex !== null && (
-              <PdfModal
-                solution={props.performances[expandedCardIndex].performance}
-                onClose={closeCard}
-              />
-            )}
-            </AnimatePresence>
+       
         </>
     )
 }

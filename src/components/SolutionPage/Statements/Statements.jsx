@@ -5,12 +5,10 @@ import StatementCard from "./StatementCard";
 import Pagination from "@/components/Leadership/Pagination";
 import { AnimatePresence,motion } from "framer-motion";
 import { animationVariants } from "@/components/Leadership/LeaderAnimations";
-import StatementForm from "./StatementForm";
+
 
 import { useAuth } from "@/context/auth";
-import Register from "@/components/Register";
-import Login from "@/components/Login";
-import NewPasswordModal from "@/components/New-Password";
+
 import PdfModal from "@/components/SolutionsGrid/SolutionModal";
 
 
@@ -22,10 +20,7 @@ function Statements(props){
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const [gearRotation, setGearRotation] = useState(0);
-    
-    const [expandedCardIndex, setExpandedCardIndex] = useState(null);
-    const openCard = (index) => setExpandedCardIndex(index);
-    const closeCard = () => setExpandedCardIndex(null);
+   
       
    
 
@@ -66,7 +61,7 @@ function Statements(props){
                             className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12">
                                 {visbaleStatments.map((statement,i) => {
                                     const actualIndex = startIndex + i
-                                    return (<StatementCard key={actualIndex} onExpand={() => openCard(i)} statement={statement} user={user}/>)
+                                    return (<StatementCard key={actualIndex}  statement={statement} user={user}/>)
                                 })}
                             </motion.div>
                         </AnimatePresence>
@@ -78,14 +73,7 @@ function Statements(props){
             </div>
             
 
-            <AnimatePresence>
-                        {expandedCardIndex !== null && (
-                        <PdfModal
-                        solution={visbaleStatments[expandedCardIndex]}
-                        onClose={closeCard}
-                        />
-                        )}
-            </AnimatePresence>
+            
             
         </>
     )

@@ -14,11 +14,7 @@ function SolutionsGrid({solutionRes,...block}){
     const [rows, setRows] = useState(1);
     const [short, setShort] = useState(false);
     const [tall, setTall] = useState(false);
-
-
-    const [expandedCardIndex, setExpandedCardIndex] = useState(null);
-    const openCard = (index) => setExpandedCardIndex(index);
-    const closeCard = () => setExpandedCardIndex(null);
+    const isSolutionGrid = true
 
     useEffect(() => {
       const updateRows = () => {
@@ -84,20 +80,13 @@ function SolutionsGrid({solutionRes,...block}){
                         />
                         <motion.div style={{ opacity: cardsOpacity, scale: cardsScale }} className=" contain-paint contain-layout will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
                             {solutions.map((card,i) => (
-                                <SolutionCard card={card} onExpand={() => openCard(i)} key={i} props={block} />
+                                <SolutionCard card={card}  key={i} props={block} />
                             ))}
                         </motion.div>
                 </div>
             </section>
 
-            <AnimatePresence>
-              {expandedCardIndex !== null && (
-              <PdfModal
-                solution={solutions[expandedCardIndex]}
-                onClose={closeCard}
-              />
-            )}
-            </AnimatePresence>
+            
         </>
     )
 }

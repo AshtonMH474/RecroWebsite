@@ -1,40 +1,9 @@
-// import { createContext, useContext, useEffect, useState, useCallback } from "react";
-// import { checkUser } from "@/lib/auth_functions";
 
-// const AuthContext = createContext();
-
-// export function AuthProvider({ children }) {
-//   const [user, setUser] = useState("loading"); // initial state
-// const [showLoginModal, setShowLoginModal] = useState(false);
-//   const [showRegisterModal, setRegisterModal] = useState(false);
-//   const [showNewPassword, setNewPassword] = useState(false);
-//       const [expandedStatementIndex, setExpandedStatementIndex] = useState(null); 
-//     const openStatement = (index) => setExpandedStatementIndex(index);
-//     const closeStatement = () => setExpandedStatementIndex(null);
-//   const refreshUser = useCallback(() => {
-//     checkUser(setUser);
-//   }, []);
-
-//   // Run once on mount
-//   useEffect(() => {
-//     refreshUser();
-//   }, [refreshUser]);
-
-//   return (
-//     <AuthContext.Provider value={{ user, setUser, refreshUser,showLoginModal,setShowLoginModal,showRegisterModal,setRegisterModal,showNewPassword,setNewPassword,expandedStatementIndex,openStatement,closeStatement }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// }
-
-// // Custom hook for easy access
-// export const useAuth = () => useContext(AuthContext);
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import NewPasswordModal from "@/components/New-Password";
 import ChangePassword from "@/components/ChangePassword";
-import StatementForm from "@/components/SolutionPage/Statements/StatementForm";
 import { checkUser } from "@/lib/auth_functions";
 
 const AuthContext = createContext();
@@ -81,9 +50,7 @@ const refreshUser = useCallback(() => {
       {activeModal === "changePassword" && (
         <ChangePassword token={modalData?.token} onClose={closeModal} />
       )}
-      {activeModal === "statement" && (
-        <StatementForm statement={modalData} onClose={closeModal} />
-      )}
+      
     </AuthContext.Provider>
   );
 }

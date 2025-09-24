@@ -76,3 +76,22 @@ export async function checkUser(setUser) {
         setUser(null);
       }
 }
+
+
+export async function handleDownload(user,pdfUrl) {
+  try {
+      const res = await fetch("/api/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+             email:user.email,
+             pdfUrl:pdfUrl
+        }),
+      });
+      const data = await res.json();
+     
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+}

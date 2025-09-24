@@ -2,11 +2,14 @@ import Link from "next/link"
 import IconRenderer from "../utils/IconRenderer"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 import { tinaField } from "tinacms/dist/react"
+import { downloadPdf } from "../utils/downlaod"
 
-function SolutionCard({card,props,onExpand}){
+function SolutionCard({card,props}){
+    const isSolutionGrid = true
+
     return(
         <>
-            {/* <Link href={`/solutions/${card._sys.filename}`}> */}
+            
                 <div  className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6`}>
                     <div className="flex items-center mb-3 gap-x-3">
                         {card.icon && (
@@ -45,7 +48,7 @@ function SolutionCard({card,props,onExpand}){
                         {/* Button */}
                         <button
                             data-tina-field={tinaField(props,'pdf_heading')}
-                            onClick={onExpand}
+                            onClick={() => downloadPdf(card,isSolutionGrid)}
                             className="px-4 text-[14px] capitalize py-1 bg-primary  rounded hover:opacity-80 transition-colors duration-300 cursor-pointer"
                         >
                             {props.pdf_heading}
