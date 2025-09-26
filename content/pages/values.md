@@ -140,6 +140,34 @@ blocks:
           allowed me to adapt quickly and stay engaged. Overall, I have no
           complaints and I look forward to continuing to grow and add value in
           this role.
+      - name: Jonathan U.
+        quote: >
+          At Recro, I’ve had the chance to do more than just build systems, I’ve
+          built solutions that matter. Over nearly six years, I’ve helped
+          modernize platforms for national defense, engineered secure
+          cloud-native environments, and transformed legacy systems into
+          scalable, reliable solutions that teams can depend on.
+
+
+          What makes Recro different is the culture of growth and trust. I’ve
+          been encouraged to take ownership of complex challenges, innovate with
+          new technologies, and continue growing in my career. Along the way,
+          I’ve earned certifications like CompTIA Cloud+ and CKA (Certified
+          Kubernetes Administrator) credentials that reflect both the
+          opportunities I’ve been given and the skills I’ve been able to sharpen
+          here.
+
+
+          And the journey doesn’t stop there. Right now, I’m diving deeper into
+          Confluent, Elastic, Cribl, and Nutanix, expanding my expertise in
+          observability, data streaming, and enterprise cloud platforms. Having
+          the space and support to explore these tools keeps me inspired and
+          ready for the next challenge.
+
+
+          Recro isn’t just another company—it’s a place where your skills grow,
+          your ideas matter, and your work has a real impact. That’s what makes
+          being part of this team so rewarding.
     _template: testimonies
 ---
 
