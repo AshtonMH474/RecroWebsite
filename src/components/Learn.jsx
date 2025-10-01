@@ -19,7 +19,7 @@ function Learn(props) {
       <div
         id={props.learn_id}
         ref={learnRef}
-        style={{ minHeight: '100%' }}
+        style={{ minHeight: 'auto' }}
         className="bg-black overflow-hidden w-full mt-42 relative z-30 pb-20"
       >
         <div

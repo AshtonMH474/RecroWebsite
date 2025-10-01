@@ -46,7 +46,7 @@ function Leadership(props) {
 
   return (
     <>
-    <div id={props.leadership_id} ref={leadershipRef}  style={{ minHeight: '100%' }} className="relative  bg-black  w-full pb-24  overflow-hidden">
+    <div id={props.leadership_id} ref={leadershipRef}  style={{ minHeight: 'auto' }} className="relative  bg-black  w-full pb-24  overflow-hidden">
         
 
         <motion.div
