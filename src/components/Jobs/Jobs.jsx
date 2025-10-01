@@ -48,7 +48,7 @@ function Jobs(props){
     
     return(
         <>
-            <div id={props.jobs_id} style={{minHeight:'100%'}} 
+            <div id={props.jobs_id} style={{minHeight:'auto'}} 
             className="relative bg-black overflow-hidden w-full pb-24" >
                 
                 <div className="flex flex-col items-center mt-32 pb-12">
@@ -95,13 +95,13 @@ function Jobs(props){
                     )}
                 </div>
                 
-                <div className="flex flex-col items-center max-w-[300px] sm:max-w-[600px]  lg:max-w-[1000px] mx-auto px-8">
-                    <a className="w-full " target="_blank" href="https://ats.recro.com/jobboard">
+                <div className="flex flex-col items-center justify-center  px-8">
+                    <a className="flex justify-center " target="_blank" href="https://ats.recro.com/jobboard">
                         {props?.buttonTypeAll === "button" && (
                         <button
                             
                             data-tina-field={tinaField(props, "buttonLabelAll")}
-                            className="bg-primary py-2  capitalize cursor-pointer px-4 text-[18px]  w-full rounded-[8px] hover:opacity-80 text-white"
+                            className="bg-primary py-2  capitalize cursor-pointer px-4 text-[18px]  w-auto rounded-[8px] hover:opacity-80 text-white"
                         >
                             {props.buttonLabelAll}
                         </button>
@@ -110,7 +110,7 @@ function Jobs(props){
                         <button
                             
                             data-tina-field={tinaField(props, "buttonLabelAll")}
-                            className="px-4  capitalize text-[18px] py-2 w-full border primary-border rounded-[8px] hover:text-white/80 transition-colors duration-300"
+                            className="px-4  capitalize text-[18px] py-2 w-auto border primary-border rounded-[8px] hover:text-white/80 transition-colors duration-300"
                         >
                             {props.buttonLabelAll}
                         </button>

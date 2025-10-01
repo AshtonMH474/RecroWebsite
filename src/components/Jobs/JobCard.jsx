@@ -46,7 +46,7 @@ function JobCard({ props, job, onExpand }) {
                 shouldTruncate ? "truncate-multiline" : ""
             }`}
             >
-            {parseJobDescription(stripHTML(job.description))[1].content}
+            {parseJobDescription(stripHTML(job.description))[1]?.content}
             </p>
         </div>
         {props?.buttonType === "button" && (
