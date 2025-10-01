@@ -12,6 +12,7 @@ import Learn from "@/components/Learn";
 import Testimonies from "@/components/Testimonies/Testimonies";
 import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
 import PartnersGrid from "@/components/Partners/PartnersGrid";
+import { useRouter } from "next/router";
 const PriorityPartners = dynamic(() => import("@/components/Partners/PriorityPartners/PriorityPartners"), { ssr: true });
 const PerformanceGrid = dynamic(() => import("@/components/PerformanceGrid/PerformanceGrid"), { ssr: true });
 
@@ -27,12 +28,14 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { client } = await import("../../tina/__generated__/databaseClient");
   const filename = params.slug[0] + ".md";
-  const isCareers = filename === "careers.md";
+  
 
-  const [pageData, navData, footerData, solutionData, partnerData, performanceData] = await Promise.all([
+
+  const [pageData, navData, footerData,footerCareers, solutionData, partnerData, performanceData] = await Promise.all([
     client.queries.page({ relativePath: filename }),
     client.queries.nav({ relativePath: "nav.md" }),
-    client.queries.footer({ relativePath: isCareers ? "footerCareers.md" : "footer.md" }),
+    client.queries.footer({ relativePath: "footer.md" }),
+    client.queries.footer({ relativePath:"footerCareers.md"}),
     client.queries.solutionConnection(),
     client.queries.partnerConnection({ first: 100 }),
     client.queries.performanceConnection(),
@@ -44,6 +47,7 @@ export async function getStaticProps({ params }) {
         pageData,
         navData,
         footerData,
+        footerCareers,
         solutionData,
         partnerData,
         performanceData,
@@ -54,9 +58,19 @@ export async function getStaticProps({ params }) {
 
 export default function Slug({ cmsData }) {
   // Combine all useTina calls into one
+const router = useRouter()
+const isCareers = router.query.slug?.[0] === "careers";
+
+
+// pick the right query object
+const footerQuery = isCareers ? cmsData.footerCareers : cmsData.footerData;
+
+// pass that into useTina
+const { data: footerContent } = useTina(footerQuery);
+
   const { data: pageContent } = useTina(cmsData.pageData);
   const { data: navContent } = useTina(cmsData.navData);
-  const { data: footerContent } = useTina(cmsData.footerData);
+
   const { data: solutionContent } = useTina(cmsData.solutionData);
   const { data: partnersContent } = useTina(cmsData.partnerData);
   const { data: performanceContent } = useTina(cmsData.performanceData);

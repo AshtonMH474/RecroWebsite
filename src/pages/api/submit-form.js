@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import clientPromise from "@/lib/mongodb";
+import { isFreeEmail } from "free-email-domains-list";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -12,6 +13,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
+
+  if(organization && isFreeEmail(email)){
+    return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
+  }
+  
   try {
     // 1️⃣ Setup email transport
     const transporter = nodemailer.createTransport({

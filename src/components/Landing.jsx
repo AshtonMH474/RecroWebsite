@@ -115,7 +115,6 @@ function Landing(props) {
       <div className="flex gap-x-8 ">
    {props.buttons?.map((button, i) => {
   const commonProps = {
-    key: i,
     "data-tina-field": tinaField(props.buttons[i], "label"),
     className:
       button.style === "border"
@@ -135,7 +134,7 @@ function Landing(props) {
   // REGISTER button
   if (button?.type === "register") {
     return (
-      <button {...commonProps} onClick={handleRegister}>
+      <button key={i} {...commonProps} onClick={handleRegister}>
         {button.label}
       </button>
     );
@@ -144,7 +143,7 @@ function Landing(props) {
   // LOGIN button
   if (button?.type === "login") {
     return (
-      <button {...commonProps} onClick={handleLogin}>
+      <button key={i} {...commonProps} onClick={handleLogin}>
         {button.label}
       </button>
     );

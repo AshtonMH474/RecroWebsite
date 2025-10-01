@@ -7,10 +7,11 @@ import { useEffect, useState } from "react";
 function ContactUsForm() {
     const router = useRouter()
     const [isCareers,setCareers] = useState(false)
+    const [errors,setErrors] = useState({})
      // checks if ur in the careers section 
     useEffect(() => {
       
-      if(router.asPath == '/careers') setCareers(true)
+      if(router.query.slug?.[0] === "careers") setCareers(true)
     },[])
     
     
@@ -40,12 +41,16 @@ function ContactUsForm() {
                   
                 }
         }
-
+                if(!formData.email || !formData.firstName || !formData.lastName || !formData.subject || !formData.message || (!formData.organization && !formData.phone)){
+                 setErrors({error: 'Make sure everything is filled out'})
+                 return
+                }
                 const res = await fetch("/api/submit-form",{
                     method:"POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(formData),
                 })
+                
 
                 if (res.ok) {
                 e.target.firstName.value = ""
@@ -60,9 +65,13 @@ function ContactUsForm() {
                 
 
                 alert("Submitted successfully!");
-                } else {
-                alert("Failed to submit.");
+                setErrors({})
+                return
                 }
+
+                setErrors({error: 'Make sure everything is filled out and you are using your company email'})
+                return 
+         
       
     }
   
@@ -116,7 +125,7 @@ function ContactUsForm() {
             rows={4}
             className="w-full p-2 rounded bg-[#2A2A2E] text-white placeholder-white/70 resize-none"
           ></textarea>
-
+          {errors?.error && (<div className="text-red-600">{errors.error}</div>)}
         
           <button
             type="submit"
