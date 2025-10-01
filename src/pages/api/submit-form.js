@@ -1,12 +1,16 @@
-
-
 import nodemailer from "nodemailer";
-import { MongoClient } from "mongodb";
+import clientPromise from "@/lib/mongodb";
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
   const { firstName, lastName, email, organization, subject, message, phone } = req.body;
+
+  if (!email || !subject || !message) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
 
   try {
     // 1️⃣ Setup email transport
@@ -15,7 +19,7 @@ export default async function handler(req, res) {
       port: Number(process.env.SMTP_PORT),
       secure: process.env.SMTP_SECURE === "true",
       auth: {
-        user:organization ? process.env.SMTP_USER : process.env.SMTP_CAREER_HOST,
+        user: organization ? process.env.SMTP_USER : process.env.SMTP_CAREER_HOST,
         pass: organization ? process.env.SMTP_PASS : process.env.SMTP_CAREER_PASS,
       },
     });
@@ -23,7 +27,7 @@ export default async function handler(req, res) {
     // 2️⃣ Prepare email
     const mailOptions = {
       from: `"Website Contact" <${organization ? process.env.SMTP_USER : process.env.SMTP_CAREER_HOST}>`,
-      to: organization ? process.env.CONTACT_EMAIL: process.env.CONTACT_CAREER_EMAIL,
+      to: organization ? process.env.CONTACT_EMAIL : process.env.CONTACT_CAREER_EMAIL,
       replyTo: email,
       subject: `Form Submission: ${subject}`,
       text: organization
@@ -34,11 +38,10 @@ export default async function handler(req, res) {
     // 3️⃣ Send email
     await transporter.sendMail(mailOptions);
 
-    // 4️⃣ Save to MongoDB
-    const client = await MongoClient.connect(process.env.MONGODB_URI);
-    const db = client.db(); // Default DB from URI
+    // 4️⃣ Save to MongoDB (via clientPromise)
+    const client = await clientPromise;
+    const db = client.db("mydb"); // 👈 replace with your actual DB name
     const collectionName = organization ? "messages" : "careers";
-    const collection = db.collection(collectionName);
 
     const doc = {
       firstName,
@@ -51,13 +54,12 @@ export default async function handler(req, res) {
       createdAt: new Date(),
     };
 
-    await collection.insertOne(doc);
-    await client.close();
+    await db.collection(collectionName).insertOne(doc);
 
     // 5️⃣ Respond success
-    res.status(200).json({ success: true });
-  } catch (err) {
-    console.error("Error handling form submission:", err);
-    res.status(500).json({ error: "Failed to send or save message." });
+    return res.status(200).json({ success: true, message: "Message sent and saved" });
+  } catch (error) {
+    console.error("Error handling form submission:", error);
+    return res.status(500).json({ error: "Failed to send or save message" });
   }
 }
