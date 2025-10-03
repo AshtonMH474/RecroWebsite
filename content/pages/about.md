@@ -129,28 +129,88 @@ blocks:
         name: Johnathan America
         title: Founder & President
         bio: >
-          John America is often described as a calm, technical leader who makes
-          complex ideas feel simple. As a consultant inside the intelligence
-          community, he saw the same gap in cybersecurity—vast data, underused
-          insight—and built analytics approaches that surfaced what mattered.
-          He’s known for translating depth into clarity and ensuring the message
-          lands.
+          By 2018, government contracting was stuck in the past. Too many
+          contractors hid behind compliance checklists, slowed by bureaucracy
+          and outdated technology. Talented engineers felt like cogs in a
+          machine, procurement cycles dragged on for years, and agencies
+          collected mountains of data without turning it into actionable
+          insight. Cyber security, despite its mission critical importance, was
+          often treated as a box to check rather than a driving force for real
+          decisions. \
 
+          \
 
-          Across more than a decade, John has moved through roles spanning
-          systems engineering, solutions architecture, and growth leadership.
-          The throughline is steady: listen deeply, design scalable platforms,
-          earn trust by delivering. With a master’s from George Mason
-          University, he bridges engineers and executives, connecting technical
-          truth to mission need.
+          I saw this firsthand early in my career. While serving as a cyber
+          engineer on key projects, I was part of an IRAD initiative that
+          leveraged open source intelligence (OSINT) to empower decision makers
+          in groundbreaking ways. At the same time, my day-to-day mission was to
+          ensure 24/7 availability, integrity, and confidentiality so our
+          warfighters could operate freely and safely. That experience showed me
+          the power of data driven decision making in cyber, a field that had
+          long been passive and compliance focused, blind to its direct impact
+          on those defending our freedoms.\
 
+          \
 
-          Today, as Chief Growth Officer, John brings a builder’s mindset to
-          growth. He forges partnerships, shapes solutions that fit the mission,
-          and ensures customers hear both the “why” and the “how.” At Recro, he
-          champions two priorities: placing world-class experts on the
-          government’s toughest problems, and guiding innovative startups into
-          the federal market with the support and services required to succeed.
+          The turning point came when I asked the CISO of a three letter agency
+          a simple question: “When was the last time a cybersecurity concern
+          delayed a satellite launch?” His answer, “Never,” was a revelation. If
+          critical vulnerabilities were not enough to pause a launch, something
+          was deeply wrong with the way our industry valued cyber hygiene. At
+          the same time, I saw procurement processes stall for months, brilliant
+          engineers leave out of frustration, and critical programs delayed
+          because of outdated tools and entrenched bureaucracy. It became clear
+          that if I wanted to see meaningful change, I would have to build it
+          myself.\
+
+          \
+
+          I had always promised myself I would start a company before turning
+          30. At 29, I was climbing the career ladder quickly, but instead of
+          taking lucrative offers, I chose the harder path. I teamed up with Rob
+          Lataille, a trusted colleague from our days pioneering the agency’s
+          first data science project for the CISO, a project that evolved from
+          data science to machine learning and ultimately to AI. Rob brought an
+          MBA, financial acumen, and a natural drive to move fast. I brought
+          deep technical expertise and a relentless focus on quality. Together,
+          we balanced speed and precision, business strategy, and cyber rigor.\
+
+          \
+
+          To make our vision real, we self funded the company from day one. We
+          moved in together, shared a commute, and cut our salaries to the bare
+          minimum to avoid outside capital or loans, an intentional choice to
+          stay mission first and independent. Our CPA, attorney, friends, and
+          even family told us we were crazy. They warned us the industry was
+          saturated, that services companies could not stand out without a
+          product, and that refusing outside financing was reckless. But we
+          believed that independence was the only way to build something
+          better.\
+
+          \
+
+          Our mission was simple but bold: deliver the most effective, data
+          driven cyber solutions to government customers, faster and with
+          greater impact than anyone else. Early on, we proved the skeptics
+          wrong by developing and implementing the agency’s first ever
+          enterprise risk assessment, a project the customer initially thought
+          was impossible. We delivered it on an aggressive timeline, using
+          creative approaches like adapting Google’s PageRank algorithm to
+          identify the most critical devices on the network. The result was a
+          revolutionary, data driven roadmap that helped the customer make
+          strategic decisions and dramatically improve cyber hygiene across the
+          enterprise.\
+
+          \
+
+          Today, we have survived government shutdowns, COVID, and the financial
+          turbulence of recent years. From two founders living lean to a team of
+          70 mission focused employees, our company stands as proof that a
+          small, agile team founded on independence, data, and cyber expertise
+          can out innovate and outperform the biggest names in government
+          contracting. We built this company to be the partner we wished we had:
+          mission focused, data driven, and fearless about challenging the
+          status quo.
       - src: >-
           https://recro-landing-site.s3.us-east-1.amazonaws.com/Leadership/lyndsay4.png
         name: Lyndsay Hawkins
