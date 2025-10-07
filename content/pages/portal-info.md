@@ -12,9 +12,11 @@ blocks:
     buttons:
       - link: /solutions
         label: Solutions
+        type: link
         style: button
       - link: /portal
         label: Partner Portal
+        type: link
         style: border
     _template: landing
   - cards_heading: About our Portal
