@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
-import { useRouter } from "next/router";
+
 
 
 function ChangePassword({onClose,token}){
