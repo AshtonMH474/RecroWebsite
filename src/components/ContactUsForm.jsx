@@ -8,6 +8,7 @@ function ContactUsForm() {
     const router = useRouter()
     const [isCareers,setCareers] = useState(false)
     const [errors,setErrors] = useState({})
+    
      // checks if ur in the careers section 
     useEffect(() => {
       

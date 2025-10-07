@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { tinaField } from "tinacms/dist/react";
 import LeaderCard from "./LeaderCard";
@@ -35,22 +35,17 @@ function Leadership(props) {
   // these are the cards that are showing
   const visibleCards = leaders.slice(startIndex, startIndex + visibleCount);
 
-// all of this is used to get that faded look based off scroll bar
-  const leadershipRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: leadershipRef,
-    offset: ["start end", "start start"],
-  });
-  const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+ 
+ 
 
 
   return (
     <>
-    <div id={props.leadership_id} ref={leadershipRef}  style={{ minHeight: 'auto' }} className="relative  bg-black  w-full pb-24  overflow-hidden">
+    <div id={props.leadership_id}  style={{ minHeight: 'auto' }} className="relative  bg-black  w-full pb-24  overflow-hidden">
         
 
-        <motion.div
-        style={{ opacity: contentOpacity }}
+        <div
         className="relative"
         >
           <div className="flex flex-col items-center mt-32 pb-12">
@@ -94,7 +89,7 @@ function Leadership(props) {
           />
           )}
           
-        </motion.div>
+        </div>
     </div>
       <AnimatePresence>
         {expandedCardIndex !== null && (

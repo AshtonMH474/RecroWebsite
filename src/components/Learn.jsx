@@ -1,24 +1,15 @@
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import Link from "next/link";
 
 function Learn(props) {
-  const learnRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: learnRef,
-    offset: ["start end", "start start"],
-  });
-
-  const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <>
       <div
         id={props.learn_id}
-        ref={learnRef}
+        
         style={{ minHeight: 'auto' }}
         className="bg-black overflow-hidden w-full mt-42 relative z-30 pb-20"
       >
@@ -26,8 +17,7 @@ function Learn(props) {
           style={{ minHeight: '100%' }}
           className="flex flex-col lg:gap-x-16  lg:flex-row pt-32 items-center justify-center "
         >
-          <motion.div
-            style={{ opacity: contentOpacity }}
+          <div
             className="px-8 mt-16 w-[95%] max-w-[700px] mb-32 pt-30"
             data-tina-field={tinaField(props, "headingLearnTeam")}
           >
@@ -67,10 +57,10 @@ function Learn(props) {
               }
               })}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            style={{ opacity: contentOpacity }}
+          <div
+           
             className="flex  flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8 lg:pr-30"
           >
             {props?.learnTeamImages?.map((image, i) => (
@@ -98,7 +88,7 @@ function Learn(props) {
               />
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
