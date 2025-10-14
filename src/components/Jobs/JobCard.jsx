@@ -24,13 +24,13 @@ function JobCard({ props, job, onExpand }) {
       className="job-card border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6"
     >
       <div>
-        <h3 className="text-[24px] font-bold">{job.title}</h3>
-        <h4 className="text-[#C2C2BC] text-[18px] flex items-center gap-x-1">
+        <h3 className="text-[20px] font-bold">{job.title}</h3>
+        <h4 className="text-[#C2C2BC] text-[16px] flex items-center gap-x-1">
           <IoLocationOutline className="text-[#14B5B5]" />
           {job.location}
         </h4>
         {job.salaryRangeMax > 0 && job.salaryRangeMin > 0 && (
-          <h4 className="text-[#C2C2BC] text-[18px]">
+          <h4 className="text-[#C2C2BC] text-[16px]">
             <span className="text-[#27AE60]">$</span>
             {job.salaryRangeMin} - <span className="text-[#27AE60]">$</span>
             {job.salaryRangeMax}
