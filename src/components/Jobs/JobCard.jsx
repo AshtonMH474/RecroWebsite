@@ -32,8 +32,8 @@ function JobCard({ props, job, onExpand }) {
         {job.salaryRangeMax > 0 && job.salaryRangeMin > 0 && (
           <h4 className="text-[#C2C2BC] text-[16px]">
             <span className="text-[#27AE60]">$</span>
-            {job.salaryRangeMin} - <span className="text-[#27AE60]">$</span>
-            {job.salaryRangeMax}
+            {Number(job.salaryRangeMin).toLocaleString()} - <span className="text-[#27AE60]">$</span>
+            {Number(job.salaryRangeMax).toLocaleString()}
           </h4>
         )}
       </div>
