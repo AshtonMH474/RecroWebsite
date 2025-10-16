@@ -3,9 +3,9 @@ import { FaUser } from "react-icons/fa";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 
-function TestimonyCard({test}){
+function TestimonyCard({test,onExpand}){
     return(
-        <div className="border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[450px] px-4 py-6">
+        <div onClick={onExpand} className="cursor-pointer border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[450px] px-4 py-6">
             <div className="flex items-center mb-3 gap-x-3">
                 {test.src ? (
                 <img
@@ -34,13 +34,13 @@ function TestimonyCard({test}){
                 </div>
             </div>
             {test.quote && (
-                <div className="overflow-y-auto h-90" data-tina-field={tinaField(test,'quote')}>
+                <div className="overflow-hidden h-90  " data-tina-field={tinaField(test,'quote')}>
                     <TinaMarkdown
                     content={test.quote}
                     components={{
                         
                       p: ({ children }) => (
-                        <p className="text-[#C2C2BC] font-bold   text-[14px]">
+                        <p className="text-[#C2C2BC] font-bold  testimonies   text-[14px]">
                             <span className="primary-color">"</span>
                                 {children}
                             <span className="primary-color">"</span>

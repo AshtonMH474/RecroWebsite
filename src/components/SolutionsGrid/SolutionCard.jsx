@@ -6,6 +6,7 @@ import { downloadPdf } from "../utils/downlaod"
 
 function SolutionCard({card,props}){
     const isSolutionGrid = true
+    
 
     return(
         <>

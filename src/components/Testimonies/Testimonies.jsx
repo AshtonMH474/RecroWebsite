@@ -5,6 +5,7 @@ import { AnimatePresence,motion } from "framer-motion";
 import { animationVariants } from "../Leadership/LeaderAnimations";
 import TestimonyCard from "./TestimonyCard";
 import Pagination from "../Leadership/Pagination";
+import LeaderModal from "../Leadership/LeaderModal";
 
 function Testimonies(props){
 
@@ -26,6 +27,11 @@ function Testimonies(props){
     };
 
     const visableTests = tests.slice(startIndex, startIndex + visibleCount);
+
+    const [expandedCardIndex, setExpandedCardIndex] = useState(null);
+    const openCard = (index) => setExpandedCardIndex(index);
+    const closeCard = () => setExpandedCardIndex(null);
+
     return (
         <>
            <div style={{minHeight:'auto'}}
@@ -51,7 +57,7 @@ function Testimonies(props){
                             className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12">
                                 {visableTests.map((test,i) => {
                                     const actualIndex = startIndex + i
-                                    return (<TestimonyCard key={actualIndex} test={test}/>)
+                                    return (<TestimonyCard onExpand={() => openCard(i)} key={actualIndex} test={test}/>)
                                 })}
                             </motion.div>
                         </AnimatePresence>
@@ -64,6 +70,14 @@ function Testimonies(props){
                 )}
                 
            </div>
+           <AnimatePresence>
+        {expandedCardIndex !== null && (
+          <LeaderModal
+            leader={visableTests[expandedCardIndex]}
+            onClose={closeCard}
+          />
+        )}
+        </AnimatePresence>
         </>
     )
 }

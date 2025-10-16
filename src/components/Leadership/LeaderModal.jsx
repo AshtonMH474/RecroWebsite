@@ -70,7 +70,7 @@ function LeaderModal({ leader, onClose }) {
         {/* Leader Bio */}
         <div data-tina-field={tinaField(leader,'bio')} className="text-white/90 text-sm md:text-base leading-relaxed space-y-4 text-center">
           <TinaMarkdown
-            content={leader.bio}
+            content={leader.bio || leader.quote}
             components={{
               p: ({ children }) => <p className="mb-2">{children}</p>,
             }}
