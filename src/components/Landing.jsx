@@ -166,6 +166,8 @@ function Landing(props) {
     repeat: Infinity,
     ease: "easeInOut",
   }}
+  style={!props?.buttons || props?.buttons?.length == 0 ? { position: 'relative', bottom: '40px' } : undefined}
+
   className="mt-8"
 >
   <ChevronDown
