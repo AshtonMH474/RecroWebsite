@@ -148,7 +148,7 @@ body {
 .testimonies{
   max-height: 900px;                /* Limit height */
   display: -webkit-box;             /* Enable flex truncation */
-  -webkit-line-clamp: 18;            /* Approx. number of lines for 100px */
+  -webkit-line-clamp: 17;            /* Approx. number of lines for 100px */
   -webkit-box-orient: vertical;     /* Vertical layout for box */
   overflow: hidden;                 /* Hide excess */
   text-overflow: ellipsis;          /* Ellipsis style */

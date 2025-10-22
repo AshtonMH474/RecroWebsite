@@ -12,11 +12,11 @@ function TestimonyCard({test,onExpand}){
                 data-tina-field={tinaField(test,'src')}
                 src={test.src}
                 alt="Profile"
-                className="w-10 h-10 rounded-full object-cover border-2 border-gray-500"
+                className="w-15 h-15 rounded-full object-cover border-2 border-gray-500"
                 />
                 ):(
-                <div data-tina-field={tinaField(test,'src')} className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-500">
-                    <FaUser className="text-gray-600 text-2xl" />
+                <div data-tina-field={tinaField(test,'src')} className="w-15 h-15 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-500">
+                    <FaUser className="text-gray-600 text-[35px]" />
                 </div>
                 )}
                 
