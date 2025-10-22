@@ -67,7 +67,8 @@ blocks:
   - testimoniesHeading: Testimonies
     underline_width: 300
     testimonies:
-      - src: ''
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Testimonies/cameronF3.png
         name: 'Cameron F. '
         job: ''
         quote: >
@@ -100,7 +101,8 @@ blocks:
           advancement process and are constantly encouraging us to strive for
           new and better heights in our careers. Once you join the team you will
           never want to be on another team again.
-      - src: ''
+      - src: >-
+          https://recro-landing-site.s3.us-east-1.amazonaws.com/Testimonies/EmilyH.png
         name: 'Emily H. '
         job: ''
         quote: >
@@ -111,7 +113,13 @@ blocks:
           teamwork, and genuine camaraderie.\
 
           \
-           One of the most unique opportunities I’ve had here is meeting regularly with a mentor who helps me align my long-term goals with the strides I’m making today. These conversations have guided me in exploring new areas of cybersecurity and gaining insight from someone with years of valuable experience. \
+
+          One of the most unique opportunities I’ve had here is meeting
+          regularly with a mentor who helps me align my long-term goals with the
+          strides I’m making today. These conversations have guided me in
+          exploring new areas of cybersecurity and gaining insight from someone
+          with years of valuable experience. \
+
           \
 
           At Recro, I’ve been empowered to pursue professional development,
@@ -171,7 +179,10 @@ blocks:
           ready for the next challenge.\
 
           \
-           Recro isn’t just another company—it’s a place where your skills grow, your ideas matter, and your work has a real impact. That’s what makes being part of this team so rewarding.
+
+          Recro isn’t just another company—it’s a place where your skills grow,
+          your ideas matter, and your work has a real impact. That’s what makes
+          being part of this team so rewarding.
     _template: testimonies
 ---
 
