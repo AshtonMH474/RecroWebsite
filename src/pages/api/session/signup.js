@@ -12,9 +12,9 @@ export default async function handler(req, res) {
   const { email, password, firstName,lastName,organization } = req.body;
 
   // Block free email domains
-  if (isFreeEmail(email)) {
-    return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
-  }
+  // if (isFreeEmail(email)) {
+  //   return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
+  // }
   
   const client = await clientPromise;
   const db = client.db("mydb");
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
   const verificationUrl = `${process.env.NEXTAUTH_URL}/#verify?token=${verificationToken}`;
 
   await transporter.sendMail({
-    from: `"Recro" <${process.env.SMTP_FROM}>`,
+    from: `${process.env.SMTP_USER}`,
     to: email,
     subject: "Verify your email",
     html: `<p>Hi ${firstName} ${lastName},</p>
