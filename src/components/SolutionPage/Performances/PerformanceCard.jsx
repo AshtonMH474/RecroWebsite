@@ -23,7 +23,7 @@ function PerformanceCard({performance}){
       className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 cursor-pointer`}
       onClick={() => {
         if(!user) openModal("register")
-        else downloadPdf(performance,false,user)
+        else downloadPdf(performance,false,user,'performance')
         }}
     >
         <div className="flex items-center mb-3 gap-x-3">

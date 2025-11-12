@@ -14,8 +14,7 @@ function SolutionsGrid({solutionRes,...block}){
     const [rows, setRows] = useState(1);
     const [short, setShort] = useState(false);
     const [tall, setTall] = useState(false);
-    const isSolutionGrid = true
-
+    
     useEffect(() => {
       const updateRows = () => {
         const screenWidth = window.innerWidth;
