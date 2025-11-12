@@ -15,7 +15,7 @@ export default function useScrollToHash(blocks = [], idFields = [], delay = 1000
       requestAnimationFrame(() => {
         setTimeout(() => {
           const el = document.getElementById(hash);
-          
+          console.log(matchingBlock)
           
           if (el) {
           

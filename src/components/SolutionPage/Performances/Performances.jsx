@@ -33,7 +33,7 @@ const headingRef = useRef(null);
 
                 <div className="pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
                     {props?.performances?.map((performance,i) => (
-                        <PerformanceCard performance={performance.performance}  key={i}/>
+                        <PerformanceCard performance={performance.performance}  key={performance._id || performance.performance?.title || i}/>
                     ))}
                 </div>
             </div>

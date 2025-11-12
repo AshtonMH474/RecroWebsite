@@ -72,7 +72,7 @@ function Leadership(props) {
                       className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
                     >
                       {visibleCards.map((leader, i) => (
-                        <LeaderCard key={i} leader={leader} isExpanded={expandedCardIndex === i}
+                        <LeaderCard key={leader._id || leader.name || i} leader={leader} isExpanded={expandedCardIndex === i}
                         onExpand={() => openCard(i)}
                         onClose={closeCard} />
                       ))}

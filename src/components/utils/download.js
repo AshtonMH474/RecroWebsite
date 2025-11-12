@@ -16,7 +16,7 @@ export async function downloadPdf(solution,isSolutionGrid,user,type){
        try{
         await handleDownload(user,pdfUrl,type)
        }catch(e){
-        console.log(e)
+        return e;
        }
     }
 

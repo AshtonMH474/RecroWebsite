@@ -1,4 +1,4 @@
-import { downloadPdf } from "@/components/utils/downlaod";
+import { downloadPdf } from "@/components/utils/download";
 import IconRenderer from "@/components/utils/IconRenderer";
 import { useAuth } from "@/context/auth";
 import { motion,useInView } from "framer-motion";

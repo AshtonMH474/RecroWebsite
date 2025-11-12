@@ -1,8 +1,8 @@
 import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import nodemailer from "nodemailer";
 import { isFreeEmail } from 'free-email-domains-list';
+import { createMailer } from "@/lib/mailer";
 
 
 
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   }
   
   const client = await clientPromise;
-  const db = client.db("mydb");
+  const db = client.db(process.env.MONGODB_DB_NAME);
 
   const existing = await db.collection("users").findOne({ email });
   if (existing) return res.status(400).json({ error: "User already exists" ,verified:existing.verified});
@@ -40,16 +40,7 @@ export default async function handler(req, res) {
   });
 
   // Send verification email
-
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+  const transporter = createMailer();
 
   const verificationUrl = `${process.env.NEXTAUTH_URL}/#verify?token=${verificationToken}`;
  

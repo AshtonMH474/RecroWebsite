@@ -33,10 +33,10 @@ function Statements(props){
         setGearRotation((prev) => prev + rotationAmount);
     };
 
-    const visbaleStatments = statements.slice(startIndex, startIndex + visibleCount);
+    const visibleStatements = statements.slice(startIndex, startIndex + visibleCount);
 
- 
-    
+
+
     return (
         <>
             <div style={{minHeight:'100%'}}
@@ -58,7 +58,7 @@ function Statements(props){
                             exit="exit"
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                             className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12">
-                                {visbaleStatments.map((statement,i) => {
+                                {visibleStatements.map((statement,i) => {
                                     const actualIndex = startIndex + i
                                     return (<StatementCard key={actualIndex}  statement={statement} user={user}/>)
                                 })}

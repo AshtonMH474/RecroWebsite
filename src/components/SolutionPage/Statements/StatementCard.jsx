@@ -2,7 +2,7 @@ import IconRenderer from "@/components/utils/IconRenderer"
 import { useAuth } from "@/context/auth";
 import { tinaField } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
-import { downloadPdf } from "@/components/utils/downlaod";
+import { downloadPdf } from "@/components/utils/download";
 function StatementCard({statement,user}){
     const {openModal} = useAuth()
     return(

@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useCallback } from "react";
 import { IoMdClose } from "react-icons/io";
 import { motion, number } from "framer-motion";
 import { handleSignup } from "@/lib/auth_functions";
@@ -44,14 +44,14 @@ function Register({onClose}){
     };
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
-  };
+  }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     if(!allFilled){
         alert("Please Fill All the Fields")
@@ -73,7 +73,7 @@ function Register({onClose}){
         setErrors(obj)
         return
     }
-    
+
     try {
       setLoading(true); // <-- show "Sending..."
       let res = await handleSignup(formData,phone);
@@ -94,7 +94,7 @@ function Register({onClose}){
     } finally {
       setLoading(false); // <-- reset back
     }
-  }
+  }, [formData, phone, allFilled]);
 
   const handleLoginModal = async() => {
     onClose()

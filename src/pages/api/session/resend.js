@@ -1,6 +1,6 @@
 import clientPromise from "@/lib/mongodb";
 import crypto from "crypto";
-import nodemailer from "nodemailer";
+import { createMailer } from "@/lib/mailer";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (!email) return res.status(400).json({ error: "Email required" });
 
   const client = await clientPromise;
-  const db = client.db("mydb");
+  const db = client.db(process.env.MONGODB_DB_NAME);
 
   const user = await db.collection("users").findOne({ email });
   if (!user) return res.status(404).json({ error: "User not found" });
@@ -35,15 +35,7 @@ export default async function handler(req, res) {
     }
   );
 
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT),
-    secure:  process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+  const transporter = createMailer();
 
    const verificationUrl = `${process.env.NEXTAUTH_URL}/#verify?token=${verificationToken}`
   await transporter.sendMail({

@@ -39,7 +39,7 @@ function PerformanceGrid({performanceRes,...block}){
             </div>
             <div className="pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12 max-w-[1500px] mx-auto">
                 {performances?.map((performance,i) => (
-                    <PerformanceCard performance={performance} key={i} onExpand={() => openCard(i)}/>
+                    <PerformanceCard performance={performance} key={performance._id || performance.title || i} onExpand={() => openCard(i)}/>
                 ))}
             </div>
         </div>

@@ -1,6 +1,6 @@
-import nodemailer from "nodemailer";
 import clientPromise from "@/lib/mongodb";
 import { isFreeEmail } from "free-email-domains-list";
+import { createMailer, createCareerMailer } from "@/lib/mailer";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -20,15 +20,7 @@ export default async function handler(req, res) {
   
   try {
     // 1️⃣ Setup email transport
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: organization ? process.env.SMTP_USER : process.env.SMTP_CAREER_HOST,
-        pass: organization ? process.env.SMTP_PASS : process.env.SMTP_CAREER_PASS,
-      },
-    });
+    const transporter = organization ? createMailer() : createCareerMailer();
 
     // 2️⃣ Prepare email
     const mailOptions = {
@@ -46,7 +38,7 @@ export default async function handler(req, res) {
 
     // 4️⃣ Save to MongoDB (via clientPromise)
     const client = await clientPromise;
-    const db = client.db("mydb"); // 👈 replace with your actual DB name
+    const db = client.db(process.env.MONGODB_DB_NAME);
     const collectionName = organization ? "messages" : "careers";
 
     const doc = {
