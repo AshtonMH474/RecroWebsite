@@ -50,7 +50,7 @@ function Register({onClose}){
       [e.target.name]: e.target.value,
     }));
   }, []);
-
+  const allFilled = Object.values(formData).every((val) => val.trim() !== "");
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     if(!allFilled){
@@ -100,7 +100,7 @@ function Register({onClose}){
     onClose()
     openModal("login")
   }
-  const allFilled = Object.values(formData).every((val) => val.trim() !== "");
+  
 
     return(
         <div
