@@ -1,6 +1,6 @@
 import { tinaField } from "tinacms/dist/react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, memo } from "react";
 import PerformanceCard from "../SolutionPage/Performances/PerformanceCard";
 import PdfModal from "../SolutionsGrid/SolutionModal";
 
@@ -55,4 +55,4 @@ function PerformanceGrid({performanceRes,...block}){
     )
 }
 
-export default PerformanceGrid
+export default memo(PerformanceGrid)

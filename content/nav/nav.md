@@ -1,7 +1,8 @@
 ---
 animation: expertise
 logo: 'https://recro-landing-site.s3.us-east-1.amazonaws.com/officalDarkLogo.png'
-height: 40
+height: 45
+width: 150
 authLabelLogin: Login
 authLabelSignout: Logout
 authStyle: button

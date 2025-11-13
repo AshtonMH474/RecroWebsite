@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, memo } from 'react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import { tinaField } from 'tinacms/dist/react'
 import { motion } from "framer-motion";
@@ -192,4 +192,5 @@ function Landing(props) {
   )
 }
 
-export default Landing
+// Memoize to prevent re-renders when parent updates but props don't change
+export default memo(Landing)

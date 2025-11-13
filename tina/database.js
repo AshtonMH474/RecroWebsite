@@ -7,19 +7,33 @@ import path from "path";
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
+// Cache certificate file paths to avoid repeated writes
+let cachedMongoUrl = null;
+
 function buildMongoUrl() {
+  // Return cached URL if already built
+  if (cachedMongoUrl) {
+    return cachedMongoUrl;
+  }
+
   const tmpDir = os.tmpdir();
-  const caPath = path.join(tmpDir, "ca.pem");
-  const keyPath = path.join(tmpDir, "mongo.pem");
+  const caPath = path.join(tmpDir, "tina-ca.pem");
+  const keyPath = path.join(tmpDir, "tina-mongo.pem");
 
-  // Decode base64 environment variables into temp files
-  const ca = Buffer.from(process.env.MONGODB_CA_B64, "base64").toString("utf-8");
-  fs.writeFileSync(caPath, ca);
+  // Only write files if they don't exist (check before decode to save CPU)
+  if (!fs.existsSync(caPath)) {
+    const ca = Buffer.from(process.env.MONGODB_CA_B64, "base64").toString("utf-8");
+    fs.writeFileSync(caPath, ca, { mode: 0o600 }); // Secure file permissions
+  }
 
-  const key = Buffer.from(process.env.MONGODB_KEY_B64, "base64").toString("utf-8");
-  fs.writeFileSync(keyPath, key);
+  if (!fs.existsSync(keyPath)) {
+    const key = Buffer.from(process.env.MONGODB_KEY_B64, "base64").toString("utf-8");
+    fs.writeFileSync(keyPath, key, { mode: 0o600 }); // Secure file permissions
+  }
 
-  return `${process.env.MONGODB_URI}&tls=true&tlsCAFile=${caPath}&tlsCertificateKeyFile=${keyPath}`;
+  // Build and cache the URL
+  cachedMongoUrl = `${process.env.MONGODB_URI}&tls=true&tlsCAFile=${caPath}&tlsCertificateKeyFile=${keyPath}`;
+  return cachedMongoUrl;
 }
 
 const tinaMongoUrl = buildMongoUrl();

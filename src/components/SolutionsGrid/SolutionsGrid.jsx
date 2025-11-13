@@ -3,7 +3,7 @@
 
 import { tinaField } from "tinacms/dist/react"
 import SolutionCard from "./SolutionCard"
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { useScroll,motion, useTransform, AnimatePresence } from "framer-motion";
 import PdfModal from "./SolutionModal";
 
@@ -90,4 +90,4 @@ function SolutionsGrid({solutionRes,...block}){
     )
 }
 
-export default SolutionsGrid
+export default memo(SolutionsGrid)
