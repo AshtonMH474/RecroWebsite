@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {  useState, memo } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { tinaField } from "tinacms/dist/react";
 import LeaderCard from "./LeaderCard";
@@ -103,4 +103,5 @@ function Leadership(props) {
   );
 }
 
-export default Leadership;
+// Memoize to prevent re-renders when parent updates but props don't change
+export default memo(Leadership);

@@ -16,6 +16,11 @@ const nav = {
       type:'number',
     },
     {
+      name:'width',
+      label:'Logo Width(px)',
+      type:'number',
+    },
+    {
       name:'authLabelLogin',
       label:'Login Label',
       type:'string'

@@ -8,6 +8,18 @@ const nextConfig = {
         return config;
     },
   reactStrictMode: true,
+    // Enable gzip compression for all responses
+    compress: true,
+    // Image optimization configuration
+    images: {
+      formats: ['image/webp', 'image/avif'],
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: '**.amazonaws.com', // For S3 images
+        },
+      ],
+    },
   async rewrites(){
         return [
             {

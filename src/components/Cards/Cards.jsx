@@ -1,6 +1,6 @@
 
 
-import {  useRef, useState, useEffect } from "react";
+import {  useRef, useState, useEffect, memo } from "react";
 import { useScroll, useTransform, motion, AnimatePresence } from "framer-motion";
 import Card from "./Card";
 import { tinaField } from "tinacms/dist/react";
@@ -130,7 +130,8 @@ useEffect(() => {
   );
 };
 
-export default Cards;
+// Memoize to prevent re-renders when parent updates but props don't change
+export default memo(Cards);
 
 
 

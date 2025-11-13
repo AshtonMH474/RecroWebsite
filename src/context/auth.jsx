@@ -14,13 +14,30 @@ export function AuthProvider({ children }) {
   const [modalData, setModalData] = useState(null);
 
 
-const refreshUser = useCallback(() => {
-    checkUser(setUser);
+const refreshUser = useCallback((forceRefresh = false) => {
+    checkUser(setUser, forceRefresh);
   }, []);
 
   // Run once on mount
   useEffect(() => {
     refreshUser();
+  }, [refreshUser]);
+
+  // Revalidate auth when user returns to tab (after 30 seconds away)
+  useEffect(() => {
+    let lastCheck = Date.now();
+
+    const handleFocus = () => {
+      const timeSinceLastCheck = Date.now() - lastCheck;
+      // Only revalidate if been away for > 30 seconds
+      if (timeSinceLastCheck > 30000) {
+        refreshUser(true); // Force refresh from server
+        lastCheck = Date.now();
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
   }, [refreshUser]);
 
   const openModal = (type, data = null) => {

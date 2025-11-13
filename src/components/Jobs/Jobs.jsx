@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import Pagination from "../Leadership/Pagination";
 import JobCard from "./JobCard";
 import { tinaField } from "tinacms/dist/react";
@@ -130,4 +130,5 @@ function Jobs(props){
 }
 
 
-export default Jobs
+// Memoize to prevent re-renders when parent updates but props don't change
+export default memo(Jobs)
