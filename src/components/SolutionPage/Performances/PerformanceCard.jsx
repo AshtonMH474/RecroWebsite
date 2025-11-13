@@ -1,4 +1,4 @@
-import { downloadPdf } from "@/components/utils/downlaod";
+import { downloadPdf } from "@/components/utils/download";
 import IconRenderer from "@/components/utils/IconRenderer";
 import { useAuth } from "@/context/auth";
 import { motion,useInView } from "framer-motion";
@@ -23,7 +23,7 @@ function PerformanceCard({performance}){
       className={`border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 cursor-pointer`}
       onClick={() => {
         if(!user) openModal("register")
-        else downloadPdf(performance,false,user)
+        else downloadPdf(performance,false,user,'performance')
         }}
     >
         <div className="flex items-center mb-3 gap-x-3">

@@ -1,23 +1,24 @@
 import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import nodemailer from "nodemailer";
 import { isFreeEmail } from 'free-email-domains-list';
+import { createMailer } from "@/lib/mailer";
 
 
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
-  const { email, password, firstName,lastName,organization } = req.body;
+  const { email, password, firstName,lastName,organization,phone } = req.body;
+ 
 
   // Block free email domains
-  // if (isFreeEmail(email)) {
-  //   return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
-  // }
+  if (isFreeEmail(email)) {
+    return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
+  }
   
   const client = await clientPromise;
-  const db = client.db("mydb");
+  const db = client.db(process.env.MONGODB_DB_NAME);
 
   const existing = await db.collection("users").findOne({ email });
   if (existing) return res.status(400).json({ error: "User already exists" ,verified:existing.verified});
@@ -31,6 +32,7 @@ export default async function handler(req, res) {
     firstName,
     lastName,
     organization,
+    phone,
     verified: false,
     verificationToken,
     verificationExpires: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes in ms
@@ -38,22 +40,12 @@ export default async function handler(req, res) {
   });
 
   // Send verification email
+  const transporter = createMailer();
 
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT),
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-
-  // const verificationUrl = `${process.env.NEXTAUTH_URL}/api/session/verify?token=${verificationToken}`;
   const verificationUrl = `${process.env.NEXTAUTH_URL}/#verify?token=${verificationToken}`;
-
+ 
   await transporter.sendMail({
-    from: `${process.env.SMTP_USER}`,
+    from: `Recro: Verify Email <${process.env.SMTP_USER}>`,
     to: email,
     subject: "Verify your email",
     html: `<p>Hi ${firstName} ${lastName},</p>

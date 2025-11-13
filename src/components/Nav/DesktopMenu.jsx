@@ -1,5 +1,4 @@
 
-
 import { useState, useRef } from "react";
 import { tinaField } from "tinacms/dist/react";
 import Link from "next/link";
@@ -88,7 +87,7 @@ export default function DesktopMenu({ links, res, user }) {
                                 window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions.id}`;
                               } else {
                                 const el = document.getElementById(sublink.linkOptions?.id);
-                                el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions?.scrollPosition || "start" });
+                                el?.scrollIntoView({ behavior: "smooth", block: sublink.linkOptions?.scrollPosition || "start" });
                               }
                             }
                           }}

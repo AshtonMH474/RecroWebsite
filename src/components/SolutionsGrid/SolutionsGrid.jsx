@@ -14,8 +14,7 @@ function SolutionsGrid({solutionRes,...block}){
     const [rows, setRows] = useState(1);
     const [short, setShort] = useState(false);
     const [tall, setTall] = useState(false);
-    const isSolutionGrid = true
-
+    
     useEffect(() => {
       const updateRows = () => {
         const screenWidth = window.innerWidth;
@@ -80,7 +79,7 @@ function SolutionsGrid({solutionRes,...block}){
                         />
                         <motion.div style={{ opacity: cardsOpacity, scale: cardsScale }} className=" contain-paint contain-layout will-change-transform transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
                             {solutions.map((card,i) => (
-                                <SolutionCard card={card}  key={i} props={block} />
+                                <SolutionCard card={card}  key={card._id || card.title || i} props={block} />
                             ))}
                         </motion.div>
                 </div>

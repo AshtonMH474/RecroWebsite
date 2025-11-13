@@ -107,7 +107,7 @@ useEffect(() => {
           >
             {expertiseItems.map((ex, i) => (
               <Card
-                key={i}
+                key={ex._id || ex.title || i}
                 ex={ex}
                 isExpanded={expandedCardIndex === i}
                 onExpand={() => openCard(i)}

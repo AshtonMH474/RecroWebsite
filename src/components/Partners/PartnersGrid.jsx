@@ -31,7 +31,7 @@ function PartnersGrid({partnersRes,...block}){
 
                             return (
                                 <Wrapper
-                                key={i}
+                                key={partner._id || partner.title || i}
                                 className="flex-1 min-w-[250px] sm:basis-[45%] lg:basis-[30%] max-w-[300px]"
                                 {...(partner.link ? { href: partner.link, target: "_blank" } : {})}
                                 >

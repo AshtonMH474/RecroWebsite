@@ -2,12 +2,10 @@ import Link from "next/link"
 import IconRenderer from "../utils/IconRenderer"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 import { tinaField } from "tinacms/dist/react"
-import { downloadPdf } from "../utils/downlaod"
+import { downloadPdf } from "../utils/download"
 
 function SolutionCard({card,props}){
     const isSolutionGrid = true
-    
-
     return(
         <>
             

@@ -30,6 +30,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-intersection-observer": "^9.16.0",
+    "react-phone-number-input": "^3.4.13",
     "tinacms": "^2.7.7",
     "tinacms-gitprovider-github": "^2.0.17"
   },

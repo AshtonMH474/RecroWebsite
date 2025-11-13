@@ -6,28 +6,71 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email, pdfUrl } = req.body;
+    const { email, pdfUrl, type } = req.body;
 
-    if (!email || !pdfUrl) {
-      return res.status(400).json({ error: "Missing email or pdfUrl" });
+    if (!email || !pdfUrl || !type ) {
+      return res
+        .status(400)
+        .json({ error: "Missing email, pdfUrl, or type" });
+    }
+    
+    const client = await clientPromise;
+    const db = client.db(process.env.MONGODB_DB_NAME);
+
+    // Ensure index exists for efficient queries (idempotent - won't error if already exists)
+    try {
+      await db.collection("downloads").createIndex(
+        { userId: 1, relativePath: 1 },
+        { unique: true, name: "userId_relativePath_idx" }
+      );
+    } catch (error) {
+      // Index might already exist, ignore error
+      if (error.code !== 85 && error.code !== 86) {
+        // 85 = IndexOptionsConflict, 86 = IndexKeySpecsConflict (index already exists with different options)
+        console.warn("Index creation warning:", error.message);
+      }
     }
 
-    // 👉 Example: log it (replace with DB save if needed)
-    console.log(`Download tracked: ${email} downloaded ${pdfUrl}`);
-    const client = await clientPromise
-    const db = client.db("mydb")
+    // Verify user exists
     const mongoUser = await db.collection("users").findOne({ email });
-    if(!mongoUser) return res.status(401).json({error:'No User Here'})
-    
-    
-     await db.collection("downloads").insertOne({
-      userId: mongoUser._id, 
+    if (!mongoUser) {
+      return res.status(401).json({ error: "No user found" });
+    }
+
+    // Check if user already downloaded this file
+    const existingDownload = await db.collection("downloads").findOne({
+      userId: mongoUser._id,
+      pdfUrl,
+    });
+
+    if (existingDownload) {
+      // Update the existing record's timestamp
+      await db.collection("downloads").updateOne(
+        { _id: existingDownload._id },
+        {
+          $set: {
+            downloadedAt: new Date(),
+          },
+        }
+      );
+
+      return res
+        .status(201)
+        .json({ success: true, message: "Download timestamp updated" });
+    }
+
+    // Otherwise, insert a new download record
+    await db.collection("downloads").insertOne({
+      userId: mongoUser._id,
       email,
       pdfUrl,
+      type,
       downloadedAt: new Date(),
     });
 
-    return res.status(200).json({ success: true, message: "Download tracked" });
+    return res
+      .status(200)
+      .json({ success: true, message: "Download tracked successfully" });
   } catch (error) {
     console.error("Error tracking download:", error);
     return res.status(500).json({ error: "Internal Server Error" });

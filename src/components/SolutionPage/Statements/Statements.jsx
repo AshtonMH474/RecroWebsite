@@ -9,7 +9,6 @@ import { animationVariants } from "@/components/Leadership/LeaderAnimations";
 
 import { useAuth } from "@/context/auth";
 
-import PdfModal from "@/components/SolutionsGrid/SolutionModal";
 
 
 function Statements(props){
@@ -34,13 +33,13 @@ function Statements(props){
         setGearRotation((prev) => prev + rotationAmount);
     };
 
-    const visbaleStatments = statements.slice(startIndex, startIndex + visibleCount);
+    const visibleStatements = statements.slice(startIndex, startIndex + visibleCount);
 
- 
-    
+
+
     return (
         <>
-            <div style={{minHeight:''}}
+            <div style={{minHeight:'100%'}}
             className="relative bg-black overflow-hidden w-full pb-24">
                 <div className="flex flex-col items-center mt-32 pb-12">
                     {props.statement_heading && (<h2 data-tina-field={tinaField(props,'statement_heading')} className="font-bold text-[32px] md:text-[40px] text-white">{props.statement_heading}</h2>)}
@@ -59,7 +58,7 @@ function Statements(props){
                             exit="exit"
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                             className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12">
-                                {visbaleStatments.map((statement,i) => {
+                                {visibleStatements.map((statement,i) => {
                                     const actualIndex = startIndex + i
                                     return (<StatementCard key={actualIndex}  statement={statement} user={user}/>)
                                 })}
