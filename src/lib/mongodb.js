@@ -1,27 +1,21 @@
 import { MongoClient } from "mongodb";
-import fs from "fs";
-import os from "os";
-import path from "path";
 
 const uri = process.env.MONGODB_URI;
 
+// Build MongoDB connection options with inline certificates (no file I/O!)
 function buildOptions() {
-  const tmpDir = os.tmpdir(); // cross-platform temp directory
-  const caPath = path.join(tmpDir, "ca.pem");
-  const keyPath = path.join(tmpDir, "mongo.pem");
-
-
-  // Write decoded files to temp
+  // Decode base64 certificates once at module load
   const ca = Buffer.from(process.env.MONGODB_CA_B64, "base64").toString("utf-8");
-  fs.writeFileSync(caPath, ca);
-
   const key = Buffer.from(process.env.MONGODB_KEY_B64, "base64").toString("utf-8");
-  fs.writeFileSync(keyPath, key);
 
   return {
     tls: true,
-    tlsCAFile: caPath,
-    tlsCertificateKeyFile: keyPath,
+    // Pass certificate content directly as strings - no file writes needed!
+    tlsCAFile: undefined, // Clear file-based option
+    tlsCertificateKeyFile: undefined, // Clear file-based option
+    ca: [ca], // Inline CA certificate
+    cert: key, // Inline client certificate + key
+    key: key, // Inline client key
   };
 }
 
