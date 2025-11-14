@@ -23,7 +23,7 @@ blocks:
     _template: landing2
   - cards_heading: Our Benefits
     cards_id: benefits_section
-    scroll: center
+    scroll: start
     underline_width: 300
     cards:
       - title: AMAZING 401K
