@@ -8,7 +8,7 @@ blocks:
       ### Recro is always seeking passionate individuals to join our team. If
       you're ready to challenge the status quo and make an impact, apply today!
     arrow: true
-    isSection: true
+    isSection: false
     buttons:
       - link: /careers#jobs_section
         label: View Open Positions
