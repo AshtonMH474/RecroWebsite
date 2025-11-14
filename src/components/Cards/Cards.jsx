@@ -21,7 +21,7 @@ function Cards(props) {
 
   // Track scroll progress and heading state
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [headingReachedTop, setHeadingReachedTop] = useState(false);
+  
   const [shouldShowHeading, setShouldShowHeading] = useState(false);
   const cardsRef = useRef(null);
   const headingRef = useRef(null);
@@ -52,9 +52,6 @@ function Cards(props) {
     setTall(isTall);
 
     const rowHeightPx = 0.5 * screenHeight;
-    const headingHeightPx = 0.5 * screenHeight;
-    // Add extra scroll space after cards finish animating
-    const extraScrollSpace = 0.4 * screenHeight; // Extra space to view finished cards
 
     // Calculate total height: rows + heading + extra space, double for short screens
     const calculatedHeight = ((rows * rowHeightPx) * (isShort ? 2 : 1));
@@ -75,7 +72,6 @@ function Cards(props) {
 
       // Check if heading has reached the top (sticky position)
       const headingAtTop = stickyRect.top <= stickyTop + 10;
-      setHeadingReachedTop(headingAtTop);
 
       // Check if section has scrolled past previous content (with earlier trigger)
       // Trigger a bit before section top reaches viewport top
