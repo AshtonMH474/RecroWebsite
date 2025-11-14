@@ -24,141 +24,72 @@ function Cards(props) {
   const cardsRef = useRef(null);
 
 
-  // Initial layout setup only (no resize listener)
-useEffect(() => {
-  const updateRows = () => {
-    const screenWidth = window.innerWidth;
+  // Calculate rows based on screen width
+  useEffect(() => {
+    const updateRows = () => {
+      const screenWidth = window.innerWidth;
+      const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
+      const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
+      setRows(newRows);
+    };
 
-    const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
-    const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
+    updateRows();
+    window.addEventListener("resize", updateRows);
+    return () => window.removeEventListener("resize", updateRows);
+  }, [expertiseItems.length]);
 
-    setRows(newRows);
-  };
+  // Calculate section height based on rows and screen height
+  useEffect(() => {
+    const screenHeight = window.innerHeight;
+    const isShort = screenHeight <= 600;
+    const isTall = screenHeight >= 1000;
 
-  updateRows(); // Initial
-  window.addEventListener("resize", updateRows);
+    setShort(isShort);
+    setTall(isTall);
 
-  return () => window.removeEventListener("resize", updateRows);
-}, [expertiseItems.length]);
+    const rowHeightPx = 0.8 * screenHeight;
+    const headingHeightPx = 0.5 * screenHeight;
 
-// 2️⃣ When rows change, recalculate section height and flags
-useEffect(() => {
-  const screenHeight = window.innerHeight;
+    // Calculate total height: rows + heading, double for short screens
+    const calculatedHeight = (rows * rowHeightPx + headingHeightPx) * (isShort ? 2 : 1);
+    setSectionHeight(calculatedHeight);
+  }, [rows]);
 
-  const isShort = screenHeight <= 600;
-  const isTall = screenHeight >= 1000;
+  // Simple scroll-based animation
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
 
-  setShort(isShort);
-  setTall(isTall);
+      const section = sectionRef.current;
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
+      // Animation start: when section enters bottom of viewport
+      const animationStart = windowHeight;
 
-  const rowHeightPx = 0.8 * screenHeight;
-  const headingHeightPx = 0.5 * screenHeight;
+      // Animation end: when section is 40% up the viewport (ensures cards reach full size before section ends)
+      const animationEnd = windowHeight * 0.4;
 
-  const calculatedHeight =
-    (rows * rowHeightPx + headingHeightPx) *
-    (isShort ? 2 : 1) ;
+      // Calculate how far section top has traveled from start to end
+      const scrolled = animationStart - rect.top;
+      const scrollRange = animationStart - animationEnd;
 
-  setSectionHeight(calculatedHeight);
-}, [rows]);
+      // Progress from 0 to 1
+      let progress = scrolled / scrollRange;
+      progress = Math.max(0, Math.min(1, progress));
 
-// Track scroll position to animate cards growing as you scroll
-useEffect(() => {
-  const handleScroll = () => {
-    if (!sectionRef.current) return;
+      setScrollProgress(progress);
+    };
 
-    const section = sectionRef.current;
-    const rect = section.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const sectionTop = rect.top;
-    const screenWidth = window.innerWidth;
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    // SMART CALCULATION: Determine cards per row based on breakpoints
-    const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
-    // 1 card/row (mobile) = slowest, 2 cards/row (tablet) = medium, 3 cards/row (desktop) = fastest
-
-    // SMART CALCULATION: Continuously scale animation based on screen height
-    // Shorter screens = longer animations to prevent jarring effect
-    // This creates a smooth curve instead of fixed thresholds
-
-    // Base multiplier calculation: smaller height = larger multiplier
-    // 1000px height → 1.0x (baseline)
-    // 800px height  → 1.25x (+25% longer)
-    // 700px height  → 1.43x (+43% longer)
-    // 600px height  → 1.67x (+67% longer)
-    // 500px height  → 2.0x  (+100% longer, twice as long!)
-    const heightMultiplier = Math.max(1.0, 1000 / windowHeight);
-    // Formula: 1000 / windowHeight ensures proportional scaling
-
-    // EXPLANATION: scrollStart = when animation begins
-    // Single column (mobile) starts later to give user time to see the section
-    const scrollStart = cardsPerRow === 1
-      ? windowHeight * 0.7  // Mobile: starts when section is 70% down viewport
-      : cardsPerRow === 2
-      ? windowHeight * 0.6  // Tablet: starts when section is 60% down
-      : windowHeight * 0.5; // Desktop: starts when section is 50% down
-
-    // SMART CALCULATION: scrollRange based on cards per row + screen height
-    // Base range proportional to section height, then adjusted by cards/row and screen height
-    const baseRange = sectionHeight * 0.5; // Start with 50% of section height
-
-    // More cards per row = faster animation (less range needed)
-    // Fewer cards per row = slower animation (more range needed)
-    const cardsMultiplier = cardsPerRow === 1 ? 1.4 : cardsPerRow === 2 ? 0.5 : 0.2;
-    // Mobile (1 card): 80% longer | Tablet (2 cards): 40% longer | Desktop (3 cards): baseline
-
-    const scrollRange = baseRange * cardsMultiplier * heightMultiplier;
-    // RESULT: Mobile on short screen = 2.52x longer than desktop on tall screen!
-
-    let progress = 0;
-    if (sectionTop < scrollStart) {
-      // Calculate progress from 0 (not started) to 1 (fully animated)
-      progress = Math.min(1, (scrollStart - sectionTop) / scrollRange);
-    }
-
-    setScrollProgress(progress);
-  };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
-
-  return () => window.removeEventListener('scroll', handleScroll);
-}, [sectionHeight]); // Re-run when section height changes
-  
-  // Calculate styles based on scroll progress (0 to 1)
-  // EXPLANATION: These convert scrollProgress into visual properties
-
-  // Get screen dimensions for adaptive scaling
-  const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
-  const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 1080;
-  const isMobileView = screenWidth < 640;
-
-  // Heading fades in gradually - matches card timing now
-  const headingOpacity = Math.min(1, scrollProgress * 1.8);
-
-  // SMART SCALING: Compensate for longer scroll ranges on shorter screens
-  // Since shorter screens have longer scroll ranges (via heightMultiplier),
-  // we need cards to scale FASTER to reach full size before scroll ends
-  // This ensures perfect timing: longer scroll + faster scaling = full size at ~80% progress
-
-  let scaleMultiplier;
-  if (isMobileView) {
-    // Mobile: Scale speed directly proportional to scroll range extension
-    // This compensates for the heightMultiplier effect on scroll range
-    // 1000px height → 1.0x (baseline, reach full at 100%)
-    // 800px height  → 1.25x (faster, reach full at 80%)
-    // 600px height  → 1.67x (much faster, reach full at 60%)
-    // 400px height  → 2.0x (very fast, reach full at 50%)
-    scaleMultiplier = Math.max(2.5, Math.min(3.0, 1000 / screenHeight));
-  } else {
-    // Desktop: Normal speed
-    scaleMultiplier = 1.0;
-  }
-
-  const cardsScale = Math.max(0.2, Math.min(1, scrollProgress * scaleMultiplier));
-
-  // Cards fade in slightly faster than they scale
-  const cardsOpacity = Math.min(1, scrollProgress * 2.5);
+  // Convert scroll progress to visual properties
+  const headingOpacity = Math.min(1, scrollProgress * 1.5);
+  const cardsScale = 0.3 + (scrollProgress * 0.7); // Scale from 0.3 to 1.0
+  const cardsOpacity = Math.min(1, scrollProgress * 1.3);
 
   return (
     <>
