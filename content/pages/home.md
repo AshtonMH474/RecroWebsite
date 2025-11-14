@@ -9,7 +9,7 @@ blocks:
       discuss how we can help grow your career.
     width: 45
     arrow: true
-    isSection: true
+    isSection: false
     buttons:
       - link: /signup
         label: Register
