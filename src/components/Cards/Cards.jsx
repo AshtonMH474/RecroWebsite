@@ -115,7 +115,7 @@ useEffect(() => {
   handleScroll();
 
   return () => window.removeEventListener('scroll', handleScroll);
-}, [sectionHeight]); // Re-run when section height changes
+}, []); // Re-run when section height changes
   
   // Calculate styles based on scroll progress (0 to 1)
   // EXPLANATION: These convert scrollProgress into visual properties
