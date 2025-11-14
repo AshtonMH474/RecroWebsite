@@ -20,7 +20,7 @@ blocks:
       mission-driven solutions across cloud, edge, and classified environments.
     width: 65
     arrow: true
-    isSection: true
+    isSection: false
     _template: landing
   - solutions_heading: Centers of Excellence
     link_heading: Learn More
