@@ -47,7 +47,7 @@ function Cards(props) {
     setShort(isShort);
     setTall(isTall);
 
-    const rowHeightPx = 0.8 * screenHeight;
+    const rowHeightPx = 0.5 * screenHeight;
     const headingHeightPx = 0.5 * screenHeight;
 
     // Calculate total height: rows + heading, double for short screens
@@ -68,7 +68,7 @@ function Cards(props) {
       const animationStart = windowHeight;
 
       // Animation end: when section is 40% up the viewport (ensures cards reach full size before section ends)
-      const animationEnd = windowHeight * 0.4;
+      const animationEnd = windowHeight * 0.2;
 
       // Calculate how far section top has traveled from start to end
       const scrolled = animationStart - rect.top;
@@ -76,7 +76,7 @@ function Cards(props) {
 
       // Progress from 0 to 1
       let progress = scrolled / scrollRange;
-      progress = Math.max(0, Math.min(1, progress));
+      progress = Math.max(0.2, Math.min(1, progress));
 
       setScrollProgress(progress);
     };
@@ -87,7 +87,7 @@ function Cards(props) {
   }, []);
 
   // Convert scroll progress to visual properties
-  const headingOpacity = Math.min(1, scrollProgress * 1.5);
+  const headingOpacity = Math.min(1, scrollProgress * 0.8);
   const cardsScale = 0.3 + (scrollProgress * 0.7); // Scale from 0.3 to 1.0
   const cardsOpacity = Math.min(1, scrollProgress * 1.3);
 
