@@ -56,7 +56,8 @@ useEffect(() => {
   const headingHeightPx = 0.5 * screenHeight;
 
   const calculatedHeight =
-    (rows * rowHeightPx + headingHeightPx);
+    (rows * rowHeightPx + headingHeightPx) *
+    (isShort ? 2 : 1) ;
 
   setSectionHeight(calculatedHeight);
 }, [rows]);
@@ -69,15 +70,11 @@ useEffect(() => {
     const section = sectionRef.current;
     const rect = section.getBoundingClientRect();
     const windowHeight = window.innerHeight;
-
-    // Calculate how much of the section is visible (0 to 1)
-    // Cards appear when section enters viewport and grow as you scroll down
     const sectionTop = rect.top;
-    
-
-    // Start animation when section is in middle of viewport
-    const scrollStart = windowHeight * 0.5;
-    const scrollRange = windowHeight * 0.8;
+    const isMobile = window.innerWidth < 640;
+    // Make scroll range proportional to section height
+    const scrollStart = isMobile ? windowHeight * 3 : windowHeight * 0.5;
+    const scrollRange = isMobile ? sectionHeight  * 0.8: sectionHeight * 0.4; // Use 40% of section height instead of fixed 80vh
 
     let progress = 0;
     if (sectionTop < scrollStart) {
@@ -87,12 +84,11 @@ useEffect(() => {
     setScrollProgress(progress);
   };
 
-  // Use passive listener for better performance
   window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll(); // Initial check
+  handleScroll();
 
   return () => window.removeEventListener('scroll', handleScroll);
-}, []);
+}, [sectionHeight]); // Add sectionHeight as dependency
   
   // Calculate styles based on scroll progress
   const headingOpacity = Math.min(1, scrollProgress * 2); // Fade in quickly
