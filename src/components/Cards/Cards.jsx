@@ -200,7 +200,7 @@ function Cards(props) {
         id={props.cards_id}
         ref={sectionRef}
         style={{ height: `${sectionHeight}px` }}
-        className="scrollCenter relative pb-16"
+        className="scrollCenter relative pb-16 mb-50"
       >
         <div
           ref={stickyContainerRef}
@@ -267,9 +267,6 @@ function Cards(props) {
 
 // Memoize to prevent re-renders when parent updates but props don't change
 export default memo(Cards);
-
-
-
 
 
 
