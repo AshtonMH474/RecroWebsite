@@ -68,7 +68,7 @@ function Cards(props) {
       const animationStart = windowHeight;
 
       // Animation end: when section is 40% up the viewport (ensures cards reach full size before section ends)
-      const animationEnd = windowHeight * 0.2;
+      const animationEnd = windowHeight * 0.1;
 
       // Calculate how far section top has traveled from start to end
       const scrolled = animationStart - rect.top;
@@ -76,7 +76,8 @@ function Cards(props) {
 
       // Progress from 0 to 1
       let progress = scrolled / scrollRange;
-      progress = Math.max(0.2, Math.min(1, progress));
+      // Clamp progress, but allow it to be 0 if section hasn't reached animation start
+      progress = Math.max(0, Math.min(1, progress));
 
       setScrollProgress(progress);
     };
@@ -87,9 +88,12 @@ function Cards(props) {
   }, []);
 
   // Convert scroll progress to visual properties
-  const headingOpacity = Math.min(1, scrollProgress * 0.8);
-  const cardsScale = 0.3 + (scrollProgress * 0.7); // Scale from 0.3 to 1.0
+  // Use scaleProgress (min 0.2) for scale to ensure cards start at minimum size
+  const scaleProgress = Math.max(0.2, scrollProgress);
+  const cardsScale = 0.3 + (scaleProgress * 0.7); // Scale from 0.3 to 1.0
+  // Use scrollProgress (can be 0) for opacity so heading/cards start invisible
   const cardsOpacity = Math.min(1, scrollProgress * 1.3);
+  const headingOpacity = cardsOpacity; // Heading fades in with cards
 
   return (
     <>
