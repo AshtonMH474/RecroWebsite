@@ -1,14 +1,13 @@
 
 
 import {  useRef, useState, useEffect, memo } from "react";
-import { useScroll, useTransform, motion, AnimatePresence } from "framer-motion";
 import Card from "./Card";
 import { tinaField } from "tinacms/dist/react";
 import CardModal from "./CardModal";
 
 
 function Cards(props) {
-  
+
   const expertiseItems = props.cards || [];
   const sectionRef = useRef(null);
   const [sectionHeight, setSectionHeight] = useState(0);
@@ -19,6 +18,10 @@ function Cards(props) {
   const [expandedCardIndex, setExpandedCardIndex] = useState(null);
   const openCard = (index) => setExpandedCardIndex(index);
   const closeCard = () => setExpandedCardIndex(null);
+
+  // Track scroll progress for smooth scale animation
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const cardsRef = useRef(null);
 
 
   // Initial layout setup only (no resize listener)
@@ -49,27 +52,53 @@ useEffect(() => {
   setTall(isTall);
 
 
-  const rowHeightPx = 0.8 * screenHeight;
-  const headingHeightPx = 0.8 * screenHeight;
+  const rowHeightPx = 0.5 * screenHeight;
+  const headingHeightPx = 0.5 * screenHeight;
 
   const calculatedHeight =
-    (rows * rowHeightPx + headingHeightPx) *
-    (isShort ? 2 : 1) ;
+    (rows * rowHeightPx + headingHeightPx);
 
   setSectionHeight(calculatedHeight);
 }, [rows]);
 
+// Track scroll position to animate cards growing as you scroll
+useEffect(() => {
+  const handleScroll = () => {
+    if (!sectionRef.current) return;
 
+    const section = sectionRef.current;
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
+    // Calculate how much of the section is visible (0 to 1)
+    // Cards appear when section enters viewport and grow as you scroll down
+    const sectionTop = rect.top;
+    
 
-  const headingOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const cardsOpacity = useTransform(scrollYProgress, [0.02, 0.3], [0, 1], { clamp: true });
-  const cardsScale = useTransform(scrollYProgress, [0.02, 0.5], [0.1, 1], { clamp: true });
+    // Start animation when section is in middle of viewport
+    const scrollStart = windowHeight * 0.5;
+    const scrollRange = windowHeight * 0.8;
+
+    let progress = 0;
+    if (sectionTop < scrollStart) {
+      progress = Math.min(1, (scrollStart - sectionTop) / scrollRange);
+    }
+
+    setScrollProgress(progress);
+  };
+
+  // Use passive listener for better performance
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Initial check
+
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
   
+  // Calculate styles based on scroll progress
+  const headingOpacity = Math.min(1, scrollProgress * 2); // Fade in quickly
+  const cardsScale = Math.max(0.2, Math.min(1, scrollProgress)); // Scale from 0.2 to 1
+  const cardsOpacity = Math.min(1, scrollProgress * 1.5);
+
   return (
     <>
       <section
@@ -86,24 +115,32 @@ useEffect(() => {
             top: tall ? "200px" : "80px",
           }}
         >
-          <motion.h2
+          <h2
             data-tina-field={tinaField(props, "cards_heading")}
-            className="font-bold text-[32px] px-4 md:text-[40px] text-white text-center"
+            className="font-bold text-[32px] px-4 md:text-[40px] text-white text-center transition-opacity duration-300"
             style={{ opacity: headingOpacity }}
           >
             {props.cards_heading}
-          </motion.h2>
+          </h2>
 
-          <motion.div
-            className={`rounded-[12px] h-1 bg-primary mx-auto mt-2`}
+          <div
+            className="rounded-[12px] h-1 bg-primary mx-auto mt-2 transition-opacity duration-300"
             data-tina-field={tinaField(props,"underline_width")}
-            style={{ opacity: headingOpacity,width:props.underline_width }}
+            style={{
+              width: props.underline_width,
+              opacity: headingOpacity
+            }}
           />
 
-          <motion.div
+          <div
+            ref={cardsRef}
             id="target"
-            className="will-change-transform contain-paint contain-layout transform-gpu pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
-            style={{ opacity: cardsOpacity, scale: cardsScale }}
+            className="will-change-transform pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12"
+            style={{
+              opacity: cardsOpacity,
+              transform: `scale(${cardsScale})`,
+              transition: 'opacity 0.1s linear, transform 0.1s linear'
+            }}
           >
             {expertiseItems.map((ex, i) => (
               <Card
@@ -114,18 +151,16 @@ useEffect(() => {
                 onClose={closeCard}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <AnimatePresence>
-        {expandedCardIndex !== null && expertiseItems[expandedCardIndex].content.children.length && expertiseItems[expandedCardIndex].allContentLink && expertiseItems[expandedCardIndex].contentIcon && (
-          <CardModal
-            ex={expertiseItems[expandedCardIndex]}
-            onClose={closeCard}
-          />
-        )}
-      </AnimatePresence>
+      {expandedCardIndex !== null && expertiseItems[expandedCardIndex]?.content?.children?.length && expertiseItems[expandedCardIndex]?.allContentLink && expertiseItems[expandedCardIndex]?.contentIcon && (
+        <CardModal
+          ex={expertiseItems[expandedCardIndex]}
+          onClose={closeCard}
+        />
+      )}
     </>
   );
 };
