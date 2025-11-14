@@ -71,7 +71,7 @@ links:
       - linkOptions:
           type: id
           id: benefits_section
-          scrollPosition: center
+          scrollPosition: start
         label: benefits
   - linkOptions:
       link: /about
