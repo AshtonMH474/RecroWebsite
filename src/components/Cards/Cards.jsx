@@ -77,10 +77,18 @@ useEffect(() => {
     const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
     // 1 card/row (mobile) = slowest, 2 cards/row (tablet) = medium, 3 cards/row (desktop) = fastest
 
-    // SMART CALCULATION: Shorter screens need longer animations to prevent jarring effect
-    const isShortScreen = windowHeight < 700;
-    const heightMultiplier = isShortScreen ? 1.4 : 1.0;
-    // Short screens (like phones in landscape) get 40% longer animation
+    // SMART CALCULATION: Continuously scale animation based on screen height
+    // Shorter screens = longer animations to prevent jarring effect
+    // This creates a smooth curve instead of fixed thresholds
+
+    // Base multiplier calculation: smaller height = larger multiplier
+    // 1000px height → 1.0x (baseline)
+    // 800px height  → 1.25x (+25% longer)
+    // 700px height  → 1.43x (+43% longer)
+    // 600px height  → 1.67x (+67% longer)
+    // 500px height  → 2.0x  (+100% longer, twice as long!)
+    const heightMultiplier = Math.max(1.0, 1000 / windowHeight);
+    // Formula: 1000 / windowHeight ensures proportional scaling
 
     // EXPLANATION: scrollStart = when animation begins
     // Single column (mobile) starts later to give user time to see the section
@@ -96,7 +104,7 @@ useEffect(() => {
 
     // More cards per row = faster animation (less range needed)
     // Fewer cards per row = slower animation (more range needed)
-    const cardsMultiplier = cardsPerRow === 1 ? 1.5 : cardsPerRow === 2 ? 1.0 : 1.0;
+    const cardsMultiplier = cardsPerRow === 1 ? 1.4 : cardsPerRow === 2 ? 0.5 : 0.2;
     // Mobile (1 card): 80% longer | Tablet (2 cards): 40% longer | Desktop (3 cards): baseline
 
     const scrollRange = baseRange * cardsMultiplier * heightMultiplier;
@@ -115,26 +123,42 @@ useEffect(() => {
   handleScroll();
 
   return () => window.removeEventListener('scroll', handleScroll);
-}, []); // Re-run when section height changes
+}, [sectionHeight]); // Re-run when section height changes
   
   // Calculate styles based on scroll progress (0 to 1)
   // EXPLANATION: These convert scrollProgress into visual properties
 
-  // Detect mobile for faster card animation
+  // Get screen dimensions for adaptive scaling
   const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
+  const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 1080;
   const isMobileView = screenWidth < 640;
 
   // Heading fades in gradually - matches card timing now
-  const headingOpacity = Math.min(1, scrollProgress * 1.3);
+  const headingOpacity = Math.min(1, scrollProgress * 1.8);
 
-  // Cards scale with different speeds based on device
-  // Mobile: Multiply by 1.4 so cards reach full size at 71% scroll progress (earlier!)
-  // Desktop: Normal speed, reaches full size at 100% scroll progress
-  const scaleMultiplier = isMobileView ? 1.4 : 1.0;
+  // SMART SCALING: Compensate for longer scroll ranges on shorter screens
+  // Since shorter screens have longer scroll ranges (via heightMultiplier),
+  // we need cards to scale FASTER to reach full size before scroll ends
+  // This ensures perfect timing: longer scroll + faster scaling = full size at ~80% progress
+
+  let scaleMultiplier;
+  if (isMobileView) {
+    // Mobile: Scale speed directly proportional to scroll range extension
+    // This compensates for the heightMultiplier effect on scroll range
+    // 1000px height → 1.0x (baseline, reach full at 100%)
+    // 800px height  → 1.25x (faster, reach full at 80%)
+    // 600px height  → 1.67x (much faster, reach full at 60%)
+    // 400px height  → 2.0x (very fast, reach full at 50%)
+    scaleMultiplier = Math.max(2.5, Math.min(3.0, 1000 / screenHeight));
+  } else {
+    // Desktop: Normal speed
+    scaleMultiplier = 1.0;
+  }
+
   const cardsScale = Math.max(0.2, Math.min(1, scrollProgress * scaleMultiplier));
 
   // Cards fade in slightly faster than they scale
-  const cardsOpacity = Math.min(1, scrollProgress * 1.2);
+  const cardsOpacity = Math.min(1, scrollProgress * 2.5);
 
   return (
     <>
