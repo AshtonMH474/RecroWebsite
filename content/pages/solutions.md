@@ -24,7 +24,7 @@ blocks:
     _template: landing
   - solutions_heading: Centers of Excellence
     link_heading: Learn More
-    pdf_heading: view
+    pdf_heading: Download
     underline_width: 300
     link_icon: FaArrowRight
     _template: solutions
