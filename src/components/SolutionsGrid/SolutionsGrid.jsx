@@ -1,6 +1,3 @@
-
-
-
 import { tinaField } from "tinacms/dist/react"
 import SolutionCard from "./SolutionCard"
 import { useEffect, useRef, useState, memo } from "react";
@@ -22,7 +19,6 @@ function SolutionsGrid({solutionRes,...block}){
     
     useEffect(() => {
       if (!solutions.length) return;
-      
       const updateRows = () => {
         const screenWidth = window.innerWidth;
     
@@ -32,54 +28,33 @@ function SolutionsGrid({solutionRes,...block}){
         setRows(newRows);
       };
     
-      
-      // Use requestAnimationFrame to ensure DOM is ready
-      const rafId = requestAnimationFrame(() => {
-        updateRows();
-      });
+      updateRows(); // Initial
       window.addEventListener("resize", updateRows);
     
-      return () => {
-        cancelAnimationFrame(rafId);
-        window.removeEventListener("resize", updateRows);
-      };
+      return () => window.removeEventListener("resize", updateRows);
     }, [solutions.length]);
     
     // Calculate section height based on rows and screen height
     useEffect(() => {
-      if (rows === 0) return;
-      
-      const updateHeight = () => {
-        const screenHeight = window.innerHeight;
-        const isShort = screenHeight <= 600;
-        const isTall = screenHeight >= 1000;
+      if (!solutions.length) return;
+      const screenHeight = window.innerHeight;
+      const isShort = screenHeight <= 600;
+      const isTall = screenHeight >= 1000;
     
-        setShort(isShort);
-        setTall(isTall);
+      setShort(isShort);
+      setTall(isTall);
     
-        const rowHeightPx = 0.5 * screenHeight;
+      const rowHeightPx = 0.5 * screenHeight;
 
     
-        // Calculate total height: rows + heading + extra space, double for short screens
-        const calculatedHeight = ((rows * rowHeightPx) * (isShort ? 2 : 1));
-        setSectionHeight(calculatedHeight);
-      };
-
-      // Use requestAnimationFrame to ensure layout is stable
-      const rafId = requestAnimationFrame(() => {
-        updateHeight();
-      });
-      
-      // Also listen to resize for height recalculation
-      window.addEventListener("resize", updateHeight);
-      return () => {
-        cancelAnimationFrame(rafId);
-        window.removeEventListener("resize", updateHeight);
-      };
+      // Calculate total height: rows + heading + extra space, double for short screens
+      const calculatedHeight = ((rows * rowHeightPx) * (isShort ? 2 : 1));
+      setSectionHeight(calculatedHeight);
     }, [rows]);
 
     // Scroll-based animation with heading tracking
     useEffect(() => {
+      if (!solutions.length) return;
       const handleScroll = () => {
         if (!sectionRef.current || !stickyContainerRef.current) return;
     
@@ -127,13 +102,9 @@ function SolutionsGrid({solutionRes,...block}){
         setShouldShowHeading(shouldShowHeading);
       };
     
-      // Use requestAnimationFrame for initial call
-      const rafId = requestAnimationFrame(handleScroll);
       window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => {
-        cancelAnimationFrame(rafId);
-        window.removeEventListener('scroll', handleScroll);
-      };
+      handleScroll();
+      return () => window.removeEventListener('scroll', handleScroll);
     }, [tall]);
 
     // Convert scroll progress to visual properties
