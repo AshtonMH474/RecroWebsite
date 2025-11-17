@@ -22,7 +22,7 @@ blocks:
     _template: landing
   - solutions_heading: Center of Excellence
     link_heading: Learn More
-    pdf_heading: View
+    pdf_heading: Download
     underline_width: 300
     solutions_id: solutions
     scroll: center
