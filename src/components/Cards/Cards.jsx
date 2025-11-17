@@ -1,9 +1,13 @@
-import { useRef, useState, useEffect, memo } from "react";
+
+
+import {  useRef, useState, useEffect, memo } from "react";
 import Card from "./Card";
 import { tinaField } from "tinacms/dist/react";
 import CardModal from "./CardModal";
 
+
 function Cards(props) {
+
   const expertiseItems = props.cards || [];
   const sectionRef = useRef(null);
   const [sectionHeight, setSectionHeight] = useState(0);
@@ -17,62 +21,72 @@ function Cards(props) {
 
   // Track scroll progress and heading state
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [shouldShowHeading, setShouldShowHeading] = useState(false);
   
+  const [shouldShowHeading, setShouldShowHeading] = useState(false);
   const cardsRef = useRef(null);
   const headingRef = useRef(null);
   const stickyContainerRef = useRef(null);
 
-  // Consolidated layout calculation - handles both initial load and resize
-  // This prevents race conditions between separate useEffect hooks
+
+  // Calculate rows based on screen width
   useEffect(() => {
-    let resizeTimer;
+    if (!expertiseItems.length) return;
     
-    const updateLayout = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
-        
-        // Calculate cards per row based on screen width
-        const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
-        const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
-        
-        // Determine screen size flags
-        const isShort = screenHeight <= 600;
-        const isTall = screenHeight >= 1000;
-        
-        // Calculate section height
-        const rowHeightPx = 0.5 * screenHeight;
-        const calculatedHeight = ((newRows * rowHeightPx) * (isShort ? 2 : 1));
-        
-        // Update all related state together to prevent layout thrashing
-        setRows(newRows);
-        setShort(isShort);
-        setTall(isTall);
-        setSectionHeight(calculatedHeight);
-      }, 100); // Debounce resize events
+    const updateRows = () => {
+      const screenWidth = window.innerWidth;
+      const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
+      const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
+      setRows(newRows);
     };
 
-    // Initial layout calculation
-    updateLayout();
+    // Use requestAnimationFrame to ensure DOM is ready
+    const rafId = requestAnimationFrame(() => {
+      updateRows();
+    });
     
-    // Listen for resize events
-    window.addEventListener("resize", updateLayout);
-    
+    window.addEventListener("resize", updateRows);
     return () => {
-      window.removeEventListener("resize", updateLayout);
-      clearTimeout(resizeTimer);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", updateRows);
     };
   }, [expertiseItems.length]);
+
+  // Calculate section height based on rows and screen height
+  useEffect(() => {
+    if (rows === 0) return;
+    
+    const updateHeight = () => {
+      const screenHeight = window.innerHeight;
+      const isShort = screenHeight <= 600;
+      const isTall = screenHeight >= 1000;
+
+      setShort(isShort);
+      setTall(isTall);
+
+      const rowHeightPx = 0.5 * screenHeight;
+
+      // Calculate total height: rows + heading + extra space, double for short screens
+      const calculatedHeight = ((rows * rowHeightPx) * (isShort ? 2 : 1));
+      setSectionHeight(calculatedHeight);
+    };
+
+    // Use requestAnimationFrame to ensure layout is stable
+    const rafId = requestAnimationFrame(() => {
+      updateHeight();
+    });
+    
+    // Also listen to resize for height recalculation
+    window.addEventListener("resize", updateHeight);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, [rows]);
 
   // Scroll-based animation with heading tracking
   useEffect(() => {
     const handleScroll = () => {
-      // Guard against missing refs
-      if (!sectionRef.current || !stickyContainerRef.current) {
-        return;
-      }
+      if (!sectionRef.current || !stickyContainerRef.current) return;
 
       const section = sectionRef.current;
       const stickyContainer = stickyContainerRef.current;
@@ -95,7 +109,7 @@ function Cards(props) {
       // Heading should be visible if:
       // 1. Section has scrolled past previous content (with early trigger), OR
       // 2. Heading is approaching/reached the top (with early trigger)
-      const shouldShow = sectionPastPreviousContent || headingApproachingTop;
+      const shouldShowHeading = sectionPastPreviousContent || headingApproachingTop;
 
       // Animation start: when section enters bottom of viewport
       const animationStart = windowHeight;
@@ -112,18 +126,20 @@ function Cards(props) {
       progress = Math.max(0, Math.min(1, progress));
 
       setScrollProgress(progress);
-      setShouldShowHeading(shouldShow);
+      
+      // Store whether heading should be visible
+      setShouldShowHeading(shouldShowHeading);
     };
 
-    // Initial call to set correct state on mount
-    requestAnimationFrame(handleScroll);
-    
+    // Use requestAnimationFrame for initial call
+    const rafId = requestAnimationFrame(handleScroll);
     window.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [tall]); // Only re-attach listener if tall changes
+  }, [tall]);
 
   // Convert scroll progress to visual properties
   // Heading is hidden initially and fades in when:
@@ -133,6 +149,8 @@ function Cards(props) {
   
   // Calculate card animation progress tied to scroll position
   // Cards start appearing after heading becomes visible
+  // Map scroll progress to card visibility (0 to 1 for each card)
+  // Slower: each card takes more scroll distance to appear
   const getCardProgress = (index) => {
     const totalCards = expertiseItems.length;
     
@@ -142,19 +160,24 @@ function Cards(props) {
     }
     
     // Cards start appearing when heading becomes visible
+    // Use current scroll progress as baseline, but ensure cards have room to animate
+    // Calculate progress range for cards (from current progress to scroll end)
     const cardAnimationRange = 1 - scrollProgress;
     const cardProgressStart = scrollProgress;
     
     // If we're already past most of the scroll, cards should appear quickly
     if (scrollProgress >= 0.9) {
+      // Near the end, show cards quickly
       return index < totalCards ? 1 : 0;
     }
     
     // Slower animation: each card takes more scroll range
+    // Increase the range each card uses by multiplying by a factor
     const cardRangeMultiplier = 1.5; // Makes each card take 1.5x more scroll distance
     const adjustedCardRange = (cardAnimationRange / totalCards) * cardRangeMultiplier;
     
     // Each card gets a larger portion of the remaining scroll range
+    // First card appears immediately when heading is visible
     const cardStartProgress = cardProgressStart + (index / totalCards) * cardAnimationRange;
     const cardEndProgress = cardStartProgress + adjustedCardRange;
     
@@ -163,10 +186,11 @@ function Cards(props) {
     
     // Calculate this card's individual progress (0 to 1)
     if (scrollProgress < cardStartProgress) {
-      return 0;
+      return 0; // Card hasn't started appearing yet
     } else if (scrollProgress >= finalCardEndProgress) {
-      return 1;
+      return 1; // Card is fully visible
     } else {
+      // Card is in the process of appearing (slower)
       const cardLocalProgress = (scrollProgress - cardStartProgress) / (finalCardEndProgress - cardStartProgress);
       return cardLocalProgress;
     }
@@ -175,6 +199,7 @@ function Cards(props) {
   // Helper function to calculate individual card animation based on scroll
   const getCardAnimation = (index) => {
     const cardProgress = getCardProgress(index);
+    const totalCards = expertiseItems.length;
     
     // Easing function for smooth animation
     const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
@@ -188,11 +213,10 @@ function Cards(props) {
     return {
       opacity,
       transform: `translateY(${translateY}px) scale(${scale})`,
+      // Slower, smoother transitions tied to scroll
       transition: cardProgress > 0 && cardProgress < 1 
         ? 'opacity 0.3s ease-out, transform 0.3s ease-out'
         : 'opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-      // Only use will-change during active animation for better performance
-      willChange: cardProgress > 0 && cardProgress < 1 ? 'opacity, transform' : 'auto',
     };
   };
 
@@ -206,7 +230,7 @@ function Cards(props) {
       >
         <div
           ref={stickyContainerRef}
-          className="overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md"
+          className=" overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md"
           style={{
             position: "sticky",
             paddingTop: short ? "5rem" : "3rem",
@@ -224,7 +248,7 @@ function Cards(props) {
 
           <div
             className="rounded-[12px] h-1 bg-primary mx-auto mt-2 transition-opacity duration-700 ease-out"
-            data-tina-field={tinaField(props, "underline_width")}
+            data-tina-field={tinaField(props,"underline_width")}
             style={{
               width: props.underline_width,
               opacity: headingOpacity
@@ -241,6 +265,7 @@ function Cards(props) {
               return (
                 <div
                   key={ex._id || ex.title || i}
+                  className="will-change-transform"
                   style={cardAnimation}
                 >
                   <Card
@@ -256,10 +281,7 @@ function Cards(props) {
         </div>
       </section>
 
-      {expandedCardIndex !== null && 
-       expertiseItems[expandedCardIndex]?.content?.children?.length && 
-       expertiseItems[expandedCardIndex]?.allContentLink && 
-       expertiseItems[expandedCardIndex]?.contentIcon && (
+      {expandedCardIndex !== null && expertiseItems[expandedCardIndex]?.content?.children?.length && expertiseItems[expandedCardIndex]?.allContentLink && expertiseItems[expandedCardIndex]?.contentIcon && (
         <CardModal
           ex={expertiseItems[expandedCardIndex]}
           onClose={closeCard}
@@ -267,10 +289,11 @@ function Cards(props) {
       )}
     </>
   );
-}
+};
 
 // Memoize to prevent re-renders when parent updates but props don't change
 export default memo(Cards);
+
 
 
 
