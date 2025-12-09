@@ -22,6 +22,7 @@ function Cards(props) {
 
   // Calculate rows based on screen width
   useEffect(() => {
+    if (!expertiseItems.length) return;
     const updateRows = () => {
       const screenWidth = window.innerWidth;
       const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
@@ -36,6 +37,7 @@ function Cards(props) {
 
   // Calculate section height based on rows and screen height
   useEffect(() => {
+    if (!expertiseItems.length) return;
     const screenHeight = window.innerHeight;
     const isShort = screenHeight <= 600;
     const isTall = screenHeight >= 1000;
@@ -121,7 +123,6 @@ function Cards(props) {
 
 // Memoize to prevent re-renders when parent updates but props don't change
 export default memo(Cards);
-
 
 
 
