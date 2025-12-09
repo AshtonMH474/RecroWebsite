@@ -19,7 +19,7 @@ export default function Modal({ isOpen, onClose, children, className = "" }) {
           />
 
           <motion.div
-            className={`relative bg-[#1A1A1E] rounded-[12px] max-w-[90%] max-h-[95vh] md:max-h-[90vh] overflow-y-auto shadow-2xl ${className}`}
+            className={`relative bg-[#1A1A1E] rounded-[12px] w-full lg:w-auto lg:max-w-[90%] max-h-[95vh] md:max-h-[90vh] overflow-y-auto shadow-2xl ${className}`}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}

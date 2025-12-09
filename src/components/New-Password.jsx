@@ -49,7 +49,7 @@ function NewPasswordModal({ onClose, setShowLoginModal }) {
 
   return (
     <Modal isOpen={true} onClose={onClose}>
-      <div className="p-6 pt-12 lg:w-[800px]">
+      <div className="p-6 pt-14 lg:w-[800px]">
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             type="email"
