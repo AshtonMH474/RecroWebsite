@@ -1,12 +1,8 @@
-
-
 import { useEffect, useRef, useState } from 'react';
-
 import Logo from './Logo';
 import MenuToggle from './MenuToggle';
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
-
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/auth';
 

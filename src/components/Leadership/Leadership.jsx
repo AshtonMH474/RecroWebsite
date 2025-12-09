@@ -1,5 +1,5 @@
-import {  useState, memo } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState, memo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { tinaField } from "tinacms/dist/react";
 import LeaderCard from "./LeaderCard";
 import Pagination from "./Pagination";
@@ -8,46 +8,48 @@ import DivGears from "../DivGears";
 import LeaderModal from "./LeaderModal";
 
 function Leadership(props) {
-  // all the cards infos
-  const leaders = props.leaders || []
+  // All leaders data
+  const leaders = props.leaders || [];
+
+  // Pagination state
+  const visibleCount = 3;
   const [startIndex, setStartIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  // Gear rotation state
   const [gearRotation, setGearRotation] = useState(0);
+
+  // Modal expansion state
   const [expandedCardIndex, setExpandedCardIndex] = useState(null);
   const openCard = (index) => setExpandedCardIndex(index);
   const closeCard = () => setExpandedCardIndex(null);
-  // getting the total amount of pages needed based on how many are visbale at once
-  const visibleCount = 3;
+
+  // How many pages based on visible cards
   const totalPages = Math.ceil(leaders.length / visibleCount);
-  
-  // go to what page based off index and the direction
- 
+
+  // Handle pagination click
   const goToPage = (pageIndex) => {
-  const newStartIndex = pageIndex * visibleCount;
-  const goingForward = pageIndex > startIndex / visibleCount;
-  const rotationAmount = goingForward ? 90 : -90;
+    const newStartIndex = pageIndex * visibleCount;
+    const goingForward = pageIndex > startIndex / visibleCount;
+    const rotationAmount = goingForward ? 90 : -90;
 
-  setDirection(goingForward ? 1 : -1);
-  setStartIndex(newStartIndex);
-  setGearRotation((prev) => prev + rotationAmount);
-};
-  // these are the cards that are showing
+    setDirection(goingForward ? 1 : -1);
+    setStartIndex(newStartIndex);
+    setGearRotation((prev) => prev + rotationAmount);
+  };
+
+  // Cards currently visible
   const visibleCards = leaders.slice(startIndex, startIndex + visibleCount);
-
-
- 
- 
-
 
   return (
     <>
-    <div id={props.leadership_id}  style={{ minHeight: 'auto' }} className="relative  bg-black  w-full pb-24  overflow-hidden">
-        
-
-        <div
-        className="relative"
-        >
+      <div
+        id={props.leadership_id}
+        style={{ minHeight: "auto" }}
+        className="relative bg-black w-full pb-24 overflow-hidden"
+      >
+        <div className="relative">
+          {/* Heading */}
           <div className="flex flex-col items-center mt-32 pb-12">
             <h2
               data-tina-field={tinaField(props, "leadershipHeading")}
@@ -57,40 +59,50 @@ function Leadership(props) {
             </h2>
             <div className="rounded-[12px] h-1 w-80 bg-primary mx-auto mt-2"></div>
           </div>
+
+          {/* Background gears */}
+          <DivGears gearRotation={gearRotation} />
+
+          {/* Cards Section */}
           <div className="w-full">
-            <DivGears  gearRotation={gearRotation}/>
-                <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[500px]">
-                  <AnimatePresence custom={direction} mode="wait">
-                    <motion.div
-                      key={startIndex}
-                      custom={direction}
-                      variants={animationVariants}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
-                      className="relative  w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
-                    >
-                      {visibleCards.map((leader, i) => (
-                        <LeaderCard key={leader._id || leader.name || i} leader={leader} isExpanded={expandedCardIndex === i}
-                        onExpand={() => openCard(i)}
-                        onClose={closeCard} />
-                      ))}
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
+            <div className="relative w-full max-w-[1000px] mx-auto overflow-hidden min-h-[500px]">
+              <AnimatePresence custom={direction} mode="wait">
+                <motion.div
+                  key={startIndex}
+                  custom={direction}
+                  variants={animationVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="relative w-full flex flex-wrap items-center justify-center gap-x-6 gap-y-12"
+                >
+                  {visibleCards.map((leader, i) => (
+                    <LeaderCard
+                      key={leader._id || leader.name || i}
+                      leader={leader}
+                      isExpanded={expandedCardIndex === i}
+                      onExpand={() => openCard(i)}
+                      onClose={closeCard}
+                    />
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
+          {/* Pagination */}
           {totalPages > 1 && (
             <Pagination
-            totalPages={totalPages}
-            currentPage={startIndex / visibleCount}
-            goToPage={goToPage}
-          />
+              totalPages={totalPages}
+              currentPage={startIndex / visibleCount}
+              goToPage={goToPage}
+            />
           )}
-          
         </div>
-    </div>
+      </div>
+
+      {/* Modal */}
       <AnimatePresence>
         {expandedCardIndex !== null && (
           <LeaderModal
@@ -103,5 +115,4 @@ function Leadership(props) {
   );
 }
 
-// Memoize to prevent re-renders when parent updates but props don't change
 export default memo(Leadership);

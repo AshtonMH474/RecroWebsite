@@ -7,7 +7,6 @@ import CardModal from "./CardModal";
 
 
 function Cards(props) {
-
   const expertiseItems = props.cards || [];
   const sectionRef = useRef(null);
   const [sectionHeight, setSectionHeight] = useState(0);
@@ -69,9 +68,6 @@ function Cards(props) {
       const stickyRect = stickyContainer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const stickyTop = tall ? 200 : 150;
-
-      // Check if heading has reached the top (sticky position)
-      const headingAtTop = stickyRect.top <= stickyTop + 10;
 
       // Check if section has scrolled past previous content (with earlier trigger)
       // Trigger a bit before section top reaches viewport top

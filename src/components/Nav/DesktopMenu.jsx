@@ -1,4 +1,3 @@
-
 import { useState, useRef } from "react";
 import { tinaField } from "tinacms/dist/react";
 import Link from "next/link";
@@ -25,10 +24,12 @@ export default function DesktopMenu({ links, res, user }) {
     <div className="hidden lg:flex items-center gap-8">
       {links?.map((link, i) => {
         const key = `nav-link-${link.label || i}`;
+        const hasSublinks = link.sublinks?.length > 0;
 
+        // ---------------------------------------------------
+        // REGULAR NAV LINK
+        // ---------------------------------------------------
         if (link.style === "link") {
-          const hasSublinks = link.sublinks?.length > 0;
-
           return (
             <div
               key={key}
@@ -36,6 +37,7 @@ export default function DesktopMenu({ links, res, user }) {
               onMouseEnter={() => hasSublinks && handleMouseEnter(i)}
               onMouseLeave={() => hasSublinks && handleMouseLeave()}
             >
+              {/* Normal Link */}
               {link.linkOptions?.link !== null && (
                 <Link
                   href={link.linkOptions.link}
@@ -46,53 +48,82 @@ export default function DesktopMenu({ links, res, user }) {
                 </Link>
               )}
 
+              {/* ID Scroll Link */}
               {link.linkOptions?.type === "id" && link.linkOptions?.id && (
                 <div
-                  onClick={() => {
-                    if (typeof window !== "undefined") {
-                      if (window.location.pathname !== link.link) {
-                        window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions?.id}`;
-                      } else {
-                        const el = document.getElementById(link.linkOptions?.id);
-                        el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions?.scrollPosition || "start" });
-                      }
-                    }
-                  }}
                   className="capitalize py-2 cursor-pointer text-white"
                   data-tina-field={tinaField(link, "label")}
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      const id = link.linkOptions.id;
+                      const scrollPos =
+                        link.linkOptions.scrollPosition || "start";
+
+                      // Navigate if on a different page
+                      if (window.location.pathname !== link.link) {
+                        window.location.href = `${link.link.replace(
+                          /^\/?/,
+                          "/"
+                        )}#${id}`;
+                        return;
+                      }
+
+                      // Scroll if already on the same page
+                      const el = document.getElementById(id);
+                      el?.scrollIntoView({ behavior: "smooth", block: scrollPos });
+                    }
+                  }}
                 >
                   {link.label}
                 </div>
               )}
 
+              {/* DROPDOWN MENU */}
               {hasSublinks && (
                 <div
-                  className={`absolute left-0 top-full mt-2 bg-black border border-white/15 rounded-md shadow-lg min-w-[160px]  transition-opacity duration-200 z-[999] ${
-                    openDropdownIndex === i ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                  className={`absolute left-0 top-full mt-2 bg-black border border-white/15 rounded-md shadow-lg min-w-[160px] transition-opacity duration-200 z-[999] ${
+                    openDropdownIndex === i
+                      ? "opacity-100 pointer-events-auto"
+                      : "opacity-0 pointer-events-none"
                   }`}
                   onMouseEnter={() => handleMouseEnter(i)}
                   onMouseLeave={handleMouseLeave}
                 >
                   {link.sublinks.map((sublink, j) => {
-                    const isIdLink = sublink.linkOptions?.type === "id" && sublink.linkOptions?.id;
                     const subKey = `sublink-${link.label}-${sublink.label}-${j}`;
+                    const isIdLink =
+                      sublink.linkOptions?.type === "id" &&
+                      sublink.linkOptions?.id;
 
+                    // ------------------------------------------
+                    // SUBLINK: ID Scroll Link
+                    // ------------------------------------------
                     if (isIdLink) {
                       return (
                         <button
                           key={subKey}
+                          className="w-full capitalize text-left px-4 pr-20 py-2 text-sm text-white cursor-pointer"
+                          data-tina-field={tinaField(sublink, "label")}
                           onClick={() => {
                             if (typeof window !== "undefined") {
+                              const id = sublink.linkOptions.id;
+                              const scrollPos =
+                                sublink.linkOptions.scrollPosition || "start";
+
                               if (window.location.pathname !== link.link) {
-                                window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions.id}`;
+                                window.location.href = `${link.link.replace(
+                                  /^\/?/,
+                                  "/"
+                                )}#${id}`;
                               } else {
-                                const el = document.getElementById(sublink.linkOptions?.id);
-                                el?.scrollIntoView({ behavior: "smooth", block: sublink.linkOptions?.scrollPosition || "start" });
+                                const el = document.getElementById(id);
+                                el?.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: scrollPos,
+                                });
                               }
                             }
                           }}
-                          className="w-full capitalize text-left px-4 pr-20 py-2 text-sm text-white cursor-pointer"
-                          data-tina-field={tinaField(sublink, "label")}
                         >
                           <span className="relative inline-block">
                             <span className="after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#B55914] after:transition-all after:duration-300 hover:after:w-full">
@@ -103,8 +134,11 @@ export default function DesktopMenu({ links, res, user }) {
                       );
                     }
 
+                    // ------------------------------------------
+                    // SUBLINK: Normal Page Link
+                    // ------------------------------------------
                     return (
-                      <div className="py-2" key={subKey}>
+                      <div key={subKey} className="py-2">
                         <Link
                           href={sublink.linkOptions?.link || "#"}
                           className="w-full capitalize text-left px-4 pr-20 py-2 text-sm text-white cursor-pointer"
@@ -125,12 +159,15 @@ export default function DesktopMenu({ links, res, user }) {
           );
         }
 
+        // ---------------------------------------------------
+        // BUTTON STYLE NAV LINK
+        // ---------------------------------------------------
         if (link.style === "button") {
           return (
-            <Link href={link.link} key={key}>
+            <Link key={key} href={link.link}>
               <button
-                data-tina-field={tinaField(link, "label")}
                 className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
+                data-tina-field={tinaField(link, "label")}
               >
                 {link.label}
               </button>
@@ -141,40 +178,45 @@ export default function DesktopMenu({ links, res, user }) {
         return null;
       })}
 
-      {/* Auth buttons */}
-      {res?.authStyle === "button" && !user && (
+      {/* --------------------------------------------------- */}
+      {/* AUTH BUTTONS */}
+      {/* --------------------------------------------------- */}
+
+      {!user && res?.authStyle === "button" && (
         <button
           onClick={() => openModal("login")}
-          data-tina-field={tinaField(res, "authLabelLogin")}
           className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
-        >
-          {res.authLabelLogin}
-        </button>
-      )}
-      {res?.authStyle === "border" && !user && (
-        <button
-          onClick={() => openModal("login")}
           data-tina-field={tinaField(res, "authLabelLogin")}
-          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
         >
           {res.authLabelLogin}
         </button>
       )}
 
-      {res?.authStyle === "button" && user && (
+      {!user && res?.authStyle === "border" && (
+        <button
+          onClick={() => openModal("login")}
+          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
+          data-tina-field={tinaField(res, "authLabelLogin")}
+        >
+          {res.authLabelLogin}
+        </button>
+      )}
+
+      {user && res?.authStyle === "button" && (
         <button
           onClick={() => handleSignout(setUser)}
-          data-tina-field={tinaField(res, "authLabelSignout")}
           className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
+          data-tina-field={tinaField(res, "authLabelSignout")}
         >
           {res.authLabelSignout}
         </button>
       )}
-      {res?.authStyle === "border" && user && (
+
+      {user && res?.authStyle === "border" && (
         <button
           onClick={() => handleSignout(setUser)}
-          data-tina-field={tinaField(res, "authLabelSignout")}
           className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
+          data-tina-field={tinaField(res, "authLabelSignout")}
         >
           {res.authLabelSignout}
         </button>
@@ -182,3 +224,4 @@ export default function DesktopMenu({ links, res, user }) {
     </div>
   );
 }
+
