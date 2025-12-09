@@ -17,11 +17,6 @@ export const navigateToIdLink = (link, id, scrollPosition = "start") => {
   }
 };
 
-export const handleIdScroll = (link) => {
-  if (!link?.linkOptions?.id) return;
-
-  const id = link.linkOptions.id;
-  const scrollPos = link.linkOptions.scrollPosition || "start";
-
-  navigateToIdLink(link.link, id, scrollPos);
+export const handleIdScroll = (link, id, scrollPosition = "start") => {
+  navigateToIdLink(link, id, scrollPosition);
 };

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { tinaField } from "tinacms/dist/react";
 import { handleSignout } from "@/lib/auth_functions";
 import { useAuth } from "@/context/auth";
+import { handleIdScroll } from "@/utils/navigationHelpers";
+import AuthButtons from "./AuthButtons";
 
 /* ---------------------------------------------
    Small +/− Toggle with Smooth Fade Animation
@@ -63,16 +65,11 @@ export default function MobileMenu({
 
     // ID-based scroll navigation
     if (link.linkOptions?.id) {
-      if (window.location.pathname !== link.link) {
-        window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions.id}`;
-      } else {
-        document
-          .getElementById(link.linkOptions.id)
-          ?.scrollIntoView({
-            behavior: "smooth",
-            block: link.linkOptions?.scrollPosition || "start",
-          });
-      }
+      handleIdScroll(
+        link.link,
+        link.linkOptions.id,
+        link.linkOptions?.scrollPosition || "start"
+      );
       return;
     }
 
@@ -90,16 +87,11 @@ export default function MobileMenu({
 
     // ID-based scroll navigation
     if (sublink.linkOptions?.id) {
-      if (window.location.pathname !== link.link) {
-        window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions.id}`;
-      } else {
-        document
-          .getElementById(sublink.linkOptions.id)
-          ?.scrollIntoView({
-            behavior: "smooth",
-            block: sublink.linkOptions?.scrollPosition || "start",
-          });
-      }
+      handleIdScroll(
+        link.link,
+        sublink.linkOptions.id,
+        sublink.linkOptions?.scrollPosition || "start"
+      );
       return;
     }
 
@@ -212,57 +204,22 @@ export default function MobileMenu({
       {/* ---------------------------------------------
          Auth Buttons (mirrors DesktopMenu)
       --------------------------------------------- */}
-      {!user && res?.authStyle === "button" && (
-        <button
-          onClick={() => {
-            toggleMenu();
-            openModal("login");
-          }}
-          className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
-          data-tina-field={tinaField(res, "authLabelLogin")}
-        >
-          {res.authLabelLogin}
-        </button>
-      )}
-
-      {!user && res?.authStyle === "border" && (
-        <button
-          onClick={() => {
-            toggleMenu();
-            openModal("login");
-          }}
-          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-          data-tina-field={tinaField(res, "authLabelLogin")}
-        >
-          {res.authLabelLogin}
-        </button>
-      )}
-
-      {user && res?.authStyle === "button" && (
-        <button
-          onClick={() => {
-            toggleMenu();
-            handleSignout(setUser);
-          }}
-          className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
-          data-tina-field={tinaField(res, "authLabelSignout")}
-        >
-          {res.authLabelSignout}
-        </button>
-      )}
-
-      {user && res?.authStyle === "border" && (
-        <button
-          onClick={() => {
-            toggleMenu();
-            handleSignout(setUser);
-          }}
-          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-          data-tina-field={tinaField(res, "authLabelSignout")}
-        >
-          {res.authLabelSignout}
-        </button>
-      )}
+      <AuthButtons
+        user={user}
+        authStyle={res?.authStyle}
+        authLabelLogin={res?.authLabelLogin}
+        authLabelSignout={res?.authLabelSignout}
+        openModal={(modal) => {
+          toggleMenu();
+          openModal(modal);
+        }}
+        handleSignout={(setUserFn) => {
+          toggleMenu();
+          handleSignout(setUserFn);
+        }}
+        setUser={setUser}
+        isMobile={true}
+      />
     </div>
   );
 }
