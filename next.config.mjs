@@ -14,6 +14,7 @@ const nextConfig = {
       },
     ],
   },
+  transpilePackages: ['tinacms-gitprovider-github'],
 
   async rewrites() {
     return [
