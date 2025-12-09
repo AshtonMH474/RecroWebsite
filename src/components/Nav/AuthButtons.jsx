@@ -10,7 +10,6 @@ export default function AuthButtons({ user, authStyle, authLabelLogin, authLabel
         variant={variant}
         onClick={() => openModal("login")}
         data-tina-field={tinaField({ authStyle, authLabelLogin }, "authLabelLogin")}
-        className={isMobile ? "w-full" : ""}
       >
         {authLabelLogin}
       </Button>
@@ -22,7 +21,6 @@ export default function AuthButtons({ user, authStyle, authLabelLogin, authLabel
       variant={variant}
       onClick={() => handleSignout(setUser)}
       data-tina-field={tinaField({ authStyle, authLabelSignout }, "authLabelSignout")}
-      className={isMobile ? "w-full" : ""}
     >
       {authLabelSignout}
     </Button>
