@@ -10,7 +10,7 @@ function JobsModal({ onClose, job }) {
 
   return (
     <Modal isOpen={true} onClose={onClose}>
-      <div className="modal-mobile-landscape p-4 flex flex-col h-full overflow-hidden">
+      <div className="modal-mobile-landscape p-4 pt-12  flex flex-col h-full overflow-hidden">
         {/* Header */}
         <div className="flex-shrink-0 pb-3">
           <h3 className="text-[24px] font-bold text-white">{job.title}</h3>
