@@ -1,3 +1,4 @@
+import { fetchWithCsrf } from "@/lib/csrf";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -46,7 +47,7 @@ function ContactUsForm() {
                  setErrors({error: 'Make sure everything is filled out'})
                  return
                 }
-                const res = await fetch("/api/submit-form",{
+                const res = await fetchWithCsrf("/api/submit-form",{
                     method:"POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(formData),

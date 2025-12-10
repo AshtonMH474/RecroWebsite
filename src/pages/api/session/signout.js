@@ -1,6 +1,8 @@
 import { deleteCookie } from "cookies-next";
+import { withCsrfProtection } from "@/lib/csrfMiddleware";
 
-export default async function handler(req, res) {
+
+ async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   // Delete the token cookie
@@ -8,3 +10,5 @@ export default async function handler(req, res) {
 
   res.status(200).json({ ok: true });
 }
+
+export default withCsrfProtection(handler);

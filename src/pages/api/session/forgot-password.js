@@ -1,11 +1,20 @@
 import clientPromise from "@/lib/mongodb";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
+import { withCsrfProtection } from "@/lib/csrfMiddleware";
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   const { email } = req.body;
+
+   if (typeof email !== 'string') {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+
+  if (!email) {
+    return res.status(400).json({ error: "Email is required" });
+  }
 
   const client = await clientPromise;
   const db = client.db(process.env.MONGODB_DB_NAME);
@@ -51,3 +60,6 @@ export default async function handler(req, res) {
 
   res.status(200).json({ ok: true });
 }
+
+
+export default withCsrfProtection(handler);

@@ -2,12 +2,23 @@ import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { setCookie } from "cookies-next";
-export default async function handler(req, res) {
+import { withCsrfProtection } from "@/lib/csrfMiddleware";
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   try {
     const { email, password } = req.body;
 
+
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      return res.status(400).json({ error: "Invalid input format" });
+    }
+
+    // Additional validation
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
+    }
+    
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB_NAME);
 
@@ -36,3 +47,4 @@ export default async function handler(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
+export default withCsrfProtection(handler);

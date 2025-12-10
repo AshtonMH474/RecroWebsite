@@ -11,7 +11,7 @@ function StatementCard({statement,user}){
             openModal('register') // open login/signup modal
           } else {
             
-            downloadPdf(statement,false,user,'statement'); // run your PDF download function
+            downloadPdf(statement,false,'statement'); // run your PDF download function
             
           }
         }} className="border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 cursor-pointer">

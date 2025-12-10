@@ -2,7 +2,7 @@ import { handleDownload } from "@/lib/auth_functions";
 
 
 
-export async function downloadPdf(solution,isSolutionGrid,user,type){
+export async function downloadPdf(solution,isSolutionGrid,type){
     
     if (!solution) return;
 
@@ -14,7 +14,8 @@ export async function downloadPdf(solution,isSolutionGrid,user,type){
 
     if(!isSolutionGrid){
         try{
-          await handleDownload(user,pdfUrl,type)
+          const data = await handleDownload(pdfUrl,type)
+          if(data.error)return;
         }catch(e){
           return e;
         }

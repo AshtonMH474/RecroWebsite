@@ -6,6 +6,7 @@ import Modal from "@/components/common/Modal";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 import { useForm } from "@/hooks/useForm";
+import { fetchWithCsrf } from "@/lib/csrf";
 
 function Login({ onClose, modalData }) {
   const { setUser, openModal } = useAuth();
@@ -20,7 +21,13 @@ function Login({ onClose, modalData }) {
     const verify = async (token) => {
       if (token) {
         setToken(true);
-        await fetch(`/api/session/verify?token=${token}`);
+        await fetchWithCsrf(`/api/session/verify`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token }),
+              });
       }
     };
     verify(modalData?.token);

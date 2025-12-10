@@ -3,6 +3,7 @@ import Modal from "@/components/common/Modal";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 import { useForm } from "@/hooks/useForm";
+import { fetchWithCsrf } from "@/lib/csrf";
 
 function ChangePassword({ onClose, token }) {
   const [success, setSuccess] = useState(null);
@@ -30,7 +31,7 @@ function ChangePassword({ onClose, token }) {
     setSuccess("");
 
     try {
-      const res = await fetch("/api/session/reset-password", {
+      const res = await fetchWithCsrf("/api/session/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
