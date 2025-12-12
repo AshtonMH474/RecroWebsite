@@ -20,13 +20,10 @@ export async function getCsrfToken() {
   try {
     const res = await fetch('/api/csrf-token', {
       credentials: 'include', // Send cookies
-      cache: 'no-cache', // Ensure fresh token in production
     });
 
     if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      console.error('CSRF token fetch failed:', res.status, errorData);
-      throw new Error(`Failed to fetch CSRF token: ${res.status}`);
+      throw new Error('Failed to fetch CSRF token');
     }
 
     const data = await res.json();

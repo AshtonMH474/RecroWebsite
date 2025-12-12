@@ -3,7 +3,6 @@ import csrf from 'csurf';
 // Initialize CSRF protection with cookie-based tokens
 const csrfProtection = csrf({
   cookie: {
-    key: '_csrf', // Explicit cookie name
     httpOnly: false, // JavaScript needs to read the token
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict', // Changed from 'lax' to 'strict' for better security
@@ -42,17 +41,9 @@ export function withCsrfProtection(handler) {
     csrfProtection(req, res, (err) => {
       if (err) {
         console.error('CSRF validation failed:', err.message);
-        console.error('Request cookies:', req.cookies);
-        console.error('CSRF token from header:', req.headers['x-csrf-token']);
-        console.error('Request origin:', req.headers.origin);
-        console.error('Request host:', req.headers.host);
         return res.status(403).json({
           error: 'CSRF token validation failed',
-          message: 'Invalid or missing CSRF token',
-          debug: process.env.NODE_ENV === 'development' ? {
-            cookiesReceived: !!req.cookies?._csrf,
-            tokenReceived: !!req.headers['x-csrf-token'],
-          } : undefined
+          message: 'Invalid or missing CSRF token'
         });
       }
 
