@@ -4,6 +4,7 @@ import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 import { useForm } from "@/hooks/useForm";
 import { useAuth } from "@/context/auth";
+import { fetchWithCsrf } from "@/lib/csrf";
 
 function NewPasswordModal({ onClose, setShowLoginModal }) {
   const [success, setSuccess] = useState(null);
@@ -21,7 +22,7 @@ function NewPasswordModal({ onClose, setShowLoginModal }) {
     setSuccess(null);
 
     try {
-      const res = await fetch("/api/session/forgot-password", {
+      const res = await fetchWithCsrf("/api/session/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
