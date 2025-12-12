@@ -3,24 +3,29 @@ import Link from "next/link";
 import { tinaField } from "tinacms/dist/react";
 import { handleSignout } from "@/lib/auth_functions";
 import { useAuth } from "@/context/auth";
+import { handleIdScroll } from "@/utils/navigationHelpers";
+import AuthButtons from "./AuthButtons";
 
-// Small component for fading + / − toggle
+/* ---------------------------------------------
+   Small +/− Toggle with Smooth Fade Animation
+--------------------------------------------- */
 function PlusMinusToggle({ isOpen }) {
   return (
     <span className="relative inline-block w-5 h-5 text-white">
+      {/* + icon */}
       <span
         className={`absolute inset-0 flex justify-center items-center transition-opacity duration-300 ${
           isOpen ? "opacity-0" : "opacity-100"
         }`}
-        aria-hidden={isOpen}
       >
         +
       </span>
+
+      {/* − icon */}
       <span
         className={`absolute inset-0 flex justify-center items-center transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
-        aria-hidden={!isOpen}
       >
         &minus;
       </span>
@@ -28,6 +33,9 @@ function PlusMinusToggle({ isOpen }) {
   );
 }
 
+/* ---------------------------------------------
+   Mobile Menu Component
+--------------------------------------------- */
 export default function MobileMenu({
   isVisible,
   menuOpen,
@@ -40,40 +48,55 @@ export default function MobileMenu({
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const { openModal, setUser } = useAuth();
 
+  /* ---------------------------------------------
+     Toggle a dropdown open/closed
+  --------------------------------------------- */
   const toggleDropdown = (i) => {
     setOpenDropdownIndex((prev) => (prev === i ? null : i));
   };
 
+  /* ---------------------------------------------
+     Handle clicking a TOP-LEVEL link
+  --------------------------------------------- */
   const handleTopLinkClick = (link) => {
     if (typeof window === "undefined") return;
+
     toggleMenu();
 
+    // ID-based scroll navigation
     if (link.linkOptions?.id) {
-      if (window.location.pathname !== link.link) {
-        window.location.href = `${link.link.replace(/^\/?/, "/")}#${link.linkOptions?.id}`;
-      } else {
-        const el = document.getElementById(link.linkOptions?.id);
-        el?.scrollIntoView({ behavior: "smooth", block: link.linkOptions?.scrollPosition || "start" });
-      }
-    } else {
-      window.location.href = link.link;
+      handleIdScroll(
+        link.link,
+        link.linkOptions.id,
+        link.linkOptions?.scrollPosition || "start"
+      );
+      return;
     }
+
+    // Normal link
+    window.location.href = link.link;
   };
 
+  /* ---------------------------------------------
+     Handle clicking a SUBLINK
+  --------------------------------------------- */
   const handleSublinkClick = (link, sublink) => {
     if (typeof window === "undefined") return;
+
     toggleMenu();
 
+    // ID-based scroll navigation
     if (sublink.linkOptions?.id) {
-      if (window.location.pathname !== link.link) {
-        window.location.href = `${link.link.replace(/^\/?/, "/")}#${sublink.linkOptions?.id}`;
-      } else {
-        const el = document.getElementById(sublink.linkOptions?.id);
-        el?.scrollIntoView({ behavior: "smooth", block: sublink.linkOptions?.scrollPosition || "start" });
-      }
-    } else if (sublink.link) {
-      window.location.href = sublink.link;
+      handleIdScroll(
+        link.link,
+        sublink.linkOptions.id,
+        sublink.linkOptions?.scrollPosition || "start"
+      );
+      return;
     }
+
+    // Normal link
+    if (sublink.link) window.location.href = sublink.link;
   };
 
   if (!isVisible) return null;
@@ -81,13 +104,24 @@ export default function MobileMenu({
   return (
     <div
       ref={menuRef}
-      className={`pb-10 fixed top-20 left-0 w-full h-[calc(100vh-80px)] bg-black z-[100] flex flex-col items-start px-8 py-6 gap-6 lg:hidden transition-opacity overflow-y-auto duration-300 ease-in-out ${
-        menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      }`}
+      className={`
+        pb-10 fixed top-20 left-0 w-full 
+        h-[calc(100vh-80px)] bg-black z-[100] 
+        flex flex-col items-start px-8 py-6 gap-6 lg:hidden 
+        transition-opacity duration-300 ease-in-out 
+        overflow-y-auto
+        ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+      `}
     >
+      {/* ---------------------------------------------
+         Navigation Links
+      --------------------------------------------- */}
       {links?.map((link, i) => {
         const hasSublinks = link.sublinks?.length > 0;
 
+        /* ---------------------------------------------
+           BUTTON link style
+        --------------------------------------------- */
         if (link.style === "button") {
           return (
             <button
@@ -104,8 +138,12 @@ export default function MobileMenu({
           );
         }
 
+        /* ---------------------------------------------
+           NORMAL link + optional dropdown
+        --------------------------------------------- */
         return (
           <div key={i} className="flex flex-col w-full">
+            {/* Top-level row */}
             <div className="flex justify-between items-center w-full">
               <button
                 onClick={() => handleTopLinkClick(link)}
@@ -115,6 +153,7 @@ export default function MobileMenu({
                 {link.label}
               </button>
 
+              {/* Dropdown toggle button */}
               {hasSublinks && (
                 <button
                   onClick={() => toggleDropdown(i)}
@@ -127,10 +166,15 @@ export default function MobileMenu({
               )}
             </div>
 
+            {/* Sublinks */}
             {hasSublinks && openDropdownIndex === i && (
               <div id={`submenu-${i}`} className="ml-1 flex flex-col">
-                {link.sublinks.map((sublink, j) =>
-                  sublink.linkOptions?.id && sublink.linkOptions?.type === "id" ? (
+                {link.sublinks.map((sublink, j) => {
+                  const isIdLink =
+                    sublink.linkOptions?.id &&
+                    sublink.linkOptions?.type === "id";
+
+                  return isIdLink ? (
                     <button
                       key={j}
                       onClick={() => handleSublinkClick(link, sublink)}
@@ -149,65 +193,35 @@ export default function MobileMenu({
                     >
                       {sublink.label}
                     </Link>
-                  )
-                )}
+                  );
+                })}
               </div>
             )}
           </div>
         );
       })}
 
-      {/* Auth buttons match DesktopMenu */}
-      {res?.authStyle === "button" && !user && (
-        <button
-          onClick={() => {
-            toggleMenu();
-            openModal("login");
-          }}
-          data-tina-field={tinaField(res, "authLabelLogin")}
-          className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
-        >
-          {res.authLabelLogin}
-        </button>
-      )}
-      {res?.authStyle === "border" && !user && (
-        <button
-          onClick={() => {
-            toggleMenu();
-            openModal("login");
-          }}
-          data-tina-field={tinaField(res, "authLabelLogin")}
-          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-        >
-          {res.authLabelLogin}
-        </button>
-      )}
-
-      {res?.authStyle === "button" && user && (
-        <button
-          onClick={() => {
-            toggleMenu();
-            handleSignout(setUser);
-          }}
-          data-tina-field={tinaField(res, "authLabelSignout")}
-          className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
-        >
-          {res.authLabelSignout}
-        </button>
-      )}
-      {res?.authStyle === "border" && user && (
-        <button
-          onClick={() => {
-            toggleMenu();
-            handleSignout(setUser);
-          }}
-          data-tina-field={tinaField(res, "authLabelSignout")}
-          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-        >
-          {res.authLabelSignout}
-        </button>
-      )}
+      {/* ---------------------------------------------
+         Auth Buttons (mirrors DesktopMenu)
+      --------------------------------------------- */}
+      <AuthButtons
+        user={user}
+        authStyle={res?.authStyle}
+        authLabelLogin={res?.authLabelLogin}
+        authLabelSignout={res?.authLabelSignout}
+        openModal={(modal) => {
+          toggleMenu();
+          openModal(modal);
+        }}
+        handleSignout={(setUserFn) => {
+          toggleMenu();
+          handleSignout(setUserFn);
+        }}
+        setUser={setUser}
+        isMobile={true}
+      />
     </div>
   );
 }
+
 

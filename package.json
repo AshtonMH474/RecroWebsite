@@ -16,6 +16,7 @@
     "@tinacms/datalayer": "^2.0.0",
     "bcryptjs": "^3.0.2",
     "cookies-next": "^6.1.0",
+    "csurf": "^1.11.0",
     "framer-motion": "^12.12.1",
     "free-email-domains-list": "^1.0.16",
     "jsonwebtoken": "^9.0.2",
