@@ -9,6 +9,7 @@ function ContactUsForm() {
     const router = useRouter()
     const [isCareers,setCareers] = useState(false)
     const [errors,setErrors] = useState({})
+    const [success, setSuccess] = useState(false);
     
      // checks if ur in the careers section 
     useEffect(() => {
@@ -65,9 +66,8 @@ function ContactUsForm() {
                   e.target.organization.value = ""
                 } else e.target.phone.value = ""
                 
-
-                alert("Submitted successfully!");
                 setErrors({})
+                setSuccess(true)
                 return
                 }
 
@@ -128,7 +128,11 @@ function ContactUsForm() {
             className="w-full p-2 rounded bg-[#2A2A2E] text-white placeholder-white/70 resize-none"
           ></textarea>
           {errors?.error && (<div className="text-red-600">{errors.error}</div>)}
-        
+          {success && (
+            <div className="text-green-500">
+              Submitted successfully! We will be in touch soon.
+            </div>
+          )}
           <button
             type="submit"
             className="hover:opacity-80 cursor-pointer w-full py-2 rounded bg-primary text-white hover:bg-primary/80 transition"
