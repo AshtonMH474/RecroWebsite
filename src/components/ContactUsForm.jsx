@@ -1,6 +1,7 @@
 import { fetchWithCsrf } from "@/lib/csrf";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { isValidEmail, isValidPhone } from "@/lib/sanitize";
 
 
 
@@ -46,6 +47,14 @@ function ContactUsForm() {
         }
                 if(!formData.email || !formData.firstName || !formData.lastName || !formData.subject || !formData.message || (!formData.organization && !formData.phone)){
                  setErrors({error: 'Make sure everything is filled out'})
+                 return
+                }
+                if (!isValidEmail(formData.email)) {
+                 setErrors({error: 'Please enter a valid email address'})
+                 return
+                }
+                if (isCareers && formData.phone && !isValidPhone(formData.phone)) {
+                 setErrors({error: 'Please enter a valid phone number'})
                  return
                 }
                 const res = await fetchWithCsrf("/api/submit-form",{

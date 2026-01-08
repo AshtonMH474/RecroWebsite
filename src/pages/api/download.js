@@ -1,25 +1,29 @@
 import clientPromise from "@/lib/mongodb";
 import { withCsrfProtection } from "@/lib/csrfMiddleware";
 import { authenticateUser } from "@/lib/authMiddleware";
+import { sanitizeDownloadData } from "@/lib/sanitize";
+
  async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const {  pdfUrl, type } = req.body;
-     const auth = await authenticateUser(req)
+    const auth = await authenticateUser(req)
     if (!auth.authenticated || !auth.user) {
           return res.status(401).json({ error: "Unauthorized" });
     }
     const email = auth.user.email;
     if (!email) return res.status(400).json({ error: "Missing email" });
-    if (!pdfUrl || !type ) {
-      return res
-        .status(400)
-        .json({ error: "pdfUrl, or type" });
+
+    // Validate and sanitize input
+    const result = sanitizeDownloadData(req.body);
+    if (!result.valid) {
+      return res.status(400).json({ error: result.error });
     }
-    
+
+    const { pdfUrl, type } = result.data;
+
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB_NAME);
 
