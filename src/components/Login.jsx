@@ -7,6 +7,7 @@ import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 import { useForm } from "@/hooks/useForm";
 import { fetchWithCsrf } from "@/lib/csrf";
+import { isValidEmail } from "@/lib/sanitize";
 
 function Login({ onClose, modalData }) {
   const { setUser, openModal } = useAuth();
@@ -47,6 +48,11 @@ function Login({ onClose, modalData }) {
     e.preventDefault();
     if (!allFilled) {
       alert("Please fill all the fields");
+      return;
+    }
+
+    if (!isValidEmail(formData.email)) {
+      setErrors({ error: "Please enter a valid email address" });
       return;
     }
 

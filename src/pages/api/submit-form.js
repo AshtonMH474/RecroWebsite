@@ -2,23 +2,26 @@ import clientPromise from "@/lib/mongodb";
 import { isFreeEmail } from "free-email-domains-list";
 import { createMailer, createCareerMailer } from "@/lib/mailer";
 import { withCsrfProtection } from "@/lib/csrfMiddleware";
+import { withRateLimit } from "@/lib/rateLimit";
+import { sanitizeContactFormData } from "@/lib/sanitize";
 
 async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { firstName, lastName, email, organization, subject, message, phone } = req.body;
-
-  if (!email || !subject || !message) {
-    return res.status(400).json({ error: "Missing required fields" });
+  // Validate and sanitize input
+  const result = sanitizeContactFormData(req.body);
+  if (!result.valid) {
+    return res.status(400).json({ error: result.error });
   }
 
+  const { firstName, lastName, email, organization, subject, message, phone } = result.data;
 
   if(organization && isFreeEmail(email)){
     return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
   }
-  
+
   try {
     // 1️⃣ Setup email transport
     const transporter = organization ? createMailer() : createCareerMailer();
@@ -63,5 +66,8 @@ async function handler(req, res) {
   }
 }
 
-
-export default withCsrfProtection(handler);
+export default withRateLimit(withCsrfProtection(handler), {
+    windowMs: 60 * 1000,
+    max: 5,
+    message: 'Too many deal submissions. Please wait a minute before trying again.'
+});

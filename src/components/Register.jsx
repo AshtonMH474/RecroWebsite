@@ -8,6 +8,7 @@ import { useForm } from "@/hooks/useForm";
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { fetchWithCsrf } from "@/lib/csrf";
+import { isValidEmail, validatePassword } from "@/lib/sanitize";
 
 function Register({ onClose }) {
   const { openModal } = useAuth();
@@ -39,13 +40,17 @@ function Register({ onClose }) {
         return;
       }
       const obj = {};
-      if (formData?.password?.length < 8) {
-        obj.pass = "Password Must be 8 Characters or More";
+      if (!isValidEmail(formData.email)) {
+        obj.email = "Please enter a valid email address";
+      }
+      const passwordValidation = validatePassword(formData.password);
+      if (!passwordValidation.valid) {
+        obj.pass = passwordValidation.error;
       }
       if (formData.password !== formData.confirmPassword) {
         obj.password = "Make Sure Passwords Match";
       }
-      if (obj.password || obj.pass) {
+      if (obj.email || obj.password || obj.pass) {
         setErrors(obj);
         return;
       }
@@ -155,6 +160,7 @@ function Register({ onClose }) {
             required
           />
 
+          {errors?.email && <div className="text-red-600">{errors.email}</div>}
           {errors?.number && <div className="text-red-600">{errors.number}</div>}
           {errors?.password && <div className="text-red-600">{errors.password}</div>}
           {errors?.pass && <div className="text-red-600">{errors.pass}</div>}

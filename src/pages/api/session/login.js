@@ -3,22 +3,21 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { setCookie } from "cookies-next";
 import { withCsrfProtection } from "@/lib/csrfMiddleware";
+import { withRateLimit } from "@/lib/rateLimit";
+import { sanitizeLoginData } from "@/lib/sanitize";
+
 async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   try {
-    const { email, password } = req.body;
-
-
-    if (typeof email !== 'string' || typeof password !== 'string') {
-      return res.status(400).json({ error: "Invalid input format" });
+    // Validate and sanitize input
+    const result = sanitizeLoginData(req.body);
+    if (!result.valid) {
+      return res.status(400).json({ error: result.error });
     }
 
-    // Additional validation
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password are required" });
-    }
-    
+    const { email, password } = result.data;
+
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB_NAME);
 
@@ -47,4 +46,8 @@ async function handler(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
-export default withCsrfProtection(handler);
+export default withRateLimit(withCsrfProtection(handler), {
+    windowMs: 60 * 1000,
+    max: 10,
+    message: 'Too many deal submissions. Please wait a minute before trying again.'
+});
