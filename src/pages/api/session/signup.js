@@ -4,7 +4,7 @@ import crypto from "crypto";
 import { isFreeEmail } from 'free-email-domains-list';
 import { createMailer } from "@/lib/mailer";
 import { withCsrfProtection } from "@/lib/csrfMiddleware";
-
+import { withRateLimit } from "@/lib/rateLimit";
 
 async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -86,4 +86,8 @@ async function handler(req, res) {
 }
 
 
-export default withCsrfProtection(handler);
+export default withRateLimit(withCsrfProtection(handler), {
+    windowMs: 60 * 1000,
+    max: 5,
+    message: 'Too many deal submissions. Please wait a minute before trying again.'
+});

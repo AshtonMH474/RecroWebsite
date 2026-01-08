@@ -2,6 +2,7 @@ import clientPromise from "@/lib/mongodb";
 import { isFreeEmail } from "free-email-domains-list";
 import { createMailer, createCareerMailer } from "@/lib/mailer";
 import { withCsrfProtection } from "@/lib/csrfMiddleware";
+import { withRateLimit } from "@/lib/rateLimit";
 
 async function handler(req, res) {
   if (req.method !== "POST") {
@@ -63,5 +64,8 @@ async function handler(req, res) {
   }
 }
 
-
-export default withCsrfProtection(handler);
+export default withRateLimit(withCsrfProtection(handler), {
+    windowMs: 60 * 1000,
+    max: 5,
+    message: 'Too many deal submissions. Please wait a minute before trying again.'
+});
