@@ -13,9 +13,9 @@ export default function Button({
   const baseStyles = "px-8 py-2 rounded transition-all duration-300 capitalize";
 
   const variants = {
-    primary: "bg-primary text-white hover:opacity-80 disabled:opacity-50",
-    border: "border primary-border text-white hover:text-white/80 disabled:opacity-50",
-    secondary: "bg-white text-black hover:bg-white/90 disabled:opacity-50",
+    primary: "cursor-pointer bg-primary text-white hover:opacity-80 disabled:opacity-50",
+    border: "cursor-pointer border primary-border text-white hover:text-white/80 disabled:opacity-50",
+    secondary: "cursor-pointer bg-white text-black hover:bg-white/90 disabled:opacity-50",
   };
 
   const buttonClass = `${baseStyles} ${variants[variant]} ${className}`;
