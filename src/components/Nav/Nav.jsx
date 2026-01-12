@@ -46,7 +46,7 @@ export default function Nav({ res }) {
         router.replace("/", undefined, { shallow: true });
       }
     }
-  }, [router.isReady]);
+  }, [router.isReady, router.asPath, openModal]);
 
   // ... menu logic here ...
     const toggleMenu = () => {

@@ -1,10 +1,12 @@
 
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import Login from "@/components/Login";
-import Register from "@/components/Register";
-import NewPasswordModal from "@/components/New-Password";
-import ChangePassword from "@/components/ChangePassword";
+import { createContext, useCallback, useContext, useEffect, useState, lazy, Suspense } from "react";
 import { checkUser } from "@/lib/auth_functions";
+
+// Lazy load modals to reduce initial bundle size
+const Login = lazy(() => import("@/components/Login"));
+const Register = lazy(() => import("@/components/Register"));
+const NewPasswordModal = lazy(() => import("@/components/New-Password"));
+const ChangePassword = lazy(() => import("@/components/ChangePassword"));
 
 const AuthContext = createContext();
 
@@ -54,19 +56,21 @@ const refreshUser = useCallback((forceRefresh = false) => {
     <AuthContext.Provider value={{ user, setUser, openModal, closeModal,refreshUser }}>
       {children}
 
-      {/* Centralized modal rendering */}
-      {activeModal === "login" && (
-        <Login onClose={closeModal} setUser={setUser} modalData={modalData} />
-      )}
-      {activeModal === "register" && (
-        <Register onClose={closeModal} />
-      )}
-      {activeModal === "newPassword" && (
-        <NewPasswordModal onClose={closeModal} />
-      )}
-      {activeModal === "changePassword" && (
-        <ChangePassword token={modalData?.token} onClose={closeModal} />
-      )}
+      {/* Centralized modal rendering with lazy loading */}
+      <Suspense fallback={null}>
+        {activeModal === "login" && (
+          <Login onClose={closeModal} setUser={setUser} modalData={modalData} />
+        )}
+        {activeModal === "register" && (
+          <Register onClose={closeModal} />
+        )}
+        {activeModal === "newPassword" && (
+          <NewPasswordModal onClose={closeModal} />
+        )}
+        {activeModal === "changePassword" && (
+          <ChangePassword token={modalData?.token} onClose={closeModal} />
+        )}
+      </Suspense>
       
     </AuthContext.Provider>
   );

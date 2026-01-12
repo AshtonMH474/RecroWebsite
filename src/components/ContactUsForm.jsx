@@ -12,11 +12,10 @@ function ContactUsForm() {
     const [errors,setErrors] = useState({})
     const [success, setSuccess] = useState(false);
     
-     // checks if ur in the careers section 
+    // checks if ur in the careers section
     useEffect(() => {
-      
       if(router.query.slug?.[0] === "careers") setCareers(true)
-    },[])
+    },[router.query.slug])
     
     
     const handleSubmit = async(e) => {
