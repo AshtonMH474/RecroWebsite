@@ -46,7 +46,7 @@
     "@playwright/test": "^1.57.0",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
-    "@tinacms/cli": "^1.9.7",
+    "@tinacms/cli": "^2.1.1",
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
