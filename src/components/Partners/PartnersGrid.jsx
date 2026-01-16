@@ -3,18 +3,16 @@ import { tinaField } from 'tinacms/dist/react';
 import Image from 'next/image';
 
 export default function PartnersGrid({ partnersRes, ...block }) {
-  // Extract all partners
-  const allPartners = partnersRes?.partnerConnection?.edges.map((e) => e.node) || [];
-
   // Filter partners without breaking Tina editing
   const filtered = useMemo(() => {
+    const allPartners = partnersRes?.partnerConnection?.edges.map((e) => e.node) || [];
     const category = block.category?.category;
 
     if (category && category !== 'All') {
       return allPartners.filter((partner) => partner?.category?.category === category);
     }
     return allPartners;
-  }, [allPartners, block.category?.category]);
+  }, [partnersRes?.partnerConnection?.edges, block.category?.category]);
 
   return (
     <div id={block.partners_id} className="relative bg-black w-full overflow-hidden pb-24">

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { tinaField } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { motion } from 'framer-motion';

@@ -1,29 +1,15 @@
-import { useRef, useState, useLayoutEffect } from 'react';
 import { tinaField } from 'tinacms/dist/react';
 import { parseJobDescription, stripHTML } from '../utils/HtmlRemover';
 import { IoLocationOutline } from 'react-icons/io5';
 
 function JobCard({ props, job, onExpand }) {
-  const buttonRef = useRef(null);
-  const [shouldTruncate, setShouldTruncate] = useState(false);
-
-  useLayoutEffect(() => {
-    if (buttonRef.current) {
-      const buttonBottom = buttonRef.current.getBoundingClientRect().bottom;
-      const cardBottom = buttonRef.current.closest('.job-card')?.getBoundingClientRect().bottom;
-
-      if (cardBottom && buttonBottom > cardBottom - 10) {
-        setShouldTruncate(true);
-      }
-    }
-  }, [job]);
-
   return (
     <div
       onClick={onExpand}
-      className="job-card border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6"
+      className="job-card border border-white/15 rounded-[8px] bg-[#1A1A1E] w-[300px] h-[260px] px-4 py-6 flex flex-col"
     >
-      <div>
+      {/* Header section - takes only the space it needs */}
+      <div className="shrink-0">
         <h3 className="text-[20px] font-bold">{job.title}</h3>
         <h4 className="text-[#C2C2BC] text-[16px] flex items-center gap-x-1">
           <IoLocationOutline className="text-[#14B5B5]" />
@@ -38,19 +24,16 @@ function JobCard({ props, job, onExpand }) {
           </h4>
         )}
       </div>
-      <div>
-        <div className={` ${shouldTruncate ? 'pb-3' : ''}`}>
-          <p
-            className={`text-[#C2C2BC] text-[12px] pb-3 ${
-              shouldTruncate ? 'truncate-multiline' : ''
-            }`}
-          >
-            {parseJobDescription(stripHTML(job.description))[1]?.content}
-          </p>
-        </div>
+
+      {/* Description - fills remaining space but truncates with ellipsis */}
+      <p className="text-[#C2C2BC] text-[12px] mt-2 job-card-description flex-1 min-h-0">
+        {parseJobDescription(stripHTML(job.description))[1]?.content}
+      </p>
+
+      {/* Button - always at bottom, fixed size */}
+      <div className="shrink-0 mt-3">
         {props?.buttonType === 'button' && (
           <button
-            ref={buttonRef}
             data-tina-field={tinaField(props, 'buttonLabel')}
             className="bg-primary capitalize cursor-pointer px-4 h-[35px] w-auto rounded-[8px] hover:opacity-80 text-white"
           >
@@ -59,7 +42,6 @@ function JobCard({ props, job, onExpand }) {
         )}
         {props?.buttonType === 'border' && (
           <button
-            ref={buttonRef}
             data-tina-field={tinaField(props, 'buttonLabel')}
             className="px-4 capitalize h-[35px] w-auto border primary-border rounded-[8px] hover:text-white/80 transition-colors duration-300"
           >

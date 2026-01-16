@@ -1,7 +1,6 @@
 import { tinaField } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import Link from 'next/link';
-import Image from 'next/image';
 import { memo } from 'react';
 
 function Learn(props) {
