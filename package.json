@@ -33,7 +33,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^19.2.1",
-    "react-intersection-observer": "^9.16.0",
+    "react-intersection-observer": "^10.0.2",
     "react-phone-number-input": "^3.4.13",
     "tinacms": "^3.0.2",
     "tinacms-gitprovider-github": "^4.0.0",
