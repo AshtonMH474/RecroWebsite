@@ -1,22 +1,22 @@
-import { useRef, useState, useEffect } from "react";
-import { tinaField } from "tinacms/dist/react";
-import { parseJobDescription, stripHTML } from "../utils/HtmlRemover";
-import { IoLocationOutline } from "react-icons/io5";
+import { useRef, useState, useLayoutEffect } from 'react';
+import { tinaField } from 'tinacms/dist/react';
+import { parseJobDescription, stripHTML } from '../utils/HtmlRemover';
+import { IoLocationOutline } from 'react-icons/io5';
 
 function JobCard({ props, job, onExpand }) {
   const buttonRef = useRef(null);
   const [shouldTruncate, setShouldTruncate] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (buttonRef.current) {
       const buttonBottom = buttonRef.current.getBoundingClientRect().bottom;
-      const cardBottom = buttonRef.current.closest(".job-card")?.getBoundingClientRect().bottom;
+      const cardBottom = buttonRef.current.closest('.job-card')?.getBoundingClientRect().bottom;
 
       if (cardBottom && buttonBottom > cardBottom - 10) {
         setShouldTruncate(true);
       }
     }
-  }, [job]); // Re-check if the job changes
+  }, [job]);
 
   return (
     <div
@@ -32,36 +32,35 @@ function JobCard({ props, job, onExpand }) {
         {job.salaryRangeMax > 0 && job.salaryRangeMin > 0 && (
           <h4 className="text-[#C2C2BC] text-[16px]">
             <span className="text-[#27AE60]">$</span>
-            {Number(job.salaryRangeMin).toLocaleString()} - <span className="text-[#27AE60]">$</span>
+            {Number(job.salaryRangeMin).toLocaleString()} -{' '}
+            <span className="text-[#27AE60]">$</span>
             {Number(job.salaryRangeMax).toLocaleString()}
           </h4>
         )}
       </div>
       <div>
-        <div className={` ${
-                shouldTruncate ? "pb-3" : ""
-            }`}>
-            <p
+        <div className={` ${shouldTruncate ? 'pb-3' : ''}`}>
+          <p
             className={`text-[#C2C2BC] text-[12px] pb-3 ${
-                shouldTruncate ? "truncate-multiline" : ""
+              shouldTruncate ? 'truncate-multiline' : ''
             }`}
-            >
+          >
             {parseJobDescription(stripHTML(job.description))[1]?.content}
-            </p>
+          </p>
         </div>
-        {props?.buttonType === "button" && (
+        {props?.buttonType === 'button' && (
           <button
             ref={buttonRef}
-            data-tina-field={tinaField(props, "buttonLabel")}
+            data-tina-field={tinaField(props, 'buttonLabel')}
             className="bg-primary capitalize cursor-pointer px-4 h-[35px] w-auto rounded-[8px] hover:opacity-80 text-white"
           >
             {props.buttonLabel}
           </button>
         )}
-        {props?.buttonType === "border" && (
+        {props?.buttonType === 'border' && (
           <button
             ref={buttonRef}
-            data-tina-field={tinaField(props, "buttonLabel")}
+            data-tina-field={tinaField(props, 'buttonLabel')}
             className="px-4 capitalize h-[35px] w-auto border primary-border rounded-[8px] hover:text-white/80 transition-colors duration-300"
           >
             {props.buttonLabel}

@@ -1,26 +1,27 @@
-import { tinaField } from "tinacms/dist/react";
+import { tinaField } from 'tinacms/dist/react';
+import Image from 'next/image';
 
 export default function PartnerCard({ partner }) {
-    const Wrapper = partner.link ? "a" : "div";
+  const Wrapper = partner.link ? 'a' : 'div';
   return (
     <Wrapper
-      {...(partner.link ? { href: partner.link, target: "_blank" } : {})}
+      {...(partner.link ? { href: partner.link, target: '_blank' } : {})}
       className="flex-1 sm:basis-[45%] lg:basis-[30%] w-[300px] min-w-[300px] max-w-[300px]"
     >
       <div
         className="flex items-center justify-center gap-x-2 border border-white/15 
                    rounded-[8px] bg-[#1A1A1E] w-full h-[120px] px-4 py-6"
-        data-tina-field={tinaField(partner, "logo")}
+        data-tina-field={tinaField(partner, 'logo')}
       >
-        <img
+        <Image
           className="object-contain h-auto max-h-[100px] w-auto"
           src={partner.logo}
-          alt={partner.title || "partner"}
+          alt={partner.title || 'partner'}
+          width={200}
+          height={100}
         />
         {partner.needsTitle && partner.title && (
-          <h1 className="font-bold text-[26px] text-center text-white">
-            {partner.title}
-          </h1>
+          <h1 className="font-bold text-[26px] text-center text-white">{partner.title}</h1>
         )}
       </div>
     </Wrapper>

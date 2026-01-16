@@ -1,26 +1,26 @@
-import { useState } from "react";
-import Modal from "@/components/common/Modal";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
-import { useForm } from "@/hooks/useForm";
-import { fetchWithCsrf } from "@/lib/csrf";
+import { useState } from 'react';
+import Modal from '@/components/common/Modal';
+import Input from '@/components/common/Input';
+import Button from '@/components/common/Button';
+import { useForm } from '@/hooks/useForm';
+import { fetchWithCsrf } from '@/lib/csrf';
 
 function ChangePassword({ onClose, token }) {
   const [success, setSuccess] = useState(null);
 
   const { formData, handleChange, errors, setErrors, allFilled } = useForm({
-    newPassword: "",
-    confirmPassword: "",
+    newPassword: '',
+    confirmPassword: '',
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const obj = {};
     if (formData?.newPassword?.length < 8) {
-      obj.pass = "Password Must be 8 Characters or More";
+      obj.pass = 'Password Must be 8 Characters or More';
     }
     if (formData.newPassword !== formData.confirmPassword) {
-      obj.password = "Make Sure Passwords Match";
+      obj.password = 'Make Sure Passwords Match';
     }
 
     if (obj.password || obj.pass) {
@@ -28,12 +28,12 @@ function ChangePassword({ onClose, token }) {
       return;
     }
     setErrors({});
-    setSuccess("");
+    setSuccess('');
 
     try {
-      const res = await fetchWithCsrf("/api/session/reset-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetchWithCsrf('/api/session/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           token,
           newPassword: formData.newPassword,
@@ -43,12 +43,12 @@ function ChangePassword({ onClose, token }) {
       const data = await res.json();
 
       if (!res.ok) {
-        setErrors({ error: data.error || "Something went wrong" });
+        setErrors({ error: data.error || 'Something went wrong' });
       } else {
-        setSuccess("Password has been reset successfully!");
+        setSuccess('Password has been reset successfully!');
       }
-    } catch (err) {
-      setErrors({ error: "Network error, please try again." });
+    } catch {
+      setErrors({ error: 'Network error, please try again.' });
     }
   };
 

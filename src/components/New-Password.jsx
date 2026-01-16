@@ -1,16 +1,16 @@
-import { useState } from "react";
-import Modal from "@/components/common/Modal";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
-import { useForm } from "@/hooks/useForm";
-import { useAuth } from "@/context/auth";
-import { fetchWithCsrf } from "@/lib/csrf";
+import { useState } from 'react';
+import Modal from '@/components/common/Modal';
+import Input from '@/components/common/Input';
+import Button from '@/components/common/Button';
+import { useForm } from '@/hooks/useForm';
+import { useAuth } from '@/context/auth';
+import { fetchWithCsrf } from '@/lib/csrf';
 
-function NewPasswordModal({ onClose, setShowLoginModal }) {
+function NewPasswordModal({ onClose }) {
   const [success, setSuccess] = useState(null);
-  const {openModal} = useAuth()
+  const { openModal } = useAuth();
   const { formData, handleChange, loading, setLoading, errors, setErrors, allFilled } = useForm({
-    email: "",
+    email: '',
   });
 
   const handleSubmit = async (e) => {
@@ -22,30 +22,30 @@ function NewPasswordModal({ onClose, setShowLoginModal }) {
     setSuccess(null);
 
     try {
-      const res = await fetchWithCsrf("/api/session/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetchWithCsrf('/api/session/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        setSuccess("If this email exists, a reset link has been sent.");
+        setSuccess('If this email exists, a reset link has been sent.');
       } else {
-        setErrors({ error: data.error || "Something went wrong." });
+        setErrors({ error: data.error || 'Something went wrong.' });
       }
     } catch (err) {
       console.error(err);
-      setErrors({ error: "Network error. Please try again." });
+      setErrors({ error: 'Network error. Please try again.' });
     } finally {
       setLoading(false);
     }
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async () => {
     await onClose();
-    await openModal("login");
+    await openModal('login');
   };
 
   return (
@@ -74,7 +74,7 @@ function NewPasswordModal({ onClose, setShowLoginModal }) {
             variant="primary"
             className="w-full"
           >
-            {loading ? "Sending..." : "Reset Password"}
+            {loading ? 'Sending...' : 'Reset Password'}
           </Button>
         </form>
       </div>

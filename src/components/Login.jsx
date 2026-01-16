@@ -1,21 +1,20 @@
-
-import { useEffect, useState } from "react";
-import { handleLogin } from "@/lib/auth_functions";
-import { useAuth } from "@/context/auth";
-import Modal from "@/components/common/Modal";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
-import { useForm } from "@/hooks/useForm";
-import { fetchWithCsrf } from "@/lib/csrf";
-import { isValidEmail } from "@/lib/sanitize";
+import { useEffect, useState } from 'react';
+import { handleLogin } from '@/lib/auth_functions';
+import { useAuth } from '@/context/auth';
+import Modal from '@/components/common/Modal';
+import Input from '@/components/common/Input';
+import Button from '@/components/common/Button';
+import { useForm } from '@/hooks/useForm';
+import { fetchWithCsrf } from '@/lib/csrf';
+import { isValidEmail } from '@/lib/sanitize';
 
 function Login({ onClose, modalData }) {
   const { setUser, openModal } = useAuth();
   const [isToken, setToken] = useState(false);
 
   const { formData, handleChange, loading, setLoading, errors, setErrors, allFilled } = useForm({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   useEffect(() => {
@@ -23,12 +22,12 @@ function Login({ onClose, modalData }) {
       if (token) {
         setToken(true);
         await fetchWithCsrf(`/api/session/verify`, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ token }),
-              });
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
       }
     };
     verify(modalData?.token);
@@ -36,23 +35,23 @@ function Login({ onClose, modalData }) {
 
   const handleRegister = () => {
     onClose();
-    openModal("register");
+    openModal('register');
   };
 
   const handleForgotPassword = () => {
     onClose();
-    openModal("newPassword");
+    openModal('newPassword');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!allFilled) {
-      alert("Please fill all the fields");
+      alert('Please fill all the fields');
       return;
     }
 
     if (!isValidEmail(formData.email)) {
-      setErrors({ error: "Please enter a valid email address" });
+      setErrors({ error: 'Please enter a valid email address' });
       return;
     }
 
@@ -64,8 +63,8 @@ function Login({ onClose, modalData }) {
         return;
       }
       onClose();
-    } catch (err) {
-      alert("Failed to submit.");
+    } catch {
+      alert('Failed to submit.');
     } finally {
       setLoading(false);
     }
@@ -114,7 +113,7 @@ function Login({ onClose, modalData }) {
               variant="primary"
               className="w-full"
             >
-              {loading ? "Sending..." : "Login"}
+              {loading ? 'Sending...' : 'Login'}
             </Button>
 
             <Button type="button" onClick={handleRegister} variant="border" className="w-full">

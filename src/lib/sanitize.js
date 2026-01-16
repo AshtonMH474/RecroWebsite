@@ -6,7 +6,8 @@
 /**
  * RFC 5322 compliant email regex pattern
  */
-const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 /**
  * Phone number pattern (basic validation)
@@ -22,7 +23,7 @@ const htmlEntities = {
   "'": '&#x27;',
   '/': '&#x2F;',
   '`': '&#x60;',
-  '=': '&#x3D;'
+  '=': '&#x3D;',
 };
 
 /**
@@ -74,7 +75,8 @@ export function validatePassword(password) {
   if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {
     return {
       valid: false,
-      error: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)'
+      error:
+        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)',
     };
   }
 
@@ -88,7 +90,7 @@ export function validatePassword(password) {
  */
 export function escapeHtml(str) {
   if (typeof str !== 'string') return str;
-  return str.replace(/[&<>"'`=/]/g, char => htmlEntities[char]);
+  return str.replace(/[&<>"'`=/]/g, (char) => htmlEntities[char]);
 }
 
 /**
@@ -101,6 +103,7 @@ export function sanitizeString(str) {
 
   let sanitized = str.trim();
   sanitized = sanitized.replace(/\0/g, '');
+  // eslint-disable-next-line no-control-regex
   sanitized = sanitized.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
   sanitized = escapeHtml(sanitized);
 
@@ -117,6 +120,7 @@ export function sanitizeMultilineString(str) {
 
   let sanitized = str.trim();
   sanitized = sanitized.replace(/\0/g, '');
+  // eslint-disable-next-line no-control-regex
   sanitized = sanitized.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
   sanitized = escapeHtml(sanitized);
 
@@ -178,8 +182,8 @@ export function sanitizeSignupData(data) {
       firstName: sanitizeString(data.firstName),
       lastName: sanitizeString(data.lastName),
       organization: sanitizeString(data.organization),
-      phone: sanitizeString(data.phone)
-    }
+      phone: sanitizeString(data.phone),
+    },
   };
 }
 
@@ -205,8 +209,8 @@ export function sanitizeLoginData(data) {
     valid: true,
     data: {
       email: sanitizeString(data.email).toLowerCase(),
-      password: data.password
-    }
+      password: data.password,
+    },
   };
 }
 
@@ -220,7 +224,13 @@ export function sanitizeContactFormData(form) {
     return { valid: false, error: 'Invalid input' };
   }
 
-  const requiredValidation = validateRequiredStrings(form, ['email', 'subject', 'message', 'firstName', 'lastName']);
+  const requiredValidation = validateRequiredStrings(form, [
+    'email',
+    'subject',
+    'message',
+    'firstName',
+    'lastName',
+  ]);
   if (!requiredValidation.valid) {
     return { valid: false, error: 'Missing required fields' };
   }
@@ -250,8 +260,8 @@ export function sanitizeContactFormData(form) {
       subject: sanitizeString(form.subject),
       message: sanitizeMultilineString(form.message),
       organization: form.organization ? sanitizeString(form.organization) : null,
-      phone: form.phone ? sanitizeString(form.phone) : null
-    }
+      phone: form.phone ? sanitizeString(form.phone) : null,
+    },
   };
 }
 
@@ -286,8 +296,8 @@ export function sanitizePasswordResetData(data) {
     valid: true,
     data: {
       resetToken: data.resetToken.trim(),
-      newPassword: data.newPassword
-    }
+      newPassword: data.newPassword,
+    },
   };
 }
 
@@ -313,7 +323,7 @@ export function sanitizeDownloadData(data) {
     valid: true,
     data: {
       pdfUrl: sanitizeString(data.pdfUrl),
-      type: sanitizeString(data.type)
-    }
+      type: sanitizeString(data.type),
+    },
   };
 }
