@@ -1,16 +1,13 @@
-import { tinaField } from "tinacms/dist/react";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
-import Link from "next/link";
-import { memo } from "react";
+import { tinaField } from 'tinacms/dist/react';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
+import Link from 'next/link';
+import { memo } from 'react';
 
 function Learn(props) {
-
-
   return (
     <>
       <div
         id={props.learn_id}
-        
         style={{ minHeight: 'auto' }}
         className="bg-black overflow-hidden w-full mt-42 relative z-30 pb-20"
       >
@@ -20,73 +17,58 @@ function Learn(props) {
         >
           <div
             className="px-8 mt-16 w-[95%] max-w-[700px] mb-32 pt-30"
-            data-tina-field={tinaField(props, "headingLearnTeam")}
+            data-tina-field={tinaField(props, 'headingLearnTeam')}
           >
             <TinaMarkdown
               content={props.headingLearnTeam}
               components={{
                 h1: (props) => (
-                  <h1
-                    className="pl-4 md:pl-0 text-[36px] md:text-[60px] font-bold"
-                    {...props}
-                  />
+                  <h1 className="pl-4 md:pl-0 text-[36px] md:text-[60px] font-bold" {...props} />
                 ),
-                bold: (props) => (
-                  <span className="primary-color" {...props} />
-                ),
-                p: (props) => (
-                  <p className="pl-4 md:pl-0 secondary-text mb-6" {...props} />
-                ),
+                bold: (props) => <span className="primary-color" {...props} />,
+                p: (props) => <p className="pl-4 md:pl-0 secondary-text mb-6" {...props} />,
               }}
             />
             <div className="flex gap-x-8 pl-4 md:pl-0">
               {props.buttons?.map((button, i) => {
                 const key = button.id || button.label || i;
                 const baseProps = {
-                  "data-tina-field": tinaField(button, "label"),
+                  'data-tina-field': tinaField(button, 'label'),
                   className:
-                    button.style === "border"
-                      ? "px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-                      : "bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white",
+                    button.style === 'border'
+                      ? 'px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300'
+                      : 'bg-primary capitalize cursor-pointer px-8 py-2 w-auto rounded hover:opacity-80 text-white',
                 };
-                if(button.link){
-                return (
-                  <Link href={button.link} key={key}>
-                    <button {...baseProps}>{button.label}</button>
-                  </Link>
-                );
-              }
+                if (button.link) {
+                  return (
+                    <Link href={button.link} key={key}>
+                      <button {...baseProps}>{button.label}</button>
+                    </Link>
+                  );
+                }
               })}
             </div>
           </div>
 
-          <div
-           
-            className="flex  flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8 lg:pr-30"
-          >
+          <div className="flex  flex-col items-center px-8 w-[95%] sm:w-auto lg:w-[80%] xl:w-auto lg:mt-[120px] gap-y-8 lg:pr-30">
             {props?.learnTeamImages?.map((image, i) => (
-              <div key={image.id || image.src || i} 
-              data-tina-field={tinaField(image, "src")}  
-              style={{
-                  top: image?.top ?? "auto",
-                  left: image?.left ?? "auto",
-                  right: image?.right ?? "auto",
-                  bottom: image?.bottom ?? "auto",
-                  zIndex: image?.zIndex ?? "auto"}} className="aspect-[16/9] w-full md:max-w-[425px] md:relative  overflow-hidden rounded-[20px] ">
-              <img
-               
-                src={image.src}
-                alt={image.alt || `team image ${i + 1}`}
-                className=" object-cover"
-                
+              <div
+                key={image.id || image.src || i}
+                data-tina-field={tinaField(image, 'src')}
+                className="aspect-[16/9] w-full md:max-w-[425px] overflow-hidden rounded-[20px] md:relative"
                 style={{
-                  top: image?.top ?? "auto",
-                  left: image?.left ?? "auto",
-                  right: image?.right ?? "auto",
-                  bottom: image?.bottom ?? "auto",
-                  zIndex: image?.zIndex ?? "auto",
+                  top: image?.top ?? undefined,
+                  left: image?.left ?? undefined,
+                  right: image?.right ?? undefined,
+                  bottom: image?.bottom ?? undefined,
+                  zIndex: image?.zIndex ?? undefined,
                 }}
-              />
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt || `team image ${i + 1}`}
+                  className="object-cover w-full h-full"
+                />
               </div>
             ))}
           </div>
@@ -99,4 +81,3 @@ function Learn(props) {
 }
 
 export default memo(Learn);
-

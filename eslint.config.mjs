@@ -1,14 +1,103 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextPlugin from "@next/eslint-plugin-next";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import js from "@eslint/js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
-
-export default eslintConfig;
+export default [
+  js.configs.recommended,
+  {
+    files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
+    plugins: {
+      react: reactPlugin,
+      "react-hooks": reactHooksPlugin,
+      "@next/next": nextPlugin,
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        React: "readonly",
+        JSX: "readonly",
+        process: "readonly",
+        console: "readonly",
+        module: "readonly",
+        require: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+        Buffer: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        fetch: "readonly",
+        URL: "readonly",
+        URLSearchParams: "readonly",
+        FormData: "readonly",
+        window: "readonly",
+        document: "readonly",
+        navigator: "readonly",
+        localStorage: "readonly",
+        sessionStorage: "readonly",
+        HTMLElement: "readonly",
+        Element: "readonly",
+        Event: "readonly",
+        MouseEvent: "readonly",
+        KeyboardEvent: "readonly",
+        ResizeObserver: "readonly",
+        IntersectionObserver: "readonly",
+        MutationObserver: "readonly",
+        requestAnimationFrame: "readonly",
+        cancelAnimationFrame: "readonly",
+        getComputedStyle: "readonly",
+        matchMedia: "readonly",
+        alert: "readonly",
+        confirm: "readonly",
+        prompt: "readonly",
+        atob: "readonly",
+        btoa: "readonly",
+        crypto: "readonly",
+        performance: "readonly",
+        Image: "readonly",
+        File: "readonly",
+        FileReader: "readonly",
+        Blob: "readonly",
+        AbortController: "readonly",
+        AbortSignal: "readonly",
+        Headers: "readonly",
+        Request: "readonly",
+        Response: "readonly",
+        EventSource: "readonly",
+        WebSocket: "readonly",
+        location: "readonly",
+        history: "readonly",
+      },
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+    rules: {
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+    },
+  },
+  {
+    ignores: [
+      ".next/**",
+      "node_modules/**",
+      "tina/__generated__/**",
+      "public/**",
+      "*.config.js",
+      "*.config.mjs",
+    ],
+  },
+];
