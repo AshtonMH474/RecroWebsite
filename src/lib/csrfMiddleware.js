@@ -1,15 +1,43 @@
-import csrf from 'csurf';
+import { doubleCsrf } from 'csrf-csrf';
+import { serialize, parse } from 'cookie';
 
-// Initialize CSRF protection with cookie-based tokens
-const csrfProtection = csrf({
-  cookie: {
+const secret = process.env.CSRF_SECRET;
+
+const { generateCsrfToken: generateToken, doubleCsrfProtection } = doubleCsrf({
+  getSecret: () => secret,
+  getSessionIdentifier: () => '',
+  cookieName: '__csrf',
+  cookieOptions: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict', // Changed from 'lax' to 'strict' for better security
-    path: '/', // Ensure cookie is accessible to all routes
-    maxAge: 3600, // 1 hour in seconds
-  }
+    sameSite: 'lax',
+    path: '/',
+  },
+  getTokenFromRequest: (req) => req.headers['x-csrf-token'],
 });
+
+/**
+ * Add Express-style res.cookie() to Next.js response
+ */
+function addCookieMethod(res) {
+  if (!res.cookie) {
+    res.cookie = (name, value, options = {}) => {
+      const cookieStr = serialize(name, value, options);
+      const existing = res.getHeader('Set-Cookie') || [];
+      const cookies = Array.isArray(existing) ? existing : [existing];
+      res.setHeader('Set-Cookie', [...cookies, cookieStr]);
+    };
+  }
+}
+
+/**
+ * Parse cookies from request
+ */
+function parseCookies(req) {
+  if (!req.cookies) {
+    req.cookies = parse(req.headers.cookie || '');
+  }
+}
 
 /**
  * CSRF Protection Middleware
@@ -18,37 +46,32 @@ const csrfProtection = csrf({
  *
  * @param {Function} handler - The API route handler to protect
  * @returns {Function} - Wrapped handler with CSRF validation
- *
- * @example
- * import { withCsrfProtection } from '@/lib/csrfMiddleware';
- *
- * export default withCsrfProtection(async function handler(req, res) {
- *   // CSRF token has been validated at this point
- *   // Your route logic here
- * });
  */
 export function withCsrfProtection(handler) {
-  return (req, res) => {
-    // Only validate CSRF for state-changing methods
+  return async (req, res) => {
+    addCookieMethod(res);
+    parseCookies(req);
+
     const statefulMethods = ['POST', 'PUT', 'DELETE', 'PATCH'];
 
     if (!statefulMethods.includes(req.method)) {
-      // GET, HEAD, OPTIONS don't need CSRF protection
       return handler(req, res);
     }
 
-    // Apply CSRF protection
-    csrfProtection(req, res, (err) => {
-      if (err) {
-        console.error('CSRF validation failed:', err.message);
-        return res.status(403).json({
-          error: 'CSRF token validation failed',
-          message: 'Invalid or missing CSRF token'
-        });
-      }
-
-      // CSRF token is valid, proceed to handler
-      return handler(req, res);
+    return new Promise((resolve) => {
+      doubleCsrfProtection(req, res, (err) => {
+        if (err) {
+          console.error('CSRF validation failed:', err.message);
+          resolve(
+            res.status(403).json({
+              error: 'CSRF token validation failed',
+              message: 'Invalid or missing CSRF token',
+            })
+          );
+        } else {
+          resolve(handler(req, res));
+        }
+      });
     });
   };
 }
@@ -56,20 +79,12 @@ export function withCsrfProtection(handler) {
 /**
  * Generate CSRF Token for Forms
  *
- * Use this in API routes that need to generate a token.
- *
  * @param {Object} req - Request object
  * @param {Object} res - Response object
- * @returns {Promise<string>} - CSRF token
+ * @returns {string} - CSRF token
  */
 export function generateCsrfToken(req, res) {
-  return new Promise((resolve, reject) => {
-    csrfProtection(req, res, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(req.csrfToken());
-      }
-    });
-  });
+  addCookieMethod(res);
+  parseCookies(req);
+  return generateToken(req, res);
 }
