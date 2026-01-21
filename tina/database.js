@@ -1,11 +1,15 @@
-import { GitHubProvider } from "tinacms-gitprovider-github";
-import { MongodbLevel } from "mongodb-level";
-import { createLocalDatabase, createDatabase } from "@tinacms/datalayer";
-import fs from "fs";
-import os from "os";
-import path from "path";
+import { GitHubProvider } from 'tinacms-gitprovider-github';
+import { MongodbLevel } from 'mongodb-level';
+import { createLocalDatabase, createDatabase } from '@tinacms/datalayer';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import { EventEmitter } from 'events';
 
-const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
+// Increase max listeners to avoid warning during parallel builds
+EventEmitter.defaultMaxListeners = 20;
+
+const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
 
 // Cache certificate file paths to avoid repeated writes
 let cachedMongoUrl = null;
@@ -17,17 +21,17 @@ function buildMongoUrl() {
   }
 
   const tmpDir = os.tmpdir();
-  const caPath = path.join(tmpDir, "tina-ca.pem");
-  const keyPath = path.join(tmpDir, "tina-mongo.pem");
+  const caPath = path.join(tmpDir, 'tina-ca.pem');
+  const keyPath = path.join(tmpDir, 'tina-mongo.pem');
 
   // Only write files if they don't exist (check before decode to save CPU)
   if (!fs.existsSync(caPath)) {
-    const ca = Buffer.from(process.env.MONGODB_CA_B64, "base64").toString("utf-8");
+    const ca = Buffer.from(process.env.MONGODB_CA_B64, 'base64').toString('utf-8');
     fs.writeFileSync(caPath, ca, { mode: 0o600 }); // Secure file permissions
   }
 
   if (!fs.existsSync(keyPath)) {
-    const key = Buffer.from(process.env.MONGODB_KEY_B64, "base64").toString("utf-8");
+    const key = Buffer.from(process.env.MONGODB_KEY_B64, 'base64').toString('utf-8');
     fs.writeFileSync(keyPath, key, { mode: 0o600 }); // Secure file permissions
   }
 
@@ -54,5 +58,3 @@ export default isLocal
       }),
       // other TinaCMS config here...
     });
-
-

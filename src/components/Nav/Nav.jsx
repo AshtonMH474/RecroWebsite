@@ -13,43 +13,42 @@ export default function Nav({ res }) {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const router = useRouter();
-  
 
   useEffect(() => {
     if (!router.isReady) return;
 
-    if (router.asPath.includes("#resetpassword")) {
-      const hash = router.asPath.split("#")[1];
+    if (router.asPath.includes('#resetpassword')) {
+      const hash = router.asPath.split('#')[1];
       let token = null;
 
       if (hash) {
-        const params = new URLSearchParams(hash.split("?")[1]);
-        token = params.get("token");
+        const params = new URLSearchParams(hash.split('?')[1]);
+        token = params.get('token');
       }
 
       if (token) {
-        openModal("changePassword", { token });
-        router.replace("/", undefined, { shallow: true });
+        openModal('changePassword', { token });
+        router.replace('/', undefined, { shallow: true });
       }
     }
-    if(router.asPath.includes('#verify')){
-      const hash = router.asPath.split("#")[1];
+    if (router.asPath.includes('#verify')) {
+      const hash = router.asPath.split('#')[1];
       let token = null;
 
       if (hash) {
-        const params = new URLSearchParams(hash.split("?")[1]);
-        token = params.get("token");
+        const params = new URLSearchParams(hash.split('?')[1]);
+        token = params.get('token');
       }
 
       if (token) {
-        openModal("login", { token });
-        router.replace("/", undefined, { shallow: true });
+        openModal('login', { token });
+        router.replace('/', undefined, { shallow: true });
       }
     }
-  }, [router.isReady]);
+  }, [router.isReady, router.asPath, openModal, router]);
 
   // ... menu logic here ...
-    const toggleMenu = () => {
+  const toggleMenu = () => {
     if (menuOpen) {
       setMenuOpen(false);
       setTimeout(() => setIsVisible(false), 300);
@@ -66,12 +65,7 @@ export default function Nav({ res }) {
         <div className="lg:hidden">
           <MenuToggle menuOpen={menuOpen} toggleMenu={toggleMenu} buttonRef={buttonRef} />
         </div>
-        <DesktopMenu
-          links={res.links}
-          res={res}
-          user={user}
-          onLogin={() => openModal("login")}
-        />
+        <DesktopMenu links={res.links} res={res} user={user} onLogin={() => openModal('login')} />
       </div>
       <MobileMenu
         isVisible={isVisible}
@@ -81,7 +75,7 @@ export default function Nav({ res }) {
         res={res}
         toggleMenu={toggleMenu}
         user={user}
-        onLogin={() => openModal("login")}
+        onLogin={() => openModal('login')}
       />
       <div className="h-10" />
     </>

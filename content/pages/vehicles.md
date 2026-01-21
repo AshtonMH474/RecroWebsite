@@ -68,6 +68,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
       - title: Title
         icon: FaAlipay
         description: >
@@ -75,6 +76,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
       - title: Title
         icon: FaAlignJustify
         description: >
@@ -82,6 +84,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
       - title: Title
         icon: FaArchive
         description: >
@@ -89,6 +92,7 @@ blocks:
           eget sapien at risus varius facilisis. In hac habitasse platea
           dictumst. Praesent tincidunt, purus at pulvinar fermentum, nulla massa
           luctus tortor,
+        content: ''
     _template: cards
 ---
 

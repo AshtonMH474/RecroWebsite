@@ -3,14 +3,20 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { isFreeEmail } from 'free-email-domains-list';
 import { createMailer } from "@/lib/mailer";
+import { withCsrfProtection } from "@/lib/csrfMiddleware";
+import { withRateLimit } from "@/lib/rateLimit";
+import { sanitizeSignupData } from "@/lib/sanitize";
 
-
-
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
-  const { email, password, firstName,lastName,organization,phone } = req.body;
- 
+  // Validate and sanitize input
+  const result = sanitizeSignupData(req.body);
+  if (!result.valid) {
+    return res.status(400).json({ error: result.error });
+  }
+
+  const { email, password, firstName, lastName, organization, phone } = result.data;
 
   // Block free email domains
   if (isFreeEmail(email)) {
@@ -54,3 +60,10 @@ export default async function handler(req, res) {
 
   res.status(201).json({ ok: true });
 }
+
+
+export default withRateLimit(withCsrfProtection(handler), {
+    windowMs: 60 * 1000,
+    max: 5,
+    message: 'Too many deal submissions. Please wait a minute before trying again.'
+});

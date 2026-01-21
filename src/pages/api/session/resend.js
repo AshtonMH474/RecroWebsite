@@ -1,12 +1,19 @@
 import clientPromise from "@/lib/mongodb";
 import crypto from "crypto";
 import { createMailer } from "@/lib/mailer";
-
-export default async function handler(req, res) {
+import { withCsrfProtection } from "@/lib/csrfMiddleware";
+import { withRateLimit } from "@/lib/rateLimit";
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   const { email } = req.body;
-  if (!email) return res.status(400).json({ error: "Email required" });
+  if (typeof email !== 'string') {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+
+  if (!email) {
+    return res.status(400).json({ error: "Email required" });
+  }
 
   const client = await clientPromise;
   const db = client.db(process.env.MONGODB_DB_NAME);
@@ -47,3 +54,8 @@ export default async function handler(req, res) {
 
   return res.json({ ok: true });
 }
+export default withRateLimit(withCsrfProtection(handler), {
+    windowMs: 60 * 1000,
+    max: 5,
+    message: 'Too many deal submissions. Please wait a minute before trying again.'
+});

@@ -1,54 +1,45 @@
 // components/PdfModal.tsx
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 
 export default function PdfModal({ solution, onClose }) {
   const pdfUrl = solution?.mainPdf || solution?.file;
-  
 
   useEffect(() => {
-
     const isMobile =
-      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-      window.innerWidth < 768;
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
 
     if (isMobile) {
       // Open in a new tab on mobile
-      window.open(pdfUrl, "_blank");
+      window.open(pdfUrl, '_blank');
       // Immediately close the modal since we don’t need it
       onClose();
       return;
     }
 
-
     const scrollY = window.scrollY;
 
     // Lock scroll and preserve current position
-    document.body.style.position = "fixed";
+    document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.overflow = "hidden";
-    document.body.style.width = "100%";
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+    document.body.style.width = '100%';
 
     return () => {
-        
       // Restore scroll position
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.overflow = "";
-      document.body.style.width = "";
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+      document.body.style.width = '';
       window.scrollTo(0, scrollY); // restore to the same spot
     };
-  }, []);
+  }, [onClose, pdfUrl]);
 
-
-  if (
-    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-    window.innerWidth < 768
-  ) {
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768) {
     return null;
   }
 
@@ -69,16 +60,10 @@ export default function PdfModal({ solution, onClose }) {
           className="bg-white w-[80%] h-[70%] rounded-lg shadow-xl relative flex flex-col "
           onClick={(e) => e.stopPropagation()} // stop closing when clicking inside
         >
-         
-
           {/* PDF iframe */}
           <embed src={pdfUrl} type="application/pdf" className="w-full flex-1" />
-
-            
-        
         </motion.div>
       </motion.div>
     </AnimatePresence>
   );
 }
-

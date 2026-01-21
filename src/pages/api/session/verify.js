@@ -1,7 +1,9 @@
 import clientPromise from "@/lib/mongodb";
-
-export default async function handler(req, res) {
-  const { token } = req.query;
+import { withCsrfProtection } from "@/lib/csrfMiddleware";
+import { withRateLimit } from "@/lib/rateLimit";
+ async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).end();
+  const { token } = req.body;
   if (!token) return res.status(400).send("Invalid token");
 
   const client = await clientPromise;
@@ -106,3 +108,8 @@ export default async function handler(req, res) {
     return res.status(500).send("Email verification failed due to HubSpot sync error. Please try again or contact support.");
   }
 }
+export default withRateLimit(withCsrfProtection(handler), {
+    windowMs: 60 * 1000,
+    max: 5,
+    message: 'Too many deal submissions. Please wait a minute before trying again.'
+});

@@ -2,11 +2,21 @@ import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { setCookie } from "cookies-next";
-export default async function handler(req, res) {
+import { withCsrfProtection } from "@/lib/csrfMiddleware";
+import { withRateLimit } from "@/lib/rateLimit";
+import { sanitizeLoginData } from "@/lib/sanitize";
+
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   try {
-    const { email, password } = req.body;
+    // Validate and sanitize input
+    const result = sanitizeLoginData(req.body);
+    if (!result.valid) {
+      return res.status(400).json({ error: result.error });
+    }
+
+    const { email, password } = result.data;
 
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB_NAME);
@@ -36,3 +46,8 @@ export default async function handler(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
+export default withRateLimit(withCsrfProtection(handler), {
+    windowMs: 60 * 1000,
+    max: 10,
+    message: 'Too many deal submissions. Please wait a minute before trying again.'
+});

@@ -1,19 +1,29 @@
 import clientPromise from "@/lib/mongodb";
+import { withCsrfProtection } from "@/lib/csrfMiddleware";
+import { authenticateUser } from "@/lib/authMiddleware";
+import { sanitizeDownloadData } from "@/lib/sanitize";
 
-export default async function handler(req, res) {
+ async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const { email, pdfUrl, type } = req.body;
-
-    if (!email || !pdfUrl || !type ) {
-      return res
-        .status(400)
-        .json({ error: "Missing email, pdfUrl, or type" });
+    const auth = await authenticateUser(req)
+    if (!auth.authenticated || !auth.user) {
+          return res.status(401).json({ error: "Unauthorized" });
     }
-    
+    const email = auth.user.email;
+    if (!email) return res.status(400).json({ error: "Missing email" });
+
+    // Validate and sanitize input
+    const result = sanitizeDownloadData(req.body);
+    if (!result.valid) {
+      return res.status(400).json({ error: result.error });
+    }
+
+    const { pdfUrl, type } = result.data;
+
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB_NAME);
 
@@ -76,3 +86,5 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+export default withCsrfProtection(handler);

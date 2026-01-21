@@ -3,6 +3,8 @@ import { tinaField } from "tinacms/dist/react";
 import Link from "next/link";
 import { handleSignout } from "@/lib/auth_functions";
 import { useAuth } from "@/context/auth";
+import { handleIdScroll } from "@/utils/navigationHelpers";
+import AuthButtons from "./AuthButtons";
 
 export default function DesktopMenu({ links, res, user }) {
   const { openModal, setUser } = useAuth();
@@ -53,26 +55,11 @@ export default function DesktopMenu({ links, res, user }) {
                 <div
                   className="capitalize py-2 cursor-pointer text-white"
                   data-tina-field={tinaField(link, "label")}
-                  onClick={() => {
-                    if (typeof window !== "undefined") {
-                      const id = link.linkOptions.id;
-                      const scrollPos =
-                        link.linkOptions.scrollPosition || "start";
-
-                      // Navigate if on a different page
-                      if (window.location.pathname !== link.link) {
-                        window.location.href = `${link.link.replace(
-                          /^\/?/,
-                          "/"
-                        )}#${id}`;
-                        return;
-                      }
-
-                      // Scroll if already on the same page
-                      const el = document.getElementById(id);
-                      el?.scrollIntoView({ behavior: "smooth", block: scrollPos });
-                    }
-                  }}
+                  onClick={() => handleIdScroll(
+                    link.link,
+                    link.linkOptions.id,
+                    link.linkOptions.scrollPosition || "start"
+                  )}
                 >
                   {link.label}
                 </div>
@@ -104,26 +91,11 @@ export default function DesktopMenu({ links, res, user }) {
                           key={subKey}
                           className="w-full capitalize text-left px-4 pr-20 py-2 text-sm text-white cursor-pointer"
                           data-tina-field={tinaField(sublink, "label")}
-                          onClick={() => {
-                            if (typeof window !== "undefined") {
-                              const id = sublink.linkOptions.id;
-                              const scrollPos =
-                                sublink.linkOptions.scrollPosition || "start";
-
-                              if (window.location.pathname !== link.link) {
-                                window.location.href = `${link.link.replace(
-                                  /^\/?/,
-                                  "/"
-                                )}#${id}`;
-                              } else {
-                                const el = document.getElementById(id);
-                                el?.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: scrollPos,
-                                });
-                              }
-                            }
-                          }}
+                          onClick={() => handleIdScroll(
+                            link.link,
+                            sublink.linkOptions.id,
+                            sublink.linkOptions.scrollPosition || "start"
+                          )}
                         >
                           <span className="relative inline-block">
                             <span className="after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#B55914] after:transition-all after:duration-300 hover:after:w-full">
@@ -181,46 +153,15 @@ export default function DesktopMenu({ links, res, user }) {
       {/* --------------------------------------------------- */}
       {/* AUTH BUTTONS */}
       {/* --------------------------------------------------- */}
-
-      {!user && res?.authStyle === "button" && (
-        <button
-          onClick={() => openModal("login")}
-          className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
-          data-tina-field={tinaField(res, "authLabelLogin")}
-        >
-          {res.authLabelLogin}
-        </button>
-      )}
-
-      {!user && res?.authStyle === "border" && (
-        <button
-          onClick={() => openModal("login")}
-          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-          data-tina-field={tinaField(res, "authLabelLogin")}
-        >
-          {res.authLabelLogin}
-        </button>
-      )}
-
-      {user && res?.authStyle === "button" && (
-        <button
-          onClick={() => handleSignout(setUser)}
-          className="bg-primary text-white px-8 py-2 rounded hover:opacity-80 capitalize cursor-pointer"
-          data-tina-field={tinaField(res, "authLabelSignout")}
-        >
-          {res.authLabelSignout}
-        </button>
-      )}
-
-      {user && res?.authStyle === "border" && (
-        <button
-          onClick={() => handleSignout(setUser)}
-          className="px-8 capitalize py-2 border primary-border rounded hover:text-white/80 transition-colors duration-300"
-          data-tina-field={tinaField(res, "authLabelSignout")}
-        >
-          {res.authLabelSignout}
-        </button>
-      )}
+      <AuthButtons
+        user={user}
+        authStyle={res?.authStyle}
+        authLabelLogin={res?.authLabelLogin}
+        authLabelSignout={res?.authLabelSignout}
+        openModal={openModal}
+        handleSignout={handleSignout}
+        setUser={setUser}
+      />
     </div>
   );
 }

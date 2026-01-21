@@ -18,14 +18,14 @@ const pages = {
   ui: {
     router: (props) => {
   // Remove the file extension
-  const slug = props.document._sys.relativePath.replace(/\.md$/, "");
+      const slug = props.document._sys.relativePath.replace(/\.md$/, "");
 
-  // If it's `home.md`, route to root
-  if (slug === "home") return "/";
+      // If it's `home.md`, route to root
+      if (slug === "home") return "/";
 
-  // Otherwise, convert folder paths like `careers/values` → `/careers/values`
-  return `/${slug}`;
-}
+      // Otherwise, convert folder paths like `careers/values` → `/careers/values`
+      return `/${slug}`;
+    }
   },
   fields: [
     {

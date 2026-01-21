@@ -11,20 +11,14 @@ export default function useScrollToHash(blocks = [], idFields = [], delay = 1000
       idFields.some((key) => block?.[key] === hash)
     );
     if (matchingBlock) {
-      
       requestAnimationFrame(() => {
         setTimeout(() => {
           const el = document.getElementById(hash);
-          console.log(matchingBlock)
-          
           if (el) {
-          
-                el?.scrollIntoView({ behavior: "smooth", block: matchingBlock?.scroll || 'start' });
-                if (window.history.replaceState) {
-                window.history.replaceState(null, "", window.location.pathname + window.location.search);
-                }
-          
-            
+            el.scrollIntoView({ behavior: "smooth", block: matchingBlock?.scroll || 'start' });
+            if (window.history.replaceState) {
+              window.history.replaceState(null, "", window.location.pathname + window.location.search);
+            }
           }
         }, delay);
       });
