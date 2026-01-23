@@ -83,32 +83,32 @@ function BG() {
   }, []);
 
   return (
-    <div
-      ref={containerRef} // container reference
-      className="background Home overflow-hidden bg-fixed bg-center bg-cover bg-contain flex flex-col items-end" // Tailwind classes
-    >
-      {[1, 2, 3, 4, 5].map((n, i) => (
-        <div
-          key={n} // key for React list rendering
-          ref={(el) => (gearsRef.current[i] = el)} // store reference to this gear div
-          className={`mr-10 gear${n} gears`} // margin-right and gear-specific class
-          style={{ transformOrigin: 'center center' }} // rotate around the center
-        >
-          <GearIcon
-            className={
-              n === 1
-                ? 'h-80 w-80 text-black'
-                : n === 2
-                  ? 'h-50 w-50'
-                  : n === 3
-                    ? 'h-65 w-65 text-black'
-                    : n === 4
-                      ? 'h-80 w-80'
-                      : 'h-105 w-105 text-black'
-            } // size & color for each gear
-          />
-        </div>
-      ))}
+    // iOS 18 Safari workaround - outer wrapper
+    <div className="background-wrapper">
+      <div ref={containerRef} className="background Home overflow-hidden flex flex-col items-end">
+        {[1, 2, 3, 4, 5].map((n, i) => (
+          <div
+            key={n}
+            ref={(el) => (gearsRef.current[i] = el)}
+            className={`mr-10 gear${n} gears`}
+            style={{ transformOrigin: 'center center' }}
+          >
+            <GearIcon
+              className={
+                n === 1
+                  ? 'h-80 w-80 text-black'
+                  : n === 2
+                    ? 'h-50 w-50'
+                    : n === 3
+                      ? 'h-65 w-65 text-black'
+                      : n === 4
+                        ? 'h-80 w-80'
+                        : 'h-105 w-105 text-black'
+              }
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

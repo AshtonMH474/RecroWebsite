@@ -25,18 +25,6 @@ body {
   position: relative;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  top: -100px;
-  left: 0;
-  right: 0;
-  bottom: -100px;
-  background: inherit;
-  z-index: -100;
-  pointer-events: none;
-}
-
 #__next {
   background: transparent;
 }
@@ -50,15 +38,31 @@ body::before {
 *::after {
   box-sizing: border-box;
 }
+/* iOS 18 Safari workaround - outer container */
+.background-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  display: block;
+  width: 100vw;
+  z-index: -20;
+  pointer-events: none;
+}
+
+/* iOS 18 Safari workaround - inner container with actual background */
 .background.Home {
   position: fixed;
-  inset: 0;
-  z-index: -20;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  background: transparent;
+  background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
   pointer-events: none;
 }
 
