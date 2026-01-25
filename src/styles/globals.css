@@ -18,9 +18,7 @@ body,
 
 html {
   overflow-x: hidden;
-  /* Use the gradient directly on html to cover entire screen including iOS safe areas */
-  background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
-  background-attachment: fixed;
+  background: #000000;
 }
 
 body {
@@ -49,18 +47,20 @@ body {
 /* Background container */
 .background.Home {
   position: fixed;
-  top: 0;
+  top: -50px; /* Extend above viewport */
   left: 0;
   right: 0;
-  /* Use bottom: 0 instead of height to extend to actual screen edge on iOS */
-  bottom: 0;
-  /* Fallback height values */
-  min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport - covers iOS Safari chrome */
-  min-height: -webkit-fill-available; /* iOS Safari fallback */
+  bottom: -100px; /* Extend below viewport to cover iOS Safari URL bar area */
   background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
   z-index: -20;
   pointer-events: none;
+}
+
+/* iOS Safari specific fix using @supports */
+@supports (-webkit-touch-callout: none) {
+  .background.Home {
+    bottom: -150px; /* Extra extension for iOS */
+  }
 }
 
 .will-change-transform {
@@ -77,19 +77,11 @@ body {
 }
 
 @media (max-width: 1150px) {
-  html {
-    background: radial-gradient(circle at 120% 185%, #b55a14 15%, #000000 85%);
-    background-attachment: fixed;
-  }
   .background.Home {
     background: radial-gradient(circle at 120% 185%, #b55a14 15%, #000000 85%);
   }
 }
 @media (max-width: 800px) {
-  html {
-    background: radial-gradient(circle at 120% 185%, #b55a14 15%, #000000 90%);
-    background-attachment: fixed;
-  }
   .background.Home {
     background: radial-gradient(circle at 120% 185%, #b55a14 15%, #000000 90%);
   }
