@@ -5,27 +5,6 @@ function BG() {
   const containerRef = useRef(null);
   const gearsRef = useRef([]);
 
-  // iOS viewport height fix
-  useEffect(() => {
-    const setAppHeight = () => {
-      // Get the actual viewport height (works on iOS Safari)
-      const vh = window.innerHeight;
-      document.documentElement.style.setProperty('--app-height', `${vh}px`);
-    };
-
-    // Set on mount
-    setAppHeight();
-
-    // Update on resize and orientation change
-    window.addEventListener('resize', setAppHeight);
-    window.addEventListener('orientationchange', setAppHeight);
-
-    return () => {
-      window.removeEventListener('resize', setAppHeight);
-      window.removeEventListener('orientationchange', setAppHeight);
-    };
-  }, []);
-
   useEffect(() => {
     if (!containerRef.current) return;
 
