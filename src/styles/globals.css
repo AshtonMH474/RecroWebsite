@@ -20,7 +20,7 @@ html {
 body {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
+  /* background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%); */
   min-height: 100lvh;
   position: relative;
 }
@@ -51,7 +51,20 @@ body {
   pointer-events: none;
 }
 
-/* iOS 18 Safari workaround - inner container with actual background */
+/* Background gradient layer - extends like the gears */
+.background-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
+  pointer-events: none;
+}
+
+/* iOS 18 Safari workaround - inner container for gears */
 .background.Home {
   position: fixed;
   top: 0;
@@ -62,7 +75,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
+  background: transparent;
   pointer-events: none;
 }
 
