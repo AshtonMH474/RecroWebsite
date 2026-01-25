@@ -78,7 +78,7 @@ function BG() {
   }, []);
 
   return (
-    <div ref={containerRef} className="background Home overflow-hidden flex flex-col items-end">
+    <div ref={containerRef} className="background Home flex flex-col items-end">
       {[1, 2, 3, 4, 5].map((n, i) => (
         <div
           key={n}
