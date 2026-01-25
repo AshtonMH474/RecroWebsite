@@ -79,6 +79,8 @@ function BG() {
 
   return (
     <div ref={containerRef} className="background Home flex flex-col items-end">
+      {/* Background gradient layer - extends for iOS Safari */}
+      <div className="bg-gradient" />
       {[1, 2, 3, 4, 5].map((n, i) => (
         <div
           key={n}

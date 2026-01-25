@@ -55,16 +55,16 @@ body {
   overflow: visible; /* Allow gears to overflow */
 }
 
-/* Pseudo-element for the gradient background that extends for iOS */
-.background.Home::before {
-  content: '';
-  position: absolute;
+/* Background gradient layer - extends for iOS Safari */
+.bg-gradient {
+  position: fixed;
   top: -50px;
   left: 0;
   right: 0;
   bottom: -150px;
   background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
-  z-index: -1; /* Base layer within the container */
+  z-index: -30; /* Behind the .background.Home container (-20) */
+  pointer-events: none;
 }
 
 .will-change-transform {
@@ -81,12 +81,12 @@ body {
 }
 
 @media (max-width: 1150px) {
-  .background.Home::before {
+  .bg-gradient {
     background: radial-gradient(circle at 120% 185%, #b55a14 15%, #000000 85%);
   }
 }
 @media (max-width: 800px) {
-  .background.Home::before {
+  .bg-gradient {
     background: radial-gradient(circle at 120% 185%, #b55a14 15%, #000000 90%);
   }
 }
