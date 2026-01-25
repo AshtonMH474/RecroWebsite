@@ -86,7 +86,7 @@ function BG() {
     // iOS 18 Safari workaround - outer wrapper
     <div className="background-wrapper">
       {/* Gradient layer - inside wrapper so it extends like gears */}
-      <div className="background-gradient" />
+      {/* <div className="background-gradient" /> */}
       <div ref={containerRef} className="background Home overflow-hidden flex flex-col items-end">
         {[1, 2, 3, 4, 5].map((n, i) => (
           <div

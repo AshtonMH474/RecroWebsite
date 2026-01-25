@@ -52,7 +52,7 @@ body {
 }
 
 /* Background gradient layer - extends like the gears */
-.background-gradient {
+/* .background-gradient {
   position: fixed;
   top: 0;
   left: 0;
@@ -62,7 +62,7 @@ body {
   height: 100vh;
   background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
   pointer-events: none;
-}
+} */
 
 /* iOS 18 Safari workaround - inner container for gears */
 .background.Home {
