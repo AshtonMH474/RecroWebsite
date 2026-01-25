@@ -58,13 +58,14 @@ body {
 /* Pseudo-element for the gradient background that extends for iOS */
 .background.Home::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: -50px;
   left: 0;
   right: 0;
-  bottom: -150px; /* Extend below for iOS Safari */
+  bottom: -150px;
   background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
-  z-index: -1;
+  z-index: -21; /* Behind parent's z-index of -20 */
+  pointer-events: none;
 }
 
 .will-change-transform {
