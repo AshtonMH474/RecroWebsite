@@ -58,7 +58,7 @@ body {
 /* Pseudo-element for the gradient background that extends for iOS */
 .background.Home::before {
   content: '';
-  position: fixed;
+  position: absolute;
   top: -50px;
   left: 0;
   right: 0;
