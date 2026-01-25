@@ -2,17 +2,33 @@ import { useRef, useEffect } from 'react';
 import GearIcon from './GearIcon';
 
 function BG() {
-  // Reference to the container div (not strictly needed here but useful if you extend functionality)
   const containerRef = useRef(null);
-
-  // Array of references to each gear div so we can update their rotation directly
   const gearsRef = useRef([]);
 
+  // iOS viewport height fix
   useEffect(() => {
-    // Guard clause: if the container hasn't mounted, do nothing
+    const setAppHeight = () => {
+      // Get the actual viewport height (works on iOS Safari)
+      const vh = window.innerHeight;
+      document.documentElement.style.setProperty('--app-height', `${vh}px`);
+    };
+
+    // Set on mount
+    setAppHeight();
+
+    // Update on resize and orientation change
+    window.addEventListener('resize', setAppHeight);
+    window.addEventListener('orientationchange', setAppHeight);
+
+    return () => {
+      window.removeEventListener('resize', setAppHeight);
+      window.removeEventListener('orientationchange', setAppHeight);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!containerRef.current) return;
 
-    // Pull the current list of gear elements
     const gears = gearsRef.current;
 
     // lastScrollY tracks the last scroll position
@@ -83,34 +99,29 @@ function BG() {
   }, []);
 
   return (
-    // iOS 18 Safari workaround - outer wrapper
-    <div className="background-wrapper">
-      {/* Gradient layer - inside wrapper so it extends like gears */}
-      {/* <div className="background-gradient" /> */}
-      <div ref={containerRef} className="background Home overflow-hidden flex flex-col items-end">
-        {[1, 2, 3, 4, 5].map((n, i) => (
-          <div
-            key={n}
-            ref={(el) => (gearsRef.current[i] = el)}
-            className={`mr-10 gear${n} gears`}
-            style={{ transformOrigin: 'center center' }}
-          >
-            <GearIcon
-              className={
-                n === 1
-                  ? 'h-80 w-80 text-black'
-                  : n === 2
-                    ? 'h-50 w-50'
-                    : n === 3
-                      ? 'h-65 w-65 text-black'
-                      : n === 4
-                        ? 'h-80 w-80'
-                        : 'h-105 w-105 text-black'
-              }
-            />
-          </div>
-        ))}
-      </div>
+    <div ref={containerRef} className="background Home overflow-hidden flex flex-col items-end">
+      {[1, 2, 3, 4, 5].map((n, i) => (
+        <div
+          key={n}
+          ref={(el) => (gearsRef.current[i] = el)}
+          className={`mr-10 gear${n} gears`}
+          style={{ transformOrigin: 'center center' }}
+        >
+          <GearIcon
+            className={
+              n === 1
+                ? 'h-80 w-80 text-black'
+                : n === 2
+                  ? 'h-50 w-50'
+                  : n === 3
+                    ? 'h-65 w-65 text-black'
+                    : n === 4
+                      ? 'h-80 w-80'
+                      : 'h-105 w-105 text-black'
+            }
+          />
+        </div>
+      ))}
     </div>
   );
 }
