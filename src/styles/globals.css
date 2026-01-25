@@ -64,7 +64,7 @@ body {
   right: 0;
   bottom: -150px;
   background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
-  z-index: 0; /* Base layer within the container */
+  z-index: -1; /* Base layer within the container */
 }
 
 .will-change-transform {
