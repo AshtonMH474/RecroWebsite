@@ -45,6 +45,6 @@
 }
 @media (max-width: 800px) {
   .gear5 {
-    display: hidden;
+    display: none;
   }
 }
