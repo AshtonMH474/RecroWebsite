@@ -34,7 +34,7 @@
 
 .gear5 {
   position: relative;
-  z-index: -5; /* Default: behind gradient on mobile */
+  z-index: -5;
   bottom: 505px;
   left: 120px;
   mix-blend-mode: soft-light;
