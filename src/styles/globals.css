@@ -29,7 +29,7 @@ body {
 
 #__next {
   background: transparent;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   min-height: 100dvh;
 }
 
@@ -52,7 +52,7 @@ body {
   background: transparent;
   z-index: -20;
   pointer-events: none;
-  /* overflow: visible; */
+  overflow: visible;
 }
 
 /* Pseudo-element for the gradient background that extends for iOS */
