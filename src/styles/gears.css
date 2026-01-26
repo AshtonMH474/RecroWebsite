@@ -25,7 +25,7 @@
 
 .gear4 {
   position: relative;
-  z-index: -3;
+  z-index: -1;
   right: 250px;
   bottom: 250px;
   mix-blend-mode: soft-light;
