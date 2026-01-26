@@ -44,9 +44,9 @@
   top: 50px;
 }
 @media (max-width: 800px) {
-  .gear5::before {
+  .gear5 {
     z-index: -5;
-    bottom: 0px;
+    bottom: auto;
     top: 100px;
   }
 }
