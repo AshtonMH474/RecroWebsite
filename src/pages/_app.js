@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import '@/styles/globals.css';
 import '@/styles/gears.css';
+import '@/styles/cards.css';
 import BG from '@/components/BG';
 import { AuthProvider } from '@/context/auth';
 
