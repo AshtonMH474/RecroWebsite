@@ -34,7 +34,7 @@
 
 .gear5 {
   position: relative;
-  z-index: -5;
+  z-index: -1;
   bottom: 505px;
   left: 120px;
   mix-blend-mode: soft-light;
@@ -43,12 +43,10 @@
 .move {
   top: 50px;
 }
-/* @media (max-width: 800px) {
-  .gear5 {
+@media (max-width: 800px) {
+  .gear5::before {
     z-index: -5;
-    display: none;
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
+    bottom: 0px;
+    top: 100px;
   }
-} */
+}
