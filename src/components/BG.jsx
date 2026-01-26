@@ -1,18 +1,9 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import GearIcon from './GearIcon';
 
 function BG() {
   const containerRef = useRef(null);
   const gearsRef = useRef([]);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Check if mobile on mount and resize
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 800);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -86,12 +77,9 @@ function BG() {
     };
   }, []);
 
-  // Only render gears 1-4 on mobile, all 5 on desktop
-  const gearsToRender = isMobile ? [1, 2, 3, 4] : [1, 2, 3, 4, 5];
-
   return (
     <div ref={containerRef} className="background overflow-hidden Home flex flex-col items-end">
-      {gearsToRender.map((n, i) => (
+      {[1, 2, 3, 4, 5].map((n, i) => (
         <div
           key={n}
           ref={(el) => (gearsRef.current[i] = el)}

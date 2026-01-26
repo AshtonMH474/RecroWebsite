@@ -34,10 +34,17 @@
 
 .gear5 {
   position: relative;
-  z-index: -1;
+  z-index: -5; /* Default: behind gradient on mobile */
   bottom: 505px;
   left: 120px;
   mix-blend-mode: soft-light;
+}
+
+/* Only show gear5 properly on desktop */
+@media (min-width: 801px) {
+  .gear5 {
+    z-index: -1;
+  }
 }
 
 .move {
