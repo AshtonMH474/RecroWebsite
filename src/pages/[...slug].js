@@ -1,23 +1,52 @@
-import dynamic from "next/dynamic";
-import { useTina } from "tinacms/dist/react";
-import useScrollToHash from "@/hooks/useScrollToHash";
-import Nav from "@/components/Nav/Nav";
-import Footer from "@/components/Footer";
-import Cards from "@/components/Cards/Cards";
-import Jobs from "@/components/Jobs/Jobs";
-import Landing from "@/components/Landing";
-import Landing2 from "@/components/Landing2";
-import Leadership from "@/components/Leadership/Leadership";
-import Learn from "@/components/Learn";
-import Testimonies from "@/components/Testimonies/Testimonies";
-import SolutionsGrid from "@/components/SolutionsGrid/SolutionsGrid";
-import PartnersGrid from "@/components/Partners/PartnersGrid";
-import { useRouter } from "next/router";
-const PriorityPartners = dynamic(() => import("@/components/Partners/PriorityPartners/PriorityPartners"), { ssr: true });
-const PerformanceGrid = dynamic(() => import("@/components/PerformanceGrid/PerformanceGrid"), { ssr: true });
+import dynamic from 'next/dynamic';
+import { useTina } from 'tinacms/dist/react';
+import useScrollToHash from '@/hooks/useScrollToHash';
+import Nav from '@/components/Nav/Nav';
+import Footer from '@/components/Footer';
+import Cards from '@/components/Cards/Cards';
+import Jobs from '@/components/Jobs/Jobs';
+import Landing from '@/components/Landing';
+import Landing2 from '@/components/Landing2';
+import Leadership from '@/components/Leadership/Leadership';
+import Learn from '@/components/Learn';
+import Testimonies from '@/components/Testimonies/Testimonies';
+import SolutionsGrid from '@/components/SolutionsGrid/SolutionsGrid';
+import PartnersGrid from '@/components/Partners/PartnersGrid';
+const PriorityPartners = dynamic(
+  () => import('@/components/Partners/PriorityPartners/PriorityPartners'),
+  { ssr: true }
+);
+const PerformanceGrid = dynamic(() => import('@/components/PerformanceGrid/PerformanceGrid'), {
+  ssr: true,
+});
+
+function getRequiredData(blocks) {
+  const needs = {
+    solutions: false,
+    partners: false,
+    performance: false,
+  };
+
+  blocks?.forEach((block) => {
+    switch (block?.__typename) {
+      case 'PageBlocksSolutions':
+        needs.solutions = true;
+        break;
+      case 'PageBlocksPartners':
+      case 'PageBlocksPriorityPartners':
+        needs.partners = true;
+        break;
+      case 'PageBlocksPerformances':
+        needs.performance = true;
+        break;
+    }
+  });
+
+  return needs;
+}
 
 export async function getStaticPaths() {
-  const { client } = await import("../../tina/__generated__/databaseClient");
+  const { client } = await import('../../tina/__generated__/databaseClient');
   const pages = await client.queries.pageConnection();
   const paths = pages?.data?.pageConnection?.edges.map(({ node }) => ({
     params: { slug: [node._sys.filename] },
@@ -26,20 +55,41 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { client } = await import("../../tina/__generated__/databaseClient");
-  const filename = params.slug[0] + ".md";
-  
+  const { client } = await import('../../tina/__generated__/databaseClient');
+  const filename = params.slug[0] + '.md';
+  const isCareers = params.slug[0] === 'careers';
 
+  const pageData = await client.queries.page({ relativePath: filename });
+  const blocks = pageData?.data?.page?.blocks;
+  const needs = getRequiredData(blocks);
 
-  const [pageData, navData, footerData,footerCareers, solutionData, partnerData, performanceData] = await Promise.all([
-    client.queries.page({ relativePath: filename }),
-    client.queries.nav({ relativePath: "nav.md" }),
-    client.queries.footer({ relativePath: "footer.md" }),
-    client.queries.footer({ relativePath:"footerCareers.md"}),
-    client.queries.solutionConnection(),
-    client.queries.partnerConnection({ first: 100 }),
-    client.queries.performanceConnection(),
-  ]);
+  const queries = [
+    client.queries.nav({ relativePath: 'nav.md' }),
+    isCareers
+      ? client.queries.footer({ relativePath: 'footerCareers.md' })
+      : client.queries.footer({ relativePath: 'footer.md' }),
+  ];
+
+  // Only fetch extra data if the page has blocks that need it
+  if (needs.solutions) {
+    queries.push(client.queries.solutionConnection());
+  }
+  if (needs.partners) {
+    queries.push(client.queries.partnerConnection({ first: 100 }));
+  }
+  if (needs.performance) {
+    queries.push(client.queries.performanceConnection());
+  }
+
+  const results = await Promise.all(queries);
+
+  // Map results back to named
+  let idx = 0;
+  const navData = results[idx++];
+  const footerData = results[idx++];
+  const solutionData = needs.solutions ? results[idx++] : null;
+  const partnerData = needs.partners ? results[idx++] : null;
+  const performanceData = needs.performance ? results[idx++] : null;
 
   return {
     props: {
@@ -47,7 +97,6 @@ export async function getStaticProps({ params }) {
         pageData,
         navData,
         footerData,
-        footerCareers,
         solutionData,
         partnerData,
         performanceData,
@@ -56,36 +105,30 @@ export async function getStaticProps({ params }) {
   };
 }
 
+function useOptionalTina(data) {
+  const result = useTina(data || { data: null, query: '', variables: {} });
+  return data ? result.data : null;
+}
+
 export default function Slug({ cmsData }) {
-  // Combine all useTina calls into one
-const router = useRouter()
-const isCareers = router.query.slug?.[0] === "careers";
-
-
-// pick the right query object
-const footerQuery = isCareers ? cmsData.footerCareers : cmsData.footerData;
-
-// pass that into useTina
-const { data: footerContent } = useTina(footerQuery);
-
   const { data: pageContent } = useTina(cmsData.pageData);
   const { data: navContent } = useTina(cmsData.navData);
-
-  const { data: solutionContent } = useTina(cmsData.solutionData);
-  const { data: partnersContent } = useTina(cmsData.partnerData);
-  const { data: performanceContent } = useTina(cmsData.performanceData);
+  const { data: footerContent } = useTina(cmsData.footerData);
+  const solutionContent = useOptionalTina(cmsData.solutionData);
+  const partnersContent = useOptionalTina(cmsData.partnerData);
+  const performanceContent = useOptionalTina(cmsData.performanceData);
 
   useScrollToHash(pageContent.page.blocks, [
-    "cards_id",
-    "jobs_id",
-    "leadership_id",
-    "learn_id",
-    "landing_id",
-    "landing2_id",
-    "testimonies_id",
-    "solutions_id",
-    "partners_id",
-    "performance_id",
+    'cards_id',
+    'jobs_id',
+    'leadership_id',
+    'learn_id',
+    'landing_id',
+    'landing2_id',
+    'testimonies_id',
+    'solutions_id',
+    'partners_id',
+    'performance_id',
   ]);
 
   return (
@@ -93,30 +136,38 @@ const { data: footerContent } = useTina(footerQuery);
       <Nav res={navContent.nav} />
       {pageContent.page.blocks?.map((block, i) => {
         switch (block?.__typename) {
-          case "PageBlocksLanding":
+          case 'PageBlocksLanding':
             return <Landing key={i} {...block} />;
-          case "PageBlocksLanding2":
+          case 'PageBlocksLanding2':
             return <Landing2 key={i} {...block} />;
-          case "PageBlocksCards":
+          case 'PageBlocksCards':
             return <Cards key={i} {...block} />;
-          case "PageBlocksLeadership":
+          case 'PageBlocksLeadership':
             return <Leadership key={i} {...block} />;
-          case "PageBlocksLearnTeam":
+          case 'PageBlocksLearnTeam':
             return <Learn key={i} {...block} />;
-          case "PageBlocksJobs":
+          case 'PageBlocksJobs':
             return <Jobs key={i} {...block} />;
-          case "PageBlocksSolutions":
-            return <SolutionsGrid key={i} {...block} solutionRes={solutionContent} />;
-          case "PageBlocksTestimonies":
+          case 'PageBlocksSolutions':
+            return solutionContent ? (
+              <SolutionsGrid key={i} {...block} solutionRes={solutionContent} />
+            ) : null;
+          case 'PageBlocksTestimonies':
             return <Testimonies key={i} {...block} />;
-          case "PageBlocksPartners":
-            return <PartnersGrid key={i} partnersRes={partnersContent} {...block} />;
-          case "PageBlocksPriorityPartners":
-            return <PriorityPartners key={i} partnersRes={partnersContent} {...block} />;
-          case "PageBlocksPerformances":
-            return <PerformanceGrid key={i} performanceRes={performanceContent} {...block} />;
+          case 'PageBlocksPartners':
+            return partnersContent ? (
+              <PartnersGrid key={i} partnersRes={partnersContent} {...block} />
+            ) : null;
+          case 'PageBlocksPriorityPartners':
+            return partnersContent ? (
+              <PriorityPartners key={i} partnersRes={partnersContent} {...block} />
+            ) : null;
+          case 'PageBlocksPerformances':
+            return performanceContent ? (
+              <PerformanceGrid key={i} performanceRes={performanceContent} {...block} />
+            ) : null;
           default:
-            console.warn("Unknown block type:", block?.__typename);
+            console.warn('Unknown block type:', block?.__typename);
             return null;
         }
       })}
