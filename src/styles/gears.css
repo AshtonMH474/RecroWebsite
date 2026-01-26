@@ -33,12 +33,11 @@
 }
 
 .gear5 {
-  position: relative;
+  position: absolute;
   z-index: -1;
-  bottom: 505px;
-  left: 120px;
+  top: 400px;
+  right: -50px;
   mix-blend-mode: soft-light;
-  overflow: hidden;
 }
 
 .move {
