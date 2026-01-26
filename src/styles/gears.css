@@ -43,10 +43,3 @@
 .move {
   top: 50px;
 }
-@media (max-width: 800px) {
-  .gear5 {
-    z-index: -5 !important;
-    bottom: auto !important;
-    top: 100px;
-  }
-}
