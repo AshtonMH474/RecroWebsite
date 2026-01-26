@@ -52,12 +52,11 @@ body {
   background: transparent;
   z-index: -20;
   pointer-events: none;
-  overflow: visible;
-  background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
+  /* overflow: visible; */
 }
 
 /* Pseudo-element for the gradient background that extends for iOS */
-/* .background.Home::before {
+.background.Home::before {
   content: '';
   position: absolute;
   top: -50px;
@@ -66,7 +65,7 @@ body {
   bottom: -150px;
   background: radial-gradient(circle at 120% 250%, #b55a14 15%, #000000 85%);
   z-index: -1;
-} */
+}
 
 .will-change-transform {
   will-change: transform, opacity;
