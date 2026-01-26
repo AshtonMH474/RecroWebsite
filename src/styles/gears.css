@@ -38,6 +38,7 @@
   bottom: 505px;
   left: 120px;
   mix-blend-mode: soft-light;
+  overflow: hidden;
 }
 
 .move {
