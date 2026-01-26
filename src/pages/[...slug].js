@@ -1,5 +1,12 @@
 import dynamic from 'next/dynamic';
 import { useTina } from 'tinacms/dist/react';
+import { client } from '../../tina/__generated__/databaseClient';
+import {
+  getSharedData,
+  getCachedSolutionData,
+  getCachedPartnerData,
+  getCachedPerformanceData,
+} from '@/lib/getSharedData';
 import useScrollToHash from '@/hooks/useScrollToHash';
 import Nav from '@/components/Nav/Nav';
 import Footer from '@/components/Footer';
@@ -46,60 +53,56 @@ function getRequiredData(blocks) {
 }
 
 export async function getStaticPaths() {
-  const { client } = await import('../../tina/__generated__/databaseClient');
   const pages = await client.queries.pageConnection();
-  const paths = pages?.data?.pageConnection?.edges.map(({ node }) => ({
+  const allPaths = pages?.data?.pageConnection?.edges.map(({ node }) => ({
     params: { slug: [node._sys.filename] },
   }));
-  return { paths, fallback: false };
+  return { paths: allPaths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const { client } = await import('../../tina/__generated__/databaseClient');
   const filename = params.slug[0] + '.md';
   const isCareers = params.slug[0] === 'careers';
 
-  const pageData = await client.queries.page({ relativePath: filename });
+  // Fetch page data and cached nav/footer in parallel
+  const [pageData, sharedData] = await Promise.all([
+    client.queries.page({ relativePath: filename }),
+    getSharedData({ includeCareersFooter: isCareers }),
+  ]);
+
+  // Check what additional data the page actually needs
   const blocks = pageData?.data?.page?.blocks;
   const needs = getRequiredData(blocks);
 
-  const queries = [
-    client.queries.nav({ relativePath: 'nav.md' }),
-    isCareers
-      ? client.queries.footer({ relativePath: 'footerCareers.md' })
-      : client.queries.footer({ relativePath: 'footer.md' }),
-  ];
+  // Only fetch the data that's actually needed
+  const additionalQueries = [];
+  const queryMap = {};
 
-  // Only fetch extra data if the page has blocks that need it
   if (needs.solutions) {
-    queries.push(client.queries.solutionConnection());
+    queryMap.solutions = additionalQueries.length;
+    additionalQueries.push(getCachedSolutionData());
   }
   if (needs.partners) {
-    queries.push(client.queries.partnerConnection({ first: 100 }));
+    queryMap.partners = additionalQueries.length;
+    additionalQueries.push(getCachedPartnerData());
   }
   if (needs.performance) {
-    queries.push(client.queries.performanceConnection());
+    queryMap.performance = additionalQueries.length;
+    additionalQueries.push(getCachedPerformanceData());
   }
 
-  const results = await Promise.all(queries);
-
-  // Map results back to named
-  let idx = 0;
-  const navData = results[idx++];
-  const footerData = results[idx++];
-  const solutionData = needs.solutions ? results[idx++] : null;
-  const partnerData = needs.partners ? results[idx++] : null;
-  const performanceData = needs.performance ? results[idx++] : null;
+  const additionalResults =
+    additionalQueries.length > 0 ? await Promise.all(additionalQueries) : [];
 
   return {
     props: {
       cmsData: {
         pageData,
-        navData,
-        footerData,
-        solutionData,
-        partnerData,
-        performanceData,
+        navData: sharedData.navData,
+        footerData: isCareers ? sharedData.footerCareersData : sharedData.footerData,
+        solutionData: needs.solutions ? additionalResults[queryMap.solutions] : null,
+        partnerData: needs.partners ? additionalResults[queryMap.partners] : null,
+        performanceData: needs.performance ? additionalResults[queryMap.performance] : null,
       },
     },
   };

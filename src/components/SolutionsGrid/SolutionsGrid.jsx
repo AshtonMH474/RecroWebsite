@@ -74,7 +74,7 @@ function SolutionsGrid({ solutionRes, ...block }) {
               const cardAnimation = getCardAnimation(i);
               return (
                 <div
-                  key={card._id || card.title || i}
+                  key={`${card._id || card.title}-${i}`}
                   className="will-change-transform"
                   style={cardAnimation}
                 >

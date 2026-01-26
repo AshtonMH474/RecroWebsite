@@ -82,7 +82,7 @@ function Cards(props) {
               const cardAnimation = getCardAnimation(i);
               return (
                 <div
-                  key={ex._id || ex.title || i}
+                  key={`${ex._id || ex.title}-${i}`}
                   className="will-change-transform"
                   style={cardAnimation}
                 >
