@@ -29,7 +29,7 @@ function Cards(props) {
     elements?.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [expertiseItems]);
+  }, [props.cards]);
 
   return (
     <>
