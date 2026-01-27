@@ -42,7 +42,7 @@ export default function PartnersGrid({ partnersRes, ...block }) {
 
             return (
               <Wrapper
-                key={partner._id || partner.title || index}
+                key={`${partner._id || partner.title}-${index}`}
                 className="flex-1 min-w-[250px] sm:basis-[45%] lg:basis-[30%] max-w-[300px]"
                 {...(partner.link ? { href: partner.link, target: '_blank' } : {})}
               >
@@ -51,7 +51,8 @@ export default function PartnersGrid({ partnersRes, ...block }) {
                   data-tina-field={tinaField(partner, 'logo')}
                 >
                   <Image
-                    className="max-h-[100px] h-auto object-contain"
+                    className="max-h-[100px] object-contain"
+                    style={{ width: 'auto', height: 'auto' }}
                     src={partner.logo}
                     alt={partner.title || 'partner'}
                     width={200}

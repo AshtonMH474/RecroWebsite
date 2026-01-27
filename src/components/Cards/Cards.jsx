@@ -1,100 +1,71 @@
-import { useState, useMemo, useSyncExternalStore, memo } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import Card from './Card';
 import { tinaField } from 'tinacms/dist/react';
 import CardModal from './CardModal';
-import { useScrollCardAnimation } from '@/hooks/useScrollCardAnimation';
-
-// Hook to get window dimensions without causing set-state-in-effect
-function useWindowDimensions() {
-  const subscribe = (callback) => {
-    window.addEventListener('resize', callback);
-    return () => window.removeEventListener('resize', callback);
-  };
-  const getSnapshot = () => `${window.innerWidth}x${window.innerHeight}`;
-  const getServerSnapshot = () => '1024x768';
-
-  const dimensions = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-  const [width, height] = dimensions.split('x').map(Number);
-  return { width, height };
-}
 
 function Cards(props) {
   const expertiseItems = props.cards || [];
   const [expandedCardIndex, setExpandedCardIndex] = useState(null);
   const openCard = (index) => setExpandedCardIndex(index);
   const closeCard = () => setExpandedCardIndex(null);
+  const containerRef = useRef(null);
 
-  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
 
-  // Derive values from dimensions
-  const { short, tall, sectionHeight } = useMemo(() => {
-    if (!expertiseItems.length) return { rows: 1, short: false, tall: false, sectionHeight: 0 };
+    const elements = containerRef.current?.querySelectorAll(
+      '.card, .heading-animate, .underline-animate'
+    );
+    elements?.forEach((el) => observer.observe(el));
 
-    const cardsPerRow = screenWidth < 640 ? 1 : screenWidth < 948 ? 2 : 3;
-    const newRows = Math.ceil(expertiseItems.length / cardsPerRow);
-    const isShort = screenHeight <= 600;
-    const isTall = screenHeight >= 1000;
-    const rowHeightPx = 0.5 * screenHeight;
-    const calculatedHeight = newRows * rowHeightPx * (isShort ? 2 : 1);
-
-    return { rows: newRows, short: isShort, tall: isTall, sectionHeight: calculatedHeight };
-  }, [screenWidth, screenHeight, expertiseItems.length]);
-
-  const { sectionRef, stickyContainerRef, headingOpacity, getCardAnimation } =
-    useScrollCardAnimation(expertiseItems.length, tall);
+    return () => observer.disconnect();
+  }, [props.cards]);
 
   return (
     <>
-      <section
-        id={props.cards_id}
-        ref={sectionRef}
-        style={{ height: `${sectionHeight}px` }}
-        className="scrollCenter relative pb-16 mb-50"
-      >
+      <section id={props.cards_id} className="relative pb-16 mb-50">
         <div
-          ref={stickyContainerRef}
-          className=" overflow-hidden z-30 py-12 max-w-[1000px] mx-auto rounded-md"
-          style={{
-            position: 'sticky',
-            paddingTop: short ? '5rem' : '3rem',
-            top: tall ? '200px' : '80px',
-          }}
+          ref={containerRef}
+          className="overflow-hidden z-30 py-12 pt-12 max-w-[1000px] mx-auto rounded-md"
         >
           <h2
             data-tina-field={tinaField(props, 'cards_heading')}
-            className="font-bold text-[32px] px-4 md:text-[40px] text-white text-center transition-opacity duration-700 ease-out"
-            style={{ opacity: headingOpacity }}
+            className="heading-animate font-bold text-[32px] px-4 md:text-[40px] text-white text-center"
           >
             {props.cards_heading}
           </h2>
 
           <div
-            className="rounded-[12px] h-1 bg-primary mx-auto mt-2 transition-opacity duration-700 ease-out"
+            className="underline-animate rounded-[12px] h-1 bg-primary mx-auto mt-2 origin-left"
             data-tina-field={tinaField(props, 'underline_width')}
-            style={{
-              width: props.underline_width,
-              opacity: headingOpacity,
-            }}
+            style={{ width: props.underline_width }}
           />
 
-          <div id="target" className="pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
-            {expertiseItems.map((ex, i) => {
-              const cardAnimation = getCardAnimation(i);
-              return (
-                <div
-                  key={ex._id || ex.title || i}
-                  className="will-change-transform"
-                  style={cardAnimation}
-                >
-                  <Card
-                    ex={ex}
-                    isExpanded={expandedCardIndex === i}
-                    onExpand={() => openCard(i)}
-                    onClose={closeCard}
-                  />
-                </div>
-              );
-            })}
+          <div className="pt-12 flex flex-wrap justify-center gap-x-6 gap-y-12">
+            {expertiseItems.map((ex, i) => (
+              <div
+                key={`${ex._id || ex.title}-${i}`}
+                className="card"
+                style={{ '--card-index': i }}
+              >
+                <Card
+                  ex={ex}
+                  isExpanded={expandedCardIndex === i}
+                  onExpand={() => openCard(i)}
+                  onClose={closeCard}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>

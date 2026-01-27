@@ -14,13 +14,13 @@ function LeaderCard({ leader,onExpand }) {
       className={`cursor-pointer relative group w-[300px]  h-[400px] md:h-[500px]  rounded-[8px] overflow-hidden shadow-md transform transition-all duration-300 hover:scale-103`}
       onClick={onExpand}
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-300 "
-        style={{ backgroundImage: `url(${leader.src})` }}
-      />
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-300 "
+          style={{ backgroundImage: `url(${leader.src})` }}
+        />
 
 
-    <LeaderInfo leader={leader} />
+        <LeaderInfo leader={leader} />
 
     </div>
   );
