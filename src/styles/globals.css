@@ -31,10 +31,6 @@ body {
   min-height: 100dvh;
 }
 
-.not-ready {
-  visibility: hidden;
-}
-
 *,
 *::before,
 *::after {
@@ -55,27 +51,14 @@ body {
 }
 
 /* Pseudo-element for the gradient background that extends for iOS */
-/* .background.Home::before {
+.background.Home::before {
   content: '';
   position: absolute;
   top: -50px;
   left: 0;
   right: 0;
   bottom: -150px;
-  z-index: -1; */
-/* } */
-
-.will-change-transform {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-.contain-paint {
-  contain: paint;
-}
-.contain-layout {
-  contain: layout;
+  z-index: -1;
 }
 
 @media (max-width: 1150px) {
@@ -89,20 +72,6 @@ body {
   }
 }
 
-@media (max-height: 500px) {
-  .expertise {
-    position: sticky;
-    top: 100px;
-  }
-}
-
-.nav {
-  z-index: 100;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
 @media (max-height: 450px) {
   .landing {
     margin-top: 50px;
@@ -113,18 +82,11 @@ body {
   background-color: #b55914;
 }
 
-.bg-primary2:hover {
-  background-color: rgba(181, 89, 20, 0.6);
-}
-
 .primary-color {
   color: #b55914;
 }
 .secondary-text {
   color: #c2c2bc;
-}
-.bg-secondary {
-  background-color: #3f3f38;
 }
 .block {
   border: 1px white solid;
@@ -139,39 +101,35 @@ body {
 }
 
 .expertiseDes {
-  max-height: 100px; /* Limit height */
-  display: -webkit-box; /* Enable flex truncation */
-  -webkit-line-clamp: 5; /* Approx. number of lines for 100px */
-  -webkit-box-orient: vertical; /* Vertical layout for box */
-  overflow: hidden; /* Hide excess */
-  text-overflow: ellipsis; /* Ellipsis style */
-  line-height: 20px; /* Ensure line height matches clamp */
-  word-break: break-word; /* Break long words */
+  max-height: 100px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  word-break: break-word;
 }
 .testimonies {
-  max-height: 900px; /* Limit height */
-  display: -webkit-box; /* Enable flex truncation */
-  -webkit-line-clamp: 17; /* Approx. number of lines for 100px */
-  -webkit-box-orient: vertical; /* Vertical layout for box */
-  overflow: hidden; /* Hide excess */
-  text-overflow: ellipsis; /* Ellipsis style */
-  line-height: 20px; /* Ensure line height matches clamp */
-  word-break: break-word; /* Break long words */
+  max-height: 900px;
+  display: -webkit-box;
+  -webkit-line-clamp: 17;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  word-break: break-word;
 }
 
 .noContentDes {
-  max-height: 180px; /* Limit height */
-  display: -webkit-box; /* Enable flex truncation */
-  -webkit-line-clamp: 7; /* Approx. number of lines for 100px */
-  -webkit-box-orient: vertical; /* Vertical layout for box */
-  overflow: hidden; /* Hide excess */
-  text-overflow: ellipsis; /* Ellipsis style */
-  line-height: 20px; /* Ensure line height matches clamp */
-  word-break: break-word; /* Break long words */
-}
-
-.safe-area-bottom {
-  padding-bottom: env(safe-area-inset-bottom);
+  max-height: 180px;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  word-break: break-word;
 }
 
 .content ul {
@@ -200,18 +158,6 @@ body {
   animation: marquee 50s linear infinite;
 }
 
-.truncate-multiline {
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Max number of lines */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-  line-height: 1.4; /* Ensure consistent height per line */
-  max-height: calc(1.4em * 2);
-}
-
-/* Job card description truncation - fills available space then truncates */
 .job-card-description {
   overflow: hidden;
   display: -webkit-box;
@@ -220,71 +166,34 @@ body {
   line-height: 1.5;
 }
 
-.priority {
-  height: auto;
-}
-@media (max-width: 947px) {
-  .priority {
-    height: 490px;
-  }
-}
-
-@media (max-width: 523px) {
-  .priority {
-    height: 622px;
-  }
-}
-
-.priority2 {
-  height: auto;
-}
-@media (max-width: 947px) {
-  .priority2 {
-    height: 264px;
-  }
-}
-
-@media (max-width: 523px) {
-  .priority2 {
-    height: 408px;
-  }
-}
-
 .PhoneInput {
   border: none;
   border-radius: 6px;
-  background-color: #2a2a2e; /* matches your design */
-  overflow: hidden; /* keeps inner input and flag inside rounded corners */
+  background-color: #2a2a2e;
+  overflow: hidden;
 }
 
-/* Outer container on focus */
 .PhoneInput.PhoneInput--focus {
   border: 1px solid white;
   border-radius: 6px;
 }
 
-/* Inner input text */
 .PhoneInputInput {
   color: white;
   background-color: transparent;
-  border: none; /* remove inner input border */
+  border: none;
   outline: none;
   width: 100%;
-  /* padding: 10px; */
 }
 
-/* Placeholder */
 .PhoneInputInput::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Country select dropdown */
 .PhoneInputCountrySelect {
   color: black;
   background-color: white;
 }
-
-/* Arrow color */
 .PhoneInputCountrySelectArrow {
   color: white;
 }
