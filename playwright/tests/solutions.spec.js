@@ -7,19 +7,21 @@ test.describe('Solutions Grid functionality', () => {
   });
 
   test('should display SolutionsGrid section on home page', async ({ page }) => {
-    const solutionsSection = page.locator('section.scrollCenter').first();
+    const solutionsSection = page.locator('section.pb-16.mb-50.relative').first();
 
     if ((await solutionsSection.count()) === 0) {
       test.skip(true, 'Solutions section not present on home page');
     }
-    await solutionsSection.scrollIntoViewIfNeeded();
 
-    const solutionCards = page.locator('.bg-\\[\\#1A1A1E\\].w-\\[300px\\]');
+    await solutionsSection.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(500);
+
+    const solutionCards = solutionsSection.locator('.card .bg-\\[\\#1A1A1E\\].w-\\[300px\\]');
     await expect(solutionCards.first()).toBeVisible({ timeout: 10000 });
   });
 
   test('should download PDF when clicking download button', async ({ page }) => {
-    const solutionsSection = page.locator('section.scrollCenter').first();
+    const solutionsSection = page.locator('section.pb-16.mb-50.relative').first();
 
     if ((await solutionsSection.count()) === 0) {
       test.skip(true, 'Solutions section not present on home page');
@@ -28,8 +30,8 @@ test.describe('Solutions Grid functionality', () => {
     await solutionsSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
 
-    const downloadButton = page
-      .locator('.bg-\\[\\#1A1A1E\\].w-\\[300px\\]')
+    const downloadButton = solutionsSection
+      .locator('.card .bg-\\[\\#1A1A1E\\].w-\\[300px\\]')
       .first()
       .locator('button.bg-primary')
       .first();
@@ -53,7 +55,7 @@ test.describe('Solutions Grid functionality', () => {
   });
 
   test('should navigate to solution page when clicking Learn More button', async ({ page }) => {
-    const solutionsSection = page.locator('section.scrollCenter').first();
+    const solutionsSection = page.locator('section.pb-16.mb-50.relative').first();
 
     if ((await solutionsSection.count()) === 0) {
       test.skip(true, 'Solutions section not present on home page');
@@ -61,8 +63,12 @@ test.describe('Solutions Grid functionality', () => {
 
     await solutionsSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
-    const solutionCard = page.locator('.bg-\\[\\#1A1A1E\\].w-\\[300px\\]').first();
+
+    const solutionCard = solutionsSection
+      .locator('.card .bg-\\[\\#1A1A1E\\].w-\\[300px\\]')
+      .first();
     await expect(solutionCard).toBeVisible({ timeout: 10000 });
+
     const learnMoreButton = solutionCard.locator('a[href^="/solutions/"] button');
 
     if ((await learnMoreButton.count()) === 0) {
@@ -77,7 +83,7 @@ test.describe('Solutions Grid functionality', () => {
   });
 
   test('should have multiple solution cards visible', async ({ page }) => {
-    const solutionsSection = page.locator('section.scrollCenter').first();
+    const solutionsSection = page.locator('section.pb-16.mb-50.relative').first();
 
     if ((await solutionsSection.count()) === 0) {
       test.skip(true, 'Solutions section not present on home page');
@@ -85,7 +91,8 @@ test.describe('Solutions Grid functionality', () => {
 
     await solutionsSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1500);
-    const solutionCards = page.locator('.bg-\\[\\#1A1A1E\\].w-\\[300px\\]');
+
+    const solutionCards = solutionsSection.locator('.card .bg-\\[\\#1A1A1E\\].w-\\[300px\\]');
     const cardCount = await solutionCards.count();
 
     expect(cardCount).toBeGreaterThan(0);

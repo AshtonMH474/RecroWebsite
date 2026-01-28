@@ -16,13 +16,13 @@ function BG() {
     // ticking prevents multiple requestAnimationFrame calls from stacking
     let ticking = false;
 
-    // ✅ Throttle: minimum time between updates (16ms = ~60fps, 33ms = ~30fps)
+    // Throttle: minimum time between updates (16ms = ~60fps, 33ms = ~30fps)
     let lastUpdateTime = 0;
     const throttleDelay = 16; // ~60fps max
 
     // The function that actually applies rotation to each gear
     const update = (timestamp) => {
-      // ✅ Throttle: skip update if not enough time has passed
+      //  Throttle: skip update if not enough time has passed
       if (timestamp - lastUpdateTime < throttleDelay) {
         ticking = false;
         return;
@@ -32,7 +32,7 @@ function BG() {
       const scrollY = lastScrollY;
       const rotate = scrollY * 0.12; // rotation factor, controls speed of gear rotation
 
-      // ✅ Use transform with will-change hint for better performance
+      // Use transform with will-change hint for better performance
       // Rotate each gear based on scroll position
       gears.forEach((gear) => {
         if (gear) {
@@ -56,7 +56,7 @@ function BG() {
       }
     };
 
-    // ✅ Use passive listener and add will-change CSS hints
+    //  Use passive listener and add will-change CSS hints
     gears.forEach((gear) => {
       if (gear) {
         gear.style.willChange = 'transform';
@@ -68,7 +68,7 @@ function BG() {
     // Cleanup function removes the scroll listener and will-change hints
     return () => {
       window.removeEventListener('scroll', onScroll);
-      // ✅ Clean up will-change to free resources
+      //  Clean up will-change to free resources
       gears.forEach((gear) => {
         if (gear) {
           gear.style.willChange = 'auto';
