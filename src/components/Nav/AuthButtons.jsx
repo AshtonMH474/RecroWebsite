@@ -17,6 +17,7 @@ export default function AuthButtons({
       <Button
         variant={variant}
         onClick={() => openModal('login')}
+        data-type="login"
         data-tina-field={tinaField({ authStyle, authLabelLogin }, 'authLabelLogin')}
       >
         {authLabelLogin}
