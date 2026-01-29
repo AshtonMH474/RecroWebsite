@@ -1,13 +1,13 @@
-import clientPromise from "@/lib/mongodb";
-import { isFreeEmail } from "free-email-domains-list";
-import { createMailer, createCareerMailer } from "@/lib/mailer";
-import { withCsrfProtection } from "@/lib/csrfMiddleware";
-import { withRateLimit } from "@/lib/rateLimit";
-import { sanitizeContactFormData } from "@/lib/sanitize";
+import clientPromise from '@/lib/mongodb';
+import { isFreeEmail } from 'free-email-domains-list';
+import { createMailer, createCareerMailer } from '@/lib/mailer';
+import { withCsrfProtection } from '@/lib/csrfMiddleware';
+import { withRateLimit } from '@/lib/rateLimit';
+import { sanitizeContactFormData } from '@/lib/sanitize';
 
 async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   // Validate and sanitize input
@@ -18,8 +18,10 @@ async function handler(req, res) {
 
   const { firstName, lastName, email, organization, subject, message, phone } = result.data;
 
-  if(organization && isFreeEmail(email)){
-    return res.status(403).json({ error: "Free email providers are not allowed. Please use your company email." });
+  if (organization && isFreeEmail(email)) {
+    return res
+      .status(403)
+      .json({ error: 'Free email providers are not allowed. Please use your company email.' });
   }
 
   try {
@@ -43,7 +45,7 @@ async function handler(req, res) {
     // 4️⃣ Save to MongoDB (via clientPromise)
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB_NAME);
-    const collectionName = organization ? "messages" : "careers";
+    const collectionName = organization ? 'messages' : 'careers';
 
     const doc = {
       firstName,
@@ -59,15 +61,15 @@ async function handler(req, res) {
     await db.collection(collectionName).insertOne(doc);
 
     // 5️⃣ Respond success
-    return res.status(200).json({ success: true, message: "Message sent and saved" });
+    return res.status(200).json({ success: true, message: 'Message sent and saved' });
   } catch (error) {
-    console.error("Error handling form submission:", error);
-    return res.status(500).json({ error: "Failed to send or save message" });
+    console.error('Error handling form submission:', error);
+    return res.status(500).json({ error: 'Failed to send or save message' });
   }
 }
 
 export default withRateLimit(withCsrfProtection(handler), {
-    windowMs: 60 * 1000,
-    max: 5,
-    message: 'Too many deal submissions. Please wait a minute before trying again.'
+  windowMs: 60 * 1000,
+  max: 5,
+  message: 'Too many submissions. Please wait a minute before trying again.',
 });

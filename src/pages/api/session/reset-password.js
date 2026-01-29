@@ -1,16 +1,16 @@
-import clientPromise from "@/lib/mongodb";
-import bcrypt from "bcryptjs";
-import { withCsrfProtection } from "@/lib/csrfMiddleware";
-import { withRateLimit } from "@/lib/rateLimit";
-import { sanitizePasswordResetData } from "@/lib/sanitize";
+import clientPromise from '@/lib/mongodb';
+import bcrypt from 'bcryptjs';
+import { withCsrfProtection } from '@/lib/csrfMiddleware';
+import { withRateLimit } from '@/lib/rateLimit';
+import { sanitizePasswordResetData } from '@/lib/sanitize';
 
 async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
+  if (req.method !== 'POST') return res.status(405).end();
 
   // Validate and sanitize input
   const result = sanitizePasswordResetData({
     resetToken: req.body.token,
-    newPassword: req.body.newPassword
+    newPassword: req.body.newPassword,
   });
   if (!result.valid) {
     return res.status(400).json({ error: result.error });
@@ -21,24 +21,23 @@ async function handler(req, res) {
   const client = await clientPromise;
   const db = client.db(process.env.MONGODB_DB_NAME);
 
-  const user = await db.collection("users").findOne({ resetToken: token });
-  if (!user) return res.status(400).json({ error: "Invalid or expired token" });
+  const user = await db.collection('users').findOne({ resetToken: token });
+  if (!user) return res.status(400).json({ error: 'Invalid or expired token' });
 
   if (user.resetExpires < new Date()) {
-    await db.collection("users").updateOne(
-      { _id: user._id },
-      { $unset: { resetToken: "", resetExpires: "" } }
-    );
-    return res.status(400).json({ error: "Token expired, request a new reset." });
+    await db
+      .collection('users')
+      .updateOne({ _id: user._id }, { $unset: { resetToken: '', resetExpires: '' } });
+    return res.status(400).json({ error: 'Token expired, request a new reset.' });
   }
 
   const passwordHash = await bcrypt.hash(newPassword, 10);
 
-  await db.collection("users").updateOne(
+  await db.collection('users').updateOne(
     { _id: user._id },
     {
       $set: { passwordHash },
-      $unset: { resetToken: "", resetExpires: "" },
+      $unset: { resetToken: '', resetExpires: '' },
     }
   );
 
@@ -46,7 +45,7 @@ async function handler(req, res) {
 }
 
 export default withRateLimit(withCsrfProtection(handler), {
-    windowMs: 60 * 1000,
-    max: 5,
-    message: 'Too many deal submissions. Please wait a minute before trying again.'
+  windowMs: 60 * 1000,
+  max: 5,
+  message: 'Too many submissions. Please wait a minute before trying again.',
 });

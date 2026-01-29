@@ -1,33 +1,35 @@
-import clientPromise from "@/lib/mongodb";
-import crypto from "crypto";
-import nodemailer from "nodemailer";
-import { withCsrfProtection } from "@/lib/csrfMiddleware";
-import { withRateLimit } from "@/lib/rateLimit";
+import clientPromise from '@/lib/mongodb';
+import crypto from 'crypto';
+import nodemailer from 'nodemailer';
+import { withCsrfProtection } from '@/lib/csrfMiddleware';
+import { withRateLimit } from '@/lib/rateLimit';
+import { sanitizeString, isValidEmail } from '@/lib/sanitize';
+
 async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
+  if (req.method !== 'POST') return res.status(405).end();
 
-  const { email } = req.body;
-
-   if (typeof email !== 'string') {
-    return res.status(400).json({ error: "Invalid email format" });
+  if (typeof req.body.email !== 'string') {
+    return res.status(400).json({ error: 'Invalid email format' });
   }
 
-  if (!email) {
-    return res.status(400).json({ error: "Email is required" });
+  const email = sanitizeString(req.body.email);
+
+  if (!email || !isValidEmail(email)) {
+    return res.status(400).json({ error: 'Email is required' });
   }
 
   const client = await clientPromise;
   const db = client.db(process.env.MONGODB_DB_NAME);
 
-  const user = await db.collection("users").findOne({ email });
+  const user = await db.collection('users').findOne({ email });
   if (!user) {
     // Don't reveal if user exists
     return res.status(200).json({ ok: true });
   }
 
-  const resetToken = crypto.randomBytes(32).toString("hex");
+  const resetToken = crypto.randomBytes(32).toString('hex');
 
-  await db.collection("users").updateOne(
+  await db.collection('users').updateOne(
     { email },
     {
       $set: {
@@ -40,7 +42,7 @@ async function handler(req, res) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT),
-    secure:  process.env.SMTP_SECURE === "true",
+    secure: process.env.SMTP_SECURE === 'true',
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -52,7 +54,7 @@ async function handler(req, res) {
   await transporter.sendMail({
     from: `${process.env.SMTP_USER}`,
     to: email,
-    subject: "Reset your password",
+    subject: 'Reset your password',
     html: `<p>You requested to reset your password.</p>
            <p>Click <a href="${resetUrl}">here</a> to set a new password. 
            This link expires in 15 minutes.</p>`,
@@ -61,9 +63,8 @@ async function handler(req, res) {
   res.status(200).json({ ok: true });
 }
 
-
 export default withRateLimit(withCsrfProtection(handler), {
-    windowMs: 60 * 1000,
-    max: 5,
-    message: 'Too many deal submissions. Please wait a minute before trying again.'
+  windowMs: 60 * 1000,
+  max: 5,
+  message: 'Too many submissions. Please wait a minute before trying again.',
 });
