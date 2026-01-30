@@ -15,7 +15,7 @@
     "@octokit/rest": "^22.0.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tinacms/auth": "^1.0.12",
-    "@tinacms/datalayer": "^2.0.0",
+    "@tinacms/datalayer": "^2.0.7",
     "bcryptjs": "^3.0.2",
     "cookies-next": "^6.1.0",
     "csrf-csrf": "^4.0.3",
