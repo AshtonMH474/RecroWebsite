@@ -49,7 +49,7 @@ export default isLocal
         token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
       }),
       databaseAdapter: new MongodbLevel({
-        collectionName: `content-${process.env.GITHUB_BRANCH}`,
+        collectionName: `website-content-${process.env.GITHUB_BRANCH}`,
         dbName: 'tina',
         mongoUri: tinaMongoUrl,
       }),
