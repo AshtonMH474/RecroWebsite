@@ -10,19 +10,12 @@ function BG() {
 
     const gears = gearsRef.current;
 
-    // lastScrollY tracks the last scroll position
     let lastScrollY = window.scrollY;
-
-    // ticking prevents multiple requestAnimationFrame calls from stacking
     let ticking = false;
-
-    // Throttle: minimum time between updates (16ms = ~60fps, 33ms = ~30fps)
     let lastUpdateTime = 0;
-    const throttleDelay = 16; // ~60fps max
+    const throttleDelay = 16;
 
-    // The function that actually applies rotation to each gear
     const update = (timestamp) => {
-      //  Throttle: skip update if not enough time has passed
       if (timestamp - lastUpdateTime < throttleDelay) {
         ticking = false;
         return;
@@ -30,33 +23,26 @@ function BG() {
 
       lastUpdateTime = timestamp;
       const scrollY = lastScrollY;
-      const rotate = scrollY * 0.12; // rotation factor, controls speed of gear rotation
+      const rotate = scrollY * 0.12;
 
-      // Use transform with will-change hint for better performance
-      // Rotate each gear based on scroll position
       gears.forEach((gear) => {
         if (gear) {
-          // Use transform3d for GPU acceleration
           gear.style.transform = `rotate(${rotate}deg) translateZ(0)`;
         }
       });
 
-      // Reset ticking so another frame can be scheduled
       ticking = false;
     };
 
-    // Event listener for scroll events
     const onScroll = () => {
       lastScrollY = window.scrollY;
 
-      // Only schedule one animation frame at a time
       if (!ticking) {
         requestAnimationFrame(update);
         ticking = true;
       }
     };
 
-    //  Use passive listener and add will-change CSS hints
     gears.forEach((gear) => {
       if (gear) {
         gear.style.willChange = 'transform';
@@ -65,10 +51,8 @@ function BG() {
 
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Cleanup function removes the scroll listener and will-change hints
     return () => {
       window.removeEventListener('scroll', onScroll);
-      //  Clean up will-change to free resources
       gears.forEach((gear) => {
         if (gear) {
           gear.style.willChange = 'auto';

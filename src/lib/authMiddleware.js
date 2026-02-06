@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
-import clientPromise from "@/lib/mongodb";
+import jwt from 'jsonwebtoken';
+import clientPromise from '@/lib/mongodb';
 
 /**
  * Authentication Middleware
@@ -27,7 +27,6 @@ import clientPromise from "@/lib/mongodb";
  */
 export async function authenticateUser(req) {
   try {
-    // 1️⃣ Extract JWT token from cookies
     const cookies = req.cookies;
     const accessToken = cookies.token;
 
@@ -35,50 +34,45 @@ export async function authenticateUser(req) {
     if (!accessToken) {
       return {
         authenticated: false,
-        error: "No authentication token provided. Please log in."
+        error: 'No authentication token provided. Please log in.',
       };
     }
 
-    // 2️⃣ Verify JWT token is valid and not expired
     let decoded;
     try {
       decoded = jwt.verify(accessToken, process.env.JWT_SECRET);
     } catch (jwtError) {
       // Token is invalid or expired
-      if (jwtError.name === "TokenExpiredError") {
+      if (jwtError.name === 'TokenExpiredError') {
         return {
           authenticated: false,
-          error: "Your session has expired. Please log in again."
+          error: 'Your session has expired. Please log in again.',
         };
       }
       return {
         authenticated: false,
-        error: "Invalid authentication token. Please log in again."
+        error: 'Invalid authentication token. Please log in again.',
       };
     }
 
-    // 3️⃣ Fetch user from database to ensure they still exist and are verified
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB_NAME);
-    const user = await db.collection("users").findOne({ email: decoded.email });
+    const user = await db.collection('users').findOne({ email: decoded.email });
 
-    // User not found in database (deleted account)
     if (!user) {
       return {
         authenticated: false,
-        error: "User account not found. Please contact support."
+        error: 'User account not found. Please contact support.',
       };
     }
 
-    // User exists but hasn't verified their email yet
     if (!user.verified) {
       return {
         authenticated: false,
-        error: "Email not verified. Please check your email to verify your account."
+        error: 'Email not verified. Please check your email to verify your account.',
       };
     }
 
-    // 4️⃣ Success! Return user data for the API route to use
     return {
       authenticated: true,
       user: {
@@ -91,13 +85,12 @@ export async function authenticateUser(req) {
         interests: user.interests || [],
       },
     };
-
   } catch (error) {
     // Unexpected error (database connection issue, etc.)
-    console.error("[authMiddleware] Unexpected error:", error.message);
+    console.error('[authMiddleware] Unexpected error:', error.message);
     return {
       authenticated: false,
-      error: "Authentication failed. Please try again."
+      error: 'Authentication failed. Please try again.',
     };
   }
 }

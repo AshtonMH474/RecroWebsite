@@ -196,5 +196,4 @@ function Landing(props) {
   );
 }
 
-// Memoize to prevent re-renders when parent updates but props don't change
 export default memo(Landing);

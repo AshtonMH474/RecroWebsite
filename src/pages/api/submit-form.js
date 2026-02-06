@@ -25,10 +25,8 @@ async function handler(req, res) {
   }
 
   try {
-    // 1️⃣ Setup email transport
     const transporter = organization ? createMailer() : createCareerMailer();
 
-    // 2️⃣ Prepare email
     const mailOptions = {
       from: `"Website Contact" <${organization ? process.env.SMTP_USER : process.env.SMTP_CAREER_HOST}>`,
       to: organization ? process.env.CONTACT_EMAIL : process.env.CONTACT_CAREER_EMAIL,
@@ -39,10 +37,8 @@ async function handler(req, res) {
         : `You received a new message from ${firstName} ${lastName} (${email})\n\nPhone Number: ${phone}\n\nMessage:\n${message}`,
     };
 
-    // 3️⃣ Send email
     await transporter.sendMail(mailOptions);
 
-    // 4️⃣ Save to MongoDB (via clientPromise)
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB_NAME);
     const collectionName = organization ? 'messages' : 'careers';
@@ -60,7 +56,6 @@ async function handler(req, res) {
 
     await db.collection(collectionName).insertOne(doc);
 
-    // 5️⃣ Respond success
     return res.status(200).json({ success: true, message: 'Message sent and saved' });
   } catch (error) {
     console.error('Error handling form submission:', error);

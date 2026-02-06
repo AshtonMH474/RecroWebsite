@@ -51,7 +51,7 @@ function SolutionLanding({ solution }) {
         </div>
       </div>
 
-      {/* 👇 Scroll Down Arrow */}
+      {/* Scroll Down Arrow */}
       {solution.arrow && (
         <motion.div
           initial={{ y: 0 }}
